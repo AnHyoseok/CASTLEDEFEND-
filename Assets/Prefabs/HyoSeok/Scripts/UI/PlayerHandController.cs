@@ -10,7 +10,12 @@ namespace Defend.UI
         #region Variables
         //테스트용 시계
         public TextMeshProUGUI timeText;
+        public GameObject viewButton;
+        public GameObject uiOnButton;
         private float time;
+
+        //버튼 켜지는여부
+        private bool isOnUi;
 
         //탑뷰
         private bool isViewChange = false;
@@ -50,6 +55,20 @@ namespace Defend.UI
             }
 
             isViewChange = !isViewChange;
+        }
+
+        public void ViewButton()
+        {
+            if (isOnUi == true)
+            {
+                uiOnButton.SetActive(true);
+                viewButton.SetActive(false);
+            }
+            else
+            {
+                uiOnButton.SetActive(false);
+                viewButton.SetActive(true);
+            }
         }
     }
 }
