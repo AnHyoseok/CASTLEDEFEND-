@@ -4285,7 +4285,7 @@ Transform:
   m_GameObject: {fileID: 919708949}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7069805, y: -0.013364887, z: 0.013364887, w: 0.7069805}
-  m_LocalPosition: {x: -0.075761914, y: 5.92, z: -0.3619694}
+  m_LocalPosition: {x: -0.075761914, y: 36.4, z: -0.3619694}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4689,6 +4689,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeText: {fileID: 2665033108058948944}
+  viewButton: {fileID: 0}
+  uiOnButton: {fileID: 0}
   currentTransform: {fileID: 0}
 --- !u!1 &991312181
 GameObject:
@@ -13321,7 +13323,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -13539,7 +13542,8 @@ MonoBehaviour:
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:

@@ -1,3 +1,4 @@
+using Defend.Player;
 using TMPro;
 using Unity.Cinemachine;
 using UnityEditor.SceneManagement;
@@ -8,10 +9,19 @@ namespace Defend.UI
     public class PlayerHandController : MonoBehaviour
     {
         #region Variables
+        //참조
+        PlayerState playerState;
         //테스트용 시계
         public TextMeshProUGUI timeText;
         public GameObject viewButton;
         public GameObject uiOnButton;
+        public GameObject viewCanvas;
+
+        //자원개수
+        public TextMeshProUGUI rockheld;
+        public TextMeshProUGUI treeheld;
+        public TextMeshProUGUI moneyheld;
+
         private float time;
 
         //버튼 켜지는여부
@@ -19,13 +29,14 @@ namespace Defend.UI
 
         //탑뷰
         private bool isViewChange = false;
-        public Transform currentTransform;
+        private Transform currentTransform;
         private Vector3 originalPosition; // 원래 위치
         private Quaternion originalRotation; // 원래 회전
         #endregion
 
         private void Start()
         {
+            playerState = GetComponent<PlayerState>();
             //초기화
             currentTransform = gameObject.transform;
             originalPosition = currentTransform.position;
@@ -34,41 +45,68 @@ namespace Defend.UI
 
         private void Update()
         {
+
             time += Time.deltaTime;
             timeText.text = time.ToString("F2");
+            rockheld.text = playerState.rock.ToString();
+            treeheld.text = playerState.tree.ToString();
+            moneyheld.text = playerState.money.ToString() + "G";
+
         }
 
         public void ViewChange()
         {
-            Debug.Log(isViewChange);
+           
             CinemachineBrain cinemachineBrain = gameObject.GetComponent<CinemachineBrain>();
-            if (isViewChange==true)
+            if (isViewChange)
             {
-                cinemachineBrain.enabled = isViewChange;
+                // 탑뷰에서 원래 위치로 돌아가기
+                currentTransform.position = originalPosition;
+                currentTransform.rotation = originalRotation;
+                cinemachineBrain.enabled = false; 
             }
             else
             {
-                // 원래 위치로 돌아가기
-                cinemachineBrain.enabled = isViewChange;
-                currentTransform.position = originalPosition;
-                currentTransform.rotation = originalRotation;
+                // 현재 위치 저장
+                originalPosition = currentTransform.position;
+                originalRotation = currentTransform.rotation;
+                cinemachineBrain.enabled = true;
             }
 
             isViewChange = !isViewChange;
         }
 
-        public void ViewButton()
+        //ui 켜기
+        public void ShowButton()
         {
             if (isOnUi == true)
             {
                 uiOnButton.SetActive(true);
-                viewButton.SetActive(false);
+                viewCanvas.SetActive(false);
             }
             else
             {
                 uiOnButton.SetActive(false);
-                viewButton.SetActive(true);
+                viewCanvas.SetActive(true);
             }
         }
+
+        //ui 끄기
+        public void hideButton()
+        {
+            if (isOnUi == true)
+            {
+                uiOnButton.SetActive(false);
+                viewCanvas.SetActive(true);
+            }
+            else
+            {
+                uiOnButton.SetActive(true);
+                viewCanvas.SetActive(false);
+            }
+        }
+
+
+
     }
 }
