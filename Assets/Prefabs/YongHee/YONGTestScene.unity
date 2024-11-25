@@ -1115,6 +1115,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1201834960580421637
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1945386843962111504, guid: bcffd13232f8cea46a47483a96462227, type: 3}
+      propertyPath: m_Name
+      value: CannonTower
+      objectReference: {fileID: 0}
+    - target: {fileID: 8607241230668842016, guid: bcffd13232f8cea46a47483a96462227, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8607241230668842016, guid: bcffd13232f8cea46a47483a96462227, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8607241230668842016, guid: bcffd13232f8cea46a47483a96462227, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8607241230668842016, guid: bcffd13232f8cea46a47483a96462227, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8607241230668842016, guid: bcffd13232f8cea46a47483a96462227, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8607241230668842016, guid: bcffd13232f8cea46a47483a96462227, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8607241230668842016, guid: bcffd13232f8cea46a47483a96462227, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8607241230668842016, guid: bcffd13232f8cea46a47483a96462227, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8607241230668842016, guid: bcffd13232f8cea46a47483a96462227, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8607241230668842016, guid: bcffd13232f8cea46a47483a96462227, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bcffd13232f8cea46a47483a96462227, type: 3}
 --- !u!1001 &1972300519116220892
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1182,7 +1239,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1839131951023700128, guid: c8bd056f147434940962a1d53f98cf9c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -2.68
       objectReference: {fileID: 0}
     - target: {fileID: 1839131951023700128, guid: c8bd056f147434940962a1d53f98cf9c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1224,6 +1281,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: NormalTower
       objectReference: {fileID: 0}
+    - target: {fileID: 8890689698223482271, guid: c8bd056f147434940962a1d53f98cf9c, type: 3}
+      propertyPath: towerInfo.projectile.attack
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8890689698223482271, guid: c8bd056f147434940962a1d53f98cf9c, type: 3}
+      propertyPath: towerInfo.projectile.moveSpeed
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1241,3 +1306,4 @@ SceneRoots:
   - {fileID: 1871241155}
   - {fileID: 938754784}
   - {fileID: 1972300519116220892}
+  - {fileID: 1201834960580421637}

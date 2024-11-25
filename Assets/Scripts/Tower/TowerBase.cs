@@ -1,3 +1,4 @@
+using Defend.Projectile;
 using Defend.Utillity;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +24,8 @@ namespace Defend.Tower
         [SerializeField] List<Transform> targets;           // 바라볼 타겟 오브젝트
         public Transform currentTarget;                     // 현재 가장 가까운 타겟
         public List<LayerMask> targetLayerList;             // 타겟 오브젝트의 레이어
+        public Transform firePoint;                         // 발사체 시작점
+        [SerializeField] float shootTime;                   // 슛 타임 카운트
 
         // 타워 정보
         [SerializeField] protected TowerInfo towerInfo;
@@ -69,6 +72,8 @@ namespace Defend.Tower
         protected virtual void Update()
         {
             SetRotationToTarget(); // 매 프레임마다 타겟을 바라보도록 회전
+            shootTime += Time.deltaTime;
+            Shoot();
 
             // TEST
             DrawLine();            // 타겟 방향으로 라인 그리기
@@ -146,6 +151,22 @@ namespace Defend.Tower
                     }
                 }
                 currentTarget = closestTarget;
+            }
+        }
+
+        // 발사
+        protected virtual void Shoot()
+        {
+            // 타겟이 있으며, 슛 딜레이가 지났을 경우
+            if(currentTarget != null && towerInfo.shootDelay < shootTime)
+            {
+                // 발사체 생성
+                GameObject projectilePrefab = Instantiate(towerInfo.projectile.prefab, firePoint.transform.position, Quaternion.identity);
+                // 발사체의 타겟설정, 발사체 정보 초기화
+                projectilePrefab.GetComponent<ProjectileBase>().Init(towerInfo.projectile, currentTarget);
+                
+                // 슛 타임 초기화
+                shootTime = 0;
             }
         }
 
