@@ -12,7 +12,7 @@ public class ResourceManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            playerState = FindObjectOfType<PlayerState>(); // PlayerState를 찾기
+            playerState = Object.FindAnyObjectByType<PlayerState>(); // PlayerState를 찾기
         }
         else
         {

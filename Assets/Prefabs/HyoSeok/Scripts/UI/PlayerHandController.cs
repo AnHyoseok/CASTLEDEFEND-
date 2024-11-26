@@ -24,14 +24,25 @@ namespace Defend.UI
 
         private float time;
 
-        //버튼 켜지는여부
-        private bool isOnUi;
+        //메뉴 선택 버튼
+        public GameObject menuCanvas;
+        public GameObject statusButton;
+        public GameObject potalButton;
+        // 현재 활성화된 메뉴 상태
+        private bool isViewMenuActive = true; 
 
+
+
+        //포탈 캔버스
+        public GameObject potalCanvas;        
         //탑뷰
         private bool isViewChange = false;
         private Transform currentTransform;
         private Vector3 originalPosition; // 원래 위치
         private Quaternion originalRotation; // 원래 회전
+
+        //버튼 켜지는여부
+        private bool isOnUi;
         #endregion
 
         private void Start()
@@ -76,6 +87,7 @@ namespace Defend.UI
             isViewChange = !isViewChange;
         }
 
+
         //ui 켜기
         public void ShowButton()
         {
@@ -83,11 +95,13 @@ namespace Defend.UI
             {
                 uiOnButton.SetActive(true);
                 viewCanvas.SetActive(false);
+                menuCanvas.SetActive(true);
             }
             else
             {
                 uiOnButton.SetActive(false);
                 viewCanvas.SetActive(true);
+                menuCanvas.SetActive(true);
             }
         }
 
@@ -98,15 +112,32 @@ namespace Defend.UI
             {
                 uiOnButton.SetActive(false);
                 viewCanvas.SetActive(true);
+                menuCanvas.SetActive(true);
             }
             else
             {
                 uiOnButton.SetActive(true);
                 viewCanvas.SetActive(false);
+                menuCanvas.SetActive(false);
             }
         }
 
-
+       
+        public void ChangeMenu()
+        {
+            if (isViewMenuActive)
+            {
+                viewCanvas.SetActive(false);
+                potalCanvas.SetActive(true);
+                isViewMenuActive = false;
+            }
+            else
+            {
+                potalCanvas.SetActive(false);
+                viewCanvas.SetActive(true);
+                isViewMenuActive = true; 
+            }
+        }
 
     }
 }
