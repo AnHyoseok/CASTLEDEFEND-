@@ -7,7 +7,11 @@ namespace Defend.Utillity
     {
         #region Layer 
         public static string LAYER_ENEMY = "Enemy";                      //Layer - Enemy 
-        public static string LAYER_BOSS= "Boss";                      //Layer - Boss
+        public static string LAYER_BOSS = "Boss";                        //Layer - Boss
+        #endregion
+
+        #region Animation 
+        public static string ANIM_SHOOTTRIGGER = "ShootTrigger";         //Anim - ShootTrigger
         #endregion
     }
 }

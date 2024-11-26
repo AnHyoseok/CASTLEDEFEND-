@@ -48,7 +48,7 @@ namespace Defend.Projectile
         }
         protected override void Hit()
         {
-            Debug.Log("HITTARGET");
+            base.Hit();
         }
     }
 }

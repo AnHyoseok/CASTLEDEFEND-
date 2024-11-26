@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
 /// 발사체의 기능을 정의한 상위 클래스
@@ -26,22 +27,15 @@ namespace Defend.Projectile
             projectileInfo = _projectileInfo;
         }
 
-
-
         // 타겟을 맞춤
         protected virtual void Hit()
         {
-            //Hit 효과
-            //GameObject effectGo = Instantiate(bulletImpactPrefab, this.transform.position, Quaternion.identity);
-            //Destroy(effectGo, 2f);
-
-            ////타겟에 데미지 준다
-            //Damage(target);
-
-            ////탄환 게임오브젝트 kill (Destroy)
-            //Destroy(this.gameObject);
-
-            Debug.Log("HIT");
+            // Projectile Effect 생성
+            GameObject effect = Instantiate(projectileInfo.effectPrefab, target.position,Quaternion.identity);
+            // Projectile Effect 삭제 예약
+            Destroy(effect, projectileInfo.effectTime);
+            // Projectile 삭제 
+            Destroy(this.gameObject);
         }
     }
 }

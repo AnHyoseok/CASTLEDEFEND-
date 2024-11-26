@@ -6,7 +6,7 @@ namespace Defend.Projectile
 {
     public class PointProjectile : ProjectileBase
     {
-        [SerializeField ]protected Transform pointTarget;             // 목표 지점
+        [SerializeField ]protected Vector3 pointTarget;             // 목표 지점
         protected override void Start()
         {
 
@@ -14,8 +14,6 @@ namespace Defend.Projectile
 
         protected override void Update()
         {
-            Debug.Log("POSITION = " + pointTarget.position);
-            Debug.Log("TRANSFORM = " + pointTarget);
             MoveToPoint();
             if (ArrivalPoint() == true) { Hit(); }
         }
@@ -25,7 +23,7 @@ namespace Defend.Projectile
         {
             base.Init(_projectileInfo, _target);
             // target이 설정되면 그 위치를 기록
-            pointTarget = _target;
+            pointTarget = _target.position;
         }
 
         // 지점을 향해 이동
@@ -34,14 +32,14 @@ namespace Defend.Projectile
             // 지점을 바라보도록 
             transform.LookAt(pointTarget);
             // 지점을 향해 이동
-            transform.position = Vector3.MoveTowards(transform.position, pointTarget.position, Time.deltaTime * projectileInfo.moveSpeed);
+            transform.position = Vector3.MoveTowards(transform.position, pointTarget, Time.deltaTime * projectileInfo.moveSpeed);
         }
 
         // 지점에 도착 여부
         protected virtual bool ArrivalPoint()
         {
             // 타겟까지의 벡터
-            Vector3 dir = pointTarget.position - transform.position;
+            Vector3 dir = pointTarget - transform.position;
             // 발사체가 한프레임당 이동하는 거리
             float distanceThisFrame = Time.deltaTime * projectileInfo.moveSpeed;
             if (dir.magnitude < distanceThisFrame)
@@ -55,6 +53,7 @@ namespace Defend.Projectile
 
         protected override void Hit()
         {
+            base.Hit();
             Debug.Log("HITPOINT");
         }
     }

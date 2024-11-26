@@ -282,8 +282,10 @@ MonoBehaviour:
     upgradeTower: {fileID: 0}
     projectile:
       prefab: {fileID: 3632738850528907811, guid: 36cec5b75a2e01948be6c4f16a0e2e74, type: 3}
-      attack: 0
-      moveSpeed: 0
+      effectPrefab: {fileID: 4996507434419837056, guid: 7f547dff0f9e9914a9c1144829d3bd94, type: 3}
+      effectTime: 3
+      attack: 1
+      moveSpeed: 10
   gizmoColor: {r: 0, g: 1, b: 0, a: 1}
   sphereRadius: 5
   lineLength: 10

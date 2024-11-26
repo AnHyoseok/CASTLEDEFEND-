@@ -7,6 +7,7 @@ public class TestMove : MonoBehaviour
     public Transform[] wayPoints;
     private int currentWaypointIndex = 0; // 현재 이동 중인 웨이포인트 인덱스
     private Vector3 targetPosition; // 현재 목표 위치
+    public Transform target;
     #endregion
     void Start()
     {
@@ -32,5 +33,7 @@ public class TestMove : MonoBehaviour
             currentWaypointIndex = (currentWaypointIndex + 1) % wayPoints.Length;
             targetPosition = wayPoints[currentWaypointIndex].position;
         }
+
+        transform.LookAt(target.position);
     }
 }

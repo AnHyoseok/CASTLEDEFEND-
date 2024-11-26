@@ -24,11 +24,16 @@ namespace Defend.Tower
         [SerializeField] List<Transform> targets;           // 바라볼 타겟 오브젝트
         public Transform currentTarget;                     // 현재 가장 가까운 타겟
         public List<LayerMask> targetLayerList;             // 타겟 오브젝트의 레이어
+
+        // 발사
         public Transform firePoint;                         // 발사체 시작점
         [SerializeField] float shootTime;                   // 슛 타임 카운트
 
         // 타워 정보
         [SerializeField] protected TowerInfo towerInfo;
+
+        // 컴포넌트
+        protected Animator animator;
         #endregion
 
         #region Variables For Test
@@ -41,6 +46,9 @@ namespace Defend.Tower
 
         protected virtual void Start()
         {
+            // 참조
+            animator = GetComponent<Animator>();
+
             // Layer 설정
             targetLayerList.Add(LayerMask.GetMask(Constants.LAYER_ENEMY));
             targetLayerList.Add(LayerMask.GetMask(Constants.LAYER_BOSS));
@@ -76,7 +84,7 @@ namespace Defend.Tower
             Shoot();
 
             // TEST
-            DrawLine();            // 타겟 방향으로 라인 그리기
+            //DrawLine();            // 타겟 방향으로 라인 그리기
         }
 
         // 타겟의 방향으로 회전
@@ -162,6 +170,9 @@ namespace Defend.Tower
             {
                 // 발사체 생성
                 GameObject projectilePrefab = Instantiate(towerInfo.projectile.prefab, firePoint.transform.position, Quaternion.identity);
+                // Shoot Animation 재생
+                animator.SetTrigger(Constants.ANIM_SHOOTTRIGGER);
+
                 // 발사체의 타겟설정, 발사체 정보 초기화
                 projectilePrefab.GetComponent<ProjectileBase>().Init(towerInfo.projectile, currentTarget);
                 
