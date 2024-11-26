@@ -26,7 +26,9 @@ namespace Defend.Enemy
         private int waveCount;  //웨이브 카운트
 
         //살아있는 enemy의 개수
-        public static int enemyAlive;
+        //public static int enemyAlive;
+        public int enemyAlive;
+
         #endregion
 
         void Start()
@@ -40,7 +42,10 @@ namespace Defend.Enemy
 
         void Update()
         {
-            if (countdown <= 0f)
+            //가드절 (웨이브 세팅 수와 웨이브 카운트가 같거나 카운트가 커지면 실행하지않음
+            if (waves.Length <= waveCount) return;
+
+            if (countdown <= 0f) 
             {
                 //타이머 명령
                 StartCoroutine(SpawnWave());
@@ -72,7 +77,7 @@ namespace Defend.Enemy
             isSpawn = true;
 
             //0 -> WaveData에 데이터 추가시 카운트변수 설정
-            WaveData wave = waves[waveCount]; 
+            WaveData wave = waves[waveCount];
 
             for (int i = 0; i < wave.count; i++)
             {
