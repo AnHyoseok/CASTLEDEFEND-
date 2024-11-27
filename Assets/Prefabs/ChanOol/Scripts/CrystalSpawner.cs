@@ -9,9 +9,9 @@ public class CrystalSpawner : MonoBehaviour
 
     public float spawnDistance = 2f;    // 현재 오브젝트에서의 거리
 
-    public float spawnInterval = 1f;   // 생성 주기
+    public float spawnInterval = 3f;    // 생성 주기
 
-    private bool isSpawn;
+    [SerializeField] private bool isSpawn;   // 생성되어있는지 체크
 
     #endregion
 
@@ -23,29 +23,29 @@ public class CrystalSpawner : MonoBehaviour
     private void Update()
     {
         //타이머 명령
-        StartCoroutine(SpawnObjectRoutine());
+        StartCoroutine(SpawnObjectRoutine(spawnInterval));
     }
 
     
 
-    private IEnumerator SpawnObjectRoutine()
+    private IEnumerator SpawnObjectRoutine(float interval)
     {
-        isSpawn = true;
-
-        if (isSpawn)
+        while (true)
         {
-            // 현재 오브젝트 앞 위치 계산
-            Vector3 spawnPosition = transform.position + transform.forward * spawnDistance;
+            if (isSpawn == false)
+            {
+                // 현재 오브젝트 앞 위치 계산
+                Vector3 spawnPosition = transform.position + transform.forward * spawnDistance;
 
-            // 오브젝트 생성
-            Instantiate(crystalPrefab, spawnPosition, Quaternion.identity);
+                // 오브젝트 생성
+                Instantiate(crystalPrefab, spawnPosition, Quaternion.identity);
 
-            // 다음 실행까지 대기
-            yield return new WaitForSeconds(spawnInterval);
+                // 다음 실행까지 대기
+                yield return new WaitForSeconds(interval);
 
-            isSpawn = false;
+                isSpawn = true;
+            }
         }
-  
     }
 }
 
