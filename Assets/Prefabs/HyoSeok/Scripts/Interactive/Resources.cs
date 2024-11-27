@@ -14,7 +14,7 @@ namespace Defend.Interactive{
 
         private void OnTriggerEnter(Collider other)
         {
-            // 손과 닿으면
+            // 손과 닿으면 // 오브젝트 이름으로 수정할것 !!
             if ((other.CompareTag("LeftHand") || other.CompareTag("RightHand")) && !isDamaged)
             {
                 StartCoroutine(TakeDamage(10));  // 손으로 때릴 때마다 10 데미지

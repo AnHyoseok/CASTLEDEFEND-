@@ -24,5 +24,7 @@ namespace Defend.UI
                 playerTransform.position = potalsTransform[index].position;
             }
         }
+
+        
     }
 }
