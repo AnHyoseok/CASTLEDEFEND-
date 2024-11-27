@@ -4691,7 +4691,14 @@ MonoBehaviour:
   timeText: {fileID: 2665033108058948944}
   viewButton: {fileID: 0}
   uiOnButton: {fileID: 0}
-  currentTransform: {fileID: 0}
+  viewCanvas: {fileID: 0}
+  rockheld: {fileID: 0}
+  treeheld: {fileID: 0}
+  moneyheld: {fileID: 0}
+  menuCanvas: {fileID: 0}
+  statusButton: {fileID: 0}
+  potalButton: {fileID: 0}
+  potalCanvas: {fileID: 0}
 --- !u!1 &991312181
 GameObject:
   m_ObjectHideFlags: 0
@@ -12185,7 +12192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
   m_InteractionLayers:
-    m_Bits: 4
+    m_Bits: 0
   m_Handedness: 0
   m_AttachTransform: {fileID: 0}
   m_KeepSelectedTargetValid: 1
@@ -13640,7 +13647,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
   m_InteractionLayers:
-    m_Bits: 4
+    m_Bits: 0
   m_Handedness: 0
   m_AttachTransform: {fileID: 0}
   m_KeepSelectedTargetValid: 1
