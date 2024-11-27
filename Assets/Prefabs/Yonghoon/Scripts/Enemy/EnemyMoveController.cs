@@ -79,8 +79,6 @@ namespace Defend.Enemy
         void Arrive()
         {
             //도착처리 (ex 라이프 감소 등)
-
-            //게임 오브젝트 kill
             Debug.Log("Enemy Arrive!");
         }
 
