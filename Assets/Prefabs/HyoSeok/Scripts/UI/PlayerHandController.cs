@@ -3,6 +3,7 @@ using TMPro;
 using Unity.Cinemachine;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Defend.UI
 {
@@ -43,15 +44,32 @@ namespace Defend.UI
 
         //버튼 켜지는여부
         private bool isOnUi;
+
+        //버튼들
+        public Button[] buttons;
+
+        //사운드
+        //포탈 사운드
+        public AudioClip clickSound;
+        private AudioSource audioSource;
         #endregion
 
         private void Start()
         {
+            //참조
             playerState = GetComponent<PlayerState>();
+            for (int i = 0; i < buttons.Length; i++)
+            {
+                //추가
+                buttons[i].onClick.AddListener(OnButtonClick);
+            }
+            audioSource = gameObject.AddComponent<AudioSource>();
             //초기화
             currentTransform = gameObject.transform;
             originalPosition = currentTransform.position;
             originalRotation = currentTransform.rotation;
+
+         
         }
 
         private void Update()
@@ -122,7 +140,7 @@ namespace Defend.UI
             }
         }
 
-       
+       //메뉴 변경 (없앨듯)
         public void ChangeMenu()
         {
             if (isViewMenuActive)
@@ -138,6 +156,14 @@ namespace Defend.UI
                 isViewMenuActive = true; 
             }
         }
+
+        void OnButtonClick()
+        {
+            audioSource.clip = clickSound;
+            audioSource.Play();
+        }
+
+       
 
     }
 }

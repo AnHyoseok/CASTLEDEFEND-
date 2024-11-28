@@ -6,16 +6,11 @@ namespace Defend.Player
     public class PlayerState : MonoBehaviour
     {
         #region Variables
-        public int money = 100; //돈
-        public int health = 20; //체력(성)
-        public int tree; //자원(나무)
-        public int rock; //자원(돌)
+        public float money = 100; //돈
+        public float health = 20; //체력(성)
+        public float tree; //자원(나무)
+        public float rock; //자원(돌)
         #endregion
-
-        private void Update()
-        {
-       
-        }
 
         //돈 , 나무 , 돌 개수 체크
         public void ShowStatus()
@@ -25,7 +20,7 @@ namespace Defend.Player
         }
 
         //데미지 입기
-        public void TakeDamage(int amount)
+        public void TakeDamage(float amount)
         {
             if (health <= amount)
             {
@@ -44,13 +39,13 @@ namespace Defend.Player
         }
 
         //돈 습득
-        public void AddMoney(int amount)
+        public void AddMoney(float amount)
         {
             money += amount;
         }
 
         //돈 소비
-        public bool SpendMoney(int amount)
+        public bool SpendMoney(float amount)
         {
             if (money >= amount)
             {
@@ -65,19 +60,19 @@ namespace Defend.Player
             }
         }
         //나무 습득
-        public void AddTree(int amount)
+        public void AddTree(float amount)
         {
             tree += amount;
         }
         //돌 습득
-        public void AddRock(int amount)
+        public void AddRock(float amount)
         {
             rock += amount;
         }
 
 
         // 자원(나무 , 돌 소비)
-        public bool SpendResources(int requiredTree = 0, int requiredRock = 0)
+        public bool SpendResources(float requiredTree = 0, float requiredRock = 0)
         {
             // 자원이 충분한지 확인
             if (tree >= requiredTree && rock >= requiredRock)
