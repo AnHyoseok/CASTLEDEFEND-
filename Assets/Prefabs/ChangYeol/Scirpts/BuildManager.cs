@@ -34,7 +34,7 @@ namespace Defend.UI
 
         public PlayerState playerState;
 
-        //선택한 터렛의 건설한 비용을 자지고 있는지
+        //선택한 타워의 건설한 비용을 자지고 있는지
         public bool HasBuildMoney
         {
             get
@@ -52,13 +52,13 @@ namespace Defend.UI
         private Tile selectTile;
         #endregion
 
-        public TowerInfo GetTurretToBuild()
+        public TowerInfo GetTowerToBuild()
         {
             return towerInfo;
         }
 
-        //매개변수로 받은 터렛 프리팹을 설치할 터렛에 저장
-        public void SetTurretToBuild(TowerInfo Tower)
+        //매개변수로 받은 타워 프리팹을 설치할 터렛에 저장
+        public void SetTowerToBuild(TowerInfo Tower)
         {
             towerInfo = Tower;
             DeselectTile();

@@ -1,5 +1,7 @@
 using Defend.Tower;
+using MyFps;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,24 +17,24 @@ namespace Defend.UI
         //선택받은 타일
         private Tile targetTile;
 
-        //업그레이드 가격 텍스트, 버튼, 판매가격 텍스트
-        public TextMeshProUGUI upgradecost;
+        //기본 타워 구매가격, 판매가격, HP,MP, Attack, AttackSpeed
+        public Upgrade basicText;
+        //업그레이드 타워 가격 텍스트, 버튼, 판매가격 텍스트
+        //public Upgrade upGradeText;
 
         //업그레이드 버튼
         public Button upgradebutton;
-        //판매 버튼
-        public TextMeshProUGUI sellcost;
+        public Button upgradeUIbutton;
 
         //플레이어 카메라 위치
         public Transform head;
+        [SerializeField] private float distance = 1.5f;
         #endregion
 
         void Start()
         {
             //초기화
             buildManager = BuildManager.Instance;
-
-
         }
 
         //매개변수로 선택한 타일 정보를 얻어온다
@@ -42,21 +44,27 @@ namespace Defend.UI
             targetTile = tile;
 
             //타워가 설치된 위치 주위에서 보여준다
-            this.transform.position = targetTile.GetBuildPosition();
-
+            this.transform.position = head.position + new Vector3(head.forward.x + -0.5f, 0, head.forward.z).normalized * distance;
+            this.transform.LookAt(new Vector3(head.position.x, this.transform.position.y, head.position.z));
+            this.transform.forward *= -1;
             //업그레이드 가격 표시
-            if (targetTile)
+            if (!targetTile)
             {
                 //업그레이드 판매 가격 표시
                 //sellcost.text = targetTile.blueprint.Getupgradecost().ToString() + " G";
-                upgradecost.text = "Done";
+                //upgradecost.text = "Done";
                 upgradebutton.interactable = false;
             }
-            else
+            else if(targetTile)
             {
                 //기본 터렛 판매 가격 표시
-                sellcost.text = targetTile.towerInfo.GetSellCost().ToString() + " G";
-                upgradecost.text = targetTile.towerInfo.cost2.ToString() + " G";
+                basicText.name.text = targetTile.towerInfo.upgradeTower.name;
+                basicText.Buycost.text = "Buy : " +  targetTile.towerInfo.cost2.ToString() + " G";
+                basicText.Sellcost.text = "Sell : " + targetTile.towerInfo.GetSellCost().ToString() + " G";
+                basicText.Hp.text = "Hp : " + targetTile.towerInfo.maxHealth.ToString();
+                basicText.Mp.text = "Mp : " + targetTile.towerInfo.maxMana.ToString();
+                basicText.Attack.text = "Attack : " + targetTile.towerInfo.projectile.attack.ToString();
+                basicText.AttackSpeed.text = "AttackSpeed : " + targetTile.towerInfo.projectile.moveSpeed.ToString();
                 upgradebutton.interactable = true;
             }
             tileUI.SetActive(true);
@@ -72,10 +80,12 @@ namespace Defend.UI
         public void Selled()
         {
             targetTile.SellTower();
+            buildManager.DeselectTile();
         }
         public void Upgraded()
         {
             targetTile.UpgradeTower();
+            buildManager.DeselectTile();
         }
     }
 }
