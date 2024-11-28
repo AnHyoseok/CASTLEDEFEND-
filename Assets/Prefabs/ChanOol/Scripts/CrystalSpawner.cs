@@ -5,28 +5,23 @@ public class CrystalSpawner : MonoBehaviour
 {
     #region Variables
 
-    public GameObject crystalPrefab;    // Cave 앞에서 생성할 프리팹
-
-    public float spawnDistance = 2f;    // 현재 오브젝트에서의 거리
-
-    public float spawnInterval = 3f;    // 생성 주기
-
-    [SerializeField] private bool isSpawn;   // 생성되어있는지 체크
+    public GameObject crystalPrefab;    // 스폰할 프리팹
+    public float spawnInterval = 3f;    // 스폰 주기
+    public int spawnCount = 3;          // 스폰 갯수
+    [SerializeField] private bool isSpawn;   // isSpawn이 true 일때만 스폰
 
     #endregion
 
     private void Start()
     {
-  
-    }
-
-    private void Update()
-    {
         //타이머 명령
         StartCoroutine(SpawnObjectRoutine(spawnInterval));
     }
 
-    
+    private void Update()
+    {
+        
+    }
 
     private IEnumerator SpawnObjectRoutine(float interval)
     {
@@ -34,16 +29,20 @@ public class CrystalSpawner : MonoBehaviour
         {
             if (isSpawn == false)
             {
-                // 현재 오브젝트 앞 위치 계산
-                Vector3 spawnPosition = transform.position + transform.forward * spawnDistance;
+                for (int i = 0; i < spawnCount; i++)
+                {
+                    // 오브젝트 생성
+                    Instantiate(crystalPrefab, transform.position, Quaternion.identity);
 
-                // 오브젝트 생성
-                Instantiate(crystalPrefab, spawnPosition, Quaternion.identity);
-
-                // 다음 실행까지 대기
-                yield return new WaitForSeconds(interval);
-
+                    // 다음 실행까지 대기
+                    yield return new WaitForSeconds(interval);
+                }
                 isSpawn = true;
+            }
+            else
+            {
+                // 플래그가 true라면 바로 다음 프레임으로 대기
+                yield return null;
             }
         }
     }
