@@ -947,12 +947,12 @@ GameObject:
   m_Component:
   - component: {fileID: 4424571023566087280}
   - component: {fileID: 6653168964992520803}
-  - component: {fileID: 6531497678326735178}
-  - component: {fileID: 6603648873012888907}
   - component: {fileID: 1876674551060910166}
   - component: {fileID: 4811453807849419974}
+  - component: {fileID: -5660023932820353151}
+  - component: {fileID: 6567091707103445654}
   m_Layer: 6
-  m_Name: Tanker
+  m_Name: TankerTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -998,40 +998,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &6531497678326735178
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8159497760085561716}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45b0f8685dccb8749bf7f3e559079c3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseSpeed: 5
-  baseAttackDamage: 5
-  baseAttackDelay: 5
-  baseHealth: 100
-  baseArmor: 100
-  rewardGold: 1
-  isDeath: 0
-  type: 2
---- !u!114 &6603648873012888907
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8159497760085561716}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7114b11c98a1c74293eeaffad2b895c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 0
-  currentArmor: 0
 --- !u!114 &1876674551060910166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1044,6 +1010,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fb520b37536e55438a98a8d0930e347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseSpeed: 5
   speed: 0
 --- !u!114 &4811453807849419974
 MonoBehaviour:
@@ -1052,14 +1019,41 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8159497760085561716}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 976c4214dfa689c4a869e20ce75e8208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackTarget: {fileID: 0}
-  currentAttackDamage: 0
-  currentAttackDelay: 0
+  baseAttackDamage: 10
+  baseAttackDelay: 2
+--- !u!114 &-5660023932820353151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8159497760085561716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 511c8228ce2acd340a44481bdb938a52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: 1, z: 0}
+--- !u!114 &6567091707103445654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8159497760085561716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34e3e69428bb6e34b8257abd4398b8bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  baseArmor: 5
 --- !u!1 &8940157667979962989
 GameObject:
   m_ObjectHideFlags: 0

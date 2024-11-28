@@ -38,15 +38,25 @@ namespace Defend.TestScript
         //힐
         public void Heal(float amount)
         {
+            // 힐 적용 전 체력 저장
             float beforeHealth = CurrentHealth;
-            CurrentHealth += amount;
-            CurrentHealth = Mathf.Clamp(CurrentHealth, 0f, maxHealth);
 
-            //real Heal 구하기
+            // 힐 적용
+            CurrentHealth = Mathf.Clamp(CurrentHealth + amount, 0f, maxHealth);
+
+            // 실제 힐량 계산
             float realHeal = CurrentHealth - beforeHealth;
+
+            //**************************************************
+            // 오버힐량 계산 => ex) 만약 힐량이 최대체력보다 높아지면 쉴드값을 준다거나, 추가적인 버프를 준다거나 필요시 사용! 
+            //float overheal = Mathf.Max(0f, amount - realHeal);
+            //**************************************************
+
+            // 디버깅 또는 로그 출력
+            Debug.Log($"Healed: {realHeal}, Current Health: {CurrentHealth}");
             if (realHeal > 0f)
             {
-                //힐 구현
+                //힐이펙트 구현
                 OnHeal?.Invoke(realHeal);
             }
         }
@@ -66,7 +76,7 @@ namespace Defend.TestScript
                 CurrentHealth -= realDamage;          
                 OnDamaged?.Invoke(realDamage);
             }
-
+            Debug.Log($"Damage Taken: {realDamage}, Remaining Health: {CurrentHealth}");
             // 체력이 0 이하라면 죽음 처리
             if (CurrentHealth <= 0f)
             {

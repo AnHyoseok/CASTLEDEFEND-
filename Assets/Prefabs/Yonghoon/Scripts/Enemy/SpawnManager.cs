@@ -26,8 +26,8 @@ namespace Defend.Enemy
         private int waveCount;  //웨이브 카운트
 
         //살아있는 enemy의 개수
-        //public static int enemyAlive;
-        public int enemyAlive;
+        public static int enemyAlive;
+        //public int enemyAlive;
 
         #endregion
 

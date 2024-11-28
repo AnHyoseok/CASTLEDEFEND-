@@ -1,4 +1,5 @@
 using Defend.Enemy;
+using Defend.TestScript;
 using UnityEngine;
 /// <summary>
 /// 타겟을 공격하는 발사체의 기능을 정의
@@ -52,8 +53,8 @@ namespace Defend.Projectile
         protected override void Hit()
         {
             base.Hit();
-            // EnemyHealthController 컴포넌트 접근
-            EnemyHealthController ehc = target.GetComponent<EnemyHealthController>();
+            // Health 컴포넌트 접근
+            Health ehc = target.GetComponent<Health>();
             // 데미지 주기
             ehc.TakeDamage(projectileInfo.attack);
         }

@@ -1,4 +1,5 @@
 using Defend.Enemy;
+using Defend.TestScript;
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
@@ -68,15 +69,15 @@ namespace Defend.Projectile
             //colliders = Physics.OverlapSphere(transform.position, projectileInfo.attackRange);
             #endregion
 
-            // EnemyStats 컴포넌트를 가진 Object 찾기
-            var enemies = FindObjectsByType<EnemyStats>(FindObjectsSortMode.None);
+            // EnemyController 컴포넌트를 가진 Object 찾기
+            var enemies = FindObjectsByType<EnemyController>(FindObjectsSortMode.None);
             foreach (var obj in enemies)
             {
                 // 거리 체크
                 float distance = Vector3.Distance(transform.position, obj.transform.position);
                 if (distance <= projectileInfo.attackRange)
                 {
-                    EnemyHealthController ehc = obj.GetComponent<EnemyHealthController>();
+                    Health ehc = obj.GetComponent<Health>();
                     if (ehc != null)
                     {
                         // 데미지 주기
