@@ -30,7 +30,7 @@ public class Fader : MonoBehaviour
     }
 
     // Fade Out/In 효과 한세트 함수
-    private IEnumerator FadeOutIn()
+    public IEnumerator FadeOutIn()
     {
         while (true)
         {
@@ -45,7 +45,7 @@ public class Fader : MonoBehaviour
     // Fader(1, 0) : FadeIn
     // Fader(0, 1) : FadeOut
 
-    private IEnumerator Fade(float start, float end)
+    public IEnumerator Fade(float start, float end)
     {
         float currentTime = 0.0f;
         float percent = 0.0f;
