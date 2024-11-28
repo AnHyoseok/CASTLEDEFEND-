@@ -3,7 +3,7 @@ using Defend.Projectile;
 using Defend.Utillity;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Defend.TestScript;
 /*
 기본타워 => 타겟공격
 스플래시타워 => 지점공격
@@ -128,11 +128,11 @@ namespace Defend.Tower
             // 반환할 타겟들 = 범위 내 타겟
             List<Transform> tempTarget = new List<Transform>();
 
-            // EnemyStats를 가진 Object를 찾음
-            var enemies = FindObjectsByType<EnemyStats>(FindObjectsSortMode.None);
+            // EnemyController를 가진 Object를 찾음
+            var enemies = FindObjectsByType<EnemyController>(FindObjectsSortMode.None);
 
             // Objects 중 공격 범위 있는 Object를 반환할 List에 추가
-            foreach (EnemyStats target in enemies)
+            foreach (EnemyController target in enemies)
             {
                 // 거리 체크
                 float distance = Vector3.Distance(transform.position, target.transform.position);

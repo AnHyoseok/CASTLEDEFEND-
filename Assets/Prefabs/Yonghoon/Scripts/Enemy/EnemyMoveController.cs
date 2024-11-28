@@ -9,10 +9,11 @@ namespace Defend.Enemy
     {
         //필드
         #region Variable
-        //Enemy의 기본정보를 가지고있는 클래스
-        private EnemyStats enemyBase;
-
+        [SerializeField] private float baseSpeed = 5f;
         [SerializeField] private float speed;   //이동 속도
+
+        //Arrive상태로 변경할 animator
+        //private Animator animator;
 
         private Transform target;   //이동할 목표지점        
 
@@ -23,10 +24,10 @@ namespace Defend.Enemy
         void Start()
         {
             //참조
-            enemyBase = GetComponent<EnemyStats>();
+            //animator = GetComponent<Animator>();
 
             //초기화
-            speed = enemyBase.baseSpeed;
+            speed = baseSpeed;
 
             //첫번째 목표지점 셋팅
             wayPointIndex = 0;
@@ -78,14 +79,23 @@ namespace Defend.Enemy
         //목표지점 도착 처리
         void Arrive()
         {
-            //도착처리 (ex 라이프 감소 등)
-            Debug.Log("Enemy Arrive!");
+            GetComponent<Animator>().SetBool("IsArrive", true);
+            GetComponent<EnemyAttackController>().enabled = true;
+
+            // Update를 멈추기 위해 컴포넌트 비활성화
+            enabled = false;
         }
 
         //슬로우 효과 적용시
         public void Slow(float rate)
         {
-            speed = enemyBase.baseSpeed * (1.0f - rate);
+            speed = baseSpeed * (1.0f - rate);
+        }
+
+        //가속화 효과 적용시
+        public void Fast(float rate)
+        {
+            speed = baseSpeed * (1.0f + rate);
         }
     }
 }

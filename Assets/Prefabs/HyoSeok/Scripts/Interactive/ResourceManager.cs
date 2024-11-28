@@ -1,37 +1,42 @@
 using Defend.Player;
 using UnityEngine;
 
-public class ResourceManager : MonoBehaviour
+namespace Defend.Interactive
 {
-    public static ResourceManager Instance;
-
-    private PlayerState playerState;
-
-    private void Awake()
+    public class ResourceManager : MonoBehaviour
     {
-        if (Instance == null)
+        #region
+        public static ResourceManager Instance;
+
+        private PlayerState playerState;
+        #endregion
+        private void Awake()
         {
-            Instance = this;
-            playerState = Object.FindAnyObjectByType<PlayerState>(); // PlayerState를 찾기
+            if (Instance == null)
+            {
+                Instance = this;
+                playerState = Object.FindAnyObjectByType<PlayerState>(); // PlayerState를 찾기
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
-        else
+
+        // 자원 추가
+        public void AddResources(float amount, string resourceType)
         {
-            Destroy(gameObject);
+
+            switch (resourceType.ToLower())
+            {
+                case "rock":
+                    playerState.AddRock(amount);
+                    break;
+                case "tree":
+                    playerState.AddTree(amount);
+                    break;
+              
+            }
         }
-    }
-
-    // 자원 추가
-    public void AddResources(int amount)
-    {
-       
-
-        //돌이면
-        playerState.AddRock(amount);
-        
-        //나무면
-        playerState.AddTree(amount);
-
-        //보유자원 표시
-        playerState.ShowStatus();
     }
 }
