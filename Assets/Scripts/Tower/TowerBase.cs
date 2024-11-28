@@ -1,3 +1,4 @@
+using Defend.Enemy;
 using Defend.Projectile;
 using Defend.Utillity;
 using System.Collections.Generic;
@@ -21,9 +22,11 @@ namespace Defend.Tower
     {
         #region Variables
         // 타겟
-        [SerializeField] List<Transform> targets;           // 바라볼 타겟 오브젝트
+        [SerializeField] List<Transform> targets;           // 타겟들
         public Transform currentTarget;                     // 현재 가장 가까운 타겟
-        public List<LayerMask> targetLayerList;             // 타겟 오브젝트의 레이어
+        #region Layer 및 collider 사용 => 미사용
+        //public List<LayerMask> targetLayerList;             // 타겟 오브젝트의 레이어
+        #endregion
 
         // 발사
         public Transform firePoint;                         // 발사체 시작점
@@ -34,6 +37,7 @@ namespace Defend.Tower
 
         // 컴포넌트
         protected Animator animator;
+        protected Status status;
         #endregion
 
         #region Variables For Test
@@ -48,10 +52,15 @@ namespace Defend.Tower
         {
             // 참조
             animator = GetComponent<Animator>();
+            status = GetComponent<Status>();
 
+            status.Init(towerInfo);
+
+            #region Layer 및 collider 사용 => 미사용
             // Layer 설정
-            targetLayerList.Add(LayerMask.GetMask(Constants.LAYER_ENEMY));
-            targetLayerList.Add(LayerMask.GetMask(Constants.LAYER_BOSS));
+            //targetLayerList.Add(LayerMask.GetMask(Constants.LAYER_ENEMY));
+            //targetLayerList.Add(LayerMask.GetMask(Constants.LAYER_BOSS));
+            #endregion
 
             // 일정 주기로 타겟 탐색
             InvokeRepeating(nameof(SetClosestTarget), 0f, towerInfo.detectDelay);
@@ -95,6 +104,9 @@ namespace Defend.Tower
                 // 타겟 설정
                 Vector3 targetPosition = currentTarget.position;
 
+                // 타겟의 y 좌표를 현재 오브젝트의 y 좌표로 고정
+                targetPosition.y = transform.position.y;
+
                 // 현재 오브젝트에서 타겟을 향하는 방향 계산
                 Vector3 direction = targetPosition - transform.position;
 
@@ -103,6 +115,7 @@ namespace Defend.Tower
 
                 // 서서히 회전 (Slerp 사용)
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, towerInfo.rotationSpeed * Time.deltaTime);
+
             }
         }
 
@@ -112,24 +125,40 @@ namespace Defend.Tower
             // 기존 타겟 초기화
             targets.Clear();
 
-            // 반환할 타겟들
+            // 반환할 타겟들 = 범위 내 타겟
             List<Transform> tempTarget = new List<Transform>();
 
-            // targetLayerList에서 여러 레이어를 비트 연산으로 결합
-            int combinedLayerMask = 0;
-            foreach (var layerMask in targetLayerList)
+            // EnemyStats를 가진 Object를 찾음
+            var enemies = FindObjectsByType<EnemyStats>(FindObjectsSortMode.None);
+
+            // Objects 중 공격 범위 있는 Object를 반환할 List에 추가
+            foreach (EnemyStats target in enemies)
             {
-                combinedLayerMask |= layerMask.value;  // 비트 연산으로 레이어 결합
+                // 거리 체크
+                float distance = Vector3.Distance(transform.position, target.transform.position);
+                if (distance <= towerInfo.attackRange)
+                {
+                    tempTarget.Add(target.transform);
+                }
             }
+
+            #region Layer 및 collider 사용 => 미사용
+            // targetLayerList에서 여러 레이어를 비트 연산으로 결합
+            //int combinedLayerMask = 0;
+            //foreach (var layerMask in targetLayerList)
+            //{
+            //    combinedLayerMask |= layerMask.value;  // 비트 연산으로 레이어 결합
+            //}
 
             // 공격 범위 내 Enemy Layer 탐색
-            Collider[] colliders = Physics.OverlapSphere(transform.position, towerInfo.attackRange, combinedLayerMask);
+            //Collider[] colliders = Physics.OverlapSphere(transform.position, towerInfo.attackRange, combinedLayerMask);
 
-            foreach (var collider in colliders)
-            {
-                // 타겟의 Transform 추가
-                tempTarget.Add(collider.transform);
-            }
+            //foreach (var collider in colliders)
+            //{
+            //    // 타겟의 Transform 추가
+            //    tempTarget.Add(collider.transform);
+            //}
+            #endregion
 
             return tempTarget;
         }
@@ -137,7 +166,7 @@ namespace Defend.Tower
         // 가장 가까운 타겟 설정
         void SetClosestTarget()
         {
-            // Enemy 받아오기
+            // 공격 범위 내 Enemy 받아오기
             targets = UpdateTargets();
 
             // 가장 가까운 타겟 찾기
@@ -173,7 +202,7 @@ namespace Defend.Tower
                 // Shoot Animation 재생
                 animator.SetTrigger(Constants.ANIM_SHOOTTRIGGER);
 
-                // 발사체의 타겟설정, 발사체 정보 초기화
+                // 발사체 정보 초기화, 발사체의 가장 가까운 타겟설정, 공격 범위 내 타겟들 설정
                 projectilePrefab.GetComponent<ProjectileBase>().Init(towerInfo.projectile, currentTarget);
                 
                 // 슛 타임 초기화

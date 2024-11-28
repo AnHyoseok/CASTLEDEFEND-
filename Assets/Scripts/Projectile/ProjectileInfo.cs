@@ -12,5 +12,6 @@ namespace Defend.Projectile
         public float effectTime;        // 이펙트 지속시간
         public float attack;            // 공격력
         public float moveSpeed;         // 이동속도
+        public float attackRange;        // 타격 범위
     }
 }

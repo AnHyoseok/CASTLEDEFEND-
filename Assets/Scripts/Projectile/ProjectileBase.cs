@@ -21,9 +21,9 @@ namespace Defend.Projectile
         }
 
         // 타겟과 발사체 정보 초기화
-        public virtual void Init(ProjectileInfo _projectileInfo, Transform _target)
+        public virtual void Init(ProjectileInfo _projectileInfo, Transform closestTarget)
         {
-            target = _target;
+            target = closestTarget;
             projectileInfo = _projectileInfo;
         }
 
@@ -31,7 +31,7 @@ namespace Defend.Projectile
         protected virtual void Hit()
         {
             // Projectile Effect 생성
-            GameObject effect = Instantiate(projectileInfo.effectPrefab, target.position,Quaternion.identity);
+            GameObject effect = Instantiate(projectileInfo.effectPrefab, transform.position, Quaternion.identity);
             // Projectile Effect 삭제 예약
             Destroy(effect, projectileInfo.effectTime);
             // Projectile 삭제 

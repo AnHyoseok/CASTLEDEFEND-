@@ -1,3 +1,5 @@
+using Defend.Enemy;
+using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
 /// 지점을 공격하는 발사체의 기능을 정의
@@ -6,7 +8,12 @@ namespace Defend.Projectile
 {
     public class PointProjectile : ProjectileBase
     {
-        [SerializeField ]protected Vector3 pointTarget;             // 목표 지점
+        [SerializeField] protected Vector3 pointTarget;             // 목표 지점
+
+        #region collider 활용 => 미사용
+        //[SerializeField] protected Collider[] colliders;          // collider 오브젝트들
+        #endregion
+
         protected override void Start()
         {
 
@@ -19,11 +26,11 @@ namespace Defend.Projectile
         }
 
         // Init 메서드를 오버라이드하여 target이 설정될 때 해당 지점을 기록
-        public override void Init(ProjectileInfo _projectileInfo, Transform _target)
+        public override void Init(ProjectileInfo _projectileInfo, Transform closestTarget)
         {
-            base.Init(_projectileInfo, _target);
+            base.Init(_projectileInfo, closestTarget);
             // target이 설정되면 그 위치를 기록
-            pointTarget = _target.position;
+            pointTarget = closestTarget.position;
         }
 
         // 지점을 향해 이동
@@ -51,10 +58,32 @@ namespace Defend.Projectile
             return false;
         }
 
+        // 타격
         protected override void Hit()
         {
             base.Hit();
-            Debug.Log("HITPOINT");
+
+            #region collider 활용 => 미사용
+            // 공격 범위 내 collider 탐색
+            //colliders = Physics.OverlapSphere(transform.position, projectileInfo.attackRange);
+            #endregion
+
+            // EnemyStats 컴포넌트를 가진 Object 찾기
+            var enemies = FindObjectsByType<EnemyStats>(FindObjectsSortMode.None);
+            foreach (var obj in enemies)
+            {
+                // 거리 체크
+                float distance = Vector3.Distance(transform.position, obj.transform.position);
+                if (distance <= projectileInfo.attackRange)
+                {
+                    EnemyHealthController ehc = obj.GetComponent<EnemyHealthController>();
+                    if (ehc != null)
+                    {
+                        // 데미지 주기
+                        ehc.TakeDamage(projectileInfo.attack);
+                    }
+                }
+            }
         }
     }
 }

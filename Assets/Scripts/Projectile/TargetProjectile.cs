@@ -1,3 +1,4 @@
+using Defend.Enemy;
 using UnityEngine;
 /// <summary>
 /// 타겟을 공격하는 발사체의 기능을 정의
@@ -23,6 +24,7 @@ namespace Defend.Projectile
             if (ArrivalTarget() == true) { Hit(); }
         }
 
+        // 타겟을 향해 이동
         protected virtual void MoveToTarget()
         {
             // 타겟을 바라보도록 
@@ -46,9 +48,14 @@ namespace Defend.Projectile
             // 미도착
             return false;
         }
+        // 타격
         protected override void Hit()
         {
             base.Hit();
+            // EnemyHealthController 컴포넌트 접근
+            EnemyHealthController ehc = target.GetComponent<EnemyHealthController>();
+            // 데미지 주기
+            ehc.TakeDamage(projectileInfo.attack);
         }
     }
 }
