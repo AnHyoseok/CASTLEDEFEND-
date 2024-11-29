@@ -176,7 +176,8 @@ namespace Defend.Tower
 
                 foreach (var target in targets)
                 {
-                    if (target == null) continue;
+                    // 타겟이 없거나 체력이 0이하로 떨어지면 다른 타겟을 찾도록
+                    if (target == null || target.GetComponent<Health>().CurrentHealth <=0) continue;
 
                     float distance = Vector3.Distance(transform.position, target.position);
 
@@ -194,8 +195,8 @@ namespace Defend.Tower
         // 발사
         protected virtual void Shoot()
         {
-            // 타겟이 있으며, 슛 딜레이가 지났을 경우
-            if(currentTarget != null && towerInfo.shootDelay < shootTime)
+            // 타겟이 있으며, 슛 딜레이가 지났을 경우, 타겟의 체력이 0보다 큰 경우
+            if(currentTarget != null && towerInfo.shootDelay < shootTime && currentTarget.GetComponent<Health>().CurrentHealth > 0)
             {
                 // 발사체 생성
                 GameObject projectilePrefab = Instantiate(towerInfo.projectile.prefab, firePoint.transform.position, Quaternion.identity);

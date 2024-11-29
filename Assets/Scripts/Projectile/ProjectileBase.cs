@@ -1,3 +1,4 @@
+using Defend.TestScript;
 using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
@@ -8,11 +9,13 @@ namespace Defend.Projectile
     public abstract class ProjectileBase : MonoBehaviour
     {
         [SerializeField] protected Transform target;                    // 목표물
+        [SerializeField] protected Vector3 targetPosition;              // 목표물
         [SerializeField] protected ProjectileInfo projectileInfo;       // 발사체 정보
+        [SerializeField] protected Vector3 offset;
 
         protected virtual void Start()
         {
-
+            
         }
 
         protected virtual void Update()
@@ -24,6 +27,8 @@ namespace Defend.Projectile
         public virtual void Init(ProjectileInfo _projectileInfo, Transform closestTarget)
         {
             target = closestTarget;
+            offset = target.gameObject.GetComponent<EnemyController>().offset;
+            targetPosition = target.position + offset;
             projectileInfo = _projectileInfo;
         }
 

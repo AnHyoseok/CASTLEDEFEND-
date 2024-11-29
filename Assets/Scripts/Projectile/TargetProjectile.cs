@@ -10,7 +10,6 @@ namespace Defend.Projectile
     {
         protected override void Start()
         {
-
         }
 
         protected override void Update()
@@ -29,16 +28,16 @@ namespace Defend.Projectile
         protected virtual void MoveToTarget()
         {
             // 타겟을 바라보도록 
-            transform.LookAt(target);
+            transform.LookAt(targetPosition);
             // 타겟을 향해 이동
-            transform.position = Vector3.MoveTowards(transform.position, target.position, Time.deltaTime * projectileInfo.moveSpeed);
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, Time.deltaTime * projectileInfo.moveSpeed);
         }
 
         // 타겟에 도착 여부
         protected virtual bool ArrivalTarget()
         {
             // 타겟까지의 벡터
-            Vector3 dir = target.position - transform.position;
+            Vector3 dir = targetPosition - transform.position;
             // 발사체가 한프레임당 이동하는 거리
             float distanceThisFrame = Time.deltaTime * projectileInfo.moveSpeed;
             if (dir.magnitude < distanceThisFrame)
@@ -54,9 +53,9 @@ namespace Defend.Projectile
         {
             base.Hit();
             // Health 컴포넌트 접근
-            Health ehc = target.GetComponent<Health>();
+            Health health = target.GetComponent<Health>();
             // 데미지 주기
-            ehc.TakeDamage(projectileInfo.attack);
+            health.TakeDamage(projectileInfo.attack);
         }
     }
 }

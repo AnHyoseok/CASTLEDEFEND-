@@ -31,7 +31,7 @@ namespace Defend.Projectile
         {
             base.Init(_projectileInfo, closestTarget);
             // target이 설정되면 그 위치를 기록
-            pointTarget = closestTarget.position;
+            pointTarget = closestTarget.position + offset;
         }
 
         // 지점을 향해 이동
