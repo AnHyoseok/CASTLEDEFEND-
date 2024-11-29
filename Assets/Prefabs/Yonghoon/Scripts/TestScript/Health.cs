@@ -24,6 +24,7 @@ namespace Defend.TestScript
         public UnityAction<float> OnDamaged;
         public UnityAction OnDie;
         public UnityAction<float> OnHeal;
+        public UnityAction<float> Armorchange;
 
         public float GetRatio() => CurrentHealth / maxHealth;
 
@@ -74,14 +75,21 @@ namespace Defend.TestScript
             {
                 // 체력 감소, 데미지이펙트 구현
                 CurrentHealth -= realDamage;          
-                OnDamaged?.Invoke(realDamage);
+                OnDamaged?.Invoke(-realDamage);
             }
-            Debug.Log($"Damage Taken: {realDamage}, Remaining Health: {CurrentHealth}");
+            //Debug.Log($"Damage Taken: {realDamage}, Remaining Health: {CurrentHealth}");
             // 체력이 0 이하라면 죽음 처리
             if (CurrentHealth <= 0f)
             {
                 HandleDeath();
             }
+        }
+        
+        //아머값 변경시 호출될 메서드
+        public void ChangedArmor(float amount)
+        {
+            CurrentArmor += amount;
+            Armorchange?.Invoke(amount);
         }
 
         //죽음 처리 관리

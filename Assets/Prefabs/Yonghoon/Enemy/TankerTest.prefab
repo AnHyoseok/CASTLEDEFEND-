@@ -951,6 +951,7 @@ GameObject:
   - component: {fileID: 4811453807849419974}
   - component: {fileID: -5660023932820353151}
   - component: {fileID: 6567091707103445654}
+  - component: {fileID: 391461198241582609}
   m_Layer: 6
   m_Name: TankerTest
   m_TagString: Untagged
@@ -1011,7 +1012,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseSpeed: 5
-  speed: 0
 --- !u!114 &4811453807849419974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1019,14 +1019,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8159497760085561716}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 976c4214dfa689c4a869e20ce75e8208, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   attackTarget: {fileID: 0}
-  baseAttackDamage: 10
+  baseAttackDamage: 31
   baseAttackDelay: 2
+  type: 2
 --- !u!114 &-5660023932820353151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1054,6 +1055,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   baseArmor: 5
+--- !u!114 &391461198241582609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8159497760085561716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45b0f8685dccb8749bf7f3e559079c3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemySpeed: 0
+  enemyAttackDamage: 0
+  enemyAttackDelay: 0
+  enemyHealth: 0
+  enemyArmor: 0
+  rewardGold: 0
+  type: 0
 --- !u!1 &8940157667979962989
 GameObject:
   m_ObjectHideFlags: 0

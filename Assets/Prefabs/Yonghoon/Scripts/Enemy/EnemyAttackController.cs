@@ -1,16 +1,27 @@
+using Defend.TestScript;
 using UnityEngine;
+using UnityEngine.Events;
+using static UnityEngine.XR.OpenXR.Features.Interactions.HTCViveControllerProfile;
 
 namespace Defend.Enemy
 {
     /// <summary>
     /// 적의 공격을 담당하는 컨트롤러 클래스
     /// </summary>
+    public enum EnemyType
+    {
+        Buffer,
+        Warrior,
+        Tanker,
+        Boss
+    }
     public class EnemyAttackController : MonoBehaviour
     {
+        #region Variables
         // 공격 대상
         [SerializeField] private Transform attackTarget;
 
-        private EnemyStats enemyStats; // 적의 기본 속성
+        private EnemyMoveController moveController; // 적의 기본 속성
         private Animator animator; // 애니메이터 컴포넌트
 
         //공격 관련
@@ -22,11 +33,20 @@ namespace Defend.Enemy
 
         private float attackCooldown;
         private bool isAttacking;
+        private bool hasArrived;
+
+        public UnityAction<float> AttackDamageChanged;
+        public UnityAction<float> AttackDelayChanged;
+
+        public EnemyType type;
+        #endregion
 
         private void Start()
         {
+            attackTarget = FindAnyObjectByType<HealthBasedCastle1>().transform;
+
             // 참조
-            enemyStats = GetComponent<EnemyStats>();
+            moveController = GetComponent<EnemyMoveController>();
             animator = GetComponent<Animator>();
 
             //초기화
@@ -34,12 +54,15 @@ namespace Defend.Enemy
             CurrentAttackDelay = baseAttackDelay;
             attackCooldown = 0f;
             isAttacking = false;
+            hasArrived = false;
+
+            moveController.EnemyArrive += OnEnemyArrive;
         }
 
         private void Update()
         {
-            //if (isAttacking || !attackTarget) return;
-            if (isAttacking) return;
+            if (!hasArrived) return;
+            if (isAttacking || !attackTarget) return;
             // 공격 쿨타임마다 공격
             if (attackCooldown > 0f)
             {
@@ -55,7 +78,6 @@ namespace Defend.Enemy
         private void TriggerAttackAnimation()
         {
             // 공격 애니메이션 실행
-            Debug.Log("Attack!");
             animator.SetTrigger("Attack");
             isAttacking = true;
         }
@@ -63,27 +85,35 @@ namespace Defend.Enemy
         // 애니메이션 이벤트에서 호출할 메서드
         public void PerformAttack()
         {
-            if (attackTarget == null) return;
-
-            //// 데미지 계산 및 적용
-            //IDamageable damageableTarget = attackTarget.GetComponent<IDamageable>();
-            //if (damageableTarget != null)
-            //{
-            //    damageableTarget.TakeDamage(CurrentAttackDamage);
-            //    Debug.Log($"{enemyStats.type} dealt {CurrentAttackDamage} damage to the target.");
-            //}
+            // 데미지 계산 및 적용
+            Health damageableTarget = attackTarget.GetComponent<Health>();
+            if (damageableTarget != null)
+            {
+                damageableTarget.TakeDamage(CurrentAttackDamage);
+            }
         }
-
-        // 공격 대상을 설정하는 메서드
-        //public void SetAttackTarget(Transform target)
-        //{
-        //    attackTarget = target;
-        //}
 
         public void StartAttackCooldown()
         {
             isAttacking = false;
             attackCooldown = CurrentAttackDelay; // 공격 대기시간 초기화
+        }
+
+        public void ChangedAttackDamage(float amount)
+        {
+            CurrentAttackDamage = Mathf.Max(CurrentAttackDamage + amount, 1f);
+            AttackDamageChanged?.Invoke(amount);
+        }
+
+        public void ChangedAttackDelay(float amount)
+        {
+            CurrentAttackDelay = Mathf.Max(CurrentAttackDelay - amount, 0.5f);
+            AttackDelayChanged?.Invoke(amount);
+        }
+
+        private void OnEnemyArrive()
+        {
+            hasArrived = true;
         }
     }
 }
