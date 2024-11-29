@@ -31,7 +31,7 @@ public class BuildMenu : MonoBehaviour
         //Debug.Log("기본 터렛을 선택 하였습니다");
         //설치할 터렛에 기본 터렛(프리팹)을 저장
         buildManager.SetTowerToBuild(cannonTower);
-        
+        Debug.Log("디버그");
         //tile.BuildTower();
     }
 }

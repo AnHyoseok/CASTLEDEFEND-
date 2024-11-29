@@ -45,6 +45,7 @@ namespace Defend.UI
         }
         protected override void OnHoverEntered(HoverEnterEventArgs args)
         {
+            Debug.Log("123");
             base.OnHoverEntered(args);
             //타워가 설치되어있으면 return
             if (tower != null)
@@ -177,23 +178,12 @@ namespace Defend.UI
             tower.AddComponent<BoxCollider>();
             tower.AddComponent<TowerXR>();
             //타워 생성 이펙트
-            /*GameObject effgo = Instantiate(TowerImpectPrefab, towerInfo.upgradeTower.transform.position + offset, Quaternion.identity);
+            GameObject effgo = Instantiate(TowerImpectPrefab, towerInfo.upgradeTower.transform.position, Quaternion.identity);
             //타일 자식으로 생성
             effgo.transform.parent = transform;
-            // 위로 이동
-            effgo.transform.Translate(Vector3.up * upwardSpeed * Time.deltaTime);
-
-            // 스케일 감소
-            effgo.transform.localScale -= new Vector3(scaleDecreaseSpeed, scaleDecreaseSpeed, scaleDecreaseSpeed) * Time.deltaTime;
-
-            // 스케일이 특정 값 이하이면 파괴
-            if (effgo.transform.localScale.x <= destroyScale)
-            {
-                Destroy(effgo);
-            }*/
-            //Debug.Log($"건설하고 남은 돈은 {PlayerStats.Money}");
+            Debug.Log("디버그");
         }
-        private void OnTriggerEnter(Collider other)
+        /*private void OnTriggerEnter(Collider other)
         {
             if(other.gameObject.tag == "Player")
             {
@@ -202,6 +192,6 @@ namespace Defend.UI
                 // 프리팹 생성
                 Instantiate(towerInfo.upgradeTower, spawnPosition, Quaternion.identity);
             }
-        }
+        }*/
     }
 }

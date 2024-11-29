@@ -30,12 +30,58 @@ namespace Defend.UI
         protected override void OnHoverEntered(HoverEnterEventArgs args)
         {
             base.OnHoverEntered(args);
+            buildManager.DeselectTile();
+        }
+        protected override void OnSelectExited(SelectExitEventArgs args)
+        {
+            base.OnSelectExited(args);
             buildManager.SelectTile(this);
         }
-        protected override void OnHoverExited(HoverExitEventArgs args)
+        public void SellTower()
         {
-            base.OnHoverExited(args);
-            buildManager.DeselectTile();
+            /*//업그레이드 터렛을 판매
+            if (turret_upgrade != null)
+            {
+                Destroy(turret_upgrade);
+                IsUpgrade = false;
+                GameObject effect = Instantiate(SellImpectPrefab, GetBuildPosition(), Quaternion.identity);
+                Destroy(effect, 2f);
+                //업그레이드터렛들의 반값으로 판매
+                PlayerStats.AddMoney(blueprint.Getupgradecost());
+            }*/
+            //기본 터렛을 판매
+            if (this != null)
+            {
+                Destroy(this);
+                //IsUpgrade = false;
+                //GameObject effect = Instantiate(SellImpectPrefab, GetBuildPosition(), Quaternion.identity);
+                //Destroy(effect, 2f);
+                //기본터렛들의 반값으로 판매
+                //PlayerState.AddMoney();
+            }
+        }
+
+        public void UpgradeTower()
+        {
+            Debug.Log("터렛 업그레이드");
+            /*if (blueprint == null)
+            {
+                //Debug.Log("업그레이드 실패했습니다");
+                return;
+            }
+            if (PlayerStats.UseMoney(blueprint.costUpgrade))
+            {
+                //Effect
+                GameObject effectGo = Instantiate(TowerImpectPrefab, GetBuildPosition(), Quaternion.identity);
+                Destroy(effectGo, 2f);
+
+                //터렛 업그레이드 여부
+                IsUpgrade = true;
+
+                //터렛 업그레이드 생성
+                turret_upgrade = Instantiate(TowerInfo.upgradeTower, GetBuildPosition(), Quaternion.identity);
+                Destroy(turret);
+            }*/
         }
     }
 }

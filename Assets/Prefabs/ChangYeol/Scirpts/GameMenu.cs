@@ -25,7 +25,7 @@ namespace Defend.UI
 
             if (gameMenu.activeSelf)
             {
-                gameMenu.transform.position = head.position + new Vector3(head.forward.x + 0.5f, 0f, head.forward.z).normalized * distance;
+                gameMenu.transform.position = head.position + new Vector3(head.forward.x + -0.5f, 0f, head.forward.z).normalized * distance;
                 gameMenu.transform.LookAt(new Vector3(head.position.x, gameMenu.transform.position.y, head.position.z));
                 gameMenu.transform.forward *= -1;
             }

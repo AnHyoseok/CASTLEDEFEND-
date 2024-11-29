@@ -111,12 +111,12 @@ namespace Defend.UI
 
         public void Selled()
         {
-            //tower.SellTower();
+            tower.SellTower();
             buildManager.DeselectTile();
         }
         public void Upgraded()
         {
-            //tower.UpgradeTower();
+            tower.UpgradeTower();
             buildManager.DeselectTile();
         }
     }
