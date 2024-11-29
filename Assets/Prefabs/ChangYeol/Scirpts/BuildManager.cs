@@ -1,3 +1,4 @@
+using Defend.Enemy;
 using Defend.Player;
 using Defend.Tower;
 using UnityEngine;
@@ -42,14 +43,20 @@ namespace Defend.UI
                 if (towerInfo == null)
                     return false;
                 //나중에 타워 설치 비용
-                return HasMoney(2,2,2);
+                return playerState.SpendMoney(towerInfo.cost2);
             }
         }
 
         //타일 UI
         public UpgradeAndSell menu;
-        //선택한 타일
-        private Tile selectTile;
+        //선택한 타워
+        //private Tile selectTile;
+        private TowerXR tower;
+
+        //선택한 적
+        public EnemyState enemyStats;
+        //적 속성 UI
+        public EnemyPropertiesUI EnemyproUI;
         #endregion
 
         public TowerInfo GetTowerToBuild()
@@ -57,14 +64,14 @@ namespace Defend.UI
             return towerInfo;
         }
 
-        //매개변수로 받은 타워 프리팹을 설치할 터렛에 저장
+        //매개변수로 받은 타워 프리팹을 설치할 타워에 저장
         public void SetTowerToBuild(TowerInfo Tower)
         {
             towerInfo = Tower;
             DeselectTile();
         }
         //매개변수로 선택한 타일 정보를 얻어온다
-        public void SelectTile(Tile tile)
+        /*public void SelectTile(Tile tile)
         {
             //같은 타일을 선택하면 HideUI
             if (tile == selectTile)
@@ -79,6 +86,22 @@ namespace Defend.UI
             towerInfo = null;
             //Debug.Log("타일 UI 보여주기");
             menu.ShowTileUI(tile);
+        }*/
+        public void SelectTile(TowerXR towerXR)
+        {
+            //같은 타워를 선택하면 HideUI
+            if (towerXR == tower)
+            {
+                DeselectTile();
+                return;
+            }
+
+            //선택한 타워에 저장하기
+            towerXR = tower;
+            //저장한 타워 속성을 초기화
+            towerInfo = null;
+            //Debug.Log("타일 UI 보여주기");
+            menu.ShowTileUI(towerXR);
         }
         //선택 해제
         public void DeselectTile()
@@ -86,13 +109,21 @@ namespace Defend.UI
             //Debug.Log("타일 UI 감추기");
             menu.HidetileUI();
             //선택한 타일 초기화하기
-            selectTile = null;
+            tower = null;
         }
 
-        public bool HasMoney(int moneyamount, int treeamount, int rockamount)
+        public void SelectEnemy(EnemyState enemy)
         {
-            return playerState.money >= moneyamount && playerState.tree >= treeamount 
-                && playerState.rock >= rockamount;
+            //같은 적을 선택하면 HideUI
+            if (enemy == enemyStats)
+            {
+                DeselectTile();
+                return;
+            }
+
+            //선택한 적 저장하기
+            enemy = enemyStats;
+            //저장한 적 속성을 초기화
         }
 
     }

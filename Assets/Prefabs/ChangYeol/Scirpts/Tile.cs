@@ -34,10 +34,6 @@ namespace Defend.UI
 
         //판매 이펙트 프리팹
         public GameObject SellImpectPrefab;
-
-        float upwardSpeed = 2.0f; // 위로 이동 속도
-        float scaleDecreaseSpeed = 0.1f; // 스케일 감소 속도
-        float destroyScale = 0.1f; // 파괴될 스케일
         #endregion
 
         private void Start()
@@ -77,12 +73,12 @@ namespace Defend.UI
         {
             base.OnSelectEntered(args);
             //타워가 설치되어있으면 return
-            if (tower != null)
+            /*if (args.interactableObject.)
             {
-                buildManager.SelectTile(this);
+                //buildManager.SelectTile(this);
                 StartCoroutine(notparticlePlay());
-                return;
-            }
+
+            }*/
             //타워가 설치 가능하면 설치
             if (buildManager.CannotBuild)
             {
@@ -175,8 +171,13 @@ namespace Defend.UI
 
             //돈을 지불한다 100, 250
             //Debug.Log($"터렛 건설비용: {blueprint.cost}");
+            //타워 생성
+            tower = Instantiate(towerInfo.upgradeTower, GetBuildPosition(), Quaternion.identity);
+            //타워를 잡을 수 있는 컴포런트 추가
+            tower.AddComponent<BoxCollider>();
+            tower.AddComponent<TowerXR>();
             //타워 생성 이펙트
-            GameObject effgo = Instantiate(TowerImpectPrefab, towerInfo.upgradeTower.transform.position + offset, Quaternion.identity);
+            /*GameObject effgo = Instantiate(TowerImpectPrefab, towerInfo.upgradeTower.transform.position + offset, Quaternion.identity);
             //타일 자식으로 생성
             effgo.transform.parent = transform;
             // 위로 이동
@@ -188,13 +189,19 @@ namespace Defend.UI
             // 스케일이 특정 값 이하이면 파괴
             if (effgo.transform.localScale.x <= destroyScale)
             {
-                Destroy(gameObject);
-            }
-            //타워 생성
-            tower = Instantiate(towerInfo.upgradeTower, GetBuildPosition(), Quaternion.identity);
+                Destroy(effgo);
+            }*/
             //Debug.Log($"건설하고 남은 돈은 {PlayerStats.Money}");
-            //애니메이션 시간 1.5초 후 삭제
-            Destroy(effgo,2f);
+        }
+        private void OnTriggerEnter(Collider other)
+        {
+            if(other.gameObject.tag == "Player")
+            {
+                Vector3 spawnPosition = other.transform.position + Vector3.up + new Vector3(2, 0, 0);
+
+                // 프리팹 생성
+                Instantiate(towerInfo.upgradeTower, spawnPosition, Quaternion.identity);
+            }
         }
     }
 }

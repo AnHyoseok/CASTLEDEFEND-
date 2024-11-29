@@ -22,7 +22,6 @@ public class BuildMenu : MonoBehaviour
     {
         //초기화
         buildManager = BuildManager.Instance;
-        //IsButton = showButton.action.WasPressedThisFrame();
     }
 
 
@@ -32,7 +31,7 @@ public class BuildMenu : MonoBehaviour
         //Debug.Log("기본 터렛을 선택 하였습니다");
         //설치할 터렛에 기본 터렛(프리팹)을 저장
         buildManager.SetTowerToBuild(cannonTower);
-        //buildUI.SetActive(false);
+        
         //tile.BuildTower();
     }
 }

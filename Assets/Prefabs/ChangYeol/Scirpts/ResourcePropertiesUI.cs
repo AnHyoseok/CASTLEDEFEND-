@@ -1,16 +1,25 @@
+using Defend.Player;
 using UnityEngine;
+using static Defend.Interactive.Resources;
 
-public class ResourcePropertiesUI : MonoBehaviour
+namespace Defend.UI
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public class ResourcePropertiesUI : MonoBehaviour
     {
-        
-    }
+        #region Variables
+        public GameObject ResourceProUI;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public Upgrade ResourceText;
+
+        public Transform head;
+
+        public ResourceType resources;
+        #endregion
+
+        private void Start()
+        {
+            ResourceText.name.text = "Tree";
+            ResourceText.Hp.text = "Hp : " + resources.health.ToString();
+        }
     }
 }
