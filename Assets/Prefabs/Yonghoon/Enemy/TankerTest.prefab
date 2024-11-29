@@ -947,11 +947,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4424571023566087280}
   - component: {fileID: 6653168964992520803}
-  - component: {fileID: 1876674551060910166}
   - component: {fileID: 4811453807849419974}
   - component: {fileID: -5660023932820353151}
   - component: {fileID: 6567091707103445654}
   - component: {fileID: 391461198241582609}
+  - component: {fileID: 8266896830803629914}
   m_Layer: 6
   m_Name: TankerTest
   m_TagString: Untagged
@@ -999,19 +999,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1876674551060910166
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8159497760085561716}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2fb520b37536e55438a98a8d0930e347, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseSpeed: 5
 --- !u!114 &4811453807849419974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1072,8 +1059,20 @@ MonoBehaviour:
   enemyAttackDelay: 0
   enemyHealth: 0
   enemyArmor: 0
-  rewardGold: 0
   type: 0
+--- !u!114 &8266896830803629914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8159497760085561716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fb520b37536e55438a98a8d0930e347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseSpeed: 5
 --- !u!1 &8940157667979962989
 GameObject:
   m_ObjectHideFlags: 0
@@ -1086,7 +1085,6 @@ GameObject:
   - component: {fileID: 1617560463347636042}
   - component: {fileID: 865787886560540002}
   - component: {fileID: 7413677616729391122}
-  - component: {fileID: 5463066957768009609}
   m_Layer: 8
   m_Name: HealthBarCanvas
   m_TagString: Untagged
@@ -1179,22 +1177,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &5463066957768009609
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8940157667979962989}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8637819f824813e4882f48fd86b537f9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  fillHp: {fileID: 6859792028811934812}
-  hpText: {fileID: 4650944511892380798}
-  owner: {fileID: 0}
 --- !u!1 &9089189296309624725
 GameObject:
   m_ObjectHideFlags: 0

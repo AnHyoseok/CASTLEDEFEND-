@@ -11754,6 +11754,7 @@ GameObject:
   m_Component:
   - component: {fileID: 455855612}
   - component: {fileID: 455855613}
+  - component: {fileID: 455855614}
   m_Layer: 0
   m_Name: Castle
   m_TagString: Untagged
@@ -11793,6 +11794,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   castleHealth: 100
+--- !u!114 &455855614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 455855611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34e3e69428bb6e34b8257abd4398b8bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  baseArmor: 5
 --- !u!1 &456197764
 GameObject:
   m_ObjectHideFlags: 0
@@ -16505,6 +16520,58 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &715417495
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 715417497}
+  - component: {fileID: 715417496}
+  m_Layer: 0
+  m_Name: SpawnManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &715417496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 715417495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff9bb78b5d35e5a418909de77f1f7e9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startPoint: {fileID: 178119861}
+  spawnManager: {fileID: 715417497}
+  spawnTimer: 5
+  isSpawn: 0
+  waves:
+  - enemyPrefab: {fileID: 8159497760085561716, guid: 5cb908da14452b24da5c4b04b1fe13ae, type: 3}
+    count: 5
+    delayTime: 2
+--- !u!4 &715417497
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 715417495}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.852545, y: -18.079342, z: 29.875387}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &715993351
 GameObject:
   m_ObjectHideFlags: 0
@@ -22824,24 +22891,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e3c2fb115b97ec43a5e33f115fb539a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeText: {fileID: 2665033108058948944}
-  viewButton: {fileID: 8534235803960660976}
-  uiOnButton: {fileID: 24702030}
-  viewCanvas: {fileID: 1847400415565623835}
-  rockheld: {fileID: 181896947}
-  treeheld: {fileID: 1646914889}
-  moneyheld: {fileID: 1762983991}
-  menuCanvas: {fileID: 1310999530}
-  statusButton: {fileID: 0}
-  potalButton: {fileID: 0}
-  potalCanvas: {fileID: 755130200}
-  buttons:
-  - {fileID: 5183158174422109543}
-  - {fileID: 1474386947}
-  - {fileID: 24702032}
-  - {fileID: 1093830482}
-  - {fileID: 14920704}
-  clickSound: {fileID: 8300000, guid: 311ec0e3ddc71474eb5f91f03161f401, type: 3}
 --- !u!1 &986167765
 GameObject:
   m_ObjectHideFlags: 0
@@ -35473,6 +35522,37 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300020, guid: 72e643619fa32984785527a0c110a313, type: 3}
+--- !u!1 &1586830963
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1586830964}
+  m_Layer: 0
+  m_Name: WayPoint (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1586830964
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1586830963}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 8, y: 1, z: 28.07}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1957782836}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1590196922
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -45081,6 +45161,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1957782836}
+  - component: {fileID: 1957782837}
   m_Layer: 0
   m_Name: WayPoints
   m_TagString: Untagged
@@ -45107,8 +45188,22 @@ Transform:
   - {fileID: 1153850446}
   - {fileID: 1076304050}
   - {fileID: 1974930724}
+  - {fileID: 1586830964}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1957782837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1957782835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ca26fcbbc8e1e94faeecdf180f99155, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializedTransforms: []
 --- !u!1 &1963248249
 GameObject:
   m_ObjectHideFlags: 0
@@ -76593,12 +76688,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3d8dacaa73cc2a4f8824c78cef9610e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Canvases:
-  - {fileID: 2644413130641654687}
-  - {fileID: 631738275}
-  - {fileID: 663870316}
-  player: {fileID: 4872608693177072846}
-  distance: 1.5
 --- !u!114 &7123259279144707543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76611,17 +76700,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6f6441202592ec4fa2a65fa0449d047, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  potalMenu: {fileID: 2644413130641654687}
-  potalButton:
-  - {fileID: 439954729}
-  - {fileID: 1788803204}
-  - {fileID: 609756661}
-  potalsTransform:
-  - {fileID: 761223050}
-  - {fileID: 1866304091}
-  - {fileID: 1051081502}
-  playerTransform: {fileID: 4872608693177072846}
-  potalSound: {fileID: 8300000, guid: 609378147db7a9d4f9add209b1a3b439, type: 3}
 --- !u!210 &7165176332870700083
 SortingGroup:
   m_ObjectHideFlags: 0
@@ -122912,3 +122990,4 @@ SceneRoots:
   - {fileID: 455855612}
   - {fileID: 6797522531079659210}
   - {fileID: 1396050652360033338}
+  - {fileID: 715417497}
