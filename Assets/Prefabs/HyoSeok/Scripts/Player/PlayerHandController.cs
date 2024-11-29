@@ -161,6 +161,7 @@ namespace Defend.UI
         {
             audioSource.clip = clickSound;
             audioSource.Play();
+            
         }
 
        

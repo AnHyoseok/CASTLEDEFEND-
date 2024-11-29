@@ -23,10 +23,13 @@ namespace MyVrSample
         //Æ÷Å» »ç¿îµå
         public AudioClip potalSound;
         private AudioSource audioSource;
+
+      
         #endregion
 
         private void Start()
         {
+        
             audioSource = gameObject.AddComponent<AudioSource>();
         }
         //Æ÷Å» UI ¶ç¿ì±â
@@ -43,7 +46,7 @@ namespace MyVrSample
             if (index >= 0 && index < potalsTransform.Length)
             {
                 playerTransform.position = potalsTransform[index].position;
-        
+               
             }
         }
 
@@ -54,10 +57,12 @@ namespace MyVrSample
         }
 
         //Æ÷Å» »ç¿îµå
-        public void PlaySound()
+        public void OnButtonClick()
         {
             audioSource.clip = potalSound;
             audioSource.Play();
+
+     
         }
     }
 }

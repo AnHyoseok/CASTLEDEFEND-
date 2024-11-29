@@ -1,3 +1,4 @@
+using Defend.item;
 using MyVrSample;
 using System.Collections;
 using System.Resources;
@@ -10,7 +11,9 @@ namespace Defend.Interactive
         public enum ResourceTypeEnum
         {
             Rock,
-            Tree
+            Tree,
+            Money
+            
         }
 
         [System.Serializable]
@@ -20,8 +23,11 @@ namespace Defend.Interactive
             public float amount;       // 자원 양
             public float health;       // 자원 별 체력
             public GameObject resourcePickupEffect;  // 자원이 떨어질 때 효과
+           
         }
         #region
+        //참조
+        private ItemDrop ItemDrop;
 
         private bool isDamaged = false;  // 데미지를 받는 중인지 여부
         public ResourceType[] resourceTypes;  // 자원 타입 배열
@@ -56,8 +62,7 @@ namespace Defend.Interactive
                 SetCurrentResourceType(gameObject.name);
                 StartCoroutine(Shake());
                 StartCoroutine(TakeDamage(10));  // 손으로 때릴 때마다 10 데미지
-
-            
+   
             }
         }
 
@@ -67,14 +72,16 @@ namespace Defend.Interactive
             isDamaged = true;
             currentResourceType.health -= damage;
             Debug.Log($"{currentResourceType.name} health = {currentResourceType.health}");
-            //사운드 재생
-            PlayHitSound();
+        
 
             // 자원 얻기
             GiveResource();
-
+            PlayHitSound();
             if (currentResourceType.health <= 0)
             {
+
+                // 흔들림 효과와 사운드가 재생될 시간을 주기 위해 대기
+                yield return new WaitForSeconds(0.5f);
                 Destroy(gameObject);
             }
 
@@ -89,7 +96,7 @@ namespace Defend.Interactive
             float t = 1f;
             float shakePower = 1f;
             Vector3 origin = transform.position;
-
+           
             while (t > 0f)
             {
                 t -= 0.05f;
@@ -106,7 +113,7 @@ namespace Defend.Interactive
             if (currentResourceType.resourcePickupEffect != null)
             {
                 GameObject effectGo = Instantiate(currentResourceType.resourcePickupEffect, transform.position, Quaternion.identity);
-                Destroy(effectGo, 1f);
+                Destroy(effectGo, 2f);
             }
 
             // 플레이어에게 전달
