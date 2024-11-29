@@ -35,6 +35,9 @@ namespace Defend.Interactive
                 case "tree":
                     playerState.AddTree(amount);
                     break;
+                case "money":
+                    playerState.AddMoney(amount);
+                    break;
               
             }
         }
