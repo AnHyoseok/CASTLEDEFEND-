@@ -46,7 +46,7 @@ namespace Defend.TestScript
         private void OnDie()
         {
             //살아있는 에너미 수 감소
-            SpawnManager.enemyAlive--;
+            ListSpawnManager.enemyAlive--;
 
             animator.SetBool("IsDeath", true);
 

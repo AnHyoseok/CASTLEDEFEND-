@@ -41,9 +41,9 @@ namespace Defend.Enemy
         public EnemyType type;
         #endregion
 
-        private void Start()
+        private void Awake()
         {
-            attackTarget = FindAnyObjectByType<HealthBasedCastle>().transform;
+            attackTarget = FindAnyObjectByType<HealthBasedCastle1>().transform;
 
             // ÂüÁ¶
             moveController = GetComponent<EnemyMoveController>();
