@@ -9,6 +9,15 @@ namespace Defend.Interactive
         public static ResourceManager Instance;
 
         private PlayerState playerState;
+
+        // 자원 추가 이벤트
+        public delegate void ResourceAddedHandler(float amount, string resourceType);
+        public event ResourceAddedHandler OnResourceAdded;
+
+        // 기본 자원 획득량
+        private float rockAmount = 1.0f;
+        private float treeAmount = 1.0f;
+        private float moneyAmount = 1.0f;
         #endregion
         private void Awake()
         {
@@ -38,7 +47,26 @@ namespace Defend.Interactive
                 case "money":
                     playerState.AddMoney(amount);
                     break;
-              
+
+            }
+            // 자원 추가 이벤트 발생
+            OnResourceAdded?.Invoke(amount, resourceType);
+        }
+
+        // 자원 획득량 업그레이드
+        public void UpgradeResourceGain(string resourceType, float multiplier)
+        {
+            switch (resourceType.ToLower())
+            {
+                case "rock":
+                    rockAmount *= multiplier;
+                    break;
+                case "tree":
+                    treeAmount *= multiplier;
+                    break;
+                case "money":
+                    moneyAmount *= multiplier;
+                    break;
             }
         }
     }
