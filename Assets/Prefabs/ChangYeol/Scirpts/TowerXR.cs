@@ -1,5 +1,6 @@
 using Defend.Tower;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
@@ -12,29 +13,38 @@ namespace Defend.UI
 
         //빌드매니저 객체
         private BuildManager buildManager;
-
-        XRGrabInteractable xRGrab;
-
-        BoxCollider boxCollider;
         #endregion
 
         private void Start()
         {
+            //참조
+            Rigidbody rigidbody = this.GetComponent<Rigidbody>();
+            //초기화
             buildManager = BuildManager.Instance;
-            xRGrab = this.GetComponent<XRGrabInteractable>();
-            boxCollider = this.GetComponent<BoxCollider>();
-            xRGrab.colliders.Add(boxCollider);
-            boxCollider.size = new Vector3(1, 2.516554f, 1);
-            boxCollider.center = new Vector3(0, 0.2562535f, 0);
-        }
-        protected override void OnHoverEntered(HoverEnterEventArgs args)
-        {
-            base.OnHoverEntered(args);
-            buildManager.DeselectTile();
+            rigidbody.constraints = RigidbodyConstraints.FreezeRotationZ;
+            rigidbody.constraints = RigidbodyConstraints.FreezeRotationX;
+            rigidbody.constraints = RigidbodyConstraints.FreezePositionX;
+            rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
         }
         protected override void OnSelectExited(SelectExitEventArgs args)
         {
             base.OnSelectExited(args);
+            buildManager.DeselectTile();
+        }
+        protected override void OnSelectEntered(SelectEnterEventArgs args)
+        {
+            base.OnSelectEntered(args);
+            buildManager.SelectTile(this);
+        }
+
+        /*protected override void OnActivated(ActivateEventArgs args)
+        {
+            base.OnActivated(args);
+            buildManager.SelectTile(this);
+        }*/
+        void OnActionUI()
+        {
+            Debug.Log("act");
             buildManager.SelectTile(this);
         }
         public void SellTower()
@@ -57,7 +67,7 @@ namespace Defend.UI
                 //GameObject effect = Instantiate(SellImpectPrefab, GetBuildPosition(), Quaternion.identity);
                 //Destroy(effect, 2f);
                 //기본터렛들의 반값으로 판매
-                //PlayerState.AddMoney();
+                buildManager.playerState.AddMoney(1);
             }
         }
 
@@ -80,7 +90,7 @@ namespace Defend.UI
 
                 //터렛 업그레이드 생성
                 turret_upgrade = Instantiate(TowerInfo.upgradeTower, GetBuildPosition(), Quaternion.identity);
-                Destroy(turret);
+                Destroy(this);
             }*/
         }
     }

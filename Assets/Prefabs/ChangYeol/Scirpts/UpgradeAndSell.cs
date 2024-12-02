@@ -10,7 +10,8 @@ namespace Defend.UI
     public class UpgradeAndSell : MonoBehaviour
     {
         #region Variables
-        public GameObject tileUI;
+        public GameObject PropertiesUI;
+        public GameObject DescriptionUI;
 
         private BuildManager buildManager;
         private TowerInfo towerInfo;
@@ -76,7 +77,7 @@ namespace Defend.UI
             tower = towerXR;
 
             //타워가 설치된 위치 주위에서 보여준다
-            this.transform.position = head.position + new Vector3(head.forward.x + -0.5f, 0, head.forward.z).normalized * distance;
+            this.transform.position = head.position + new Vector3(head.forward.x, 0, head.forward.z).normalized * distance;
             this.transform.LookAt(new Vector3(head.position.x, this.transform.position.y, head.position.z));
             this.transform.forward *= -1;
             //업그레이드 가격 표시
@@ -99,12 +100,12 @@ namespace Defend.UI
                 basicText.AttackSpeed.text = "AttackSpeed : " + tower.towerInfo.projectile.moveSpeed.ToString();
                 upgradebutton.interactable = true;
             }
-            tileUI.SetActive(true);
+            PropertiesUI.SetActive(true);
         }
         //선택해제시 UI 안보이게 하기
         public void HidetileUI()
         {
-            tileUI.SetActive(false);
+            PropertiesUI.SetActive(false);
             //선택받은 타일 초기화
             tower = null;
         }
@@ -118,6 +119,16 @@ namespace Defend.UI
         {
             tower.UpgradeTower();
             buildManager.DeselectTile();
+        }
+        public void TowerDescription()
+        {
+            PropertiesUI.SetActive(false);
+            DescriptionUI.SetActive(true);
+        }
+        public void RemoveTowerDescription()
+        {
+            DescriptionUI.SetActive(false);
+            PropertiesUI.SetActive(true);
         }
     }
 }

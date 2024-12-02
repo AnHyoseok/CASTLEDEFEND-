@@ -51,7 +51,7 @@ namespace Defend.Enemy
         private void Update()
         {
             if (isDeath) return;
-            Move();
+            //Move();
         }
 
         //¿Ãµø

@@ -6,7 +6,7 @@ using UnityEngine;
 /// </summary>
 namespace Defend.Enemy
 {
-    public class EnemyState : MonoBehaviour
+    public class EnemyState
     {
         //이동관련
         public float enemySpeed;
@@ -29,12 +29,12 @@ namespace Defend.Enemy
         private EnemyMoveController moveController;
         private EnemyAttackController attackController;
 
-        private void Start()
+        /*private void Start()
         {
             //참조
-            health = GetComponent<Health>();
-            moveController = GetComponent<EnemyMoveController>();
-            attackController = GetComponent<EnemyAttackController>();
+            //health = GetComponent<Health>();
+            //moveController = GetComponent<EnemyMoveController>();
+            //attackController = GetComponent<EnemyAttackController>();
 
             //변화를 줄 UnityActions
             //Health 변경
@@ -62,9 +62,9 @@ namespace Defend.Enemy
 
             enemySpeed = moveController.CurrentSpeed;
             
-        }
+        }*/
 
-        private void ChangeDelay(float amount)
+        /*private void ChangeDelay(float amount)
         {
             enemyAttackDelay -= amount;
         }
@@ -87,6 +87,6 @@ namespace Defend.Enemy
         private void ChangeSpeed(float value)
         {
             enemySpeed = value;
-        }
+        }*/
     }
 }
