@@ -1,3 +1,8 @@
+using Defend.Projectile;
+using Defend.TestScript;
+using Defend.Utillity;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -8,15 +13,61 @@ namespace Defend.Tower
 {
     public class MultipleTower : TowerBase
     {
+        [SerializeField] protected int maxCount;
         protected override void Start()
         {
             base.Start();
-            towerInfo.attackRange = 7f;
         }
 
         protected override void Update()
         {
             base.Update();
+        }
+
+        List<Transform> GetClosestTargets()
+        {
+            // 타겟 목록을 거리 기준으로 정렬
+            var sortedTargets = UpdateTargets()
+                .Where(target => target != null && target.GetComponent<Health>().CurrentHealth > 0) // 유효한 타겟만 필터링
+                .OrderBy(target => Vector3.Distance(transform.position, target.position))          // 거리 기준 정렬
+                .Take(maxCount)                                                                    // 최대 maxCount만큼 선택
+                .ToList();
+
+            return sortedTargets;
+        }
+
+        // Shoot 재정의
+        protected override void Shoot()
+        {
+            // 슛 딜레이와 타겟 유효성 검사
+            if (towerInfo.shootDelay >= shootTime) return;
+
+            // 가장 가까운 타겟 3개 가져오기
+            var closestTargets = GetClosestTargets();
+
+            // 유효한 타겟이 없으면 종료
+            if (closestTargets.Count == 0) return;
+
+            // 발사체 생성
+            foreach (var target in closestTargets)
+            {
+                // 발사체 인스턴스 생성
+                GameObject projectilePrefab = Instantiate(
+                    towerInfo.projectile.prefab,
+                    firePoint.transform.position,
+                    Quaternion.identity
+                );
+
+                // 발사체 초기화
+                projectilePrefab.GetComponent<ProjectileBase>().Init(towerInfo.projectile, target);
+
+                // 애니메이션 재생
+                if (animator != null)
+                    animator.SetTrigger(Constants.ANIM_SHOOTTRIGGER);
+            }
+
+            // 슛 타임 초기화
+            shootTime = 0;
         }
     }
 }

@@ -30,7 +30,7 @@ namespace Defend.Tower
 
         // 발사
         public Transform firePoint;                         // 발사체 시작점
-        [SerializeField] float shootTime;                   // 슛 타임 카운트
+        [SerializeField] protected float shootTime;         // 슛 타임 카운트
 
         // 타워 정보
         [SerializeField] protected TowerInfo towerInfo;
@@ -120,7 +120,7 @@ namespace Defend.Tower
         }
 
         // 범위 내의 타겟을 갱신
-        List<Transform> UpdateTargets()
+        protected List<Transform> UpdateTargets()
         {
             // 기존 타겟 초기화
             targets.Clear();
@@ -177,7 +177,7 @@ namespace Defend.Tower
                 foreach (var target in targets)
                 {
                     // 타겟이 없거나 체력이 0이하로 떨어지면 다른 타겟을 찾도록
-                    if (target == null || target.GetComponent<Health>().CurrentHealth <=0) continue;
+                    if (target == null || target.GetComponent<Health>().CurrentHealth <= 0) continue;
 
                     float distance = Vector3.Distance(transform.position, target.position);
 
@@ -196,16 +196,17 @@ namespace Defend.Tower
         protected virtual void Shoot()
         {
             // 타겟이 있으며, 슛 딜레이가 지났을 경우, 타겟의 체력이 0보다 큰 경우
-            if(currentTarget != null && towerInfo.shootDelay < shootTime && currentTarget.GetComponent<Health>().CurrentHealth > 0)
+            if (currentTarget != null && towerInfo.shootDelay < shootTime && currentTarget.GetComponent<Health>().CurrentHealth > 0)
             {
                 // 발사체 생성
                 GameObject projectilePrefab = Instantiate(towerInfo.projectile.prefab, firePoint.transform.position, Quaternion.identity);
                 // Shoot Animation 재생
-                animator.SetTrigger(Constants.ANIM_SHOOTTRIGGER);
+                if (animator != null)
+                    animator.SetTrigger(Constants.ANIM_SHOOTTRIGGER);
 
                 // 발사체 정보 초기화, 발사체의 가장 가까운 타겟설정, 공격 범위 내 타겟들 설정
                 projectilePrefab.GetComponent<ProjectileBase>().Init(towerInfo.projectile, currentTarget);
-                
+
                 // 슛 타임 초기화
                 shootTime = 0;
             }

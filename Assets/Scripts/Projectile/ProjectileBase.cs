@@ -32,7 +32,7 @@ namespace Defend.Projectile
             projectileInfo = _projectileInfo;
         }
 
-        // 타겟을 맞춤
+        // 타겟에 Projectile Effect 생성
         protected virtual void Hit()
         {
             // Projectile Effect 생성
@@ -41,6 +41,36 @@ namespace Defend.Projectile
             Destroy(effect, projectileInfo.effectTime);
             // Projectile 삭제 
             Destroy(this.gameObject);
+        }
+
+        // 타겟의 폭발 범위 만큼 범위공격
+        protected void HitOnRange()
+        {
+            // EnemyController 컴포넌트를 가진 Object 찾기
+            var enemies = FindObjectsByType<EnemyController>(FindObjectsSortMode.None);
+            foreach (var obj in enemies)
+            {
+                // 거리 체크
+                float distance = Vector3.Distance(transform.position, obj.transform.position);
+                if (distance <= projectileInfo.attackRange)
+                {
+                    Health health = obj.GetComponent<Health>();
+                    if (health != null)
+                    {
+                        // 데미지 주기
+                        health.TakeDamage(projectileInfo.attack);
+                    }
+                }
+            }
+        }
+
+        // 타겟만 공격
+        protected void HitOnTarget()
+        {
+            // Health 컴포넌트 접근
+            Health health = target.GetComponent<Health>();
+            // 데미지 주기
+            health.TakeDamage(projectileInfo.attack);
         }
     }
 }

@@ -1,3 +1,4 @@
+using Defend.TestScript;
 using UnityEngine;
 /// <summary>
 /// 캐논 발사체 정의
@@ -16,6 +17,12 @@ namespace Defend.Projectile
         protected override void Update()
         {
             base.Update();
+        }
+
+        protected override void Hit()
+        {
+            base.Hit();
+            HitOnRange();
         }
     }
 }

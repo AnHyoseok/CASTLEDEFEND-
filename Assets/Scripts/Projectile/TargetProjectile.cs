@@ -50,14 +50,5 @@ namespace Defend.Projectile
             // 미도착
             return false;
         }
-        // 타격
-        protected override void Hit()
-        {
-            base.Hit();
-            // Health 컴포넌트 접근
-            Health health = target.GetComponent<Health>();
-            // 데미지 주기
-            health.TakeDamage(projectileInfo.attack);
-        }
     }
 }

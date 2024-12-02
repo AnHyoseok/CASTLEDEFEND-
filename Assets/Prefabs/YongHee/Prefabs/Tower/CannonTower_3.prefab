@@ -140,11 +140,11 @@ MonoBehaviour:
   shootTime: 0
   towerInfo:
     rotationSpeed: 5
-    attackRange: 5
+    attackRange: 7
     detectDelay: 0.5
-    shootDelay: 0.5
+    shootDelay: 3
     maxHealth: 200
-    maxMana: 50
+    maxMana: 30
     armor: 5
     cost1: 1
     cost2: 2
@@ -153,13 +153,13 @@ MonoBehaviour:
     upgradeTower: {fileID: 0}
     projectile:
       prefab: {fileID: 1781035392759507797, guid: c6c56c03db5155e41ab6474b89a9c1c4, type: 3}
-      effectPrefab: {fileID: 4996507434419837056, guid: 0bcfde4e13cb71b4496cb65f23327795, type: 3}
+      effectPrefab: {fileID: 4996507434419837056, guid: 05645285958abb94c81af9e87c7205c6, type: 3}
       effectTime: 3
-      attack: 15
-      moveSpeed: 30
-      attackRange: 0.1
+      attack: 30
+      moveSpeed: 50
+      attackRange: 4
   gizmoColor: {r: 0, g: 1, b: 0, a: 1}
-  sphereRadius: 0
+  sphereRadius: 7
   lineLength: 10
 --- !u!114 &220005266862883459
 MonoBehaviour:
@@ -450,6 +450,10 @@ PrefabInstance:
       propertyPath: owner
       value: 
       objectReference: {fileID: 1964954065753519856}
+    - target: {fileID: 2715368477043167026, guid: 40ce92f049b3c0b4caabdb9342af370b, type: 3}
+      propertyPath: status
+      value: 
+      objectReference: {fileID: 220005266862883459}
     - target: {fileID: 5403166087981713806, guid: 40ce92f049b3c0b4caabdb9342af370b, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

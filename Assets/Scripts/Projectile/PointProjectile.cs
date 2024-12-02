@@ -31,7 +31,7 @@ namespace Defend.Projectile
         {
             base.Init(_projectileInfo, closestTarget);
             // target이 설정되면 그 위치를 기록
-            pointTarget = closestTarget.position + offset;
+            pointTarget = closestTarget.position;
         }
 
         // 지점을 향해 이동
@@ -57,34 +57,6 @@ namespace Defend.Projectile
             }
             // 미도착
             return false;
-        }
-
-        // 타격
-        protected override void Hit()
-        {
-            base.Hit();
-
-            #region collider 활용 => 미사용
-            // 공격 범위 내 collider 탐색
-            //colliders = Physics.OverlapSphere(transform.position, projectileInfo.attackRange);
-            #endregion
-
-            // EnemyController 컴포넌트를 가진 Object 찾기
-            var enemies = FindObjectsByType<EnemyController>(FindObjectsSortMode.None);
-            foreach (var obj in enemies)
-            {
-                // 거리 체크
-                float distance = Vector3.Distance(transform.position, obj.transform.position);
-                if (distance <= projectileInfo.attackRange)
-                {
-                    Health ehc = obj.GetComponent<Health>();
-                    if (ehc != null)
-                    {
-                        // 데미지 주기
-                        ehc.TakeDamage(projectileInfo.attack);
-                    }
-                }
-            }
         }
     }
 }

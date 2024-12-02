@@ -22,13 +22,11 @@ namespace Defend.UI
         public TextMeshProUGUI manaText;      // 마나 텍스트
         public GameObject buffsFisrt;         // 버프창1
         public GameObject buffsSecond;        // 버프창2
-        private Status status;
+        [SerializeField] private Status status;
         #endregion
 
         void Start()
         {
-            status = owner.transform.root.GetComponent<Status>();
-
             if (target == null)
             {
                 // TODO :: Player를 바라봐야함
