@@ -13,7 +13,7 @@ namespace Defend.Interactive
             Rock,
             Tree,
             Money
-            
+                
         }
 
         [System.Serializable]
@@ -26,8 +26,7 @@ namespace Defend.Interactive
            
         }
         #region
-        //참조
-        private ItemDrop ItemDrop;
+      
 
         private bool isDamaged = false;  // 데미지를 받는 중인지 여부
         public ResourceType[] resourceTypes;  // 자원 타입 배열
@@ -36,6 +35,9 @@ namespace Defend.Interactive
         //타격 사운드
         public AudioClip  hitSound;
         private AudioSource audioSource;
+
+        //제거 이펙트
+        public GameObject destroyEffect;
         #endregion
 
         private void Awake()
@@ -83,6 +85,9 @@ namespace Defend.Interactive
                 // 흔들림 효과와 사운드가 재생될 시간을 주기 위해 대기
                 yield return new WaitForSeconds(0.5f);
                 Destroy(gameObject);
+                //제거 이펙트
+               GameObject detheffect= Instantiate(destroyEffect, transform.position, Quaternion.identity);
+                Destroy(detheffect,1f);
             }
 
             yield return new WaitForSeconds(1f);
@@ -106,18 +111,20 @@ namespace Defend.Interactive
 
             transform.position = origin;
         }
-
+        //자원흭득
         void GiveResource()
         {
-            // 자원 생성 효과이펙트(조그만한 자원이 떨어지는느낌?) 그리고 1초뒤 제거?
+            // 자원 생성 (미니사이즈)
             if (currentResourceType.resourcePickupEffect != null)
             {
-                GameObject effectGo = Instantiate(currentResourceType.resourcePickupEffect, transform.position, Quaternion.identity);
-                Destroy(effectGo, 2f);
+                //위치 다시잡아야됌 ======================================================================================================
+                GameObject dropitem = Instantiate(currentResourceType.resourcePickupEffect, transform.position, Quaternion.identity);
+               
             }
 
             // 플레이어에게 전달
-            ResourceManager.Instance.AddResources(currentResourceType.amount, currentResourceType.name.ToString());
+
+            //ResourceManager.Instance.AddResources(currentResourceType.amount, currentResourceType.name.ToString());
         }
 
         // 자원 타입에 따른 현재 자원 설정

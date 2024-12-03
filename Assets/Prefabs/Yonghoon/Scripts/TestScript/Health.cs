@@ -37,8 +37,10 @@ namespace Defend.TestScript
         {
             CurrentHealth = maxHealth;
             CurrentArmor = baseArmor;
+            HPTime(RgAmount, Rginterval);//1초마다 1의 체력을 회복
         }
 
+       
         //맥스 체력 올리기
         public void IncreaseMaxHealth(float amount)
         {
@@ -56,15 +58,16 @@ namespace Defend.TestScript
         {
             if (isHpTime == true)
             {
-                float elapsedTime = 0f;
+              
 
                 while (true)
                 {
+                    amount = RgAmount;
+                   
                     CurrentHealth += amount;
                     // 최대 체력을 초과하지 않도록 제한
                     CurrentHealth = Mathf.Min(CurrentHealth, maxHealth);
-                    //Debug.Log("Current Health: " + CurrentHealth);
-                    elapsedTime += interval;
+                 
                     // 지정된 간격만큼 대기
                     yield return new WaitForSeconds(interval);
                 }

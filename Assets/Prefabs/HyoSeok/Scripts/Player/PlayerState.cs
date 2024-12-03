@@ -10,8 +10,10 @@ namespace Defend.Player
         public float health = 20; //체력(성)
         public float tree; //자원(나무)
         public float rock; //자원(돌)
+   
         #endregion
 
+    
         //돈 , 나무 , 돌 개수 체크
         public void ShowStatus()
         {
@@ -50,6 +52,7 @@ namespace Defend.Player
             if (money >= amount)
             {
                 money -= amount;    //돈 충분하면 소비
+
                 return true;
             }
             else

@@ -15,9 +15,9 @@ namespace Defend.Interactive
         public event ResourceAddedHandler OnResourceAdded;
 
         // ±âº» ÀÚ¿ø È¹µæ·®
-        private float rockAmount = 1.0f;
-        private float treeAmount = 1.0f;
-        private float moneyAmount = 1.0f;
+        private float rockmultiplier = 1.0f;
+        private float treemultiplier = 1.0f;
+        private float moneymultiplier = 1.0f;
         #endregion
         private void Awake()
         {
@@ -39,13 +39,16 @@ namespace Defend.Interactive
             switch (resourceType.ToLower())
             {
                 case "rock":
-                    playerState.AddRock(amount);
+                  
+                    playerState.AddRock(amount* rockmultiplier);
                     break;
                 case "tree":
-                    playerState.AddTree(amount);
+                 
+                    playerState.AddTree(amount* treemultiplier);
                     break;
                 case "money":
-                    playerState.AddMoney(amount);
+                 
+                    playerState.AddMoney(amount * moneymultiplier);
                     break;
 
             }
@@ -56,16 +59,20 @@ namespace Defend.Interactive
         // ÀÚ¿ø È¹µæ·® ¾÷±×·¹ÀÌµå
         public void UpgradeResourceGain(string resourceType, float multiplier)
         {
+         
             switch (resourceType.ToLower())
             {
                 case "rock":
-                    rockAmount *= multiplier;
+                    rockmultiplier *= multiplier;
+                    Debug.Log($"rockamout = {moneymultiplier}");
                     break;
                 case "tree":
-                    treeAmount *= multiplier;
+                    treemultiplier *= multiplier;
+                    Debug.Log($"treeAmount = {moneymultiplier}");
                     break;
                 case "money":
-                    moneyAmount *= multiplier;
+                    moneymultiplier *= multiplier;
+                    Debug.Log($"moneyAmount = {moneymultiplier}");
                     break;
             }
         }
