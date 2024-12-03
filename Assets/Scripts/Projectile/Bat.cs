@@ -2,6 +2,7 @@ using Defend.TestScript;
 using UnityEngine;
 /// <summary>
 /// Bat 발사체 정의
+/// 단거리, 단일, 표창
 /// </summary>
 namespace Defend.Projectile
 {

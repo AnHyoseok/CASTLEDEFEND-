@@ -2,6 +2,7 @@ using Defend.TestScript;
 using UnityEngine;
 /// <summary>
 /// Ballista 발사체 정의
+/// 원거리, 단일, 화살
 /// </summary>
 namespace Defend.Projectile
 {

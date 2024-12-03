@@ -1,3 +1,4 @@
+using Defend.Utillity;
 using UnityEngine;
 
 /// <summary>
@@ -10,13 +11,14 @@ namespace Defend.Tower
     {
         protected override void Start()
         {
-            base.Start();
-            towerInfo.attackRange = 7f;
+            status = GetComponent<Status>();
+
+            status.Init(towerInfo);
         }
 
         protected override void Update()
         {
-            base.Update();
+
         }
     }
 }

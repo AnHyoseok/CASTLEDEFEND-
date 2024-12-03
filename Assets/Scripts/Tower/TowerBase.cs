@@ -90,7 +90,7 @@ namespace Defend.Tower
         {
             SetRotationToTarget(); // 매 프레임마다 타겟을 바라보도록 회전
             shootTime += Time.deltaTime;
-            Shoot();
+            //Shoot();
 
             // TEST
             //DrawLine();            // 타겟 방향으로 라인 그리기
@@ -116,6 +116,11 @@ namespace Defend.Tower
                 // 서서히 회전 (Slerp 사용)
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, towerInfo.rotationSpeed * Time.deltaTime);
 
+                // 회전이 거의 완료되었는지 체크
+                if (Quaternion.Angle(transform.rotation, targetRotation) <= 5.0f)
+                {
+                    Shoot(); // 회전 완료 후 슛 실행
+                }
             }
         }
 
@@ -195,8 +200,8 @@ namespace Defend.Tower
         // 발사
         protected virtual void Shoot()
         {
-            // 타겟이 있으며, 슛 딜레이가 지났을 경우, 타겟의 체력이 0보다 큰 경우
-            if (currentTarget != null && towerInfo.shootDelay < shootTime && currentTarget.GetComponent<Health>().CurrentHealth > 0)
+            // 슛 딜레이가 지났을 경우, 타겟의 체력이 0보다 큰 경우
+            if (towerInfo.shootDelay < shootTime && currentTarget.GetComponent<Health>().CurrentHealth > 0)
             {
                 // 발사체 생성
                 GameObject projectilePrefab = Instantiate(towerInfo.projectile.prefab, firePoint.transform.position, Quaternion.identity);

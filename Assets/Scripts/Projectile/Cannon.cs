@@ -2,6 +2,7 @@ using Defend.TestScript;
 using UnityEngine;
 /// <summary>
 /// 캐논 발사체 정의
+/// 단거리, 범위, 폭발
 /// </summary>
 namespace Defend.Projectile
 {

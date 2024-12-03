@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2040392437297103216}
   - component: {fileID: 4613120032308767905}
   m_Layer: 0
-  m_Name: scaled_visibility
+  m_Name: SCALED
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

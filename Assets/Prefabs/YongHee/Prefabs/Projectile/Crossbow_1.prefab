@@ -4915,7 +4915,7 @@ GameObject:
   - component: {fileID: 393659287985398830}
   - component: {fileID: 7254956867374942345}
   m_Layer: 0
-  m_Name: scaled_visibility
+  m_Name: SCALED
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -72,5 +72,13 @@ namespace Defend.Projectile
             // 데미지 주기
             health.TakeDamage(projectileInfo.attack);
         }
+
+
+        // 공격범위 기즈모
+        protected void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, projectileInfo.attackRange);
+        }
     }
 }

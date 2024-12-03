@@ -2,6 +2,7 @@ using Defend.TestScript;
 using UnityEngine;
 /// <summary>
 /// Crossbow 발사체 정의
+/// 단거리, 다중, 화살
 /// </summary>
 namespace Defend.Projectile
 {
