@@ -49,26 +49,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2354f7cd9d294844bff719572f731e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cannonTower:
-    rotationSpeed: 5
-    attackRange: 5
-    detectDelay: 0.5
-    shootDelay: 1
-    maxHealth: 200
-    maxMana: 50
-    armor: 5
-    cost1: 1
-    cost2: 2
-    cost3: 3
-    cost4: 4
-    upgradeTower: {fileID: 9036777913266629440, guid: bcffd13232f8cea46a47483a96462227, type: 3}
-    projectile:
-      prefab: {fileID: 0}
-      effectPrefab: {fileID: 0}
-      effectTime: 0
-      attack: 0
-      moveSpeed: 0
-      attackRange: 0
+  towerinfo: []
+  towerSprite: []
+  boxes: []
   tile: {fileID: 0}
   BuildUI: {fileID: 7572395514055643615}
 --- !u!1 &2582977213405467079

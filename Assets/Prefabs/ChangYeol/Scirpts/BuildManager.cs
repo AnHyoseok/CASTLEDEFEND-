@@ -3,6 +3,7 @@ using Defend.Player;
 using Defend.Tower;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 namespace Defend.UI
 {
@@ -30,6 +31,7 @@ namespace Defend.UI
         #region Variables
         //타일에 설치할 타일의 정보(프리팹, 가격정보)
         private TowerInfo towerInfo;
+        private Sprite TowerSprite;
 
         //선택한 타일이 있는지, 선택하지 안했으면 건설 못한다
         public bool CannotBuild => towerInfo == null;
@@ -55,6 +57,9 @@ namespace Defend.UI
         //선택한 타워
         private TowerXR tower;
 
+        public bool isInstall;
+        public bool isSelect;
+
         /*//선택한 적
         public EnemyState enemyStats;
         //적 속성 UI
@@ -66,14 +71,13 @@ namespace Defend.UI
         {
             return towerInfo;
         }
-
         //매개변수로 받은 타워 프리팹을 설치할 타워에 저장
-        public void SetTowerToBuild(TowerInfo Tower)
+        public void SetTowerToBuild(TowerInfo Tower/*,Sprite sprite*/)
         {
             towerInfo = Tower;
+            /*TowerSprite = sprite;*/
             DeselectTile();
         }
-        
         public void SelectTile(TowerXR towerXR)
         {
             //같은 타워를 선택하면 HideUI
@@ -84,7 +88,7 @@ namespace Defend.UI
             }
 
             //선택한 타워에 저장하기
-            towerXR = tower;
+            tower = towerXR;
             //저장한 타워 속성을 초기화
             towerInfo = null;
             //Debug.Log("타일 UI 보여주기");

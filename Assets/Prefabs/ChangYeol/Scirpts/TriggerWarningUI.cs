@@ -9,7 +9,6 @@ namespace Defend.UI
 
         public BuildMenu buildMenu;
 
-        public bool isInstall;
         #endregion
         private void Start()
         {
@@ -19,18 +18,17 @@ namespace Defend.UI
         private void OnTriggerEnter(Collider other)
         {
             Debug.Log(other.name);
-            TowerXR tower = other.gameObject.GetComponent<TowerXR>();
-            if (tower)
+            if (other && !buildManager.isInstall)
             {
-                buildMenu.IsSelect = true;
+                buildManager.isSelect = true;
             }
         }
         private void OnTriggerExit(Collider other)
         {
-            TowerXR tower = other.gameObject.GetComponent<TowerXR>();
-            if (tower)
+            buildManager.isInstall = true;
+            if (other && buildManager.isInstall)
             {
-                buildMenu.IsSelect = false;
+                buildManager.isSelect = false;
             }
         }
     }
