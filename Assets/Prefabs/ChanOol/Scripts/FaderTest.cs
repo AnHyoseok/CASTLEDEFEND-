@@ -15,27 +15,21 @@ public class FaderTest : MonoBehaviour
         image = GetComponentInChildren<Image>();
     }
 
-
-
-    // FadeOut
+    // FadeOut (점점 어두워짐)
     public void FadeTo()
     {
-        // FadeOut 시작 전 알파 초기화
-        // image.color = new Color(0f, 0f, 0f, 0f);
         StartCoroutine(FadeOut());
     }
 
-    // FadeIn
+    // FadeIn (점점 밝아짐)
     public void FromFade()
     {
-        // FadeIn 시작 전 알파 초기화
-        // image.color = new Color(0f, 0f, 0f, 1f);
         StartCoroutine(FadeIn());
     }
 
     IEnumerator FadeOut()
     {
-        // 1초 동안 image alpha 0 -> 1
+        // 1초 동안 Image Alpha값 0 -> 1 (점점 어두워짐)
         float t = 0f;
 
         while (t < 1f)
@@ -49,7 +43,7 @@ public class FaderTest : MonoBehaviour
 
     IEnumerator FadeIn()
     {
-        // 1초 동안 image alpha 1 -> 0
+        // 1초 동안 Image Alpha값 1 -> 0 (점점 밝아짐)
         float t = 1f;
 
         while (t > 0f)
