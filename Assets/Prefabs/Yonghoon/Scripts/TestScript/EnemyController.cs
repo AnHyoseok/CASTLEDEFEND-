@@ -29,6 +29,18 @@ namespace Defend.TestScript
 
         public Vector3 offset;
 
+        //떨어뜨릴 골드 개수
+        [SerializeField] private int rewardGoldCount;
+        //참조가 필요시 사용할 레퍼런스
+        public int RewardGoldCount { get { return rewardGoldCount; } private set { rewardGoldCount = value; } }
+        //코인 프리팹
+        public GameObject goldPrefab;
+        //흩뿌릴 힘
+        public float scatterForce = 5f;
+        //생성될 위치 (위로 조정)
+        public Transform offsetTransform;
+
+
         // VFX 관련 변수
         public Material bodyMaterial; // 데미지를 줄 머티리얼
         [GradientUsage(true)] public Gradient hitEffectGradient; // 데미지 컬러 그라디언트 효과
@@ -78,6 +90,7 @@ namespace Defend.TestScript
 
             if (Input.GetKeyDown(KeyCode.Q))
             {
+                ScatterCoins();
                 OnHeal(1);
             }
         }
@@ -101,6 +114,9 @@ namespace Defend.TestScript
             ListSpawnManager.enemyAlive--;
 
             animator.SetBool("IsDeath", true);
+
+            //죽으면 코인 흩뿌리기
+            ScatterCoins();
 
             //Enemy 킬
             Destroy(gameObject, 2f);
@@ -145,6 +161,28 @@ namespace Defend.TestScript
                 data.renderer.SetPropertyBlock(bodyFlashMaterialPropertyBlock, data.metarialIndx);
             }
             isFlashing = false;
+        }
+
+        private void ScatterCoins()
+        {
+            for (int i = 0; i < rewardGoldCount; i++)
+            {
+                // 코인 생성
+                GameObject coin = Instantiate(goldPrefab, offsetTransform.position, Quaternion.identity);
+
+                // 랜덤 방향으로 힘을 가합니다.
+                Rigidbody rb = coin.GetComponent<Rigidbody>();
+                if (rb != null)
+                {
+                    Vector3 randomDirection = new Vector3(
+                        Random.Range(-1f, 1f),
+                        Random.Range(0.5f, 1f), // 약간 위로 튀도록 Y축 조정
+                        Random.Range(-1f, 1f)
+                    ).normalized;
+                    randomDirection.y = randomDirection.y * 2;
+                    rb.AddForce(randomDirection * scatterForce, ForceMode.Impulse);
+                }
+            }
         }
     }
 }
