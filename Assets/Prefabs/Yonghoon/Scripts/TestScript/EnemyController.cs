@@ -87,12 +87,6 @@ namespace Defend.TestScript
             {
                 UpdateEffect();
             }
-
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                ScatterCoins();
-                OnHeal(1);
-            }
         }
 
         private void OnDamaged(float arg0)

@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 73035135}
   - component: {fileID: 73035134}
   - component: {fileID: 73035133}
+  - component: {fileID: 73035137}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
@@ -228,6 +229,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &73035137
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 73035132}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 186dcb69cf502c84797658d11c75012d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1171,31 +1194,9 @@ MonoBehaviour:
   isSpawn: 0
   waves:
   - enemies:
-    - enemyPrefab: {fileID: 4101051290623180776, guid: 827e08f60db2ed34c9c5738e157e2fb0, type: 3}
-      count: 1
-      delayTime: 1
     - enemyPrefab: {fileID: 8159497760085561716, guid: 5cb908da14452b24da5c4b04b1fe13ae, type: 3}
       count: 1
       delayTime: 1
-    - enemyPrefab: {fileID: 6130659323785349130, guid: e3d344102f6f62d41a58304963ed3762, type: 3}
-      count: 1
-      delayTime: 1
-    - enemyPrefab: {fileID: 9083013574223758421, guid: d10e436ff1f75e74b8c8677cc1d92334, type: 3}
-      count: 1
-      delayTime: 1
-  - enemies:
-    - enemyPrefab: {fileID: 4101051290623180776, guid: 827e08f60db2ed34c9c5738e157e2fb0, type: 3}
-      count: 1
-      delayTime: 5
-    - enemyPrefab: {fileID: 8159497760085561716, guid: 5cb908da14452b24da5c4b04b1fe13ae, type: 3}
-      count: 1
-      delayTime: 5
-    - enemyPrefab: {fileID: 6130659323785349130, guid: e3d344102f6f62d41a58304963ed3762, type: 3}
-      count: 1
-      delayTime: 5
-    - enemyPrefab: {fileID: 9083013574223758421, guid: d10e436ff1f75e74b8c8677cc1d92334, type: 3}
-      count: 1
-      delayTime: 5
 --- !u!4 &1858824280
 Transform:
   m_ObjectHideFlags: 0
@@ -2123,7 +2124,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  owner: {fileID: 8056235506893544652}
   healthBar: {fileID: 9199601218117188419}
   fillHealth: {fileID: 8299997211083928592}
   healthText: {fileID: 7105978334007870197}

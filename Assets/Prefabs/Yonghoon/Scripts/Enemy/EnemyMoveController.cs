@@ -1,5 +1,6 @@
 using Defend.TestScript;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -14,6 +15,15 @@ namespace Defend.Enemy
         #region Variable
         [SerializeField] private float baseSpeed = 5f;
         [SerializeField] public float CurrentSpeed { get; private set; }   //이동 속도
+
+        // 슬로우를 적용한 주체와 비율을 저장하는 딕셔너리
+        private Dictionary<GameObject, float> moveSources = new Dictionary<GameObject, float>();
+
+        ////테스트용
+        //GameObject enemy1 = new GameObject("Enemy1");
+        //GameObject enemy2 = new GameObject("Enemy2");
+        //GameObject enemy3 = new GameObject("Enemy3");
+
         private Health health;
         //Arrive상태로 변경할 animator
         //private Animator animator;
@@ -91,12 +101,65 @@ namespace Defend.Enemy
             target = WayPoints.points[wayPointIndex];
         }
 
-        //이동속도 변경시
-        public void ChangedMoveSpeed(float rate)
+        public void ChangedMoveSpeed(GameObject source, float rate)
         {
-            CurrentSpeed = baseSpeed * (1.0f + rate);
+            if (moveSources.ContainsKey(source))
+            {
+                // 이미 동일한 주체가 적용한 경우, 슬로우 비율을 갱신
+                moveSources[source] = rate;
+            }
+            else
+            {
+                // 새로운 주체라면 추가
+                moveSources.Add(source, rate);
+            }
+
+            // 최종 속도 계산
+            UpdateCurrentSpeed();
+        }
+
+        public void RemoveMoveSource(GameObject source)
+        {
+            if (moveSources.ContainsKey(source))
+            {
+                // 슬로우 주체 제거
+                moveSources.Remove(source);
+
+                // 최종 속도 계산
+                UpdateCurrentSpeed();
+            }
+        }
+
+        private void UpdateCurrentSpeed()
+        {
+            float totalRate = 0;
+
+            // 모든 슬로우 비율을 합산
+            foreach (var rate in moveSources.Values)
+            {
+                totalRate += rate;
+            }
+
+            // 이동 속도 갱신
+            CurrentSpeed = baseSpeed * (1.0f + totalRate);
+            Debug.Log("최종 속도 = " + CurrentSpeed);
+
+            // 속도 변경 이벤트 호출
             MoveSpeedChanged?.Invoke(CurrentSpeed);
         }
+
+        //이동속도 변경시
+        //public void ChangedMoveSpeed(float rate)
+        //{
+
+
+        //    float checkChangeSpeed = baseSpeed - (baseSpeed * (1.0f + rate));
+        //    Debug.Log("바뀌는 값 = " + checkChangeSpeed);
+        //    CurrentSpeed -= checkChangeSpeed;
+        //    Debug.Log("현재 이속 = " + CurrentSpeed);
+
+        //    MoveSpeedChanged?.Invoke(CurrentSpeed);
+        //}
 
         //목표지점 도착 처리
         void Arrive()
