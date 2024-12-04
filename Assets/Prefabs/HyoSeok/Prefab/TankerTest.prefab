@@ -2911,7 +2911,7 @@ GameObject:
   - component: {fileID: 4811453807849419974}
   - component: {fileID: 6567091707103445654}
   - component: {fileID: 8266896830803629914}
-  - component: {fileID: -5660023932820353151}
+  - component: {fileID: -5700212832090779394}
   - component: {fileID: 391461198241582609}
   m_Layer: 6
   m_Name: TankerTest
@@ -3007,7 +3007,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseSpeed: 3
---- !u!114 &-5660023932820353151
+--- !u!114 &-5700212832090779394
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3016,14 +3016,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 8159497760085561716}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 511c8228ce2acd340a44481bdb938a52, type: 3}
+  m_Script: {fileID: 11500000, guid: e9db53a0f846d8948aff25e9e1fdc559, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 1, z: 0}
-  rewardGoldCount: 5
+  rewardGoldCount: 1
   goldPrefab: {fileID: 4610807197165865268, guid: 209a641942809fc4cad0b9a8d4ba8a9b, type: 3}
-  scatterForce: 3
-  offsetTransform: {fileID: 1828569783196411834}
+  scatterForce: 5
+  offsetTransform: {fileID: 0}
   bodyMaterial: {fileID: 2100000, guid: 63d68c3ba5d7b90418069b96d9c35a4a, type: 2}
   hitEffectGradient:
     serializedVersion: 2
