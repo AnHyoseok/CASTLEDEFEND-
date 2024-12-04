@@ -1,6 +1,7 @@
 using UnityEngine;
 using Defend.Enemy;
 using System.Collections.Generic;
+using Defend.item;
 
 namespace Defend.TestScript
 {
@@ -162,20 +163,11 @@ namespace Defend.TestScript
             for (int i = 0; i < rewardGoldCount; i++)
             {
                 // 코인 생성
-                GameObject coin = Instantiate(goldPrefab, offsetTransform.position, Quaternion.identity);
+                GameObject coin = Instantiate(goldPrefab, transform.position, Quaternion.identity);
+                DropItem item = coin.GetComponent<DropItem>();
+                item.amount = 1f;
+                item.resourceName = "Money";
 
-                // 랜덤 방향으로 힘을 가합니다.
-                Rigidbody rb = coin.GetComponent<Rigidbody>();
-                if (rb != null)
-                {
-                    Vector3 randomDirection = new Vector3(
-                        Random.Range(-1f, 1f),
-                        Random.Range(0.5f, 1f), // 약간 위로 튀도록 Y축 조정
-                        Random.Range(-1f, 1f)
-                    ).normalized;
-                    randomDirection.y = randomDirection.y * 2;
-                    rb.AddForce(randomDirection * scatterForce, ForceMode.Impulse);
-                }
             }
         }
     }

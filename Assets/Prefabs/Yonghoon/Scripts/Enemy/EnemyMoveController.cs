@@ -132,16 +132,16 @@ namespace Defend.Enemy
 
         private void UpdateCurrentSpeed()
         {
-            float totalRate = 0;
+            float currentSpeed = baseSpeed;
 
-            // 모든 슬로우 비율을 합산
+            // 복리 계산: 현재 속도를 기준으로 슬로우 효과 적용
             foreach (var rate in moveSources.Values)
             {
-                totalRate += rate;
+                currentSpeed -= currentSpeed * -rate; // 복리 적용
             }
 
-            // 이동 속도 갱신
-            CurrentSpeed = baseSpeed * (1.0f + totalRate);
+            CurrentSpeed = currentSpeed; // 최종 속도 업데이트
+
             Debug.Log("최종 속도 = " + CurrentSpeed);
 
             // 속도 변경 이벤트 호출
