@@ -85,19 +85,6 @@ namespace Defend.Utillity
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                TakeDamage(30);
-            }
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                Heal(20);
-            }
-            if (Input.GetKeyDown(KeyCode.D))
-            {
-                UseMana(20);
-            }
-
             ChargeMana(0.5f);
         }
         // √ ±‚»≠

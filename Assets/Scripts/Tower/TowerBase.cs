@@ -4,6 +4,7 @@ using Defend.Utillity;
 using System.Collections.Generic;
 using UnityEngine;
 using Defend.TestScript;
+using System.Linq;
 /*
 기본타워 => 타겟공격
 스플래시타워 => 지점공격
@@ -41,10 +42,7 @@ namespace Defend.Tower
         #endregion
 
         #region Variables For Test
-        public Color gizmoColor = Color.green;              // 기즈모 색상
-        public float sphereRadius;                          // 구의 반지름
-        public float lineLength = 10f;                      // 라인의 길이
-
+        [SerializeField] public Gizmo gizmo;
         LineRenderer lineRenderer;                          // 라인 랜더러
         #endregion
 
@@ -67,8 +65,12 @@ namespace Defend.Tower
 
             #region Test를 위한 시각화 => LineRenderer 초기화, Gizmo
             {
+                // 기즈모 색상 초기화
+                gizmo.gizmoColor = Color.green;
                 // 기즈모 범위 초기화
-                sphereRadius = towerInfo.attackRange;
+                gizmo.sphereRadius = towerInfo.attackRange;
+                // 라인랜더러 길이 초기화
+                gizmo.lineLength = towerInfo.attackRange;
 
                 // LineRenderer 컴포넌트를 가져오거나 추가
                 lineRenderer = GetComponent<LineRenderer>();
@@ -117,7 +119,7 @@ namespace Defend.Tower
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, towerInfo.rotationSpeed * Time.deltaTime);
 
                 // 회전이 거의 완료되었는지 체크
-                if (Quaternion.Angle(transform.rotation, targetRotation) <= 5.0f)
+                if (Quaternion.Angle(transform.rotation, targetRotation) <= 15.0f || towerInfo.rotationSpeed == 0)
                 {
                     Shoot(); // 회전 완료 후 슛 실행
                 }
@@ -165,7 +167,9 @@ namespace Defend.Tower
             //}
             #endregion
 
-            return tempTarget;
+            // 유효한 타겟 : 현재 체력이 0 이상이며, 타겟이 null이 아닌 경우 필터링
+            return tempTarget.Where(target => target != null && target.GetComponent<Health>().CurrentHealth > 0) 
+                .ToList();
         }
 
         // 가장 가까운 타겟 설정
@@ -224,15 +228,15 @@ namespace Defend.Tower
             lineRenderer.SetPosition(0, transform.position);
 
             // 끝점 (오브젝트의 전방 방향으로 lineLength만큼 떨어진 위치)
-            Vector3 endPosition = transform.position + transform.forward * lineLength;
+            Vector3 endPosition = transform.position + transform.forward * gizmo.lineLength;
             lineRenderer.SetPosition(1, endPosition);
         }
 
         // 공격범위 기즈모
         private void OnDrawGizmos()
         {
-            Gizmos.color = gizmoColor;
-            Gizmos.DrawWireSphere(transform.position, sphereRadius);
+            Gizmos.color = gizmo.gizmoColor;
+            Gizmos.DrawWireSphere(transform.position, gizmo.sphereRadius);
         }
     }
 }
