@@ -7,6 +7,7 @@ using UnityEngine;
 /// </summary>
 namespace Defend.Projectile
 {
+    // TODO :: Rocket의 경우 지정된 지점에 적과 무관하게 계속 공격하도록 하는 기능?
     public class PointProjectile : ProjectileBase
     {
         [SerializeField] protected Vector3 pointTarget;             // 목표 지점

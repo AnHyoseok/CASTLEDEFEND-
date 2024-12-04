@@ -13,7 +13,7 @@ namespace Defend.Tower
 {
     public class MultipleTower : TowerBase
     {
-        [SerializeField] protected int maxCount;
+        [SerializeField] protected int maxCount;            // 최대 발사체 생성 갯수
         protected override void Start()
         {
             base.Start();
@@ -28,7 +28,6 @@ namespace Defend.Tower
         {
             // 타겟 목록을 거리 기준으로 정렬
             var sortedTargets = UpdateTargets()
-                .Where(target => target != null && target.GetComponent<Health>().CurrentHealth > 0) // 유효한 타겟만 필터링
                 .OrderBy(target => Vector3.Distance(transform.position, target.position))          // 거리 기준 정렬
                 .Take(maxCount)                                                                    // 최대 maxCount만큼 선택
                 .ToList();

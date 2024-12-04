@@ -303,12 +303,14 @@ MonoBehaviour:
     cost4: 4
     upgradeTower: {fileID: 1964954065753519856, guid: 9c95e8364e95eb240a78bb9e739076e6, type: 3}
     projectile:
+      tower: {fileID: 8382427648633259584}
       prefab: {fileID: 121176909599899313, guid: defc490ba893c5e478df87ea91ac3252, type: 3}
       effectPrefab: {fileID: 4996507434419837056, guid: 4c0cdc67322b76b4db6497e0aadce0e9, type: 3}
       effectTime: 3
       attack: 40
       moveSpeed: 50
       attackRange: 3.5
+      debuffRatio: 0
   gizmoColor: {r: 0, g: 1, b: 0, a: 1}
   sphereRadius: 6
   lineLength: 10
