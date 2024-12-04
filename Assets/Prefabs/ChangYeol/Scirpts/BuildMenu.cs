@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.XR.Interaction.Toolkit.Interactors.Visuals;
 
 namespace Defend.UI
 {
@@ -14,6 +15,7 @@ namespace Defend.UI
         public TowerInfo[] towerinfo;
         public Sprite[] towerSprite;
         public List<BoxCollider> boxes;
+        private GameObject tower;
 
         public Tile tile;
 
@@ -54,9 +56,10 @@ namespace Defend.UI
                 //Debug.Log("기본 터렛을 선택 하였습니다");
                 //설치할 터렛에 기본 터렛(프리팹)을 저장
                 buildManager.SetTowerToBuild(towerinfo[index]/*, towerSprite[index]*/);
-                tile.BuildTower(boxes[index].size, boxes[index].center);
+                tile.BuildTower(boxes[index].size, boxes[index].center,index);
                 //buildManager.SetTowerToInfo(towerinfo[7]);
             }
+            BuildUI.SetActive(false);
         }
         public void SelectUpgradeTower(int index)
         {

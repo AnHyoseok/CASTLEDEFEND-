@@ -1,17 +1,15 @@
 using Defend.Tower;
+using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 namespace Defend.UI
 {
-    public class TowerXR : XRGrabInteractable
+    public class TowerXR : XRSimpleInteractable
     {
         #region Variables
         public TowerInfo towerInfo;
-
-        private NormalTower normal;
 
         //빌드매니저 객체
         private BuildManager buildManager;
@@ -19,22 +17,7 @@ namespace Defend.UI
 
         private void Start()
         {
-            //참조
-            Rigidbody rigidbody = this.GetComponent<Rigidbody>();
-            normal = GetComponent<NormalTower>();
-            //초기화
-            buildManager = BuildManager.Instance;
-            rigidbody.constraints = RigidbodyConstraints.FreezeRotationZ;
-            rigidbody.constraints = RigidbodyConstraints.FreezeRotationX;
-            rigidbody.constraints = RigidbodyConstraints.FreezePositionX;
-            rigidbody.constraints = RigidbodyConstraints.FreezePositionZ;
-        }
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                buildManager.SelectTile(this);
-            }
+            
         }
         protected override void OnSelectExited(SelectExitEventArgs args)
         {
@@ -44,14 +27,14 @@ namespace Defend.UI
         protected override void OnSelectEntered(SelectEnterEventArgs args)
         {
             base.OnSelectEntered(args);
-            buildManager.SelectTile(this);
+            //buildManager.SelectTile(this);
         }
 
-        /*protected override void OnActivated(ActivateEventArgs args)
+        protected override void OnActivated(ActivateEventArgs args)
         {
             base.OnActivated(args);
-            buildManager.SelectTile(this,normal);
-        }*/
+            buildManager.SelectTile(this);
+        }
         void OnActionUI()
         {
             Debug.Log("act");

@@ -2,15 +2,18 @@ using Defend.Player;
 using Defend.Tower;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
+using UnityEngine.XR.Interaction.Toolkit.Interactors.Visuals;
 
 namespace Defend.UI
 {
-    public class Tile : MonoBehaviour
+    public class Tile : XRSimpleInteractable
     {
         #region Variables
         //타일에 설치된 타워 게임오브젝트 객체
-        [HideInInspector]public GameObject tower;
+        public GameObject[] towers;
+        private GameObject tower;
         [HideInInspector] public GameObject tower_upgrade;
         //현재 선택된 타워 TowerInfo(prefab, cost, ....)
         public TowerInfo[] towerInfo;
@@ -23,10 +26,13 @@ namespace Defend.UI
         //설치하면 생성되는 이펙트
         public GameObject TowerImpectPrefab;
         //플레이어 위치
-        public Transform head;
+        public BuildMenu buildMenu;
         //타워 업그레이드 여부
         public bool IsUpgrade { get; private set; }
         [SerializeField] private float distance = 1.5f;
+
+        public XRInteractorReticleVisual reticleVisual;
+        public XRInteractorLineVisual lineVisual;
         #endregion
 
         private void Start()
@@ -35,29 +41,52 @@ namespace Defend.UI
 
             buildManager = BuildManager.Instance;
         }
+        protected override void OnHoverEntering(HoverEnterEventArgs args)
+        {
+            base.OnHoverEntering(args);
+        }
+        protected override void OnSelectEntered(SelectEnterEventArgs args)
+        {
+            base.OnSelectEntered(args);
+            tower = Instantiate(lineVisual.reticle, GetBuildPosition(), Quaternion.identity);
+            tower.AddComponent<BoxCollider>();
+            //BoxCollider box = tower.GetComponent<BoxCollider>();
+            tower.SetActive(true);
+            Destroy(lineVisual.reticle);
+            lineVisual.reticle = null;
+            Debug.Log($"{reticleVisual.reticlePrefab},{lineVisual.reticle}");
+        }
+        protected override void OnSelectExited(SelectExitEventArgs args)
+        {
+            base.OnSelectExited(args);
+        }
         //타워 설치 위치
         public Vector3 GetBuildPosition()
         {
-            return head.position + new Vector3(head.forward.x,0,head.forward.z).normalized * distance;
+            Debug.Log("towerselectssss");
+            return lineVisual.reticle.transform.position;
         }
         //타워 생성
-        public void BuildTower(Vector3 size, Vector3 center)
+        public void BuildTower(Vector3 size, Vector3 center,int index)
         {
             //설치할 터렛의 속성값 가져오기 (터렛 프리팹, 건설비용, 업그레이드 프리팹, 업그레이드 비용...)
-            towerInfo[1] = buildManager.GetTowerToBuild();
-            
+            towerInfo[0] = buildManager.GetTowerToBuild();
             //돈을 지불한다 100, 250
             //Debug.Log($"터렛 건설비용: {blueprint.cost}");
             //타워 생성
-            tower = Instantiate(towerInfo[1].upgradeTower, GetBuildPosition(), Quaternion.identity);
-            //타워를 잡을 수 있는 컴포런트 추가
-            tower.AddComponent<BoxCollider>();
-            tower.AddComponent<TowerXR>();
-            XRGrabInteractable xRGrabInter = tower.GetComponent<TowerXR>();
-
-            BoxCollider boxCollider = tower.GetComponent<BoxCollider>();
-            boxCollider.size = size;
-            boxCollider.center = center;
+            //tower = Instantiate(towerInfo[1].upgradeTower, GetBuildPosition(), Quaternion.identity);
+            if (!reticleVisual.reticlePrefab)
+            {
+                //lineVisual.reticle = towers[index];
+                lineVisual.reticle = towerInfo[0].upgradeTower;
+                //타워를 잡을 수 있는 컴포런트 추가
+                /*tower.AddComponent<BoxCollider>();
+                BoxCollider boxCollider = towerInfo[1].upgradeTower.GetComponent<BoxCollider>();
+                boxCollider.size = size;
+                boxCollider.center = center;
+                boxCollider.enabled = false;*/
+            }
+            //towerInfo[1].upgradeTower.AddComponent<TowerXR>();
             //타워 생성 이펙트
             /*GameObject effgo = Instantiate(TowerImpectPrefab, GetBuildPosition(), Quaternion.identity);
             //타일 자식으로 생성
@@ -99,7 +128,7 @@ namespace Defend.UI
             }
             if(tower)
             {
-                towerInfo[2] = buildManager.GetTowerToBuild();
+                towerInfo[1] = buildManager.GetTowerToBuild();
                 Debug.Log("터렛 업그레이드");
                 //Effect
                 //GameObject effectGo = Instantiate(TowerImpectPrefab, GetBuildPosition(), Quaternion.identity);
@@ -108,7 +137,7 @@ namespace Defend.UI
                 //터렛 업그레이드 여부
                 IsUpgrade = true;
 
-                //터렛 업그레이드 생성
+                //터렛 업그레이드 생성   
                 tower_upgrade = Instantiate(towerInfo[2].upgradeTower, tower.transform.position, Quaternion.identity);
                 tower_upgrade.AddComponent<BoxCollider>();
                 tower_upgrade.AddComponent<TowerXR>();
