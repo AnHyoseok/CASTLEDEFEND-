@@ -9,7 +9,7 @@ namespace Defend.Interactive
         public static ResourceManager Instance;
 
         private PlayerState playerState;
-
+        Resources resources;
         // 자원 추가 이벤트
         public delegate void ResourceAddedHandler(float amount, string resourceType);
         public event ResourceAddedHandler OnResourceAdded;
@@ -18,9 +18,16 @@ namespace Defend.Interactive
         private float rockmultiplier = 1.0f;
         private float treemultiplier = 1.0f;
         private float moneymultiplier = 1.0f;
+
+        //dropitem수치
+        public static float distance = 3f; // 플레이어에게 가는 거리
+        public static float speed = 1.0f; // 플레이어에게 가는 속도
+
+      
         #endregion
         private void Awake()
         {
+           
             if (Instance == null)
             {
                 Instance = this;

@@ -22,7 +22,7 @@ namespace Defend.Interactive
             public ResourceTypeEnum name;        // 자원 이름 
             public float amount;       // 자원 양
             public float health;       // 자원 별 체력
-            public GameObject resourcePickupEffect;  // 자원이 떨어질 때 효과
+            public GameObject resourceItem;  // 자원 드랍아이템
            
         }
         #region
@@ -38,6 +38,8 @@ namespace Defend.Interactive
 
         //제거 이펙트
         public GameObject destroyEffect;
+
+
         #endregion
 
         private void Awake()
@@ -74,10 +76,18 @@ namespace Defend.Interactive
             isDamaged = true;
             currentResourceType.health -= damage;
             Debug.Log($"{currentResourceType.name} health = {currentResourceType.health}");
-        
 
-            // 자원 얻기
-            GiveResource();
+            // 자원 생성 (미니사이즈)
+            if (currentResourceType.resourceItem != null)
+            {
+                //위치 다시잡아야됌 ======================================================================================================
+                GameObject dropitem = Instantiate(currentResourceType.resourceItem, transform.position, Quaternion.identity);
+                DropItem item = dropitem.GetComponent<DropItem>();
+                item.amount = currentResourceType.amount;
+                item.resourceName = currentResourceType.name.ToString();
+
+            }
+
             PlayHitSound();
             if (currentResourceType.health <= 0)
             {
@@ -111,21 +121,12 @@ namespace Defend.Interactive
 
             transform.position = origin;
         }
-        //자원흭득
-        void GiveResource()
-        {
-            // 자원 생성 (미니사이즈)
-            if (currentResourceType.resourcePickupEffect != null)
-            {
-                //위치 다시잡아야됌 ======================================================================================================
-                GameObject dropitem = Instantiate(currentResourceType.resourcePickupEffect, transform.position, Quaternion.identity);
-               
-            }
-
-            // 플레이어에게 전달
-
-            //ResourceManager.Instance.AddResources(currentResourceType.amount, currentResourceType.name.ToString());
-        }
+       // //자원흭득
+       //public void GiveResource()
+       // {
+       //     // 플레이어에게 전달
+       //     ResourceManager.Instance.AddResources(currentResourceType.amount, currentResourceType.name.ToString());
+       // }
 
         // 자원 타입에 따른 현재 자원 설정
         public void SetCurrentResourceType(string resourceName)

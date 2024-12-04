@@ -213,7 +213,8 @@ namespace Defend.Player
         //아이템 흭득 범위 증가
         public void AutoGain()
         {
-
+            ResourceManager.speed = 20f;
+            ResourceManager.distance = 500f;
         }
 
 
