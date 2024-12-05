@@ -19,6 +19,7 @@ namespace Defend.UI
         {
             for (int i = 0; i < towerinfo.Length; i++)
             {
+                towerinfo[i].image.sprite = build.towerSprite[i];
                 towerinfo[i].Hp.text = "Hp : " + build.towerinfo[i].maxHealth.ToString();
                 towerinfo[i].Mp.text = "Mp : " + build.towerinfo[i].maxMana.ToString();
                 towerinfo[i].Attack.text = "Attack : " + build.towerinfo[i].projectile.attack.ToString();
@@ -29,6 +30,7 @@ namespace Defend.UI
         public void Stst(int index)
         {
             selectTower.SetActive(true);
+            selectTowerinfo.image.sprite = build.towerSprite[index];
             selectTowerinfo.name.text = towerinfo[index].name.text;
             selectTowerinfo.Hp.text = "Hp : " + build.towerinfo[index].maxHealth.ToString();
             selectTowerinfo.Mp.text = "Mp : " + build.towerinfo[index].maxMana.ToString();

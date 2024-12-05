@@ -22,63 +22,47 @@ namespace Defend.UI
         public GameObject BuildUI;
 
         private BoxCollider Trirggerbox;
+        public int indexs;
         #endregion
 
         private void Start()
         {
             //초기화
             buildManager = BuildManager.Instance;
-            //플레이어에게 box콜라이더 추가하고 trigger로 주변에 있는 콜라이더가 있으면 경고창이 뜬다
-            Trirggerbox = buildManager.playerState.gameObject.AddComponent<BoxCollider>();
-            Trirggerbox.isTrigger = true;
-            Trirggerbox.center = new Vector3(0, 0.3f, 0);
-            Trirggerbox.size = new Vector3(2.5f, 0.3f, 2.5f);
-            buildManager.isSelect = false;
         }
 
 
         //기본 터렛 버튼을 클릭시 호출
         public void SelectTower(int index)
         {
-            if (buildManager.isSelect)
-            {
-                StartCoroutine(TriggerWarning(towerinfo[index]));
-                return;
-            }
-            else if (!buildManager.playerState.SpendMoney(towerinfo[index].cost1))
+            indexs = index;
+            if (!buildManager.playerState.SpendMoney(towerinfo[index].cost1))
             {
                 buildManager.warningWindow.ShowWarning("Not Enough Money");
                 return;
             }
-            if (buildManager.playerState.SpendMoney(towerinfo[index].cost1) && buildManager.isInstall)
+            if (buildManager.playerState.SpendMoney(towerinfo[index].cost1))
             {
-                buildManager.isInstall = false;
                 //Debug.Log("기본 터렛을 선택 하였습니다");
                 //설치할 터렛에 기본 터렛(프리팹)을 저장
-                buildManager.SetTowerToBuild(towerinfo[index]/*, towerSprite[index]*/);
-                tile.BuildTower(boxes[index].size, boxes[index].center,index);
+                buildManager.SetTowerToBuild(towerinfo[index]);
+                tile.BuildTower(boxes[index].size, boxes[index].center, index);
                 //buildManager.SetTowerToInfo(towerinfo[7]);
             }
-            BuildUI.SetActive(false);
+            //BuildUI.SetActive(false);
         }
         public void SelectUpgradeTower(int index)
         {
-            if (buildManager.isSelect)
-            {
-                StartCoroutine(TriggerWarning(towerinfo[index]));
-                return;
-            }
-            else if (!buildManager.playerState.SpendMoney(towerinfo[index].cost2))
+            if (!buildManager.playerState.SpendMoney(towerinfo[index].cost2))
             {
                 buildManager.warningWindow.ShowWarning("Not Enough Money");
                 return;
             }
-            if (buildManager.playerState.SpendMoney(towerinfo[index].cost2) && buildManager.isInstall)
+            if (buildManager.playerState.SpendMoney(towerinfo[index].cost2))
             {
-                buildManager.isInstall = false;
                 //Debug.Log("기본 터렛을 선택 하였습니다");
                 //설치할 터렛에 기본 터렛(프리팹)을 저장
-                buildManager.SetTowerToBuild(towerinfo[index]/*, towerImage[index]*/);
+                buildManager.SetTowerToBuild(towerinfo[index]);
                 tile.UpgradeTower(boxes[index].size, boxes[index].center);
             }
         }

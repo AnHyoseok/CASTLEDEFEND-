@@ -54,6 +54,7 @@ MonoBehaviour:
   boxes: []
   tile: {fileID: 0}
   BuildUI: {fileID: 7572395514055643615}
+  indexs: 0
 --- !u!1 &2582977213405467079
 GameObject:
   m_ObjectHideFlags: 0
