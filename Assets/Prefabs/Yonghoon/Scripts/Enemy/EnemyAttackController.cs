@@ -36,7 +36,6 @@ namespace Defend.Enemy
         private bool hasArrived;
 
         public UnityAction<float> AttackDamageChanged;
-        public UnityAction<float> AttackDelayChanged;
 
         public EnemyType type;
         #endregion
@@ -103,12 +102,6 @@ namespace Defend.Enemy
         {
             CurrentAttackDamage = Mathf.Max(CurrentAttackDamage + amount, 1f);
             AttackDamageChanged?.Invoke(amount);
-        }
-
-        public void ChangedAttackDelay(float amount)
-        {
-            CurrentAttackDelay = Mathf.Max(CurrentAttackDelay - amount, 0.5f);
-            AttackDelayChanged?.Invoke(amount);
         }
 
         private void OnEnemyArrive()

@@ -46,7 +46,6 @@ namespace Defend.Enemy
 
             //공격 능력치 변경
             attackController.AttackDamageChanged += ChangeDamage;
-            attackController.AttackDelayChanged += ChangeDelay;
 
             //이동속도 변경
             moveController.MoveSpeedChanged += ChangeSpeed;
@@ -84,7 +83,7 @@ namespace Defend.Enemy
             enemyHealth += amount;
         }
 
-        private void ChangeSpeed(float value)
+        private void ChangeSpeed(float value, float rate)
         {
             enemySpeed = value;
         }

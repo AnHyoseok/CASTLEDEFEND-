@@ -19,11 +19,6 @@ namespace Defend.Enemy
         // 슬로우를 적용한 주체와 비율을 저장하는 딕셔너리
         private Dictionary<GameObject, float> moveSources = new Dictionary<GameObject, float>();
 
-        ////테스트용
-        //GameObject enemy1 = new GameObject("Enemy1");
-        //GameObject enemy2 = new GameObject("Enemy2");
-        //GameObject enemy3 = new GameObject("Enemy3");
-
         private Health health;
         //Arrive상태로 변경할 animator
         //private Animator animator;
@@ -35,7 +30,7 @@ namespace Defend.Enemy
         private bool isDeath;
 
         //이동속도 변화를 감지할 UnityAction
-        public UnityAction<float> MoveSpeedChanged;
+        public UnityAction<float, float> MoveSpeedChanged;
         public UnityAction EnemyArrive;
         #endregion
 
@@ -105,7 +100,7 @@ namespace Defend.Enemy
         {
             if (moveSources.ContainsKey(source))
             {
-                // 이미 동일한 주체가 적용한 경우, 슬로우 비율을 갱신
+                // 이미 동일한 주체가 적용한 경우, 증감 비율을 갱신
                 moveSources[source] = rate;
             }
             else
@@ -122,7 +117,7 @@ namespace Defend.Enemy
         {
             if (moveSources.ContainsKey(source))
             {
-                // 슬로우 주체 제거
+                // 증감 주체 제거
                 moveSources.Remove(source);
 
                 // 최종 속도 계산
@@ -132,32 +127,46 @@ namespace Defend.Enemy
 
         private void UpdateCurrentSpeed()
         {
-            float currentSpeed = baseSpeed;
+            float totalRate = 0;
 
-            // 복리 계산: 현재 속도를 기준으로 슬로우 효과 적용
+            // 모든 슬로우 비율을 합산
             foreach (var rate in moveSources.Values)
             {
-                currentSpeed -= currentSpeed * -rate; // 복리 적용
+                totalRate += rate;
             }
 
-            CurrentSpeed = currentSpeed; // 최종 속도 업데이트
+            //증감효과는 슬로우 = 66%, 증가 = 50%로 제한
+            totalRate = Mathf.Clamp(totalRate, -0.66f, 0.5f);
+
+            // 이동 속도 갱신
+            CurrentSpeed = baseSpeed * (1.0f + totalRate);
+            //이동속도는 baseSpeed를 기반으로 +-50%를 초과할 수 없음
+            //CurrentSpeed = Mathf.Clamp(CurrentSpeed, (baseSpeed / 2), (baseSpeed * 2));
 
             Debug.Log("최종 속도 = " + CurrentSpeed);
 
             // 속도 변경 이벤트 호출
-            MoveSpeedChanged?.Invoke(CurrentSpeed);
+            MoveSpeedChanged?.Invoke(CurrentSpeed, totalRate);
         }
 
-        //이동속도 변경시
-        //public void ChangedMoveSpeed(float rate)
+        //private void UpdateCurrentSpeed()
         //{
+        //    float currentSpeed = baseSpeed;
 
+        //    //복리 계산: 현재 속도를 기준으로 슬로우 효과 적용
+        //    foreach (var rate in moveSources.Values)
+        //    {
+        //        currentSpeed -= currentSpeed * -rate; // 복리 적용
+        //    }
 
-        //    float checkChangeSpeed = baseSpeed - (baseSpeed * (1.0f + rate));
-        //    Debug.Log("바뀌는 값 = " + checkChangeSpeed);
-        //    CurrentSpeed -= checkChangeSpeed;
-        //    Debug.Log("현재 이속 = " + CurrentSpeed);
+        //    CurrentSpeed = currentSpeed; // 최종 속도 업데이트
 
+        //    //    //이동속도는 baseSpeed를 기반으로 +-50%를 초과할 수 없음
+        //    CurrentSpeed = Mathf.Clamp(currentSpeed, (baseSpeed / 2), (baseSpeed * 2));
+
+        //    Debug.Log("최종 속도 = " + CurrentSpeed);
+
+        //    // 속도 변경 이벤트 호출
         //    MoveSpeedChanged?.Invoke(CurrentSpeed);
         //}
 

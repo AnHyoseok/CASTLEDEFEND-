@@ -24,11 +24,23 @@ namespace Defend.TestScript
         #region Variables
         //애니메이터
         private Animator animator;
+        private float animatorSpeed;
+
+        //버프와 디버프
+        public ParticleSystem buffParticleSystem;
+        public ParticleSystem debuffParticleSystem;
+        public ParticleSystem healParticleSystem;
 
         //체력담당 컴포넌트
         private Health health;
+        //이동담당 컴포넌트
+        private EnemyMoveController moveController;
 
-        public Vector3 offset;
+        //미사일이 날아와서 부딪힐 곳을 offset으로 할당
+        public Vector3 positionOffset;
+        //public Vector3 offset;
+        //몬스터마다 타워쪽 이펙트에 스케일을 조절하기위한 scaleOffset
+        public float scaleOffset;
 
         //떨어뜨릴 골드 개수
         [SerializeField] private int rewardGoldCount;
@@ -59,11 +71,17 @@ namespace Defend.TestScript
             //참조
             animator = GetComponent<Animator>();
             health = GetComponent<Health>();
+            moveController = GetComponent<EnemyMoveController>();
 
             //UnityAction
             health.OnDie += OnDie;
             health.OnHeal += OnHeal;
             health.OnDamaged += OnDamaged;
+
+            //버프와 디버프관련 UnityAction
+            health.Armorchange += UpdateArmor;
+            moveController.MoveSpeedChanged += UpdateSpeed;
+
 
             // 반짝임 효과 초기화
             bodyFlashMaterialPropertyBlock = new MaterialPropertyBlock();
@@ -79,6 +97,11 @@ namespace Defend.TestScript
                 }
             }
 
+            //초기화
+            animatorSpeed = animator.speed;
+            buffParticleSystem.Stop();
+            debuffParticleSystem.Stop();
+            healParticleSystem.Stop();
         }
 
         void Update()
@@ -87,6 +110,14 @@ namespace Defend.TestScript
             if (isFlashing)
             {
                 UpdateEffect();
+            }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                OnHeal(1);
+            }            
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                PlayEffect(0.1f);
             }
         }
 
@@ -99,8 +130,9 @@ namespace Defend.TestScript
 
         private void OnHeal(float arg0)
         {
-            TriggerEffect(healEffectGradient); // 힐 효과 적용
+            //TriggerEffect(healEffectGradient); // 힐 효과 적용
             Debug.Log("힐 받음");
+            healParticleSystem.Play();
         }
 
         private void OnDie()
@@ -168,6 +200,34 @@ namespace Defend.TestScript
                 item.amount = 1f;
                 item.resourceName = "Money";
 
+            }
+        }
+
+        private void UpdateSpeed(float value, float rate)
+        {
+            // rate에 따라 버프 또는 디버프 효과 실행
+            PlayEffect(rate);
+
+            Debug.Log($"before anim speed = {animator.speed}, rate = {rate}");
+            animator.speed = animatorSpeed * (1.0f + rate);
+            Debug.Log($"after anim speed = {animator.speed}");
+        }
+
+        private void UpdateArmor(float amount)
+        {
+            Debug.Log($"{amount}만큼 방어력 증/감소됨!");
+            PlayEffect(amount);
+        }
+
+        private void PlayEffect(float amount)
+        {
+            if (amount > 0)
+            {
+                buffParticleSystem.Play();
+            }
+            else if (amount < 0)
+            {
+                debuffParticleSystem.Play();
             }
         }
     }
