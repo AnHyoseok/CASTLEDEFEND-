@@ -24894,8 +24894,9 @@ MonoBehaviour:
   - name: 1
     amount: 8
     health: 40
-    resourcePickupEffect: {fileID: 2430103393786866082, guid: 62b0e284d742b1d4d998e5f25cbcdfe6, type: 3}
+    resourceItem: {fileID: 0}
   hitSound: {fileID: 8300000, guid: 574378e1c5ad35145bb28f133324b25f, type: 3}
+  destroyEffect: {fileID: 0}
 --- !u!114 &1974002638918915662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26377,8 +26378,9 @@ MonoBehaviour:
   - name: 0
     amount: 10
     health: 30
-    resourcePickupEffect: {fileID: 8603091193204584128, guid: 2f85440902d9d6240bde41408d394cd2, type: 3}
+    resourceItem: {fileID: 0}
   hitSound: {fileID: 8300000, guid: 574378e1c5ad35145bb28f133324b25f, type: 3}
+  destroyEffect: {fileID: 0}
 --- !u!1 &3013331618422135020
 GameObject:
   m_ObjectHideFlags: 0

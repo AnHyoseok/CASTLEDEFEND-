@@ -58,15 +58,17 @@ namespace Defend.Interactive
 
         private void OnTriggerEnter(Collider other)
         {
-            // 손과 닿으면 // 오브젝트 이름으로 수정할것 !!
-            //무기시스템 만들수있으니 마지막에 수정함
-            if ((other.CompareTag("LeftHand") || other.CompareTag("RightHand")) && !isDamaged)
+            // 충돌한 오브젝트의 이름과 현재 오브젝트의 이름을 기반으로 자원 타입 설정
+            string otherName = other.gameObject.name;
+            string currentName = gameObject.name;
+
+            if (!isDamaged &&
+                ((otherName == "Axe" && currentName == "Tree") ||
+                 (otherName == "PickAxe" && currentName == "Rock")))
             {
-                // 충돌한 오브젝트의 이름을 기반으로 자원 타입 설정
-                SetCurrentResourceType(gameObject.name);
+                SetCurrentResourceType(currentName);
                 StartCoroutine(Shake());
-                StartCoroutine(TakeDamage(10));  // 손으로 때릴 때마다 10 데미지
-   
+                StartCoroutine(TakeDamage(10)); 
             }
         }
 

@@ -12,6 +12,8 @@ namespace MyVrSample
         #region Variables
 
         //[SerializeField] private float distance = 1.5f;
+        //
+        [SerializeField] private GameObject player;
         //Æ÷Å»
         public GameObject potalMenu;
         //Æ÷Å» ¹öÆ°
@@ -30,7 +32,7 @@ namespace MyVrSample
         private void Start()
         {
         
-            audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource = player.AddComponent<AudioSource>();
         }
         //Æ÷Å» UI ¶ç¿ì±â
         public void OnPotalUI()
