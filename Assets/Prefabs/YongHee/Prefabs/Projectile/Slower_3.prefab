@@ -4902,6 +4902,7 @@ MonoBehaviour:
     attackRange: 0
     debuffRatio: 0
   offset: {x: 0, y: 0, z: 0}
+  targetComponent: {fileID: 0}
   isDebuff: 0
 --- !u!1 &7688527138722668049
 GameObject:
