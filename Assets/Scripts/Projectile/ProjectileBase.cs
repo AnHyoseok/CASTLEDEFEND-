@@ -27,7 +27,7 @@ namespace Defend.Projectile
         public virtual void Init(ProjectileInfo _projectileInfo, Transform closestTarget)
         {
             target = closestTarget;
-            offset = target.gameObject.GetComponent<EnemyController>().offset;
+            offset = target.gameObject.GetComponent<EnemyController>().positionOffset;
             targetPosition = target.position + offset;
             projectileInfo = _projectileInfo;
         }
