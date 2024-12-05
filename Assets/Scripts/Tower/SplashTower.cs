@@ -11,7 +11,6 @@ namespace Defend.Tower
         protected override void Start()
         {
             base.Start();
-            towerInfo.attackRange = 7f;
         }
 
         protected override void Update()

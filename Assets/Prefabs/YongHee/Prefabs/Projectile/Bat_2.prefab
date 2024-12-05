@@ -14783,12 +14783,14 @@ MonoBehaviour:
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
   projectileInfo:
+    tower: {fileID: 0}
     prefab: {fileID: 0}
     effectPrefab: {fileID: 0}
     effectTime: 0
     attack: 0
     moveSpeed: 0
     attackRange: 0
+    debuffRatio: 0
   offset: {x: 0, y: 0, z: 0}
 --- !u!1 &8034713169633961885
 GameObject:

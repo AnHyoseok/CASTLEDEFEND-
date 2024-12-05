@@ -246,9 +246,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7597333470338351555}
-  - component: {fileID: 2691668377719302157}
   - component: {fileID: 745780306001498231}
   - component: {fileID: 1967085171950032894}
+  - component: {fileID: 6384561807555014314}
   m_Layer: 0
   m_Name: CannonTower_2
   m_TagString: Untagged
@@ -273,47 +273,6 @@ Transform:
   - {fileID: 6429677773540550400}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2691668377719302157
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8382427648633259584}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f75651eefe013a4f93df438efbb2118, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targets: []
-  currentTarget: {fileID: 0}
-  firePoint: {fileID: 5235240248204334988}
-  shootTime: 0
-  towerInfo:
-    rotationSpeed: 5
-    attackRange: 6
-    detectDelay: 0.5
-    shootDelay: 3
-    maxHealth: 200
-    maxMana: 20
-    armor: 4
-    cost1: 1
-    cost2: 2
-    cost3: 3
-    cost4: 4
-    upgradeTower: {fileID: 1964954065753519856, guid: 9c95e8364e95eb240a78bb9e739076e6, type: 3}
-    projectile:
-      tower: {fileID: 8382427648633259584}
-      prefab: {fileID: 121176909599899313, guid: defc490ba893c5e478df87ea91ac3252, type: 3}
-      effectPrefab: {fileID: 4996507434419837056, guid: 4c0cdc67322b76b4db6497e0aadce0e9, type: 3}
-      effectTime: 3
-      attack: 40
-      moveSpeed: 50
-      attackRange: 3.5
-      debuffRatio: 0
-  gizmoColor: {r: 0, g: 1, b: 0, a: 1}
-  sphereRadius: 6
-  lineLength: 10
 --- !u!114 &745780306001498231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -353,6 +312,48 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6384561807555014314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8382427648633259584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1621b8537a0d2b41b24c5422615614e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targets: []
+  currentTarget: {fileID: 0}
+  firePoint: {fileID: 5235240248204334988}
+  shootTime: 0
+  towerInfo:
+    rotationSpeed: 5
+    attackRange: 6
+    detectDelay: 0.5
+    shootDelay: 3
+    maxHealth: 200
+    maxMana: 50
+    armor: 4
+    cost1: 1
+    cost2: 2
+    cost3: 3
+    cost4: 4
+    upgradeTower: {fileID: 1964954065753519856, guid: 9c95e8364e95eb240a78bb9e739076e6, type: 3}
+    projectile:
+      tower: {fileID: 8382427648633259584}
+      prefab: {fileID: 121176909599899313, guid: defc490ba893c5e478df87ea91ac3252, type: 3}
+      effectPrefab: {fileID: 4996507434419837056, guid: 4c0cdc67322b76b4db6497e0aadce0e9, type: 3}
+      effectTime: 3
+      attack: 40
+      moveSpeed: 50
+      attackRange: 3.5
+      debuffRatio: 0
+  gizmo:
+    gizmoColor: {r: 0, g: 1, b: 0, a: 1}
+    sphereRadius: 0
+    lineLength: 10
 --- !u!1 &9135760907470675727
 GameObject:
   m_ObjectHideFlags: 0

@@ -16,6 +16,8 @@ namespace Defend.Tower
         public float maxHealth = 200f;      // 최대 체력
         public float maxMana = 50f;         // 최대 마나
         public float armor = 5f;            // 방어력
+        public float healthRegen = 1f;      // 체력 재생력
+        public float manaRegen = 1f;        // 마나 재생력
         public float cost1 = 1f;            // 건설비용 1
         public float cost2 = 2f;            // 건설비용 2
         public float cost3 = 3f;            // 건설비용 3

@@ -19,13 +19,13 @@ namespace Defend.Projectile
         // 디버프 액션 발동
         protected override void DoDebuffAction(EnemyMoveController component)
         {
-            component.ChangedMoveSpeed(this.gameObject,projectileInfo.debuffRatio); // 이동 속도 감소
+            component.ChangedMoveSpeed(this.gameObject, projectileInfo.debuffRatio); // 속도 감소
         }
 
         // 디버프 제거 발동
         protected override void UndoDebuffAction(EnemyMoveController component)
         {
-            component.RemoveMoveSource(this.gameObject); // 이동 속도 원상복구
+            component.RemoveMoveSource(this.gameObject); // 속도 원상복구
         }
     }
 }

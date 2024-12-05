@@ -311,9 +311,10 @@ MonoBehaviour:
       moveSpeed: 40
       attackRange: 0
       debuffRatio: 0
-  gizmoColor: {r: 0, g: 1, b: 0, a: 1}
-  sphereRadius: 25
-  lineLength: 10
+  gizmo:
+    gizmoColor: {r: 0, g: 1, b: 0, a: 1}
+    sphereRadius: 0
+    lineLength: 10
 --- !u!114 &3791134913080805643
 MonoBehaviour:
   m_ObjectHideFlags: 0

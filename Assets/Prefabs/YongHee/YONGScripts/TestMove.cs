@@ -1,39 +1,34 @@
+using Defend.Tower;
 using UnityEngine;
 
 public class TestMove : MonoBehaviour
 {
     #region Variables
-    //public float speed = 2f; // 이동 속도
-    //public Transform[] wayPoints;
-    //private int currentWaypointIndex = 0; // 현재 이동 중인 웨이포인트 인덱스
-    //private Vector3 targetPosition; // 현재 목표 위치
     public Transform target;
+    public TowerBase[] towers;
     #endregion
     void Start()
     {
-        //if (wayPoints.Length > 0)
-        //{
-        //    // 첫 번째 웨이포인트를 목표 위치로 설정
-        //    targetPosition = wayPoints[currentWaypointIndex].position;
-        //}
+        towers = FindObjectsByType<TowerBase>(FindObjectsSortMode.None);
     }
 
     void Update()
     {
-        //if (wayPoints.Length == 0)
-        //    return; // 웨이포인트가 없으면 업데이트 중단
-
-        //// 오브젝트를 목표 위치로 이동
-        //transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
-
-        //// 목표 위치에 도달했는지 확인
-        //if (Vector3.Distance(transform.position, targetPosition) < 0.1f)
-        //{
-        //    // 다음 웨이포인트로 이동 (마지막 웨이포인트를 넘어가면 첫 번째 웨이포인트로 순환)
-        //    currentWaypointIndex = (currentWaypointIndex + 1) % wayPoints.Length;
-        //    targetPosition = wayPoints[currentWaypointIndex].position;
-        //}
-
-        transform.LookAt(target.position);
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            // 각 TowerBase 오브젝트에 대해 BuffTower 호출
+            foreach (TowerBase tower in towers)
+            {
+                tower.BuffTower(
+                    duration: 5f,
+                    atk: 10f,
+                    armor: 5f,
+                    shootDelay: 1.2f,
+                    atkRange: 2f,
+                    healthRegen: 2f,
+                    manaRegen: 3f
+                );
+            }
+        }
     }
 }

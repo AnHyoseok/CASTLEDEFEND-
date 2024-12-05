@@ -57,7 +57,7 @@ namespace Defend.Utillity
             {
                 currentMana = value;
 
-                //죽음 처리
+                // 마나 부족
                 if (currentMana <= 0)
                 {
 
@@ -76,6 +76,24 @@ namespace Defend.Utillity
             }
         }
 
+        [SerializeField] private float manaRegenRatio = 1f;
+        public float ManaRegenRatio
+        {
+            get { return manaRegenRatio; }
+            set
+            {
+                manaRegenRatio *= value;
+            }
+        }
+        [SerializeField] private float healthRegenRatio = 1f;
+        public float HealthRegenRatio
+        {
+            get { return healthRegenRatio; }
+            set
+            {
+                healthRegenRatio *= value;
+            }
+        }
         #endregion
 
         private void Start()
@@ -85,7 +103,7 @@ namespace Defend.Utillity
 
         private void Update()
         {
-            ChargeMana(0.5f);
+            ChargeMana(ManaRegenRatio);
         }
         // 초기화
         public void Init(TowerInfo towerInfo)
@@ -173,13 +191,25 @@ namespace Defend.Utillity
         }
 
         // 마나 재생
-        public void ChargeMana(float ratio)
+        private void ChargeMana(float ratio)
         {
             // 최대 마나 보다 작은 경우
             if(CurrentMana < maxMana)
             {
-                CurrentMana += Time.deltaTime * ratio;
+                CurrentMana = Mathf.Min(CurrentMana + Time.deltaTime * ratio, maxMana);
             }
         }
+
+        // 마나 재생 곱연산
+        //public void MultiplyManaRegenRatio(float ratio)
+        //{
+        //    manaRegenRatio *= ratio;
+        //}
+
+        //// 체력 재생 곱연산
+        //public void MultiplyHealthRegenRatio(float ratio)
+        //{
+        //    healthRegenRatio *= ratio;
+        //}
     }
 }

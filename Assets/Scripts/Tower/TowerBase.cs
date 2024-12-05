@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Defend.TestScript;
 using System.Linq;
+using System.Collections;
 /*
 기본타워 => 타겟공격
 스플래시타워 => 지점공격
@@ -168,7 +169,7 @@ namespace Defend.Tower
             #endregion
 
             // 유효한 타겟 : 현재 체력이 0 이상이며, 타겟이 null이 아닌 경우 필터링
-            return tempTarget.Where(target => target != null && target.GetComponent<Health>().CurrentHealth > 0) 
+            return tempTarget.Where(target => target != null && target.GetComponent<Health>().CurrentHealth > 0)
                 .ToList();
         }
 
@@ -219,6 +220,46 @@ namespace Defend.Tower
                 // 슛 타임 초기화
                 shootTime = 0;
             }
+        }
+
+        // 타워 강화 (지속시간, 공격력, 방어력, 연사력, 공격사거리, 체력재생, 마나재생)
+        public void BuffTower(
+            float duration,
+            float atk = 0f,
+            float armor = 0f,
+            float shootDelay = 1f,
+            float atkRange = 1f,
+            float healthRegen = 1f,
+            float manaRegen = 1f)
+        {
+            towerInfo.projectile.attack += atk;
+            towerInfo.armor += armor;
+            towerInfo.shootDelay /= shootDelay;
+            towerInfo.attackRange *= atkRange;
+            status.HealthRegenRatio *= healthRegen;
+            status.ManaRegenRatio *= manaRegen;
+
+            StartCoroutine(ResetTower(duration, atk, armor, shootDelay, atkRange, healthRegen, manaRegen));
+        }
+
+        // 타워 복구 (지속시간, 공격력, 방어력, 연사력, 공격사거리, 체력재생, 마나재생)
+        IEnumerator ResetTower(
+            float duration,
+            float atk,
+            float armor,
+            float shootDelay,
+            float atkRange,
+            float healthRegen,
+            float manaRegen)
+        {
+            yield return new WaitForSeconds(duration);
+
+            towerInfo.projectile.attack -= atk;
+            towerInfo.armor -= armor;
+            towerInfo.shootDelay *= shootDelay;
+            towerInfo.attackRange /= atkRange;
+            status.HealthRegenRatio /= healthRegen;
+            status.ManaRegenRatio /= manaRegen;
         }
 
         // 공격방향 라인 랜더러

@@ -2205,6 +2205,11 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300020, guid: 72e643619fa32984785527a0c110a313, type: 3}
+--- !u!4 &45185771 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2588270610959251271, guid: 36d3640aa7caa10418c32bcc41227ffd, type: 3}
+  m_PrefabInstance: {fileID: 8462687237922445896}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &45188158
 GameObject:
   m_ObjectHideFlags: 0
@@ -2968,6 +2973,11 @@ Transform:
   - {fileID: 1600798656}
   m_Father: {fileID: 1764023835}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &85055474 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5025643480149927868, guid: 3a1930dee4b841141afd18a11aaf0f3b, type: 3}
+  m_PrefabInstance: {fileID: 5660827679100013223}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &88263987
 GameObject:
   m_ObjectHideFlags: 0
@@ -13945,6 +13955,40 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &499295250
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 499295251}
+  m_Layer: 0
+  m_Name: DeArmor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &499295251
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499295250}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8.55, y: 0, z: -7.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1623510077}
+  - {fileID: 85055474}
+  - {fileID: 45185771}
+  m_Father: {fileID: 1335844119}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &502056557
 GameObject:
   m_ObjectHideFlags: 0
@@ -14867,10 +14911,6 @@ PrefabInstance:
     - target: {fileID: 1964954065753519856, guid: 9c95e8364e95eb240a78bb9e739076e6, type: 3}
       propertyPath: m_Name
       value: CannonTower_3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4361971774183273056, guid: 9c95e8364e95eb240a78bb9e739076e6, type: 3}
-      propertyPath: towerInfo.rotationSpeed
-      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8515086370889944062, guid: 9c95e8364e95eb240a78bb9e739076e6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -18957,7 +18997,7 @@ MonoBehaviour:
   waves:
   - enemyPrefab: {fileID: 4101051290623180776, guid: 827e08f60db2ed34c9c5738e157e2fb0, type: 3}
     count: 1000
-    delayTime: 0.3
+    delayTime: 1
 --- !u!4 &715417497
 Transform:
   m_ObjectHideFlags: 0
@@ -36094,6 +36134,7 @@ Transform:
   - {fileID: 1585243160}
   - {fileID: 1394054162}
   - {fileID: 1767935032}
+  - {fileID: 499295251}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &1336370007
@@ -40051,7 +40092,7 @@ MonoBehaviour:
     name: 0
     amount: 0
     health: 0
-    resourcePickupEffect: {fileID: 0}
+    resourceItem: {fileID: 0}
 --- !u!33 &1552485547
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -42437,6 +42478,11 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!4 &1623510077 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6445084693589329579, guid: f6dd2a88c05b8454daa04cab80fbe0bf, type: 3}
+  m_PrefabInstance: {fileID: 3868185094179041524}
+  m_PrefabAsset: {fileID: 0}
 --- !u!64 &1625087959
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -43281,10 +43327,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 96111215}
     m_Modifications:
-    - target: {fileID: 2691668377719302157, guid: a0d53067344fbbe48a6a38161c36e06b, type: 3}
-      propertyPath: towerInfo.rotationSpeed
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 7597333470338351555, guid: a0d53067344fbbe48a6a38161c36e06b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.140505
@@ -47113,7 +47155,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1767935032
 Transform:
   m_ObjectHideFlags: 0
@@ -52644,6 +52686,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 80705761}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 90}
+--- !u!1 &1999165449
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1999165451}
+  - component: {fileID: 1999165450}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1999165450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999165449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92d0f237550cafc4fba8622733faf5a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  towers: []
+--- !u!4 &1999165451
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999165449}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.545, y: 1.6, z: -8.36808}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1999226302
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -60774,7 +60862,7 @@ MonoBehaviour:
   - name: 1
     amount: 8
     health: 40
-    resourcePickupEffect: {fileID: 2430103393786866082, guid: 62b0e284d742b1d4d998e5f25cbcdfe6, type: 3}
+    resourceItem: {fileID: 0}
   hitSound: {fileID: 8300000, guid: 574378e1c5ad35145bb28f133324b25f, type: 3}
   destroyEffect: {fileID: 0}
 --- !u!114 &1974002638918915662
@@ -62296,7 +62384,7 @@ MonoBehaviour:
   - name: 0
     amount: 10
     health: 30
-    resourcePickupEffect: {fileID: 8603091193204584128, guid: 2f85440902d9d6240bde41408d394cd2, type: 3}
+    resourceItem: {fileID: 0}
   hitSound: {fileID: 8300000, guid: 574378e1c5ad35145bb28f133324b25f, type: 3}
   destroyEffect: {fileID: 0}
 --- !u!1001 &2923113782915304394
@@ -63196,6 +63284,63 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1001 &3868185094179041524
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 499295251}
+    m_Modifications:
+    - target: {fileID: 3399068686474022131, guid: f6dd2a88c05b8454daa04cab80fbe0bf, type: 3}
+      propertyPath: m_Name
+      value: DeArmorTower_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6445084693589329579, guid: f6dd2a88c05b8454daa04cab80fbe0bf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 6445084693589329579, guid: f6dd2a88c05b8454daa04cab80fbe0bf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6445084693589329579, guid: f6dd2a88c05b8454daa04cab80fbe0bf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -20.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6445084693589329579, guid: f6dd2a88c05b8454daa04cab80fbe0bf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6445084693589329579, guid: f6dd2a88c05b8454daa04cab80fbe0bf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6445084693589329579, guid: f6dd2a88c05b8454daa04cab80fbe0bf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6445084693589329579, guid: f6dd2a88c05b8454daa04cab80fbe0bf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6445084693589329579, guid: f6dd2a88c05b8454daa04cab80fbe0bf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6445084693589329579, guid: f6dd2a88c05b8454daa04cab80fbe0bf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6445084693589329579, guid: f6dd2a88c05b8454daa04cab80fbe0bf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f6dd2a88c05b8454daa04cab80fbe0bf, type: 3}
 --- !u!1 &3886249148776378594
 GameObject:
   m_ObjectHideFlags: 0
@@ -67325,6 +67470,63 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!1001 &5660827679100013223
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 499295251}
+    m_Modifications:
+    - target: {fileID: 5025643480149927868, guid: 3a1930dee4b841141afd18a11aaf0f3b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 5025643480149927868, guid: 3a1930dee4b841141afd18a11aaf0f3b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5025643480149927868, guid: 3a1930dee4b841141afd18a11aaf0f3b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -20.200003
+      objectReference: {fileID: 0}
+    - target: {fileID: 5025643480149927868, guid: 3a1930dee4b841141afd18a11aaf0f3b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5025643480149927868, guid: 3a1930dee4b841141afd18a11aaf0f3b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5025643480149927868, guid: 3a1930dee4b841141afd18a11aaf0f3b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5025643480149927868, guid: 3a1930dee4b841141afd18a11aaf0f3b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5025643480149927868, guid: 3a1930dee4b841141afd18a11aaf0f3b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5025643480149927868, guid: 3a1930dee4b841141afd18a11aaf0f3b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5025643480149927868, guid: 3a1930dee4b841141afd18a11aaf0f3b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9131892694948468726, guid: 3a1930dee4b841141afd18a11aaf0f3b, type: 3}
+      propertyPath: m_Name
+      value: DeArmorTower_2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3a1930dee4b841141afd18a11aaf0f3b, type: 3}
 --- !u!224 &5667803940537982325
 RectTransform:
   m_ObjectHideFlags: 0
@@ -114102,6 +114304,63 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1001 &8462687237922445896
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 499295251}
+    m_Modifications:
+    - target: {fileID: 2588270610959251271, guid: 36d3640aa7caa10418c32bcc41227ffd, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2588270610959251271, guid: 36d3640aa7caa10418c32bcc41227ffd, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2588270610959251271, guid: 36d3640aa7caa10418c32bcc41227ffd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -20.200003
+      objectReference: {fileID: 0}
+    - target: {fileID: 2588270610959251271, guid: 36d3640aa7caa10418c32bcc41227ffd, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2588270610959251271, guid: 36d3640aa7caa10418c32bcc41227ffd, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2588270610959251271, guid: 36d3640aa7caa10418c32bcc41227ffd, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2588270610959251271, guid: 36d3640aa7caa10418c32bcc41227ffd, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2588270610959251271, guid: 36d3640aa7caa10418c32bcc41227ffd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2588270610959251271, guid: 36d3640aa7caa10418c32bcc41227ffd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2588270610959251271, guid: 36d3640aa7caa10418c32bcc41227ffd, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2604370016932081696, guid: 36d3640aa7caa10418c32bcc41227ffd, type: 3}
+      propertyPath: m_Name
+      value: DeArmorTower_3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 36d3640aa7caa10418c32bcc41227ffd, type: 3}
 --- !u!120 &8486706198328281037
 LineRenderer:
   serializedVersion: 2
@@ -130564,3 +130823,4 @@ SceneRoots:
   - {fileID: 715417497}
   - {fileID: 137741368}
   - {fileID: 1335844119}
+  - {fileID: 1999165451}
