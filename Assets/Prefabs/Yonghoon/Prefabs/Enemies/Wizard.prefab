@@ -37447,6 +37447,7 @@ GameObject:
   - component: {fileID: 1392758854722754380}
   - component: {fileID: 3561543013164669943}
   - component: {fileID: 8631572856059282821}
+  - component: {fileID: -4813033649021712409}
   m_Layer: 6
   m_Name: Wizard
   m_TagString: Untagged
@@ -37559,7 +37560,7 @@ MonoBehaviour:
   buffParticleSystem: {fileID: 7036160444818451619}
   debuffParticleSystem: {fileID: 4255017052588634064}
   healParticleSystem: {fileID: 1578967352239689753}
-  offset: {x: 0, y: 0, z: 0}
+  positionOffset: {x: 0, y: 0, z: 0}
   scaleOffset: 0
   rewardGoldCount: 5
   goldPrefab: {fileID: 4610807197165865268, guid: 78f0efdf0964cd74896d92f9d555be50, type: 3}
@@ -37645,6 +37646,19 @@ MonoBehaviour:
   enemyHealth: 0
   enemyArmor: 0
   type: 0
+--- !u!114 &-4813033649021712409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6130659323785349130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 645075da7f794114783c47684969cb21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healAmount: 5
 --- !u!1 &6225424283202638962
 GameObject:
   m_ObjectHideFlags: 0

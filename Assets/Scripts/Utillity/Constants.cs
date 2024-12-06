@@ -13,5 +13,13 @@ namespace Defend.Utillity
         #region Animation 
         public static string ANIM_SHOOTTRIGGER = "ShootTrigger";         //Anim - ShootTrigger
         #endregion
+
+        #region EnemyAnimation
+        public static string ENEMY_ANIM_ISARRIVE = "IsArrive";         //EnemyAnim - ArriveCheck
+        public static string ENEMY_ANIM_ISDEATH = "IsDeath";         //EnemyAnim - DeathCheck
+        public static string ENEMY_ANIM_ATTACKTRIGGER = "Attack";         //EnemyAnim - AttackTrigger
+        public static string ENEMY_ANIM_SCREAMTRIGGER = "Scream";         //EnemyAnim - ScreamTrigger
+
+        #endregion
     }
 }

@@ -25628,6 +25628,7 @@ GameObject:
   - component: {fileID: 334139641479693819}
   - component: {fileID: 211053470906578040}
   - component: {fileID: 1043428634358233238}
+  - component: {fileID: 3170493446737906187}
   m_Layer: 6
   m_Name: Warrior
   m_TagString: Untagged
@@ -25693,7 +25694,6 @@ MonoBehaviour:
   attackTarget: {fileID: 0}
   baseAttackDamage: 15
   baseAttackDelay: 2
-  type: 1
 --- !u!114 &7850741854386742074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25739,7 +25739,7 @@ MonoBehaviour:
   buffParticleSystem: {fileID: 7529731777580602332}
   debuffParticleSystem: {fileID: 3253417434488396232}
   healParticleSystem: {fileID: 5317149843969996721}
-  offset: {x: 0, y: 1, z: 0}
+  positionOffset: {x: 0, y: 0, z: 0}
   scaleOffset: 0
   rewardGoldCount: 5
   goldPrefab: {fileID: 4610807197165865268, guid: 78f0efdf0964cd74896d92f9d555be50, type: 3}
@@ -25807,6 +25807,7 @@ MonoBehaviour:
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
   flashDuration: 0.5
+  type: 1
 --- !u!114 &1043428634358233238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25825,6 +25826,19 @@ MonoBehaviour:
   enemyHealth: 0
   enemyArmor: 0
   type: 0
+--- !u!114 &3170493446737906187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4101051290623180776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e5a440da6abfbf4b8967429481ba574, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  increaseAttackPowerAmount: 5
 --- !u!1 &4257797501596484271
 GameObject:
   m_ObjectHideFlags: 0

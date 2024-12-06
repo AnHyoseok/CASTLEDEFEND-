@@ -16,7 +16,7 @@ namespace Defend.TestScript
 
         //아머 관련
         [SerializeField] private float baseArmor = 5f;
-        public float CurrentArmor { get; private set; }
+        public float CurrentArmor { get; set; }
 
         private bool isDeath = false;                       //죽음 체크
         //체젠 관련

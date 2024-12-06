@@ -1,4 +1,5 @@
 using Defend.TestScript;
+using Defend.Utillity;
 using UnityEngine;
 using UnityEngine.Events;
 using static UnityEngine.XR.OpenXR.Features.Interactions.HTCViveControllerProfile;
@@ -8,13 +9,6 @@ namespace Defend.Enemy
     /// <summary>
     /// 적의 공격을 담당하는 컨트롤러 클래스
     /// </summary>
-    public enum EnemyType
-    {
-        Buffer,
-        Warrior,
-        Tanker,
-        Boss
-    }
     public class EnemyAttackController : MonoBehaviour
     {
         #region Variables
@@ -36,8 +30,6 @@ namespace Defend.Enemy
         private bool hasArrived;
 
         public UnityAction<float> AttackDamageChanged;
-
-        public EnemyType type;
         #endregion
 
         private void Awake()
@@ -77,7 +69,7 @@ namespace Defend.Enemy
         private void TriggerAttackAnimation()
         {
             // 공격 애니메이션 실행
-            animator.SetTrigger("Attack");
+            animator.SetTrigger(Constants.ENEMY_ANIM_ATTACKTRIGGER);
             isAttacking = true;
         }
 

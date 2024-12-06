@@ -1,4 +1,5 @@
 using Defend.TestScript;
+using Defend.Utillity;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -173,7 +174,7 @@ namespace Defend.Enemy
         //목표지점 도착 처리
         void Arrive()
         {
-            GetComponent<Animator>().SetBool("IsArrive", true);
+            GetComponent<Animator>().SetBool(Constants.ENEMY_ANIM_ISARRIVE, true);
             EnemyArrive?.Invoke();
             // Update를 멈추기 위해 컴포넌트 비활성화
             enabled = false;

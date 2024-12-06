@@ -2,9 +2,19 @@ using UnityEngine;
 using Defend.Enemy;
 using System.Collections.Generic;
 using Defend.item;
+using Defend.Utillity;
+using Defend.Enemy.Skill;
 
 namespace Defend.TestScript
 {
+    public enum EnemyType
+    {
+        Buffer,
+        Warrior,
+        Tanker,
+        Boss
+    }
+
     // Renderer와 머티리얼 인덱스를 관리하기 위한 구조체
     [System.Serializable]
     public struct RendererIndexData
@@ -26,32 +36,27 @@ namespace Defend.TestScript
         private Animator animator;
         private float animatorSpeed;
 
+        //스킬을 받아올 컴포넌트
+        private SkillBase skill; // 공통 스킬 참조
+
         //버프와 디버프
         public ParticleSystem buffParticleSystem;
         public ParticleSystem debuffParticleSystem;
         public ParticleSystem healParticleSystem;
 
-        //체력담당 컴포넌트
-        private Health health;
-        //이동담당 컴포넌트
-        private EnemyMoveController moveController;
+        private Health health;//체력담당 컴포넌트
+        private EnemyMoveController moveController;//이동담당 컴포넌트
+        private EnemyAttackController attackController;//공격담당 컴포넌트
 
-        //미사일이 날아와서 부딪힐 곳을 offset으로 할당
-        public Vector3 positionOffset;
-        //public Vector3 offset;
-        //몬스터마다 타워쪽 이펙트에 스케일을 조절하기위한 scaleOffset
-        public float scaleOffset;
+        public Vector3 positionOffset;//미사일이 날아와서 부딪힐 곳을 offset으로 할당
+        public float scaleOffset;//몬스터마다 타워쪽 이펙트에 스케일을 조절하기위한 scaleOffset
 
         //떨어뜨릴 골드 개수
         [SerializeField] private int rewardGoldCount;
-        //참조가 필요시 사용할 레퍼런스
-        public int RewardGoldCount { get { return rewardGoldCount; } private set { rewardGoldCount = value; } }
-        //코인 프리팹
-        public GameObject goldPrefab;
-        //흩뿌릴 힘
-        public float scatterForce = 5f;
-        //생성될 위치 (위로 조정)
-        public Transform offsetTransform;
+        public int RewardGoldCount { get { return rewardGoldCount; } private set { rewardGoldCount = value; } } //참조가 필요시 사용할 레퍼런스
+        public GameObject goldPrefab;           //코인 프리팹
+        public float scatterForce = 5f;         //흩뿌릴 힘
+        public Transform offsetTransform;       //생성될 위치 (위로 조정)
 
 
         // VFX 관련 변수
@@ -65,6 +70,8 @@ namespace Defend.TestScript
         [SerializeField] private float flashDuration = 0.5f;
         private bool isFlashing; // 반짝거림 상태
         private Gradient currentEffectGradient; // 현재 적용 중인 그라디언트
+
+        public EnemyType type;
         #endregion
         void Start()
         {
@@ -72,6 +79,8 @@ namespace Defend.TestScript
             animator = GetComponent<Animator>();
             health = GetComponent<Health>();
             moveController = GetComponent<EnemyMoveController>();
+            attackController = GetComponent<EnemyAttackController>();
+
 
             //UnityAction
             health.OnDie += OnDie;
@@ -99,6 +108,7 @@ namespace Defend.TestScript
 
             //초기화
             animatorSpeed = animator.speed;
+
             buffParticleSystem.Stop();
             debuffParticleSystem.Stop();
             healParticleSystem.Stop();
@@ -114,21 +124,20 @@ namespace Defend.TestScript
             if (Input.GetKeyDown(KeyCode.E))
             {
                 OnHeal(1);
-            }            
+            }
             if (Input.GetKeyDown(KeyCode.T))
             {
                 PlayEffect(0.1f);
             }
         }
 
-        private void OnDamaged(float arg0)
+        private void OnDamaged(float amount)
         {
             Debug.Log("공격 받음");
             TriggerEffect(hitEffectGradient); // 데미지 효과 적용
-
         }
 
-        private void OnHeal(float arg0)
+        private void OnHeal(float amount)
         {
             //TriggerEffect(healEffectGradient); // 힐 효과 적용
             Debug.Log("힐 받음");
@@ -140,7 +149,7 @@ namespace Defend.TestScript
             //살아있는 에너미 수 감소
             ListSpawnManager.enemyAlive--;
 
-            animator.SetBool("IsDeath", true);
+            animator.SetBool(Constants.ENEMY_ANIM_ISDEATH, true);
 
             //죽으면 코인 흩뿌리기
             ScatterCoins();
@@ -229,6 +238,11 @@ namespace Defend.TestScript
             {
                 debuffParticleSystem.Play();
             }
+        }
+
+        private void ActiveSkill()
+        {
+
         }
     }
 }

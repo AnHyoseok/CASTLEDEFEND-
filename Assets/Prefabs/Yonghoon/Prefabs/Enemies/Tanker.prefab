@@ -51348,6 +51348,7 @@ GameObject:
   - component: {fileID: 8266896830803629914}
   - component: {fileID: -5660023932820353151}
   - component: {fileID: 391461198241582609}
+  - component: {fileID: 3173712311814204115}
   m_Layer: 6
   m_Name: Tanker
   m_TagString: Untagged
@@ -51412,7 +51413,6 @@ MonoBehaviour:
   attackTarget: {fileID: 0}
   baseAttackDamage: 10
   baseAttackDelay: 2
-  type: 2
 --- !u!114 &6567091707103445654
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51458,7 +51458,7 @@ MonoBehaviour:
   buffParticleSystem: {fileID: 265557943813956872}
   debuffParticleSystem: {fileID: 8614722980305677832}
   healParticleSystem: {fileID: 2099963106396781099}
-  offset: {x: 0, y: 1, z: 0}
+  positionOffset: {x: 0, y: 0, z: 0}
   scaleOffset: 0
   rewardGoldCount: 5
   goldPrefab: {fileID: 4610807197165865268, guid: 78f0efdf0964cd74896d92f9d555be50, type: 3}
@@ -51526,6 +51526,7 @@ MonoBehaviour:
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
   flashDuration: 0.5
+  type: 2
 --- !u!114 &391461198241582609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51544,6 +51545,19 @@ MonoBehaviour:
   enemyHealth: 0
   enemyArmor: 0
   type: 0
+--- !u!114 &3173712311814204115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8159497760085561716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06e116e2f9af0a74aa0c45feb69d3136, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  increaseArmorAmount: 5
 --- !u!1 &8361692655883624189
 GameObject:
   m_ObjectHideFlags: 0
