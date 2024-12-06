@@ -13046,6 +13046,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   baseArmor: 5
+  RgAmount: 0
+  Rginterval: 0
+  isHpTime: 0
 --- !u!1 &456197764
 GameObject:
   m_ObjectHideFlags: 0
@@ -35521,8 +35524,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dad78dbbde0b0044bba3f52cbf1f9344, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileUI: {fileID: 899233636}
+  PropertiesUI: {fileID: 0}
+  DescriptionUI: {fileID: 0}
+  tile: {fileID: 0}
   basicText:
+    image: {fileID: 0}
     name: {fileID: 1709171669}
     Buycost: {fileID: 138899956}
     Sellcost: {fileID: 1871044317}
@@ -35530,8 +35536,20 @@ MonoBehaviour:
     Mp: {fileID: 429905739}
     Attack: {fileID: 2125594995}
     AttackSpeed: {fileID: 1477781161}
+    UpgradeMoney: {fileID: 0}
+    currentsprite: {fileID: 0}
+  upGradeText:
+    image: {fileID: 0}
+    name: {fileID: 0}
+    Buycost: {fileID: 0}
+    Sellcost: {fileID: 0}
+    Hp: {fileID: 0}
+    Mp: {fileID: 0}
+    Attack: {fileID: 0}
+    AttackSpeed: {fileID: 0}
+    UpgradeMoney: {fileID: 0}
+    currentsprite: {fileID: 0}
   upgradebutton: {fileID: 776529855}
-  upgradeUIbutton: {fileID: 0}
   head: {fileID: 4872608693177072846}
   distance: 1
 --- !u!64 &1336370007
@@ -37086,6 +37104,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyProUI: {fileID: 1600913312}
   EnemyText:
+    image: {fileID: 0}
     name: {fileID: 1509229287}
     Buycost: {fileID: 0}
     Sellcost: {fileID: 1723694203}
@@ -37093,8 +37112,9 @@ MonoBehaviour:
     Mp: {fileID: 272580265}
     Attack: {fileID: 1197807359}
     AttackSpeed: {fileID: 55108273}
+    UpgradeMoney: {fileID: 0}
+    currentsprite: {fileID: 0}
   head: {fileID: 4872608693177072846}
-  enemyStats: {fileID: 6531497678326735178, guid: 0488d08f0f720db4daa8656b395b994a, type: 3}
   distance: 1
 --- !u!23 &1443353649
 MeshRenderer:
@@ -39377,6 +39397,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ResourceProUI: {fileID: 0}
   ResourceText:
+    image: {fileID: 0}
     name: {fileID: 0}
     Buycost: {fileID: 0}
     Sellcost: {fileID: 0}
@@ -39384,12 +39405,14 @@ MonoBehaviour:
     Mp: {fileID: 0}
     Attack: {fileID: 0}
     AttackSpeed: {fileID: 0}
+    UpgradeMoney: {fileID: 0}
+    currentsprite: {fileID: 0}
   head: {fileID: 0}
   resources:
     name: 0
     amount: 0
     health: 0
-    resourcePickupEffect: {fileID: 0}
+    resourceItem: {fileID: 0}
 --- !u!33 &1552485547
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -52724,9 +52747,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerState: {fileID: 7308864104443573022}
+  warningWindow: {fileID: 0}
   menu: {fileID: 1330834673}
-  enemyStats: {fileID: 0}
-  EnemyproUI: {fileID: 0}
 --- !u!4 &2024111613
 Transform:
   m_ObjectHideFlags: 0
@@ -59698,8 +59720,9 @@ MonoBehaviour:
   - name: 1
     amount: 8
     health: 40
-    resourcePickupEffect: {fileID: 2430103393786866082, guid: 62b0e284d742b1d4d998e5f25cbcdfe6, type: 3}
+    resourceItem: {fileID: 0}
   hitSound: {fileID: 8300000, guid: 574378e1c5ad35145bb28f133324b25f, type: 3}
+  destroyEffect: {fileID: 0}
 --- !u!114 &1974002638918915662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61219,8 +61242,9 @@ MonoBehaviour:
   - name: 0
     amount: 10
     health: 30
-    resourcePickupEffect: {fileID: 8603091193204584128, guid: 2f85440902d9d6240bde41408d394cd2, type: 3}
+    resourceItem: {fileID: 0}
   hitSound: {fileID: 8300000, guid: 574378e1c5ad35145bb28f133324b25f, type: 3}
+  destroyEffect: {fileID: 0}
 --- !u!1 &3013331618422135020
 GameObject:
   m_ObjectHideFlags: 0
@@ -82839,6 +82863,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6f6441202592ec4fa2a65fa0449d047, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   potalMenu: {fileID: 2644413130641654687}
   potalButton:
   - {fileID: 439954729}

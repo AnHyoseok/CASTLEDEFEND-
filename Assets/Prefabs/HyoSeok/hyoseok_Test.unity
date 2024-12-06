@@ -47497,6 +47497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6f6441202592ec4fa2a65fa0449d047, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   potalMenu: {fileID: 2644413130641654687}
   potalButton:
   - {fileID: 439954729}

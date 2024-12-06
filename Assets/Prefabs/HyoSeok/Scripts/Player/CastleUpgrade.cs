@@ -8,6 +8,7 @@ using Defend.Interactive;
 using TMPro;
 using UnityEngine.Playables;
 using UnityEngine.PlayerLoop;
+using Unity.VisualScripting;
 namespace Defend.Player
 {
     /// <summary>
@@ -47,12 +48,21 @@ namespace Defend.Player
         private float CostFullHP = 100f;    //hp회복
         private float[] CostHPUpgrade = { 100f, 250f, 500f };
         private float[] CostHPTimeUpgrade = { 250f, 500f, 1000f };
+        //private float[] CostArmorUpgrade = { 250f, 500f, 1000f }; //방어력
+        //private float CostHPTimeUpgrade = 100f
+        //private float CostHPTimeUpgrade = 100f
+        //private float CostHPTimeUpgrade = 100f
+        //자원업그레이드
         private float[] CostMoneyGainUpgrade = { 100f, 250f, 500f };
         private float[] CostTreeGainUpgrade = { 100f, 250f, 500f };
         private float[] CostRockGainUpgrade = { 100f, 250f, 500f };
+ 
+    //영구업그레이드
         private float CostMoveSpeedUpgrade = 200f;
         private float CostPotalActivateUpgrade = 300f;
         private float CostAutoGainUpgrade = 400f;
+
+         
 
         //업그레이드별 수치증가량
         private float[] IncreaseHPUpgrade = { 100f, 200f, 300f }; //hp
@@ -60,6 +70,10 @@ namespace Defend.Player
         private float[] IncreaseMoneyGainUpgrade = {1.2f,1.5f,2.0f };
         private float[] IncreaseTreeGainUpgrade = { 1.2f, 1.5f, 2.0f };
         private float[] increaseRockGainUpgrade = { 1.2f, 1.5f, 2.0f };
+        //private float[] increaseRockGainUpgrade = { 1.2f, 1.5f, 2.0f };
+        //private float[] increaseRockGainUpgrade = { 1.2f, 1.5f, 2.0f };
+        //private float[] increaseRockGainUpgrade = { 1.2f, 1.5f, 2.0f };
+        //private float[] increaseRockGainUpgrade = { 1.2f, 1.5f, 2.0f };
 
         //업그레이드 단계
         private int currentHPUpgradeLevel = 0; //hp
@@ -67,6 +81,10 @@ namespace Defend.Player
         private int currentMoneyGainUpgradeLevel = 0;
         private int currentTreeGainUpgradeLevel = 0;
         private int currentRockGainUpgradeLevel = 0;
+       /* private int currentRockGainUpgradeLevel = 0;
+        private int currentRockGainUpgradeLevel = 0;
+        private int currentRockGainUpgradeLevel = 0;
+        private int currentRockGainUpgradeLevel = 0;*/
 
         //테스트용 텍스트
         public TextMeshProUGUI test1;
@@ -221,6 +239,30 @@ namespace Defend.Player
             ResourceManager.speed = 20f;
             ResourceManager.distance = 500f;
         }
+
+        //캐슬 방어력 업그레이드
+        public void ArmorUpgrade()
+        {
+
+        }
+
+        //타워 공격력 업그레이드
+        public void TowerATKUpgrade()
+        {
+
+        }
+        //타워 공격속도 업그레이드
+        public void TowerATKSpeedUpgrade()
+        {
+
+        }
+        //타워 공격 범위 업그레이드
+        public void TowerATKRangeUpgrade()
+        {
+
+        }
+
+
 
 
         //버튼 상태 업데이트
