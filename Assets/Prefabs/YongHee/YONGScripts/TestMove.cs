@@ -19,15 +19,7 @@ public class TestMove : MonoBehaviour
             // 각 TowerBase 오브젝트에 대해 BuffTower 호출
             foreach (TowerBase tower in towers)
             {
-                tower.BuffTower(
-                    duration: 5f,
-                    atk: 10f,
-                    armor: 5f,
-                    shootDelay: 1.2f,
-                    atkRange: 2f,
-                    healthRegen: 2f,
-                    manaRegen: 3f
-                );
+                //tower.BuffTower();
             }
         }
     }

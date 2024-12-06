@@ -42,7 +42,7 @@ namespace Defend.Enemy
 
         private void Awake()
         {
-            attackTarget = FindAnyObjectByType<HealthBasedCastle1>().transform;
+            attackTarget = FindAnyObjectByType<HealthBasedCastle>().transform;
 
             // ÂüÁ¶
             moveController = GetComponent<EnemyMoveController>();

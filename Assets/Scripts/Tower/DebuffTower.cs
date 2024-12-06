@@ -45,7 +45,7 @@ namespace Defend.Tower
             foreach (var target in allTargets)
             {
                 // 이미 적용한 적인지, 소모 마나보다 많이 보유한 경우
-                if (!attackedTargets.Contains(target) && status.CurrentMana >= manaAmount)
+                if (!attackedTargets.Contains(target) && isOn == true)
                 {
                     // 마나 소모
                     status.UseMana(manaAmount);

@@ -59,11 +59,13 @@ MonoBehaviour:
     maxHealth: 100
     maxMana: 200
     armor: 5
+    healthRegen: 1
+    manaRegen: 1
     cost1: 1
     cost2: 2
     cost3: 3
     cost4: 4
-    upgradeTower: {fileID: 0}
+    upgradeTower: {fileID: 9131892694948468726, guid: 3a1930dee4b841141afd18a11aaf0f3b, type: 3}
     projectile:
       tower: {fileID: 3399068686474022131}
       prefab: {fileID: 1228461917622904394, guid: a3d009acbdabab545a45267653d4538b, type: 3}
@@ -97,6 +99,8 @@ MonoBehaviour:
   maxMana: 0
   currentMana: 0
   currentArmor: 0
+  manaRegenRatio: 1
+  healthRegenRatio: 1
 --- !u!1 &3527236925806721937
 GameObject:
   m_ObjectHideFlags: 0

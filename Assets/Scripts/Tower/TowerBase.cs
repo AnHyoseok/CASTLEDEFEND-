@@ -169,8 +169,10 @@ namespace Defend.Tower
             #endregion
 
             // 유효한 타겟 : 현재 체력이 0 이상이며, 타겟이 null이 아닌 경우 필터링
-            return tempTarget.Where(target => target != null && target.GetComponent<Health>().CurrentHealth > 0)
+            tempTarget = tempTarget.Where(target => target != null && target.GetComponent<Health>().CurrentHealth > 0)
                 .ToList();
+
+            return tempTarget;
         }
 
         // 가장 가까운 타겟 설정
@@ -223,43 +225,29 @@ namespace Defend.Tower
         }
 
         // 타워 강화 (지속시간, 공격력, 방어력, 연사력, 공격사거리, 체력재생, 마나재생)
-        public void BuffTower(
-            float duration,
-            float atk = 0f,
-            float armor = 0f,
-            float shootDelay = 1f,
-            float atkRange = 1f,
-            float healthRegen = 1f,
-            float manaRegen = 1f)
+        public void BuffTower(BuffContents buffContents)
         {
-            towerInfo.projectile.attack += atk;
-            towerInfo.armor += armor;
-            towerInfo.shootDelay /= shootDelay;
-            towerInfo.attackRange *= atkRange;
-            status.HealthRegenRatio *= healthRegen;
-            status.ManaRegenRatio *= manaRegen;
+            towerInfo.projectile.attack += buffContents.atk;
+            towerInfo.armor += buffContents.armor;
+            towerInfo.shootDelay /= buffContents.shootDelay;
+            towerInfo.attackRange *= buffContents.atkRange;
+            status.HealthRegenRatio *= buffContents.healthRegen;
+            status.ManaRegenRatio *= buffContents.manaRegen;
 
-            StartCoroutine(ResetTower(duration, atk, armor, shootDelay, atkRange, healthRegen, manaRegen));
+            StartCoroutine(ResetTower(buffContents));
         }
 
         // 타워 복구 (지속시간, 공격력, 방어력, 연사력, 공격사거리, 체력재생, 마나재생)
-        IEnumerator ResetTower(
-            float duration,
-            float atk,
-            float armor,
-            float shootDelay,
-            float atkRange,
-            float healthRegen,
-            float manaRegen)
+        IEnumerator ResetTower(BuffContents buffContents)
         {
-            yield return new WaitForSeconds(duration);
+            yield return new WaitForSeconds(buffContents.duration);
 
-            towerInfo.projectile.attack -= atk;
-            towerInfo.armor -= armor;
-            towerInfo.shootDelay *= shootDelay;
-            towerInfo.attackRange /= atkRange;
-            status.HealthRegenRatio /= healthRegen;
-            status.ManaRegenRatio /= manaRegen;
+            towerInfo.projectile.attack -= buffContents.atk;
+            towerInfo.armor -= buffContents.armor;
+            towerInfo.shootDelay *= buffContents.shootDelay;
+            towerInfo.attackRange /= buffContents.atkRange;
+            status.HealthRegenRatio /= buffContents.healthRegen;
+            status.ManaRegenRatio /= buffContents.manaRegen;
         }
 
         // 공격방향 라인 랜더러
