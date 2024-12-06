@@ -5,7 +5,7 @@ public class TreeSpawner : MonoBehaviour
 {
     public GameObject treePrefab; // 생성할 오브젝트의 프리팹
     public float width = 10f; // x축 방향 크기
-    public float depth = 50f; // z축 방향 크기
+    public float depth = 66f; // z축 방향 크기
     private Vector3 currentPosition; // 현재 오브젝트 위치
     [SerializeField] private int maxTrees = 10; // 나무가 10 개면 더이상 생성X
     [SerializeField] private float spawnDelay = 5f; // 나무 생성 딜레이
