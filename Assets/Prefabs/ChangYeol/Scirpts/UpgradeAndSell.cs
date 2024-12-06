@@ -41,7 +41,6 @@ namespace Defend.UI
         //매개변수로 선택한 타일 정보를 얻어온다
         public void ShowTileUI(TowerXR towerXR)
         {
-            Debug.Log($"{tower}");
             //선택받은 타워 저장
             tower = towerXR;
             //타워가 설치된 위치 주위에서 보여준다
@@ -99,23 +98,43 @@ namespace Defend.UI
                 upGradeText.Attack.text = "Attack : " + tower.towerInfo[1].projectile.attack.ToString();
                 upGradeText.AttackSpeed.text = "AttackSpeed : " + tower.towerInfo[1].projectile.moveSpeed.ToString();
             }*/
-            //기본 터렛 판매 가격 표시
-            basicText.name.text = tower.towerInfo[0].projectile.tower.ToString();
-            basicText.Buycost.text = "Buy : " + tower.towerInfo[0].cost1 + " G";
-            basicText.Sellcost.text = "Sell : " + tower.towerInfo[0].GetSellCost().ToString() + " G";
-            basicText.Hp.text = "Hp : " + tower.towerInfo[0].maxHealth.ToString();
-            basicText.Mp.text = "Mp : " + tower.towerInfo[0].maxMana.ToString();
-            basicText.Attack.text = "Attack : " + tower.towerInfo[0].projectile.attack.ToString();
-            basicText.AttackSpeed.text = "AttackSpeed : " + tower.towerInfo[0].projectile.moveSpeed.ToString();
-            //업그레이드 판매 가격 표시
-            upGradeText.name.text = tower.towerInfo[1].projectile.tower.ToString();
-            upGradeText.Buycost.text = "Buy : " + tower.towerInfo[1].cost2.ToString() + " G";
-            upGradeText.Sellcost.text = "Sell : " + tower.towerInfo[1].GetSellCost().ToString() + " G";
-            upGradeText.Hp.text = "Hp : " + tower.towerInfo[1].maxHealth.ToString();
-            upGradeText.Mp.text = "Mp : " + tower.towerInfo[1].maxMana.ToString();
-            upGradeText.Attack.text = "Attack : " + tower.towerInfo[1].projectile.attack.ToString();
-            upGradeText.AttackSpeed.text = "AttackSpeed : " + tower.towerInfo[1].projectile.moveSpeed.ToString();
-            PropertiesUI.SetActive(true);
+            if(tower.towerInfo[buildManager.buildMenu.indexs].projectile.tower == tower.towerInfo[buildManager.buildMenu.indexs].upgradeTower || tile.IsUpgrade)
+            {
+                //업그레이드 판매 가격 표시
+                basicText.image.sprite = buildManager.buildMenu.towerSprite[buildManager.buildMenu.indexs];
+                basicText.name.text = tower.towerInfo[buildManager.buildMenu.indexs].upgradeTower.ToString();
+                basicText.Buycost.text = "Buy : " + tower.towerInfo[buildManager.buildMenu.indexs].cost2.ToString() + " G";
+                basicText.Sellcost.text = "Sell : " + tower.towerInfo[buildManager.buildMenu.indexs].GetSellCost().ToString() + " G";
+                basicText.Hp.text = "Hp : " + tower.towerInfo[buildManager.buildMenu.indexs].maxHealth.ToString();
+                basicText.Mp.text = "Mp : " + tower.towerInfo[buildManager.buildMenu.indexs].maxMana.ToString();
+                basicText.Attack.text = "Attack : " + tower.towerInfo[buildManager.buildMenu.indexs].projectile.attack.ToString();
+                basicText.AttackSpeed.text = "AttackSpeed : " + tower.towerInfo[buildManager.buildMenu.indexs].projectile.moveSpeed.ToString();
+                PropertiesUI.SetActive(true);
+                DescriptionUI.SetActive(false);
+            }
+            if(tower.towerInfo[buildManager.buildMenu.indexs].projectile.tower != tower.towerInfo[buildManager.buildMenu.indexs].upgradeTower && !tile.IsUpgrade)
+            {
+                //기본 터렛 판매 가격 표시
+                basicText.image.sprite = buildManager.buildMenu.towerSprite[buildManager.buildMenu.indexs];
+                basicText.name.text = tower.towerInfo[buildManager.buildMenu.indexs].projectile.tower.ToString();
+                basicText.Buycost.text = "Buy : " + tower.towerInfo[buildManager.buildMenu.indexs].cost1 + " G";
+                basicText.Sellcost.text = "Sell : " + tower.towerInfo[buildManager.buildMenu.indexs].GetSellCost().ToString() + " G";
+                basicText.Hp.text = "Hp : " + tower.towerInfo[buildManager.buildMenu.indexs].maxHealth.ToString();
+                basicText.Mp.text = "Mp : " + tower.towerInfo[buildManager.buildMenu.indexs].maxMana.ToString();
+                basicText.Attack.text = "Attack : " + tower.towerInfo[buildManager.buildMenu.indexs].projectile.attack.ToString();
+                basicText.AttackSpeed.text = "AttackSpeed : " + tower.towerInfo[buildManager.buildMenu.indexs].projectile.moveSpeed.ToString();
+                //업그레이드 판매 가격 표시
+                basicText.image.sprite = buildManager.buildMenu.towerSprite[buildManager.buildMenu.indexs + 1];
+                upGradeText.name.text = tower.towerInfo[buildManager.buildMenu.indexs].upgradeTower.ToString();
+                upGradeText.Buycost.text = "Buy : " + tower.towerInfo[buildManager.buildMenu.indexs + 1].cost2.ToString() + " G";
+                upGradeText.Sellcost.text = "Sell : " + tower.towerInfo[buildManager.buildMenu.indexs + 1].GetSellCost().ToString() + " G";
+                upGradeText.Hp.text = "Hp : " + tower.towerInfo[buildManager.buildMenu.indexs + 1].maxHealth.ToString();
+                upGradeText.Mp.text = "Mp : " + tower.towerInfo[buildManager.buildMenu.indexs + 1].maxMana.ToString();
+                upGradeText.Attack.text = "Attack : " + tower.towerInfo[buildManager.buildMenu.indexs + 1].projectile.attack.ToString();
+                upGradeText.AttackSpeed.text = "AttackSpeed : " + tower.towerInfo[buildManager.buildMenu.indexs + 1].projectile.moveSpeed.ToString();
+                PropertiesUI.SetActive(true);
+                DescriptionUI.SetActive(true);
+            }
         }
         //선택해제시 UI 안보이게 하기
         public void HidetileUI()
@@ -129,15 +148,12 @@ namespace Defend.UI
             tile.SellTower();
             buildManager.DeselectTile();
         }
-        public void TowerDescription()
+        public void Upgraded()
         {
-            PropertiesUI.SetActive(false);
-            DescriptionUI.SetActive(true);
-        }
-        public void RemoveTowerDescription()
-        {
-            DescriptionUI.SetActive(false);
-            PropertiesUI.SetActive(true);
+            if ((buildManager.buildMenu.indexs + 1) % 3 == 0)
+                return;
+            tile.UpgradeTower(buildManager.buildMenu.boxes[buildManager.buildMenu.indexs + 1].size, buildManager.buildMenu.boxes[buildManager.buildMenu.indexs + 1].center);
+            buildManager.DeselectTile();
         }
     }
 }

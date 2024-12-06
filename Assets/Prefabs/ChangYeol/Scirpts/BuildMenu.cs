@@ -17,6 +17,8 @@ namespace Defend.UI
         public List<BoxCollider> boxes;
         private GameObject tower;
 
+        public GameObject[] falsetowers;
+
         public Tile tile;
 
         public GameObject BuildUI;
@@ -36,39 +38,23 @@ namespace Defend.UI
         public void SelectTower(int index)
         {
             indexs = index;
-            if (!buildManager.playerState.SpendMoney(towerinfo[index].cost1))
-            {
-                buildManager.warningWindow.ShowWarning("Not Enough Money");
-                return;
-            }
-            if (buildManager.playerState.SpendMoney(towerinfo[index].cost1))
-            {
-                //Debug.Log("기본 터렛을 선택 하였습니다");
-                //설치할 터렛에 기본 터렛(프리팹)을 저장
-                buildManager.SetTowerToBuild(towerinfo[index]);
-                tile.BuildTower(boxes[index].size, boxes[index].center, index);
-                //buildManager.SetTowerToInfo(towerinfo[7]);
-            }
-            //BuildUI.SetActive(false);
+            buildManager.SetTowerToBuild(towerinfo[index]);
+            tile.BuildTower(boxes[index].size, boxes[index].center, index);
+            BuildUI.SetActive(false);
         }
-        public void SelectUpgradeTower(int index)
+        /*public void SelectUpgradeTower(int index)
         {
-            if (!buildManager.playerState.SpendMoney(towerinfo[index].cost2))
-            {
-                buildManager.warningWindow.ShowWarning("Not Enough Money");
-                return;
-            }
-            if (buildManager.playerState.SpendMoney(towerinfo[index].cost2))
-            {
-                //Debug.Log("기본 터렛을 선택 하였습니다");
-                //설치할 터렛에 기본 터렛(프리팹)을 저장
-                buildManager.SetTowerToBuild(towerinfo[index]);
-                tile.UpgradeTower(boxes[index].size, boxes[index].center);
-            }
-        }
+            indexs = index + 1;
+            //Debug.Log("기본 터렛을 선택 하였습니다");
+            //설치할 터렛에 기본 터렛(프리팹)을 저장
+            buildManager.SetTowerToBuild(towerinfo[index]);
+            tile.UpgradeTower(boxes[index].size, boxes[index].center);
+        }*/
         public void BuildMenuUI()
         {
             BuildUI.SetActive(!BuildUI.activeSelf);
+            Destroy(tile.lineVisual.reticle);
+            tile.lineVisual.reticle = null;
         }
         IEnumerator TriggerWarning(TowerInfo tower)
         {

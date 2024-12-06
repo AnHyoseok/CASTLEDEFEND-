@@ -32,15 +32,15 @@ public class TreeSpawner : MonoBehaviour
     {
         // 랜덤한 x축 위치를 생성합니다.
         float randomX = Random.Range(currentPosition.x - width / 2, currentPosition.x + width / 2);
-        Debug.Log($"Random.Range : {randomX}");
+        //Debug.Log($"Random.Range : {randomX}");
 
         // 랜덤한 z축 위치를 생성합니다.
         float randomZ = Random.Range(currentPosition.z - depth / 2, currentPosition.z + depth / 2);
-        Debug.Log($"Random.Range : {randomZ}");
+        //Debug.Log($"Random.Range : {randomZ}");
 
         // y축 위치는 현재 위치와 동일하게 유지합니다.
         float randomY = currentPosition.y;
-        Debug.Log($"Random.Range : {randomY}");
+        //Debug.Log($"Random.Range : {randomY}");
 
         // 새로운 랜덤 위치를 생성합니다.
         Vector3 spawnPosition = new Vector3(randomX, randomY, randomZ);

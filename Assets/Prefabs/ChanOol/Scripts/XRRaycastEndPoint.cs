@@ -6,11 +6,12 @@ public class XRRaycastEndPoint : MonoBehaviour
 {
     public XRRayInteractor rayInteractor;  // XR 컨트롤러의 Ray Interactor
     private GameObject buildArea;  // 자식 오브젝트 Build Area 참조용
-    private bool isBuildAreaActive = false;  // Build Area 활성 상태 캐싱
+    //private bool isBuildAreaActive = false;  // Build Area 활성 상태 캐싱
     private Renderer buildAreaRenderer; // Build Area의 Renderer 참조
 
     void Start()
     {
+
         // 자식 오브젝트를 이름으로 찾아서 참조
         buildArea = transform.Find("BuildArea")?.gameObject;
 

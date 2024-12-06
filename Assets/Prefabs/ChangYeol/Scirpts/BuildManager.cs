@@ -54,6 +54,7 @@ namespace Defend.UI
 
         //타일 UI
         public UpgradeAndSell menu;
+        public BuildMenu buildMenu;
         //선택한 타워
         private TowerXR tower;
 
