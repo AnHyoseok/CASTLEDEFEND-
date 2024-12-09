@@ -20,7 +20,7 @@ namespace Defend.Player
     {
         #region Variables
         //참조
-        public static BuffContents buffContents = null;
+        public static BuffContents buffContents = new BuffContents();
         HealthBasedCastle HealthBasedCastle;
         TowerBase[] towerbase;
         PlayerState playerState;
@@ -94,7 +94,7 @@ namespace Defend.Player
         private int currentTowerATKSpeedUpgradeLevel = 0;
         private int currentTowerATKRangeUpgradeLevel = 0;
 
-        
+
         //테스트용 텍스트
         public TextMeshProUGUI test1;
         public TextMeshProUGUI test2;
@@ -106,14 +106,14 @@ namespace Defend.Player
         #endregion
         private void Start()
         {
-            Debug.Log(CastleUpgrade.buffContents+"!!!!!!!!!!!!");
+            Debug.Log(CastleUpgrade.buffContents + "!!!!!!!!!!!!");
             //참조
             health = castle.GetComponent<Health>();
             playerState = Object.FindAnyObjectByType<PlayerState>();
             //초기화
             RgAmount = health.RgAmount;
 
-  
+
 
             initializeUpgradeCosts();
             UpdateButtonStates();
@@ -178,7 +178,7 @@ namespace Defend.Player
         {
             if (health != null && currentHPTimeUpgradeLevel < IncreaseHPTimeUpgrade.Length && RgAmount < 5f)
             {
-                
+
                 float cost = CostHPTimeUpgrade[currentHPTimeUpgradeLevel];
                 if (playerState.SpendMoney(cost))
                 {
@@ -283,25 +283,25 @@ namespace Defend.Player
         public void TowerATKUpgrade()
         {
             towerbase = FindObjectsByType<TowerBase>(FindObjectsSortMode.None);
-            
-       
+
+
             if (currentTowerATKUpgradeLevel < CostTowerATKUpgrade.Length && playerState.SpendMoney(CostTowerATKUpgrade[currentTowerATKUpgradeLevel]))
             {
                 playerState.SpendMoney(CostTowerATKUpgrade[currentTowerATKUpgradeLevel]);
                 currentTowerATKUpgradeLevel++;
 
-                buffContents = new BuffContents();
                 //공격력 업
                 if (buffContents != null)
                 {
-                    buffContents.atk ++;
-                    
+                    buffContents.atk = 0f;
+                    buffContents.atk++;
+
                 }
                 foreach (var tower in towerbase)
                 {
                     tower.BuffTower(buffContents, true);
                 }
-            
+
 
                 UpdateButtonStates();
             }
@@ -317,7 +317,8 @@ namespace Defend.Player
                 //타워 공격속도 업
                 if (buffContents != null)
                 {
-                    buffContents.shootDelay ++;
+                    buffContents.shootDelay = 0f;
+                    buffContents.shootDelay++;
 
                 }
                 foreach (var tower in towerbase)
@@ -337,7 +338,8 @@ namespace Defend.Player
                 // 공격 범위 증가 로직 추가             
                 if (buffContents != null)
                 {
-                    buffContents.atkRange ++;
+                    buffContents.atkRange = 0f;
+                    buffContents.atkRange++;
 
                 }
                 foreach (var tower in towerbase)

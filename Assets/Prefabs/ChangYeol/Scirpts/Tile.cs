@@ -58,14 +58,15 @@ namespace Defend.UI
             if (lineVisual.reticle && buildManager.playerState.SpendMoney(buildMenu.towerinfo[buildMenu.indexs].cost1))
             {
                 tower = Instantiate(buildMenu.towerinfo[buildMenu.indexs].projectile.tower, GetBuildPosition(), Quaternion.identity);
-                
-                TowerBase towerBase = tower.GetComponent<TowerBase>();
 
+                TowerBase towerBase = tower.GetComponent<TowerBase>();
+                CastleUpgrade castleUpgrade = GetComponent<CastleUpgrade>();
 
                 if (towerBase != null)
                 {
+
                     towerBase.BuffTower(CastleUpgrade.buffContents, true);
-                    
+
                 }
                 GameObject effgo = Instantiate(TowerImpectPrefab, tower.transform.position, Quaternion.identity);
                 Destroy(effgo, 2f);
@@ -85,7 +86,7 @@ namespace Defend.UI
         //타워 설치 위치
         public Vector3 GetBuildPosition()
         {
-            if(lineVisual.reticle)
+            if (lineVisual.reticle)
             {
                 return lineVisual.reticle.transform.position;
             }
@@ -108,7 +109,7 @@ namespace Defend.UI
                 lineVisual.reticle.GetComponent<BoxCollider>().enabled = false;
                 return;
             }
-            else if(!lineVisual.reticle)
+            else if (!lineVisual.reticle)
             {
                 //lineVisual.reticle = towerInfo[0].projectile.tower;
                 lineVisual.reticle = buildMenu.falsetowers[buildMenu.indexs];
