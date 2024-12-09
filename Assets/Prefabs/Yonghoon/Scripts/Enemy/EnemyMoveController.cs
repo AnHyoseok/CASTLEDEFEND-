@@ -1,6 +1,7 @@
 using Defend.TestScript;
 using Defend.Utillity;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -16,6 +17,8 @@ namespace Defend.Enemy
         #region Variable
         [SerializeField] private float baseSpeed = 5f;
         [SerializeField] public float CurrentSpeed { get; private set; }   //이동 속도
+
+        private float originSpeed; 
 
         // 슬로우를 적용한 주체와 비율을 저장하는 딕셔너리
         private Dictionary<GameObject, float> moveSources = new Dictionary<GameObject, float>();
@@ -44,6 +47,7 @@ namespace Defend.Enemy
 
             //초기화
             CurrentSpeed = baseSpeed;
+            
             isDeath = false;
 
             //첫번째 목표지점 셋팅
@@ -141,6 +145,9 @@ namespace Defend.Enemy
 
             // 이동 속도 갱신
             CurrentSpeed = baseSpeed * (1.0f + totalRate);
+
+            originSpeed = CurrentSpeed;
+
             //이동속도는 baseSpeed를 기반으로 +-50%를 초과할 수 없음
             //CurrentSpeed = Mathf.Clamp(CurrentSpeed, (baseSpeed / 2), (baseSpeed * 2));
 
@@ -170,6 +177,15 @@ namespace Defend.Enemy
         //    // 속도 변경 이벤트 호출
         //    MoveSpeedChanged?.Invoke(CurrentSpeed);
         //}
+
+        public IEnumerator SetZeroSpeed()
+        {
+            //originSpeed = CurrentSpeed;
+            CurrentSpeed = 0.0f;
+            yield return new WaitForSeconds(5f);
+            CurrentSpeed = originSpeed;
+        }
+        
 
         //목표지점 도착 처리
         void Arrive()
