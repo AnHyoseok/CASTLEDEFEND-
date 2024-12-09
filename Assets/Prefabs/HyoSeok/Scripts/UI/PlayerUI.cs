@@ -33,7 +33,7 @@ namespace Defend.UI
             }
         }
         // 메뉴가 열려 있는 경우 모든 캔버스 닫기
-        private void CloseAllCanvases()
+        public void CloseAllCanvases()
         {
             isOpen = false;
             gameMenuCanvas.SetActive(false);

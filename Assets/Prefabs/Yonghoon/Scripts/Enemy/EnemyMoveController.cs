@@ -146,7 +146,7 @@ namespace Defend.Enemy
             // 이동 속도 갱신
             CurrentSpeed = baseSpeed * (1.0f + totalRate);
 
-            originSpeed = CurrentSpeed;
+         
 
             //이동속도는 baseSpeed를 기반으로 +-50%를 초과할 수 없음
             //CurrentSpeed = Mathf.Clamp(CurrentSpeed, (baseSpeed / 2), (baseSpeed * 2));
@@ -178,11 +178,16 @@ namespace Defend.Enemy
         //    MoveSpeedChanged?.Invoke(CurrentSpeed);
         //}
 
-        public IEnumerator SetZeroSpeed()
+        public void TimeStop(float duration)
         {
-            //originSpeed = CurrentSpeed;
+            StartCoroutine(SetZeroSpeed(duration));
+        }
+
+        public IEnumerator SetZeroSpeed(float duration)
+        {
+            originSpeed = CurrentSpeed;
             CurrentSpeed = 0.0f;
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(duration);
             CurrentSpeed = originSpeed;
         }
         

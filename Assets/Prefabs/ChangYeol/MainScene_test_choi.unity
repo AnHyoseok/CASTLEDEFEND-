@@ -1467,6 +1467,7 @@ MonoBehaviour:
   playerState: {fileID: 0}
   warningWindow: {fileID: 0}
   menu: {fileID: 0}
+  buildMenu: {fileID: 0}
 --- !u!4 &1534121171
 Transform:
   m_ObjectHideFlags: 0
@@ -1663,7 +1664,7 @@ MonoBehaviour:
   m_StartingHoverFilters: []
   m_StartingSelectFilters: []
   m_StartingInteractionStrengthFilters: []
-  towers: []
+  tower: {fileID: 0}
   tower_upgrade: {fileID: 0}
   towerInfo:
   - rotationSpeed: 0
@@ -1714,9 +1715,19 @@ MonoBehaviour:
       debuffRatio: 0
   TowerImpectPrefab: {fileID: 0}
   buildMenu: {fileID: 0}
-  distance: 1.5
   lineVisual: {fileID: 8868687749213888214}
-  reticleVisual: {fileID: 0}
+  property:
+    m_UseReference: 0
+    m_Action:
+      m_Name: 
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: a82a6b4d-feb5-4a63-b7e0-8a1bb8ee854f
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
 --- !u!1 &1778144475
 GameObject:
   m_ObjectHideFlags: 0

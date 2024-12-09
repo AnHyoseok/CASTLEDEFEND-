@@ -1,3 +1,4 @@
+using Defend.Player;
 using Defend.Tower;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -57,10 +58,18 @@ namespace Defend.UI
             if (lineVisual.reticle && buildManager.playerState.SpendMoney(buildMenu.towerinfo[buildMenu.indexs].cost1))
             {
                 tower = Instantiate(buildMenu.towerinfo[buildMenu.indexs].projectile.tower, GetBuildPosition(), Quaternion.identity);
-                buildMenu.buildpro.SetActive(false);
-                GameObject effgo = Instantiate(TowerImpectPrefab, tower.transform.position, Quaternion.identity);
-                Destroy(effgo,2f);
                 
+                TowerBase towerBase = tower.GetComponent<TowerBase>();
+
+
+                if (towerBase != null)
+                {
+                    towerBase.BuffTower(CastleUpgrade.buffContents, true);
+                    
+                }
+                GameObject effgo = Instantiate(TowerImpectPrefab, tower.transform.position, Quaternion.identity);
+                Destroy(effgo, 2f);
+
                 tower.AddComponent<BoxCollider>();
                 tower.AddComponent<TowerXR>();
                 BoxCollider box = tower.GetComponent<BoxCollider>();
@@ -72,6 +81,7 @@ namespace Defend.UI
                 tower = Instantiate(reticleVisual.reticlePrefab, reticleVisual.reticlePrefab.transform.position,Quaternion.identity);
             }*/
         }
+
         //타워 설치 위치
         public Vector3 GetBuildPosition()
         {
