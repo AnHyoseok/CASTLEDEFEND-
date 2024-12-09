@@ -94,7 +94,6 @@ namespace Defend.Tower
             SetRotationToTarget(); // 매 프레임마다 타겟을 바라보도록 회전
             shootTime += Time.deltaTime;
             //Shoot();
-
             // TEST
             //DrawLine();            // 타겟 방향으로 라인 그리기
         }

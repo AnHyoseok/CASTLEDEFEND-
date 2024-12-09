@@ -297,6 +297,8 @@ MonoBehaviour:
     maxHealth: 200
     maxMana: 20
     armor: 5
+    healthRegen: 1
+    manaRegen: 1
     cost1: 1
     cost2: 2
     cost3: 3
@@ -311,9 +313,10 @@ MonoBehaviour:
       moveSpeed: 40
       attackRange: 0
       debuffRatio: 0
-  gizmoColor: {r: 0, g: 1, b: 0, a: 1}
-  sphereRadius: 15
-  lineLength: 10
+  gizmo:
+    gizmoColor: {r: 0, g: 1, b: 0, a: 1}
+    sphereRadius: 0
+    lineLength: 10
 --- !u!114 &522886884656965306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -331,6 +334,8 @@ MonoBehaviour:
   maxMana: 0
   currentMana: 0
   currentArmor: 0
+  manaRegenRatio: 1
+  healthRegenRatio: 1
 --- !u!1 &9207821906157877289
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,7 +504,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5403166087981713806, guid: 40ce92f049b3c0b4caabdb9342af370b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 5403166087981713806, guid: 40ce92f049b3c0b4caabdb9342af370b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

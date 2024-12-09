@@ -232,7 +232,7 @@ Transform:
   m_GameObject: {fileID: 7568668993475798155}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -264,6 +264,8 @@ MonoBehaviour:
     maxHealth: 100
     maxMana: 10
     armor: 1
+    healthRegen: 1
+    manaRegen: 1
     cost1: 1
     cost2: 2
     cost3: 3
@@ -278,9 +280,10 @@ MonoBehaviour:
       moveSpeed: 50
       attackRange: 0
       debuffRatio: 0
-  gizmoColor: {r: 0, g: 1, b: 0, a: 1}
-  sphereRadius: 8
-  lineLength: 10
+  gizmo:
+    gizmoColor: {r: 0, g: 1, b: 0, a: 1}
+    sphereRadius: 0
+    lineLength: 10
   maxCount: 2
 --- !u!114 &1453089053744829494
 MonoBehaviour:
@@ -299,6 +302,8 @@ MonoBehaviour:
   maxMana: 0
   currentMana: 0
   currentArmor: 0
+  manaRegenRatio: 1
+  healthRegenRatio: 1
 --- !u!1 &8076756251764956313
 GameObject:
   m_ObjectHideFlags: 0

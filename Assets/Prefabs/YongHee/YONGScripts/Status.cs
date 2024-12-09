@@ -175,6 +175,7 @@ namespace Defend.Utillity
         // 마나 사용
         public void UseMana(float amount)
         {
+            Debug.Log("TEST NAME = " + gameObject.name + " Mana = " + amount);
             // 소모값 유효성 검사
             amount = Mathf.Clamp(amount, 0, Mathf.Infinity);
 
