@@ -22,8 +22,7 @@ namespace Defend.UI
         public Tile tile;
 
         public GameObject BuildUI;
-
-        private BoxCollider Trirggerbox;
+        public GameObject buildpro;
         public int indexs;
         #endregion
 

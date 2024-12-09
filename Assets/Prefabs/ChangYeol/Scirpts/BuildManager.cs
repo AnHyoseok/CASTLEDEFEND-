@@ -1,8 +1,6 @@
-using Defend.Enemy;
 using Defend.Player;
 using Defend.Tower;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace Defend.UI
@@ -39,6 +37,11 @@ namespace Defend.UI
         public PlayerState playerState;
 
         public WarningWindow warningWindow;
+
+        public Button Sellbutton;
+        public Button UpgradeButton;
+
+        public bool IsUpgrade;
 
         //선택한 타워의 건설한 비용을 자지고 있는지
         public bool HasBuildMoney

@@ -26,10 +26,6 @@ namespace Defend.UI
 
         //업그레이드 버튼
         public Button upgradebutton;
-
-        //플레이어 카메라 위치
-        public Transform head;
-        [SerializeField] private float distance = 1.5f;
         #endregion
 
         void Start()
@@ -43,61 +39,8 @@ namespace Defend.UI
         {
             //선택받은 타워 저장
             tower = towerXR;
-            //타워가 설치된 위치 주위에서 보여준다
-            this.transform.position = head.position + new Vector3(head.forward.x, 0, head.forward.z).normalized * distance;
-            this.transform.LookAt(new Vector3(head.position.x, this.transform.position.y, head.position.z));
-            this.transform.forward *= -1;
 
             //업그레이드 가격 표시
-            /*if (tower && tile.IsUpgrade)
-            {
-                //기본 터렛 판매 가격 표시
-                basicText.name.text = tower.towerInfo[2].projectile.tower.ToString();
-                basicText.Buycost.text = "Buy : " + tower.towerInfo[2].cost1 + " G";
-                basicText.Sellcost.text = "Sell : " + tower.towerInfo[2].GetSellCost().ToString() + " G";
-                basicText.Hp.text = "Hp : " + tower.towerInfo[2].maxHealth.ToString();
-                basicText.Mp.text = "Mp : " + tower.towerInfo[2].maxMana.ToString();
-                basicText.Attack.text = "Attack : " + tower.towerInfo[2].projectile.attack.ToString();
-                basicText.AttackSpeed.text = "AttackSpeed : " + tower.towerInfo[2].projectile.moveSpeed.ToString();
-            }*/
-            /*if (tower && tile.IsUpgrade)
-            {
-                //기본 터렛 판매 가격 표시
-                basicText.name.text = tower.towerInfo[1].projectile.tower.ToString();
-                basicText.Buycost.text = "Buy : " + tower.towerInfo[1].cost1 + " G";
-                basicText.Sellcost.text = "Sell : " + tower.towerInfo[1].GetSellCost().ToString() + " G";
-                basicText.Hp.text = "Hp : " + tower.towerInfo[1].maxHealth.ToString();
-                basicText.Mp.text = "Mp : " + tower.towerInfo[1].maxMana.ToString();
-                basicText.Attack.text = "Attack : " + tower.towerInfo[1].projectile.attack.ToString();
-                basicText.AttackSpeed.text = "AttackSpeed : " + tower.towerInfo[1].projectile.moveSpeed.ToString();
-                //업그레이드 판매 가격 표시
-                upGradeText.name.text = tower.towerInfo[2].projectile.tower.ToString();
-                upGradeText.Buycost.text = "Buy : " + tower.towerInfo[2].cost2.ToString() + " G";
-                upGradeText.Sellcost.text = "Sell : " + tower.towerInfo[2].GetSellCost().ToString() + " G";
-                upGradeText.Hp.text = "Hp : " + tower.towerInfo[2].maxHealth.ToString();
-                upGradeText.Mp.text = "Mp : " + tower.towerInfo[2].maxMana.ToString();
-                upGradeText.Attack.text = "Attack : " + tower.towerInfo[2].projectile.attack.ToString();
-                upGradeText.AttackSpeed.text = "AttackSpeed : " + tower.towerInfo[2].projectile.moveSpeed.ToString();
-            }*/
-            /*if (tower && !tile.IsUpgrade)
-            {
-                //기본 터렛 판매 가격 표시
-                basicText.name.text = tower.towerInfo[0].projectile.tower.ToString();
-                basicText.Buycost.text = "Buy : " + tower.towerInfo[0].cost1 + " G";
-                basicText.Sellcost.text = "Sell : " + tower.towerInfo[0].GetSellCost().ToString() + " G";
-                basicText.Hp.text = "Hp : " + tower.towerInfo[0].maxHealth.ToString();
-                basicText.Mp.text = "Mp : " + tower.towerInfo[0].maxMana.ToString();
-                basicText.Attack.text = "Attack : " + tower.towerInfo[0].projectile.attack.ToString();
-                basicText.AttackSpeed.text = "AttackSpeed : " + tower.towerInfo[0].projectile.moveSpeed.ToString();
-                //업그레이드 판매 가격 표시
-                upGradeText.name.text = tower.towerInfo[1].projectile.tower.ToString();
-                upGradeText.Buycost.text = "Buy : " + tower.towerInfo[1].cost2.ToString() + " G";
-                upGradeText.Sellcost.text = "Sell : " + tower.towerInfo[1].GetSellCost().ToString() + " G";
-                upGradeText.Hp.text = "Hp : " + tower.towerInfo[1].maxHealth.ToString();
-                upGradeText.Mp.text = "Mp : " + tower.towerInfo[1].maxMana.ToString();
-                upGradeText.Attack.text = "Attack : " + tower.towerInfo[1].projectile.attack.ToString();
-                upGradeText.AttackSpeed.text = "AttackSpeed : " + tower.towerInfo[1].projectile.moveSpeed.ToString();
-            }*/
             if(tower.towerInfo[buildManager.buildMenu.indexs].projectile.tower == tower.towerInfo[buildManager.buildMenu.indexs].upgradeTower || tile.IsUpgrade)
             {
                 //업그레이드 판매 가격 표시
@@ -112,7 +55,30 @@ namespace Defend.UI
                 PropertiesUI.SetActive(true);
                 DescriptionUI.SetActive(false);
             }
-            if(tower.towerInfo[buildManager.buildMenu.indexs].projectile.tower != tower.towerInfo[buildManager.buildMenu.indexs].upgradeTower && !tile.IsUpgrade)
+            else if (tower.towerInfo[buildManager.buildMenu.indexs].projectile.tower != tower.towerInfo[buildManager.buildMenu.indexs].upgradeTower && buildManager.IsUpgrade)
+            {
+                //기본 터렛 판매 가격 표시
+                basicText.image.sprite = buildManager.buildMenu.towerSprite[buildManager.buildMenu.indexs+1];
+                basicText.name.text = tower.towerInfo[buildManager.buildMenu.indexs + 1].projectile.tower.ToString();
+                basicText.Buycost.text = "Buy : " + tower.towerInfo[buildManager.buildMenu.indexs + 1].cost1 + " G";
+                basicText.Sellcost.text = "Sell : " + tower.towerInfo[buildManager.buildMenu.indexs + 1].GetSellCost().ToString() + " G";
+                basicText.Hp.text = "Hp : " + tower.towerInfo[buildManager.buildMenu.indexs + 1].maxHealth.ToString();
+                basicText.Mp.text = "Mp : " + tower.towerInfo[buildManager.buildMenu.indexs + 1].maxMana.ToString();
+                basicText.Attack.text = "Attack : " + tower.towerInfo[buildManager.buildMenu.indexs + 1].projectile.attack.ToString();
+                basicText.AttackSpeed.text = "AttackSpeed : " + tower.towerInfo[buildManager.buildMenu.indexs + 1].projectile.moveSpeed.ToString();
+                //업그레이드 판매 가격 표시
+                basicText.image.sprite = buildManager.buildMenu.towerSprite[buildManager.buildMenu.indexs + 2];
+                upGradeText.name.text = tower.towerInfo[buildManager.buildMenu.indexs + 2].upgradeTower.ToString();
+                upGradeText.Buycost.text = "Buy : " + tower.towerInfo[buildManager.buildMenu.indexs + 2].cost2.ToString() + " G";
+                upGradeText.Sellcost.text = "Sell : " + tower.towerInfo[buildManager.buildMenu.indexs + 2].GetSellCost().ToString() + " G";
+                upGradeText.Hp.text = "Hp : " + tower.towerInfo[buildManager.buildMenu.indexs + 2].maxHealth.ToString();
+                upGradeText.Mp.text = "Mp : " + tower.towerInfo[buildManager.buildMenu.indexs + 2].maxMana.ToString();
+                upGradeText.Attack.text = "Attack : " + tower.towerInfo[buildManager.buildMenu.indexs + 2].projectile.attack.ToString();
+                upGradeText.AttackSpeed.text = "AttackSpeed : " + tower.towerInfo[buildManager.buildMenu.indexs + 2].projectile.moveSpeed.ToString();
+                PropertiesUI.SetActive(true);
+                DescriptionUI.SetActive(true);
+            }
+            else if(tower.towerInfo[buildManager.buildMenu.indexs].projectile.tower != tower.towerInfo[buildManager.buildMenu.indexs].upgradeTower && !buildManager.IsUpgrade)
             {
                 //기본 터렛 판매 가격 표시
                 basicText.image.sprite = buildManager.buildMenu.towerSprite[buildManager.buildMenu.indexs];
@@ -124,7 +90,7 @@ namespace Defend.UI
                 basicText.Attack.text = "Attack : " + tower.towerInfo[buildManager.buildMenu.indexs].projectile.attack.ToString();
                 basicText.AttackSpeed.text = "AttackSpeed : " + tower.towerInfo[buildManager.buildMenu.indexs].projectile.moveSpeed.ToString();
                 //업그레이드 판매 가격 표시
-                basicText.image.sprite = buildManager.buildMenu.towerSprite[buildManager.buildMenu.indexs + 1];
+                upGradeText.image.sprite = buildManager.buildMenu.towerSprite[buildManager.buildMenu.indexs + 1];
                 upGradeText.name.text = tower.towerInfo[buildManager.buildMenu.indexs].upgradeTower.ToString();
                 upGradeText.Buycost.text = "Buy : " + tower.towerInfo[buildManager.buildMenu.indexs + 1].cost2.ToString() + " G";
                 upGradeText.Sellcost.text = "Sell : " + tower.towerInfo[buildManager.buildMenu.indexs + 1].GetSellCost().ToString() + " G";
@@ -142,18 +108,6 @@ namespace Defend.UI
             PropertiesUI.SetActive(false);
             //선택받은 타일 초기화
             tower = null;
-        }
-        public void Selled()
-        {
-            tile.SellTower();
-            buildManager.DeselectTile();
-        }
-        public void Upgraded()
-        {
-            if ((buildManager.buildMenu.indexs + 1) % 3 == 0)
-                return;
-            tile.UpgradeTower(buildManager.buildMenu.boxes[buildManager.buildMenu.indexs + 1].size, buildManager.buildMenu.boxes[buildManager.buildMenu.indexs + 1].center);
-            buildManager.DeselectTile();
         }
     }
 }

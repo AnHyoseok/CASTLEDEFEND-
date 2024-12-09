@@ -11,12 +11,15 @@ namespace Defend.UI
         #region Variables
         public TowerInfo[] towerInfo = new TowerInfo[12];
 
+        private GameObject tower_upgrade;
+
         //빌드매니저 객체
         private BuildManager buildManager;
         #endregion
 
         private void Start()
         {
+            //초기화
             buildManager = BuildManager.Instance;
             for (int i = 0; i < towerInfo.Length; i++)
             {
@@ -25,6 +28,9 @@ namespace Defend.UI
                 towerInfo[i].projectile.tower = buildManager.buildMenu.towerinfo[i].projectile.tower;
                 towerInfo[i].projectile = buildManager.buildMenu.towerinfo[i].projectile;
             }
+            //함수 등록
+            buildManager.Sellbutton.onClick.AddListener(SellTower);
+            buildManager.UpgradeButton.onClick.AddListener(UpgradeTower);
         }
         protected override void OnSelectExited(SelectExitEventArgs args)
         {
@@ -35,10 +41,74 @@ namespace Defend.UI
         {
             base.OnSelectEntered(args);
             buildManager.SelectTile(this);
+            //if()
         }
         private void OnCollisionStay(Collision collision)
         {
             Debug.Log("ddd");
+        }
+        public void SellTower()
+        {
+            /*//업그레이드 터렛을 판매
+            if (turret_upgrade != null)
+            {
+                Destroy(turret_upgrade);
+                IsUpgrade = false;
+                GameObject effect = Instantiate(SellImpectPrefab, GetBuildPosition(), Quaternion.identity);
+                Destroy(effect, 2f);
+                //업그레이드터렛들의 반값으로 판매
+                PlayerStats.AddMoney(blueprint.Getupgradecost());
+            }*/
+            //기본 터렛을 판매
+            if (this.gameObject != null)
+            {
+                Debug.Log("판매");
+                Destroy(this.gameObject);
+                //IsUpgrade = false;
+                //GameObject effect = Instantiate(SellImpectPrefab, GetBuildPosition(), Quaternion.identity);
+                //Destroy(effect, 2f);
+                //기본터렛들의 반값으로 판매
+                buildManager.playerState.AddMoney(1);
+                buildManager.DeselectTile();
+            }
+            else if (!this.gameObject)
+            {
+                Debug.Log("판매하지 못했습니다");
+            }
+        }
+
+        public void UpgradeTower()
+        {
+            if (towerInfo[buildManager.buildMenu.indexs] == null)
+            {
+                Debug.Log("업그레이드 실패했습니다");
+                return;
+            }
+            if (towerInfo[buildManager.buildMenu.indexs] != null)
+            {
+                Debug.Log("터렛 업그레이드");
+                //Effect
+                //GameObject effectGo = Instantiate(TowerImpectPrefab, GetBuildPosition(), Quaternion.identity);
+                //Destroy(effectGo, 2f);
+
+                //터렛 업그레이드 여부
+                buildManager.IsUpgrade = true;
+
+                //터렛 업그레이드 생성   
+                tower_upgrade = Instantiate(towerInfo[buildManager.buildMenu.indexs].upgradeTower, transform.position, Quaternion.identity);
+                tower_upgrade.AddComponent<BoxCollider>();
+                tower_upgrade.AddComponent<TowerXR>();
+                BoxCollider boxCollider = tower_upgrade.GetComponent<BoxCollider>();
+                boxCollider.size = buildManager.buildMenu.boxes[buildManager.buildMenu.indexs].size;
+                boxCollider.center = buildManager.buildMenu.boxes[buildManager.buildMenu.indexs].center;
+                if(buildManager.buildMenu.tile.tower)
+                {
+                    //Destroy();
+                    tower_upgrade = buildManager.buildMenu.tile.tower;
+                    tower_upgrade = null;
+                }
+                buildManager.DeselectTile();
+            }
         }
     }
 }

@@ -2119,7 +2119,6 @@ GameObject:
   - component: {fileID: 7203391548911061071}
   - component: {fileID: 6696526017487865691}
   - component: {fileID: 4187742508672879075}
-  - component: {fileID: 7652722576675705057}
   m_Layer: 5
   m_Name: StatusCanvas
   m_TagString: Untagged
@@ -2214,28 +2213,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &7652722576675705057
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5628940312101036402}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc59516804da0af4e96916a20c2d76ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  healthBar: {fileID: 3431788140938142437}
-  fillHealth: {fileID: 1080873430798810247}
-  healthText: {fileID: 6993283606082827093}
-  manaBar: {fileID: 7332992712656168749}
-  fillMana: {fileID: 6972077726952469784}
-  manaText: {fileID: 3191075880906074371}
-  buffsFisrt: {fileID: 8024261372413273133}
-  buffsSecond: {fileID: 2950389120987972548}
-  status: {fileID: 0}
 --- !u!1 &5901884559021446465
 GameObject:
   m_ObjectHideFlags: 0
@@ -2289,8 +2266,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1.8833}
-  m_Center: {x: 0, y: 0, z: -0.9378902}
+  m_Size: {x: 1, y: 1.8833, z: 0}
+  m_Center: {x: 0, y: 0.9378902, z: 0}
 --- !u!1 &5986535398783880996
 GameObject:
   m_ObjectHideFlags: 0

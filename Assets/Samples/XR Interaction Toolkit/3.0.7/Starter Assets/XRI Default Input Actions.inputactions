@@ -452,6 +452,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "GetLeftPrimaryButtonX",
+                    "type": "Button",
+                    "id": "0ae1ae00-8ff2-4fd2-8d29-325f7010fc48",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "GetLeftSecondaryButtonY",
+                    "type": "Button",
+                    "id": "550bffcd-8444-4529-88b6-4b6b037d7a4a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -859,6 +877,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Thumbstick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "431979c8-5201-4efe-9b74-5066b3dc06ce",
+                    "path": "<XRController>{LeftHand}/{PrimaryButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GetLeftPrimaryButtonX",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "45030426-f71c-4f75-a9da-a5e40080a7cc",
+                    "path": "<XRController>{LeftHand}/{SecondaryButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GetLeftSecondaryButtonY",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -1523,6 +1563,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "GetRightPrimaryButtonA",
+                    "type": "Button",
+                    "id": "c6f11ef9-5896-4954-b4bb-8e249b3865a5",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "GetRightSecondaryButtonB",
+                    "type": "Button",
+                    "id": "4e3dbc5a-74e1-4f8b-a9da-b8b3c18a8ac6",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -1930,6 +1988,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Thumbstick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d8d83b45-1028-44e7-8779-545e7c95cb5f",
+                    "path": "<XRController>{RightHand}/{PrimaryButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GetRightPrimaryButtonA",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d218e14a-a723-4ea5-8eef-54b751ff65ed",
+                    "path": "<XRController>{RightHand}/{SecondaryButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GetRightSecondaryButtonB",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
