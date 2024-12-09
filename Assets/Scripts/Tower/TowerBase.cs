@@ -225,7 +225,8 @@ namespace Defend.Tower
         }
 
         // 타워 강화 (지속시간, 공격력, 방어력, 연사력, 공격사거리, 체력재생, 마나재생)
-        public void BuffTower(BuffContents buffContents)
+        // isPermanent 영구적인 버프인지 아닌지
+        public void BuffTower(BuffContents buffContents, bool isPermanent)
         {
             // 버프 적용
             towerInfo.projectile.attack += buffContents.atk;
@@ -236,7 +237,10 @@ namespace Defend.Tower
             status.ManaRegenRatio *= buffContents.manaRegen;
 
             // 복구 Coroutine 실행
-            StartCoroutine(ResetTower(buffContents));
+            if (isPermanent == false)
+            {
+                StartCoroutine(ResetTower(buffContents));
+            }
         }
 
         // 타워 복구 (지속시간, 공격력, 방어력, 연사력, 공격사거리, 체력재생, 마나재생)
@@ -250,20 +254,6 @@ namespace Defend.Tower
             status.HealthRegenRatio /= buffContents.healthRegen;
             status.ManaRegenRatio /= buffContents.manaRegen;
         }
-
-        // 타워 복구 (지속시간, 공격력, 방어력, 연사력, 공격사거리, 체력재생, 마나재생)
-        //IEnumerator ResetTower(float duration, float originalAttack, float originalArmor, float originalShootDelay, float originalAttackRange, float originalHealthRegen, float originalManaRegen)
-        //{
-        //    yield return new WaitForSeconds(duration);
-        //    // 원래 상태로 복구
-        //    towerInfo.projectile.attack = originalAttack;
-        //    towerInfo.armor = originalArmor;
-        //    towerInfo.shootDelay = originalShootDelay;
-        //    towerInfo.attackRange = originalAttackRange;
-        //    status.HealthRegenRatio = originalHealthRegen;
-        //    status.ManaRegenRatio = originalManaRegen;
-        //}
-
 
         // 공격방향 라인 랜더러
         private void DrawLine()

@@ -80,7 +80,7 @@ namespace Defend.Tower
                 // 버프 타워면 버프적용하지 않도록
                 if (buffTower != null) continue;
 
-                tower.BuffTower(buffContents);
+                tower.BuffTower(buffContents, false);
 
                 // 효과 이펙트 적용
                 ParticleSystem effect = Instantiate(buffEffect, tower.gameObject.transform);
