@@ -19,7 +19,7 @@ namespace Defend.UI
 
         private void Start()
         {
-            //초기화
+            /*//초기화
             buildManager = BuildManager.Instance;
             for (int i = 0; i < towerInfo.Length; i++)
             {
@@ -27,7 +27,7 @@ namespace Defend.UI
                 towerInfo[i].upgradeTower = buildManager.buildMenu.towerinfo[i].upgradeTower;
                 towerInfo[i].projectile.tower = buildManager.buildMenu.towerinfo[i].projectile.tower;
                 towerInfo[i].projectile = buildManager.buildMenu.towerinfo[i].projectile;
-            }
+            }*/
         }
         protected override void OnSelectEntered(SelectEnterEventArgs args)
         {
@@ -67,7 +67,7 @@ namespace Defend.UI
 
         public void UpgradeTower()
         {
-            if (towerInfo[buildManager.buildMenu.indexs] == null)
+            /*if (towerInfo[buildManager.buildMenu.indexs] == null)
             {
                 Debug.Log("업그레이드 실패했습니다");
                 return;
@@ -90,7 +90,7 @@ namespace Defend.UI
                 boxCollider.size = buildManager.buildMenu.boxes[buildManager.buildMenu.indexs].size;
                 boxCollider.center = buildManager.buildMenu.boxes[buildManager.buildMenu.indexs].center;
                 buildManager.DeselectTile();
-            }
+            }*/
         }
     }
 }

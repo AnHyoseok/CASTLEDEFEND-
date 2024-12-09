@@ -15,6 +15,7 @@ namespace Defend.UI
         public BuildTowerUI Ballista;
         public BuildTowerUI Bat;
         public BuildTowerUI Cannon;
+        public BuildTowerUI Crossbow;
 
         public GameObject[] falsetowers;
 
@@ -33,21 +34,34 @@ namespace Defend.UI
 
 
         //기본 터렛 버튼을 클릭시 호출
-        public void SelectTower(int index)
+        public void SelectBallista(int index)
         {
             indexs = index;
-            buildManager.SetTowerToBuild(Ballista[index]);
-            tile.BuildTower(boxes[index].size, boxes[index].center, index);
+            buildManager.SetTowerToBuild(Ballista.towerInfos[index]);
+            tile.BuildTower(Ballista.towerBoxCollider[index].size, Ballista.towerBoxCollider[index].center);
             BuildUI.SetActive(false);
         }
-        /*public void SelectUpgradeTower(int index)
+        public void SelectBat(int index)
         {
-            indexs = index + 1;
-            //Debug.Log("기본 터렛을 선택 하였습니다");
-            //설치할 터렛에 기본 터렛(프리팹)을 저장
-            buildManager.SetTowerToBuild(towerinfo[index]);
-            tile.UpgradeTower(boxes[index].size, boxes[index].center);
-        }*/
+            indexs = index;
+            buildManager.SetTowerToBuild(Bat.towerInfos[index]);
+            tile.BuildTower(Bat.towerBoxCollider[index].size, Bat.towerBoxCollider[index].center);
+            BuildUI.SetActive(false);
+        }
+        public void SelectCannon(int index)
+        {
+            indexs = index;
+            buildManager.SetTowerToBuild(Cannon.towerInfos[index]);
+            tile.BuildTower(Cannon.towerBoxCollider[index].size, Cannon.towerBoxCollider[index].center);
+            BuildUI.SetActive(false);
+        }
+        public void SelectCrossbow(int index)
+        {
+            indexs = index;
+            buildManager.SetTowerToBuild(Crossbow.towerInfos[index]);
+            tile.BuildTower(Crossbow.towerBoxCollider[index].size, Crossbow.towerBoxCollider[index].center);
+            BuildUI.SetActive(false);
+        }
         public void BuildMenuUI()
         {
             BuildUI.SetActive(!BuildUI.activeSelf);

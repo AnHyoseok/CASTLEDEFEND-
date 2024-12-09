@@ -49,15 +49,15 @@ namespace Defend.UI
         }
         protected override void OnSelectEntered(SelectEnterEventArgs args)
         {
-            base.OnSelectEntered(args);
-            /*if (!buildManager.playerState.SpendMoney(buildMenu.towerinfo[buildMenu.indexs].cost1))
+            /*base.OnSelectEntered(args);
+            if (!buildManager.playerState.SpendMoney(towerInfo[buildMenu.indexs].cost1))
             {
                 buildManager.warningWindow.ShowWarning("Not Enough Money");
                 return;
             }
-            if (lineVisual.reticle && buildManager.playerState.SpendMoney(buildMenu.towerinfo[buildMenu.indexs].cost1))
+            if (lineVisual.reticle && buildManager.playerState.SpendMoney(towerInfo[buildMenu.indexs].cost1))
             {
-                tower = Instantiate(buildMenu.towerinfo[buildMenu.indexs].projectile.tower, GetBuildPosition(), Quaternion.identity);
+                tower = Instantiate(towerInfo[buildMenu.indexs].projectile.tower, GetBuildPosition(), Quaternion.identity);
 
                 TowerBase towerBase = tower.GetComponent<TowerBase>();
                 CastleUpgrade castleUpgrade = GetComponent<CastleUpgrade>();
@@ -75,10 +75,6 @@ namespace Defend.UI
                 box.size = buildMenu.boxes[buildMenu.indexs].size;
                 box.center = buildMenu.boxes[(buildMenu.indexs)].center;
             }*/
-            /*if(reticleVisual.reticlePrefab)
-            {
-                tower = Instantiate(reticleVisual.reticlePrefab, reticleVisual.reticlePrefab.transform.position,Quaternion.identity);
-            }*/
         }
 
         //타워 설치 위치
@@ -91,7 +87,7 @@ namespace Defend.UI
             return Vector3.zero;
         }
         //타워 생성
-        public void BuildTower(Vector3 size, Vector3 center, int index)
+        public void BuildTower(Vector3 size, Vector3 center)
         {
             //설치할 터렛의 속성값 가져오기 (터렛 프리팹, 건설비용, 업그레이드 프리팹, 업그레이드 비용...)
             towerInfo[0] = buildManager.GetTowerToBuild();
