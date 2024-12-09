@@ -13,9 +13,9 @@ namespace Defend.UI
         #endregion
         private void Start()
         {
-            StartBuild();
+            //StartBuild();
         }
-        public void StartBuild()
+        /*public void StartBuild()
         {
             for (int i = 0; i < towerinfo.Length; i++)
             {
@@ -36,6 +36,6 @@ namespace Defend.UI
             selectTowerinfo.Mp.text = "Mp : " + build.towerinfo[index].maxMana.ToString();
             selectTowerinfo.Attack.text = "Attack : " + build.towerinfo[index].projectile.attack.ToString();
             selectTowerinfo.AttackSpeed.text = "Armor : " + build.towerinfo[index].armor.ToString();
-        }
+        }*/
     }
 }

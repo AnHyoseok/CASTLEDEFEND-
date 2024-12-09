@@ -50,7 +50,7 @@ namespace Defend.UI
         protected override void OnSelectEntered(SelectEnterEventArgs args)
         {
             base.OnSelectEntered(args);
-            if (!buildManager.playerState.SpendMoney(buildMenu.towerinfo[buildMenu.indexs].cost1))
+            /*if (!buildManager.playerState.SpendMoney(buildMenu.towerinfo[buildMenu.indexs].cost1))
             {
                 buildManager.warningWindow.ShowWarning("Not Enough Money");
                 return;
@@ -64,9 +64,7 @@ namespace Defend.UI
 
                 if (towerBase != null)
                 {
-
                     towerBase.BuffTower(CastleUpgrade.buffContents, true);
-
                 }
                 GameObject effgo = Instantiate(TowerImpectPrefab, tower.transform.position, Quaternion.identity);
                 Destroy(effgo, 2f);
@@ -76,7 +74,7 @@ namespace Defend.UI
                 BoxCollider box = tower.GetComponent<BoxCollider>();
                 box.size = buildMenu.boxes[buildMenu.indexs].size;
                 box.center = buildMenu.boxes[(buildMenu.indexs)].center;
-            }
+            }*/
             /*if(reticleVisual.reticlePrefab)
             {
                 tower = Instantiate(reticleVisual.reticlePrefab, reticleVisual.reticlePrefab.transform.position,Quaternion.identity);

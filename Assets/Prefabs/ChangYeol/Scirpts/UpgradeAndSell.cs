@@ -41,7 +41,7 @@ namespace Defend.UI
             tower = towerXR;
 
             //업그레이드 가격 표시
-            if(tower.towerInfo[buildManager.buildMenu.indexs].projectile.tower == tower.towerInfo[buildManager.buildMenu.indexs].upgradeTower || tile.IsUpgrade)
+            /*if(tower.towerInfo[buildManager.buildMenu.indexs].projectile.tower == tower.towerInfo[buildManager.buildMenu.indexs].upgradeTower || tile.IsUpgrade)
             {
                 //업그레이드 판매 가격 표시
                 basicText.image.sprite = buildManager.buildMenu.towerSprite[buildManager.buildMenu.indexs];
@@ -78,7 +78,7 @@ namespace Defend.UI
                 PropertiesUI.SetActive(true);
                 DescriptionUI.SetActive(true);
             }
-            else if(tower.towerInfo[buildManager.buildMenu.indexs].projectile.tower != tower.towerInfo[buildManager.buildMenu.indexs].upgradeTower && !buildManager.IsUpgrade)
+            else if((tower.towerInfo[buildManager.buildMenu.indexs].projectile.tower != tower.towerInfo[buildManager.buildMenu.indexs].upgradeTower && !buildManager.IsUpgrade) || tower.towerInfo[buildManager.buildMenu.indexs].projectile.tower != tower.towerInfo[buildManager.buildMenu.indexs].upgradeTower)
             {
                 //기본 터렛 판매 가격 표시
                 basicText.image.sprite = buildManager.buildMenu.towerSprite[buildManager.buildMenu.indexs];
@@ -100,7 +100,7 @@ namespace Defend.UI
                 upGradeText.AttackSpeed.text = "AttackSpeed : " + tower.towerInfo[buildManager.buildMenu.indexs + 1].projectile.moveSpeed.ToString();
                 PropertiesUI.SetActive(true);
                 DescriptionUI.SetActive(true);
-            }
+            }*/
         }
         //선택해제시 UI 안보이게 하기
         public void HidetileUI()

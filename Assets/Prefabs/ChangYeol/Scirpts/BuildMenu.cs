@@ -12,10 +12,9 @@ namespace Defend.UI
         #region Variables
         private BuildManager buildManager;
         //타워들의 정보값
-        public TowerInfo[] towerinfo;
-        public Sprite[] towerSprite;
-        public List<BoxCollider> boxes;
-        private GameObject tower;
+        public BuildTowerUI Ballista;
+        public BuildTowerUI Bat;
+        public BuildTowerUI Cannon;
 
         public GameObject[] falsetowers;
 
@@ -37,7 +36,7 @@ namespace Defend.UI
         public void SelectTower(int index)
         {
             indexs = index;
-            buildManager.SetTowerToBuild(towerinfo[index]);
+            buildManager.SetTowerToBuild(Ballista[index]);
             tile.BuildTower(boxes[index].size, boxes[index].center, index);
             BuildUI.SetActive(false);
         }

@@ -28,24 +28,12 @@ namespace Defend.UI
                 towerInfo[i].projectile.tower = buildManager.buildMenu.towerinfo[i].projectile.tower;
                 towerInfo[i].projectile = buildManager.buildMenu.towerinfo[i].projectile;
             }
-            //함수 등록
-            buildManager.Sellbutton.onClick.AddListener(SellTower);
-            buildManager.UpgradeButton.onClick.AddListener(UpgradeTower);
-        }
-        protected override void OnSelectExited(SelectExitEventArgs args)
-        {
-            base.OnSelectExited(args);
-            //buildManager.DeselectTile();
         }
         protected override void OnSelectEntered(SelectEnterEventArgs args)
         {
             base.OnSelectEntered(args);
-            buildManager.SelectTile(this);
+            buildManager.SelectTower(this);
             //if()
-        }
-        private void OnCollisionStay(Collision collision)
-        {
-            Debug.Log("ddd");
         }
         public void SellTower()
         {
@@ -60,7 +48,7 @@ namespace Defend.UI
                 PlayerStats.AddMoney(blueprint.Getupgradecost());
             }*/
             //기본 터렛을 판매
-            if (this.gameObject != null)
+            if (this.gameObject != null && !buildManager.IsUpgrade)
             {
                 Debug.Log("판매");
                 Destroy(this.gameObject);
@@ -68,7 +56,7 @@ namespace Defend.UI
                 //GameObject effect = Instantiate(SellImpectPrefab, GetBuildPosition(), Quaternion.identity);
                 //Destroy(effect, 2f);
                 //기본터렛들의 반값으로 판매
-                buildManager.playerState.AddMoney(1);
+                buildManager.playerState.AddMoney(towerInfo[buildManager.buildMenu.indexs].GetSellCost());
                 buildManager.DeselectTile();
             }
             else if (!this.gameObject)
@@ -101,12 +89,6 @@ namespace Defend.UI
                 BoxCollider boxCollider = tower_upgrade.GetComponent<BoxCollider>();
                 boxCollider.size = buildManager.buildMenu.boxes[buildManager.buildMenu.indexs].size;
                 boxCollider.center = buildManager.buildMenu.boxes[buildManager.buildMenu.indexs].center;
-                if(buildManager.buildMenu.tile.tower)
-                {
-                    //Destroy();
-                    tower_upgrade = buildManager.buildMenu.tile.tower;
-                    tower_upgrade = null;
-                }
                 buildManager.DeselectTile();
             }
         }
