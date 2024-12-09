@@ -31,6 +31,8 @@ namespace Defend.UI
                 // TODO :: Player를 바라봐야함
                 target = Camera.main.transform;
             }
+            
+            status = transform.root.GetComponent<Status>();
         }
 
         // Update is called once per frame
@@ -38,6 +40,8 @@ namespace Defend.UI
         {
             transform.LookAt(transform.position + target.forward);
             // TODO :: 델리게이트 사용해서 넘기자
+            
+            if (status == null) return;
             SetFillHealth();
             SetHealthText();
             SetFillMana();
