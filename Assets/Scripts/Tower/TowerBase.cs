@@ -47,13 +47,16 @@ namespace Defend.Tower
         LineRenderer lineRenderer;                          // 라인 랜더러
         #endregion
 
+        protected virtual void Awake()
+        {
+            status = GetComponent<Status>();
+            status.Init(towerInfo);
+        }
+
         protected virtual void Start()
         {
             // 참조
             animator = GetComponent<Animator>();
-            status = GetComponent<Status>();
-
-            status.Init(towerInfo);
 
             #region Layer 및 collider 사용 => 미사용
             // Layer 설정
