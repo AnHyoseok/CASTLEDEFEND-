@@ -82,7 +82,7 @@ namespace Defend.Utillity
             get { return manaRegenRatio; }
             set
             {
-                manaRegenRatio *= value;
+                manaRegenRatio = value;
             }
         }
         [SerializeField] private float healthRegenRatio = 1f;
@@ -91,7 +91,7 @@ namespace Defend.Utillity
             get { return healthRegenRatio; }
             set
             {
-                healthRegenRatio *= value;
+                healthRegenRatio = value;
             }
         }
         #endregion
@@ -175,7 +175,6 @@ namespace Defend.Utillity
         // 마나 사용
         public void UseMana(float amount)
         {
-            Debug.Log("TEST NAME = " + gameObject.name + " Mana = " + amount);
             // 소모값 유효성 검사
             amount = Mathf.Clamp(amount, 0, Mathf.Infinity);
 

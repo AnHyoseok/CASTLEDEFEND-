@@ -28,6 +28,8 @@ namespace Defend.Tower
         [SerializeField] private bool isOn => status.CurrentMana >= manaAmount;
         [SerializeField] private GameObject effectObj;
         [SerializeField] protected BuffContents buffContents;
+        [SerializeField] protected ParticleSystem buffEffect;
+        [SerializeField] protected ParticleSystem debuffEffect;
         protected override void Start()
         {
             status = GetComponent<Status>();
@@ -67,11 +69,22 @@ namespace Defend.Tower
                 }
             }
 
+            // 마나 소모
+            status.UseMana(manaAmount);
+
             // 각 타워 효과 적용
             foreach (TowerBase tower in towersInRage)
             {
+                // 버프 타워 구분
+                BuffTower buffTower = tower.GetComponent<BuffTower>();
+                // 버프 타워면 버프적용하지 않도록
+                if (buffTower != null) continue;
+
                 tower.BuffTower(buffContents);
-                //TODO 효과 이펙트 적용
+
+                // 효과 이펙트 적용
+                ParticleSystem effect = Instantiate(buffEffect, tower.gameObject.transform);
+                Destroy(effect.gameObject, buffContents.duration);
             }
 
             // 슛 타임 초기화

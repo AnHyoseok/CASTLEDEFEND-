@@ -93,6 +93,7 @@ namespace Defend.Tower
         {
             SetRotationToTarget(); // 매 프레임마다 타겟을 바라보도록 회전
             shootTime += Time.deltaTime;
+
             //Shoot();
             // TEST
             //DrawLine();            // 타겟 방향으로 라인 그리기
@@ -226,6 +227,7 @@ namespace Defend.Tower
         // 타워 강화 (지속시간, 공격력, 방어력, 연사력, 공격사거리, 체력재생, 마나재생)
         public void BuffTower(BuffContents buffContents)
         {
+            // 버프 적용
             towerInfo.projectile.attack += buffContents.atk;
             towerInfo.armor += buffContents.armor;
             towerInfo.shootDelay /= buffContents.shootDelay;
@@ -233,6 +235,7 @@ namespace Defend.Tower
             status.HealthRegenRatio *= buffContents.healthRegen;
             status.ManaRegenRatio *= buffContents.manaRegen;
 
+            // 복구 Coroutine 실행
             StartCoroutine(ResetTower(buffContents));
         }
 
@@ -240,7 +243,6 @@ namespace Defend.Tower
         IEnumerator ResetTower(BuffContents buffContents)
         {
             yield return new WaitForSeconds(buffContents.duration);
-
             towerInfo.projectile.attack -= buffContents.atk;
             towerInfo.armor -= buffContents.armor;
             towerInfo.shootDelay *= buffContents.shootDelay;
@@ -248,6 +250,20 @@ namespace Defend.Tower
             status.HealthRegenRatio /= buffContents.healthRegen;
             status.ManaRegenRatio /= buffContents.manaRegen;
         }
+
+        // 타워 복구 (지속시간, 공격력, 방어력, 연사력, 공격사거리, 체력재생, 마나재생)
+        //IEnumerator ResetTower(float duration, float originalAttack, float originalArmor, float originalShootDelay, float originalAttackRange, float originalHealthRegen, float originalManaRegen)
+        //{
+        //    yield return new WaitForSeconds(duration);
+        //    // 원래 상태로 복구
+        //    towerInfo.projectile.attack = originalAttack;
+        //    towerInfo.armor = originalArmor;
+        //    towerInfo.shootDelay = originalShootDelay;
+        //    towerInfo.attackRange = originalAttackRange;
+        //    status.HealthRegenRatio = originalHealthRegen;
+        //    status.ManaRegenRatio = originalManaRegen;
+        //}
+
 
         // 공격방향 라인 랜더러
         private void DrawLine()
