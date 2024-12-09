@@ -20,7 +20,7 @@ public class XRRaycastEndPoint : MonoBehaviour
     void Update()
     {
         if (rayInteractor == null || buildArea == null) return;
-        
+
         RaycastHit hit;
         bool isBuildAreaActive = rayInteractor.TryGetCurrent3DRaycastHit(out hit);
 
