@@ -12,6 +12,7 @@ namespace Defend.Player
     public class Skill : MonoBehaviour
     {
         #region Variables
+        TowerBase[] towerbase;
         //참조
         private EnemyMoveController moveController;
         private BuffContents buffContents;
@@ -90,18 +91,27 @@ namespace Defend.Player
         }
         public void TowerAtkSpeedPlay()
         {
+            towerbase = FindObjectsByType<TowerBase>(FindObjectsSortMode.None);
+
+            if (buffContents != null)
+            {
+                buffContents.shootDelay = 1f;
+                StartCoroutine(TowerAttakSpeed());
+
+            }
+        
             if (buffContents == null)
             {
                 Debug.LogError("buffContents is null!");
                 return;
             }
 
-            StartCoroutine(TowerAttakSpeed());
+           
         }
         //타워 공속 업
         public IEnumerator TowerAttakSpeed()
         {
-
+          
             originalshootDelay = buffContents.shootDelay;
 
             if (buffContents != null)
@@ -109,6 +119,12 @@ namespace Defend.Player
                 buffContents.shootDelay += 30f;
             }
             yield return new WaitForSeconds(3f);
+            towerbase = FindObjectsByType<TowerBase>(FindObjectsSortMode.None);
+            foreach (var tower in towerbase)
+            {
+                tower.BuffTower(buffContents, true);
+            }
+
             buffContents.shootDelay = originalshootDelay;
         }
 

@@ -79,9 +79,9 @@ namespace Defend.Player
         private float[] IncreaseTreeGainUpgrade = { 1.2f, 1.5f, 2.0f };
         private float[] increaseRockGainUpgrade = { 1.2f, 1.5f, 2.0f };
         private float[] increaseArmorUpgrade = { 5f, 10f, 20f };
-        private float increaseTowerATKUpgrade = 1f;
-        private float increaseTowerATKSpeedUpgrade = 1f;
-        private float increaseTowerATKRangeUpgrade = 1f;
+        //private float increaseTowerATKUpgrade = 1f;
+        //private float increaseTowerATKSpeedUpgrade = 1f;
+        //private float increaseTowerATKRangeUpgrade = 1f;
 
         //업그레이드 단계
         private int currentHPUpgradeLevel = 0; //hp
@@ -106,7 +106,7 @@ namespace Defend.Player
         #endregion
         private void Start()
         {
-            Debug.Log(CastleUpgrade.buffContents + "!!!!!!!!!!!!");
+  
             //참조
             health = castle.GetComponent<Health>();
             playerState = Object.FindAnyObjectByType<PlayerState>();
@@ -309,6 +309,7 @@ namespace Defend.Player
         //타워 공격속도 업그레이드
         public void TowerATKSpeedUpgrade()
         {
+            towerbase = FindObjectsByType<TowerBase>(FindObjectsSortMode.None);
             if (currentTowerATKSpeedUpgradeLevel < CostTowerATKSpeed.Length && playerState.SpendMoney(CostTowerATKSpeed[currentTowerATKSpeedUpgradeLevel]))
             {
                 playerState.SpendMoney(CostTowerATKSpeed[currentTowerATKSpeedUpgradeLevel]);
@@ -331,6 +332,7 @@ namespace Defend.Player
         //타워 공격 범위 업그레이드
         public void TowerATKRangeUpgrade()
         {
+            towerbase = FindObjectsByType<TowerBase>(FindObjectsSortMode.None);
             if (currentTowerATKRangeUpgradeLevel < CostTowerATKRange.Length && playerState.SpendMoney(CostTowerATKRange[currentTowerATKRangeUpgradeLevel]))
             {
                 playerState.SpendMoney(CostTowerATKRange[currentTowerATKRangeUpgradeLevel]);
