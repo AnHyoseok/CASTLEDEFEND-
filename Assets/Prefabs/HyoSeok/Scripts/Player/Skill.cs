@@ -6,6 +6,9 @@ using Defend.Tower;
 using TMPro;
 using UnityEngine.UI;
 using Defend.Utillity;
+using Defend.Player;
+using Unity.VisualScripting;
+using Defend.TestScript;
 
 namespace Defend.UI
 {
@@ -16,7 +19,7 @@ namespace Defend.UI
         //Status[] status;
         //참조
         private EnemyMoveController moveController;
-        private BuffContents buffContents;
+
         //캔버스
         public GameObject canvas;
         //
@@ -37,10 +40,11 @@ namespace Defend.UI
 
         //타임스탑 변수
         private GameObject[] enemies;
-        private Vector3[] originalVelocities;
+
+        EnemyState[] enemyState;
 
         //타워공속업 변수
-        private float originalshootDelay;
+        //private float originalshootDelay;
 
         //사운드
         public AudioClip magnetSound;
@@ -96,46 +100,82 @@ namespace Defend.UI
         }
 
         //몬스터 정지 스킬
-        public void TimeStop()
+        public void TimeStopPlay()
         {
-
+            StartCoroutine(TimeStop());
         }
 
+        public IEnumerator TimeStop()
+        {
+            ////연출시작 
+          
 
+
+            EnemyState[] enemys = FindObjectsByType<EnemyState>(FindObjectsSortMode.None);
+
+            foreach (EnemyState e in enemys)
+            {
+                e.gameObject.GetComponent<EnemyMoveController>().enabled = false;
+              
+                e.gameObject.GetComponent<Animator>().speed=0.01f;
+                Debug.Log($"e={e.gameObject}");
+                GameObject magnetEffect = Instantiate(magnetEffectPrefab, e.transform.position + transform.forward, Quaternion.identity);
+                magnetEffect.transform.SetParent(transform);
+                //연출 종료
+                Destroy(magnetEffect, 3f);
+            }
+         
+            yield return new WaitForSeconds(3f);
+
+            foreach (EnemyState e in enemys)
+            {
+
+                e.gameObject.GetComponent<EnemyMoveController>().enabled = true;
+              
+                e.gameObject.GetComponent<Animator>().speed = 1f;
+
+            }
+     
+            //사운드 종료
+            audioSource.Stop();
+        }
         //타워 공속 업
         public void TowerAtkSpeedPlay()
         {
-            towerbase = FindObjectsByType<TowerBase>(FindObjectsSortMode.None);
 
-            if (buffContents == null)
-            {
-                Debug.LogError("buffContents is null!");
-                return;
-            }
-
-            buffContents.shootDelay = 1f;
             StartCoroutine(TowerAttakSpeed());
-
 
         }
 
         public IEnumerator TowerAttakSpeed()
         {
-
-            originalshootDelay = buffContents.shootDelay;
-
-            if (buffContents != null)
+            //연출시작 
+            GameObject magnetEffect = Instantiate(magnetEffectPrefab, player.transform.position + transform.forward, Quaternion.identity);
+            magnetEffect.transform.SetParent(transform);
+            //사운드 시작
+            audioSource.Play();
+            if (CastleUpgrade.buffContents != null)
             {
-                buffContents.shootDelay += 30f;
+                CastleUpgrade.buffContents.duration = 5f;
+                CastleUpgrade.buffContents.atk = 0f;
+                CastleUpgrade.buffContents.armor = 0f;
+                CastleUpgrade.buffContents.healthRegen = 1f;
+                CastleUpgrade.buffContents.manaRegen = 1f;
+                CastleUpgrade.buffContents.atkRange = 1f;
+                CastleUpgrade.buffContents.shootDelay = 5f;
             }
-            yield return new WaitForSeconds(3f);
+
             towerbase = FindObjectsByType<TowerBase>(FindObjectsSortMode.None);
             foreach (var tower in towerbase)
             {
-                tower.BuffTower(buffContents, true);
+                tower.BuffTower(CastleUpgrade.buffContents, false);
             }
+            yield return new WaitForSeconds(3f);
 
-            buffContents.shootDelay = originalshootDelay;
+            //연출 종료
+            Destroy(magnetEffect);
+            //사운드 종료
+            audioSource.Stop();
         }
 
         //쿨시작
@@ -153,16 +193,16 @@ namespace Defend.UI
         {
             float cooldownTime = 0f;
 
-         
+
             switch (skillIndex)
             {
                 case 0:
                     cooldownTime = magnetCoolTime;
                     break;
-                case 1: 
+                case 1:
                     cooldownTime = timeStopCoolTime;
                     break;
-                case 2: 
+                case 2:
                     cooldownTime = atkSpeedUpCoolTime;
                     break;
             }
@@ -173,23 +213,23 @@ namespace Defend.UI
             {
                 elapsedTime += Time.deltaTime;
                 float fillAmount = Mathf.Clamp01(1 - (elapsedTime / cooldownTime));
-                coolTimeUI[skillIndex].GetComponent<Image>().fillAmount = fillAmount; 
+                coolTimeUI[skillIndex].GetComponent<Image>().fillAmount = fillAmount;
                 coolTimeText[skillIndex].text = Mathf.Ceil(cooldownTime - elapsedTime).ToString();
 
                 yield return null;
             }
 
             //UI 초기화
-            coolTimeUI[skillIndex].GetComponent<Image>().fillAmount = 1; 
+            coolTimeUI[skillIndex].GetComponent<Image>().fillAmount = 1;
             coolTimeText[skillIndex].text = "";
             skillButtons[skillIndex].interactable = true;
-            isCooldown[skillIndex] = false; 
+            isCooldown[skillIndex] = false;
         }
 
         public void OnSkillButtonClick(int skillIndex)
         {
             StartCooldown(skillIndex);
-           
+
         }
     }
 

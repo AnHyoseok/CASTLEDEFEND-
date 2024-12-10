@@ -358,7 +358,6 @@ namespace Defend.Player
         //버튼 상태 업데이트
         private void UpdateButtonStates()
         {
-
             btnList[0].interactable = playerState.money >= CostFullHP && health.CurrentHealth != health.maxHealth; // FullHP 버튼
             btnList[1].interactable = currentHPUpgradeLevel < CostHPUpgrade.Length && health.maxHealth < 1000f && playerState.money > (CostHPUpgrade[currentHPUpgradeLevel]); // HPUpgrade 버튼
             btnList[2].interactable = currentHPTimeUpgradeLevel < CostHPTimeUpgrade.Length && RgAmount < 5f && playerState.money > CostHPTimeUpgrade[currentHPTimeUpgradeLevel]; // HPTimeUpgrade 버튼
