@@ -20,15 +20,15 @@ public class BuildArea : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        renderer.material = AreaRed;
-    }
-
-    /*private void OnTriggerStay(Collider other)
+    /*private void OnTriggerEnter(Collider other)
     {
         renderer.material = AreaRed;
     }*/
+
+    private void OnTriggerStay(Collider other)
+    {
+        renderer.material = AreaRed;
+    }
 
     private void OnTriggerExit(Collider other)
     {
