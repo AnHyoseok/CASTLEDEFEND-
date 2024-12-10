@@ -2,17 +2,18 @@ using UnityEngine;
 using Defend.Interactive;
 using System.Collections;
 using Defend.Enemy;
-using static UnityEngine.XR.OpenXR.Features.Interactions.HTCViveControllerProfile;
 using Defend.Tower;
-using System.Linq;
-using Defend.UI;
+using TMPro;
+using UnityEngine.UI;
+using Defend.Utillity;
 
-namespace Defend.Player
+namespace Defend.UI
 {
     public class Skill : MonoBehaviour
     {
         #region Variables
         TowerBase[] towerbase;
+        //Status[] status;
         //참조
         private EnemyMoveController moveController;
         private BuffContents buffContents;
@@ -21,7 +22,15 @@ namespace Defend.Player
         //
         public GameObject player;
 
-      
+        //쿨타임
+        public GameObject[] coolTimeUI;        //쿨타임이미지
+        public TextMeshProUGUI[] coolTimeText; //쿨타임 시간
+        [SerializeField] float magnetCoolTime = 60f;
+        [SerializeField] float timeStopCoolTime = 120f;
+        [SerializeField] float atkSpeedUpCoolTime = 180f;
+
+        private bool[] isCooldown;
+        public Button[] skillButtons;
         //자석값 변수
         private float originalMagnetSpeed;
         private float originalMagnetDistance;
@@ -46,11 +55,13 @@ namespace Defend.Player
 
             moveController = FindFirstObjectByType<EnemyMoveController>();
             audioSource = player.AddComponent<AudioSource>();
+
+            isCooldown = new bool[coolTimeUI.Length];
             audioSource.clip = magnetSound;
             audioSource.playOnAwake = false; // 자동 재생 방지
 
         }
-
+        //필드위 자원 모두 흡수하는 스킬
         public void MagnetPlay()
         {
 
@@ -58,11 +69,11 @@ namespace Defend.Player
 
         }
 
-        //필드위 자원 모두 흡수하는 스킬
+
         public IEnumerator Magnet()
         {
-    
-           canvas.SetActive(false);
+
+            //canvas.SetActive(false);
             //연출시작 
             GameObject magnetEffect = Instantiate(magnetEffectPrefab, player.transform.position + transform.forward, Quaternion.identity);
             magnetEffect.transform.SetParent(transform);
@@ -70,14 +81,14 @@ namespace Defend.Player
             audioSource.Play();
             //yield return new WaitForSeconds(1f);    //연출할 시간
 
-            
+
             originalMagnetSpeed = ResourceManager.speed;
             originalMagnetDistance = ResourceManager.distance;
             ResourceManager.speed = 20f;
             ResourceManager.distance = 500f;
             yield return new WaitForSeconds(3f);
             //연출 종료
-            Destroy(magnetEffect );
+            Destroy(magnetEffect);
             //사운드 종료
             audioSource.Stop();
             ResourceManager.speed = originalMagnetSpeed;
@@ -89,29 +100,28 @@ namespace Defend.Player
         {
 
         }
+
+
+        //타워 공속 업
         public void TowerAtkSpeedPlay()
         {
             towerbase = FindObjectsByType<TowerBase>(FindObjectsSortMode.None);
 
-            if (buffContents != null)
-            {
-                buffContents.shootDelay = 1f;
-                StartCoroutine(TowerAttakSpeed());
-
-            }
-        
             if (buffContents == null)
             {
                 Debug.LogError("buffContents is null!");
                 return;
             }
 
-           
+            buffContents.shootDelay = 1f;
+            StartCoroutine(TowerAttakSpeed());
+
+
         }
-        //타워 공속 업
+
         public IEnumerator TowerAttakSpeed()
         {
-          
+
             originalshootDelay = buffContents.shootDelay;
 
             if (buffContents != null)
@@ -128,10 +138,58 @@ namespace Defend.Player
             buffContents.shootDelay = originalshootDelay;
         }
 
-        //스킬 쿨다운
-        IEnumerator SkillCoolDown()
+        //쿨시작
+        public void StartCooldown(int skillIndex)
         {
-            yield return null;
+            if (isCooldown[skillIndex]) return;
+
+            isCooldown[skillIndex] = true;
+            skillButtons[skillIndex].interactable = false;
+            StartCoroutine(SkillCoolDown(skillIndex));
+        }
+
+        //스킬 쿨다운
+        IEnumerator SkillCoolDown(int skillIndex)
+        {
+            float cooldownTime = 0f;
+
+         
+            switch (skillIndex)
+            {
+                case 0:
+                    cooldownTime = magnetCoolTime;
+                    break;
+                case 1: 
+                    cooldownTime = timeStopCoolTime;
+                    break;
+                case 2: 
+                    cooldownTime = atkSpeedUpCoolTime;
+                    break;
+            }
+
+            //UI 업데이트
+            float elapsedTime = 0f;
+            while (elapsedTime < cooldownTime)
+            {
+                elapsedTime += Time.deltaTime;
+                float fillAmount = Mathf.Clamp01(1 - (elapsedTime / cooldownTime));
+                coolTimeUI[skillIndex].GetComponent<Image>().fillAmount = fillAmount; 
+                coolTimeText[skillIndex].text = Mathf.Ceil(cooldownTime - elapsedTime).ToString();
+
+                yield return null;
+            }
+
+            //UI 초기화
+            coolTimeUI[skillIndex].GetComponent<Image>().fillAmount = 1; 
+            coolTimeText[skillIndex].text = "";
+            skillButtons[skillIndex].interactable = true;
+            isCooldown[skillIndex] = false; 
+        }
+
+        public void OnSkillButtonClick(int skillIndex)
+        {
+            StartCooldown(skillIndex);
+           
         }
     }
 

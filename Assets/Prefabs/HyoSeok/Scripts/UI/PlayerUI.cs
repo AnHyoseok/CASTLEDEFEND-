@@ -9,8 +9,9 @@ namespace Defend.UI
         [SerializeField] private GameObject gameMenuCanvas;
         [SerializeField] private GameObject buildCanvas;
         [SerializeField] private GameObject upgradeCanvas;
-        [SerializeField] private GameObject shopCanvas;
+        [SerializeField] private GameObject towerCanvas;
         [SerializeField] private GameObject skilCanvas;
+        [SerializeField] private Animator[] animators;
         private bool isOpen;
         #endregion
 
@@ -36,10 +37,16 @@ namespace Defend.UI
         public void CloseAllCanvases()
         {
             isOpen = false;
+            foreach (var animator in animators)
+            { // 애니메이션 초기화
+                animator.Rebind();
+                animator.Update(0); 
+            }
+
             gameMenuCanvas.SetActive(false);
             buildCanvas.SetActive(false);
             upgradeCanvas.SetActive(false);
-            shopCanvas.SetActive(false);
+            towerCanvas.SetActive(false);
             skilCanvas.SetActive(false);
         }
 
@@ -57,11 +64,11 @@ namespace Defend.UI
             upgradeCanvas.SetActive(true );
         }
 
-        public void Shop()
+        public void Tower()
         {
             //Debug.Log("Shopopen");
             gameMenuCanvas.SetActive(false);
-            shopCanvas.SetActive(true);
+            towerCanvas.SetActive(true);
         }
 
         public void Skill()

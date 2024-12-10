@@ -12,6 +12,8 @@ namespace Defend.UI
         public Transform[] potalsTransform;
         //플레이어 위치값
         public Transform playerTransform;
+
+     
         #endregion
 
    
@@ -19,6 +21,8 @@ namespace Defend.UI
         //포탈 이동 버튼
         public void Teleportation(int index)
         {
+           
+
             if (index >= 0 && index < potalsTransform.Length)
             {
                 playerTransform.position = potalsTransform[index].position;
