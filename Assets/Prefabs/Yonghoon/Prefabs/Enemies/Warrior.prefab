@@ -25628,7 +25628,6 @@ GameObject:
   - component: {fileID: 334139641479693819}
   - component: {fileID: 211053470906578040}
   - component: {fileID: 1043428634358233238}
-  - component: {fileID: 3170493446737906187}
   m_Layer: 6
   m_Name: Warrior
   m_TagString: Untagged
@@ -25826,19 +25825,6 @@ MonoBehaviour:
   enemyHealth: 0
   enemyArmor: 0
   type: 0
---- !u!114 &3170493446737906187
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4101051290623180776}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e5a440da6abfbf4b8967429481ba574, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  increaseAttackPowerAmount: 5
 --- !u!1 &4257797501596484271
 GameObject:
   m_ObjectHideFlags: 0

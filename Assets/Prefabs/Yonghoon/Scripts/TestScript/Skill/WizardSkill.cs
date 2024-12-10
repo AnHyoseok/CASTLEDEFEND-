@@ -5,20 +5,24 @@ namespace Defend.Enemy.Skill
 {
     public class WizardSkill : SkillBase
     {
-        #region Variables
-        [SerializeField] private float healAmount = 5f;
-        #endregion
+
+        [SerializeField] private float skillCooldown = 5f; // 스킬 발동 주기
+        private float lastSkillTime = -Mathf.Infinity; // 마지막 스킬 발동 시간
 
         #region Test용 Range
-        private float range = 5f;
+        [SerializeField] private float range = 5f;
         #endregion
 
-        public override void ActivateSkill(Transform activator, float range)
+        public override void ActivateSkill()
         {
             Debug.Log("Wizard uses Heal skill!");
 
+            float healAmount = gameObject.GetComponent<EnemyAttackController>().CurrentAttackDamage;
+
+            Debug.Log(healAmount);
+
             // 범위 내 모든 Collider 검색
-            Collider[] hitColliders = Physics.OverlapSphere(activator.position, range);
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, range);
 
             foreach (var collider in hitColliders)
             {
@@ -26,8 +30,9 @@ namespace Defend.Enemy.Skill
                 var enemyStats = collider.GetComponentInParent<Health>();
                 if (enemyStats != null)
                 {
+
                     enemyStats.Heal(healAmount); // 방어력 증가
-                    Debug.Log($"{enemyStats.gameObject.name}의 체력이 증가했습니다!");
+                    Debug.Log($"{enemyStats.gameObject.name}의 체력이 {healAmount}만큼 증가했습니다!");
                 }
             }
 
@@ -35,9 +40,14 @@ namespace Defend.Enemy.Skill
             //ShowEffect(activator, range);
         }
 
-        private void ShowEffect(Transform activator, float range)
+        //private void ShowEffect(Transform activator, float range)
+        //{
+        //    Debug.Log($"Heal 효과 발생! 범위: {range}");
+        //}
+
+        public override bool CanActivateSkill(float healthRatio)
         {
-            Debug.Log($"Warrior 포효 효과 발생! 범위: {range}");
+            return Time.time - lastSkillTime >= skillCooldown;
         }
 
         #region Test용 GIZMO
@@ -48,5 +58,6 @@ namespace Defend.Enemy.Skill
             Gizmos.DrawWireSphere(transform.position, range);
         }
         #endregion
+
     }
 }

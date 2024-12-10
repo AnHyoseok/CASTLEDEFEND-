@@ -18,7 +18,7 @@ namespace Defend.Utillity
         public static string ENEMY_ANIM_ISARRIVE = "IsArrive";         //EnemyAnim - ArriveCheck
         public static string ENEMY_ANIM_ISDEATH = "IsDeath";         //EnemyAnim - DeathCheck
         public static string ENEMY_ANIM_ATTACKTRIGGER = "Attack";         //EnemyAnim - AttackTrigger
-        public static string ENEMY_ANIM_SCREAMTRIGGER = "Scream";         //EnemyAnim - ScreamTrigger
+        public static string ENEMY_ANIM_SKILLTRIGGER = "Skill";         //EnemyAnim - ScreamTrigger
 
         #endregion
     }

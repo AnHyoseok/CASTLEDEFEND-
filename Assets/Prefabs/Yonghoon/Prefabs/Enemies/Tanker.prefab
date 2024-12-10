@@ -51348,7 +51348,7 @@ GameObject:
   - component: {fileID: 8266896830803629914}
   - component: {fileID: -5660023932820353151}
   - component: {fileID: 391461198241582609}
-  - component: {fileID: 3173712311814204115}
+  - component: {fileID: 5207861229347086097}
   m_Layer: 6
   m_Name: Tanker
   m_TagString: Untagged
@@ -51426,7 +51426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 200
-  baseArmor: 5
+  baseArmor: 20
   RgAmount: 0
   Rginterval: 0
   isHpTime: 0
@@ -51545,7 +51545,7 @@ MonoBehaviour:
   enemyHealth: 0
   enemyArmor: 0
   type: 0
---- !u!114 &3173712311814204115
+--- !u!114 &5207861229347086097
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -51558,6 +51558,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   increaseArmorAmount: 5
+  hasSkill: 0
+  range: 10
 --- !u!1 &8361692655883624189
 GameObject:
   m_ObjectHideFlags: 0

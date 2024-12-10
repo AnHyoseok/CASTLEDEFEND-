@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Defend.item;
 using Defend.Utillity;
 using Defend.Enemy.Skill;
+using UnityEngine.Events;
 
 namespace Defend.TestScript
 {
@@ -38,6 +39,9 @@ namespace Defend.TestScript
 
         //스킬을 받아올 컴포넌트
         private SkillBase skill; // 공통 스킬 참조
+        private bool channeling = false; //스킬을 사용 중인지 체크
+        public UnityAction OnChanneling;
+
 
         //버프와 디버프
         public ParticleSystem buffParticleSystem;
@@ -112,6 +116,25 @@ namespace Defend.TestScript
             buffParticleSystem.Stop();
             debuffParticleSystem.Stop();
             healParticleSystem.Stop();
+
+            switch (type)
+            {
+                case EnemyType.Tanker:
+                    skill = gameObject.GetComponent<TankerSkill>();
+                    break;
+                case EnemyType.Warrior:
+                    skill = gameObject.GetComponent<WarriorSkill>();
+                    break;
+                case EnemyType.Buffer:
+                    skill = gameObject.GetComponent<WizardSkill>();
+                    break;
+                case EnemyType.Boss:
+                    //skill = gameObject.GetComponent<BossSkill>();
+                    break;
+                default:
+                    Debug.LogWarning("Unknown EnemyType. No skill assigned.");
+                    break;
+            }
         }
 
         void Update()
@@ -121,6 +144,21 @@ namespace Defend.TestScript
             {
                 UpdateEffect();
             }
+
+            if (!skill)
+            {
+                Debug.Log("스킬이 설정되지 않았습니다");
+                return;
+            }
+
+            if (skill.CanActivateSkill(health.GetRatio()) && !channeling)
+            {
+                ChangeChannelingStatus();
+                animator.SetTrigger(Constants.ENEMY_ANIM_SKILLTRIGGER);
+            }
+
+
+
             if (Input.GetKeyDown(KeyCode.E))
             {
                 OnHeal(1);
@@ -131,9 +169,15 @@ namespace Defend.TestScript
             }
         }
 
+        private void ChangeChannelingStatus()
+        {
+            channeling = !channeling;
+            OnChanneling?.Invoke();
+        }
+
         private void OnDamaged(float amount)
         {
-            Debug.Log("공격 받음");
+            //Debug.Log("공격 받음");
             TriggerEffect(hitEffectGradient); // 데미지 효과 적용
         }
 
@@ -238,11 +282,6 @@ namespace Defend.TestScript
             {
                 debuffParticleSystem.Play();
             }
-        }
-
-        private void ActiveSkill()
-        {
-
         }
     }
 }

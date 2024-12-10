@@ -25,9 +25,12 @@ namespace Defend.Enemy
         public float CurrentAttackDamage { get; private set; }
         public float CurrentAttackDelay { get; private set; }
 
-        private float attackCooldown;
-        private bool isAttacking;
-        private bool hasArrived;
+        private float attackCooldown = 0f;
+        private bool isAttacking = false;
+        private bool hasArrived = false;
+
+        private EnemyController enemyController;
+        private bool isChanneling = false;
 
         public UnityAction<float> AttackDamageChanged;
         #endregion
@@ -38,22 +41,25 @@ namespace Defend.Enemy
 
             // 참조
             moveController = GetComponent<EnemyMoveController>();
+            enemyController = GetComponent<EnemyController>();
             animator = GetComponent<Animator>();
 
             //초기화
             CurrentAttackDamage = baseAttackDamage;
             CurrentAttackDelay = baseAttackDelay;
-            attackCooldown = 0f;
-            isAttacking = false;
-            hasArrived = false;
-
-            moveController.EnemyArrive += OnEnemyArrive;
         }
+
+        private void Start()
+        {
+            moveController.EnemyArrive += OnEnemyArrive;
+            enemyController.OnChanneling += OnChanneling;
+        }
+
 
         private void Update()
         {
             if (!hasArrived) return;
-            if (isAttacking || !attackTarget) return;
+            if (isAttacking || !attackTarget || isChanneling) return;
             // 공격 쿨타임마다 공격
             if (attackCooldown > 0f)
             {
@@ -99,6 +105,11 @@ namespace Defend.Enemy
         private void OnEnemyArrive()
         {
             hasArrived = true;
+        }
+
+        private void OnChanneling()
+        {
+            isChanneling = !isChanneling;
         }
     }
 }

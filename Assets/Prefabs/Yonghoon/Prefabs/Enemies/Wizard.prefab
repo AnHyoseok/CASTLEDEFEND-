@@ -37447,7 +37447,6 @@ GameObject:
   - component: {fileID: 1392758854722754380}
   - component: {fileID: 3561543013164669943}
   - component: {fileID: 8631572856059282821}
-  - component: {fileID: -4813033649021712409}
   m_Layer: 6
   m_Name: Wizard
   m_TagString: Untagged
@@ -37514,7 +37513,6 @@ MonoBehaviour:
   attackTarget: {fileID: 0}
   baseAttackDamage: 10
   baseAttackDelay: 2
-  type: 0
 --- !u!114 &8203510802694303396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37628,6 +37626,7 @@ MonoBehaviour:
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
   flashDuration: 0.5
+  type: 0
 --- !u!114 &8631572856059282821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37646,19 +37645,6 @@ MonoBehaviour:
   enemyHealth: 0
   enemyArmor: 0
   type: 0
---- !u!114 &-4813033649021712409
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6130659323785349130}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 645075da7f794114783c47684969cb21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healAmount: 5
 --- !u!1 &6225424283202638962
 GameObject:
   m_ObjectHideFlags: 0
