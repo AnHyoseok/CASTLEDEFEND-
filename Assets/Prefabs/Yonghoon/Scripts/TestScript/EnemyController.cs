@@ -94,7 +94,8 @@ namespace Defend.TestScript
             //버프와 디버프관련 UnityAction
             health.Armorchange += UpdateArmor;
             moveController.MoveSpeedChanged += UpdateSpeed;
-
+            attackController.AttackDamageChanged += UpdateAttactDamage;
+            attackController.AttackDamageChanged += UpdateAttactDamage;
 
             // 반짝임 효과 초기화
             bodyFlashMaterialPropertyBlock = new MaterialPropertyBlock();
@@ -184,7 +185,7 @@ namespace Defend.TestScript
         private void OnHeal(float amount)
         {
             //TriggerEffect(healEffectGradient); // 힐 효과 적용
-            Debug.Log("힐 받음");
+            //Debug.Log("힐 받음");
             healParticleSystem.Play();
         }
 
@@ -261,14 +262,20 @@ namespace Defend.TestScript
             // rate에 따라 버프 또는 디버프 효과 실행
             PlayEffect(rate);
 
-            Debug.Log($"before anim speed = {animator.speed}, rate = {rate}");
+            //Debug.Log($"before anim speed = {animator.speed}, rate = {rate}");
             animator.speed = animatorSpeed * (1.0f + rate);
-            Debug.Log($"after anim speed = {animator.speed}");
+            //Debug.Log($"after anim speed = {animator.speed}");
         }
 
         private void UpdateArmor(float amount)
         {
-            Debug.Log($"{amount}만큼 방어력 증/감소됨!");
+            //Debug.Log($"{amount}만큼 방어력 증/감소됨!");
+            PlayEffect(amount);
+        }
+
+        private void UpdateAttactDamage(float amount)
+        {
+            //Debug.Log($"{amount}만큼 공격력 증/감소됨!");
             PlayEffect(amount);
         }
 

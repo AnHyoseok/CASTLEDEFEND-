@@ -19,11 +19,13 @@ namespace Defend.Enemy.Skill
         public override void ActivateSkill()
         {
             hasSkill = true;
-            
-            Debug.Log("탱커가 방어력 증가 버프 사용");
 
-            // 범위 내 모든 Collider 검색
-            Collider[] hitColliders = Physics.OverlapSphere(transform.position, range);
+            //Debug.Log("탱커가 방어력 증가 버프 사용");
+
+            // 범위 내 특정 레이어의 Collider 검색
+            int layerMask = LayerMask.GetMask("Enemy", "Boss");
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, range, layerMask);
+
 
             foreach (var collider in hitColliders)
             {
@@ -32,20 +34,12 @@ namespace Defend.Enemy.Skill
                 if (healthComponent != null)
                 {
                     healthComponent.ChangedArmor(increaseArmorAmount); // 방어력 증가
-                    Debug.Log($"{healthComponent.gameObject.name}의 방어력이 {increaseArmorAmount}만큼 증가했습니다!");
+                    //Debug.Log($"{healthComponent.gameObject.name}의 방어력이 {increaseArmorAmount}만큼 증가했습니다!");
 
                     // 지속 시간 동안 방어력 증가 후 원래 값으로 복귀
                     healthComponent.StartCoroutine(RestoreArmorAfterDuration(healthComponent, skillDuration));
                 }
             }
-
-            // 선택적 이펙트
-            //ShowEffect(activator, range);
-        }
-
-        private void ShowEffect(Transform activator, float range)
-        {
-            Debug.Log($"Warrior 포효 효과 발생! 범위: {range}");
         }
 
         // 방어력 증가 후 지속 시간 동안만 유지되게 하는 코루틴
@@ -55,7 +49,7 @@ namespace Defend.Enemy.Skill
 
             // 방어력을 원래 값으로 복구
             healthComponent.ChangedArmor(-increaseArmorAmount);
-            Debug.Log($"{healthComponent.gameObject.name}의 방어력이 {increaseArmorAmount}만큼 다시 감소했습니다!");
+            //Debug.Log($"{healthComponent.gameObject.name}의 방어력이 {increaseArmorAmount}만큼 다시 감소했습니다!");
         }
 
         public override bool CanActivateSkill(float healthRatio)

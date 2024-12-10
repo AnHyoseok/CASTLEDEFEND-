@@ -12,7 +12,7 @@ namespace Defend.TestScript
 
         //체력관련
         public float maxHealth = 100f;    //최대 Hp
-        public float CurrentHealth { get;  set; }    //현재 Hp
+        public float CurrentHealth { get; set; }    //현재 Hp
 
         //아머 관련
         [SerializeField] private float baseArmor = 5f;
@@ -40,7 +40,7 @@ namespace Defend.TestScript
             HPTime(RgAmount, Rginterval);//1초마다 1의 체력을 회복
         }
 
-       
+
         //맥스 체력 올리기
         public void IncreaseMaxHealth(float amount)
         {
@@ -58,16 +58,16 @@ namespace Defend.TestScript
         {
             if (isHpTime == true)
             {
-              
+
 
                 while (true)
                 {
                     amount = RgAmount;
-                   
+
                     CurrentHealth += amount;
                     // 최대 체력을 초과하지 않도록 제한
                     CurrentHealth = Mathf.Min(CurrentHealth, maxHealth);
-                 
+
                     // 지정된 간격만큼 대기
                     yield return new WaitForSeconds(interval);
                 }
@@ -80,7 +80,7 @@ namespace Defend.TestScript
             float beforeHealth = CurrentHealth;
 
             // 힐 적용
-            CurrentHealth = Mathf.Clamp(CurrentHealth + amount, 0f, maxHealth);
+            CurrentHealth = Mathf.Clamp(CurrentHealth + amount, CurrentHealth, maxHealth);
 
             // 실제 힐량 계산
             float realHeal = CurrentHealth - beforeHealth;
@@ -91,7 +91,7 @@ namespace Defend.TestScript
             //**************************************************
 
             // 디버깅 또는 로그 출력
-            Debug.Log($"Healed: {realHeal}, Current Health: {CurrentHealth}");
+            //Debug.Log($"Healed: {realHeal}, Current Health: {CurrentHealth}");
             if (realHeal > 0f)
             {
                 //힐이펙트 구현
@@ -111,7 +111,7 @@ namespace Defend.TestScript
             if (realDamage > 0f)
             {
                 // 체력 감소, 데미지이펙트 구현
-                CurrentHealth -= realDamage;          
+                CurrentHealth -= realDamage;
                 OnDamaged?.Invoke(-realDamage);
             }
             //Debug.Log($"Damage Taken: {realDamage}, Remaining Health: {CurrentHealth}");
@@ -121,7 +121,7 @@ namespace Defend.TestScript
                 HandleDeath();
             }
         }
-        
+
         //아머값 변경시 호출될 메서드
         public void ChangedArmor(float amount)
         {

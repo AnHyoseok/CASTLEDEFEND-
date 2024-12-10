@@ -51425,7 +51425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34e3e69428bb6e34b8257abd4398b8bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 200
+  maxHealth: 400
   baseArmor: 20
   RgAmount: 0
   Rginterval: 0
@@ -51558,6 +51558,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   increaseArmorAmount: 5
+  skillDuration: 5
   hasSkill: 0
   range: 10
 --- !u!1 &8361692655883624189

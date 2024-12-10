@@ -1,6 +1,5 @@
 using Defend.TestScript;
 using Defend.Utillity;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -156,7 +155,7 @@ namespace Defend.Enemy
             //이동속도는 baseSpeed를 기반으로 +-50%를 초과할 수 없음
             //CurrentSpeed = Mathf.Clamp(CurrentSpeed, (baseSpeed / 2), (baseSpeed * 2));
 
-            Debug.Log("최종 속도 = " + CurrentSpeed);
+            //Debug.Log("최종 속도 = " + CurrentSpeed);
 
             // 속도 변경 이벤트 호출
             MoveSpeedChanged?.Invoke(CurrentSpeed, totalRate);
