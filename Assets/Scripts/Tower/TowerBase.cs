@@ -40,6 +40,9 @@ namespace Defend.Tower
         // 컴포넌트
         protected Animator animator;
         protected Status status;
+        [SerializeField] protected ParticleSystem buffEffect;
+        [SerializeField] protected ParticleSystem debuffEffect;
+        [SerializeField] protected GameObject destroyEffect;
         #endregion
 
         #region Variables For Test
@@ -243,6 +246,9 @@ namespace Defend.Tower
             if (isPermanent == false)
             {
                 StartCoroutine(ResetTower(buffContents));
+                // 효과 이펙트 적용
+                ParticleSystem effect = Instantiate(buffEffect, gameObject.transform);
+                Destroy(effect.gameObject, buffContents.duration);
             }
         }
 

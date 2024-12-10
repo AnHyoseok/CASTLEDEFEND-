@@ -5283,6 +5283,8 @@ MonoBehaviour:
     maxHealth: 300
     maxMana: 300
     armor: 10
+    healthRegen: 1
+    manaRegen: 1
     cost1: 1
     cost2: 2
     cost3: 3
@@ -5297,6 +5299,9 @@ MonoBehaviour:
       moveSpeed: 100
       attackRange: 25
       debuffRatio: -0.7
+  buffEffect: {fileID: 1362654769694918472, guid: 485d1a74ddf5544469139c460fbe22ec, type: 3}
+  debuffEffect: {fileID: 2639560195941380255, guid: 9fb0195321ad90d48be4c27218022c91, type: 3}
+  destroyEffect: {fileID: 1842692474500718, guid: cfd68de6510901147ad542cfdfa2e148, type: 3}
   gizmo:
     gizmoColor: {r: 0, g: 1, b: 0, a: 1}
     sphereRadius: 0
@@ -5321,6 +5326,8 @@ MonoBehaviour:
   maxMana: 0
   currentMana: 0
   currentArmor: 0
+  manaRegenRatio: 1
+  healthRegenRatio: 1
 --- !u!1 &8877515672411605078
 GameObject:
   m_ObjectHideFlags: 0

@@ -9765,6 +9765,9 @@ MonoBehaviour:
       moveSpeed: 0
       attackRange: 0
       debuffRatio: 0
+  buffEffect: {fileID: 1362654769694918472, guid: 485d1a74ddf5544469139c460fbe22ec, type: 3}
+  debuffEffect: {fileID: 2639560195941380255, guid: 9fb0195321ad90d48be4c27218022c91, type: 3}
+  destroyEffect: {fileID: 1842692474500718, guid: cfd68de6510901147ad542cfdfa2e148, type: 3}
   gizmo:
     gizmoColor: {r: 0, g: 1, b: 0, a: 1}
     sphereRadius: 20
@@ -9780,8 +9783,6 @@ MonoBehaviour:
     atkRange: 1.1
     healthRegen: 1.1
     manaRegen: 1.1
-  buffEffect: {fileID: 1362654769694918472, guid: 485d1a74ddf5544469139c460fbe22ec, type: 3}
-  debuffEffect: {fileID: 2639560195941380255, guid: 9fb0195321ad90d48be4c27218022c91, type: 3}
 --- !u!114 &7412336502495491488
 MonoBehaviour:
   m_ObjectHideFlags: 0

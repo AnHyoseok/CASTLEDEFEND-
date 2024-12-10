@@ -12,13 +12,13 @@ namespace Defend.Tower
     [System.Serializable]
     public class BuffContents
     {
-        public float duration;              // 지속시간
-        public float atk;                   // 공격력 증가
-        public float armor;                 // 방어력 증가
-        public float shootDelay;            // 연사력 증가
-        public float atkRange;              // 공격범위 증가
-        public float healthRegen;           // 체력 재생력 증가
-        public float manaRegen;             // 마나 재생력 증가
+        public float duration;                   // 지속시간
+        public float atk = 0f;                   // 공격력 증가
+        public float armor = 0f;                 // 방어력 증가
+        public float shootDelay = 1f;            // 연사력 증가
+        public float atkRange = 1f;              // 공격범위 증가
+        public float healthRegen = 1f;           // 체력 재생력 증가
+        public float manaRegen = 1f;             // 마나 재생력 증가
     }
 
     public class BuffTower : TowerBase
@@ -28,8 +28,7 @@ namespace Defend.Tower
         [SerializeField] private bool isOn => status.CurrentMana >= manaAmount;
         [SerializeField] private GameObject effectObj;
         [SerializeField] protected BuffContents buffContents;
-        [SerializeField] protected ParticleSystem buffEffect;
-        [SerializeField] protected ParticleSystem debuffEffect;
+        
         protected override void Start()
         {
             status = GetComponent<Status>();
@@ -81,10 +80,6 @@ namespace Defend.Tower
                 if (buffTower != null) continue;
 
                 tower.BuffTower(buffContents, false);
-
-                // 효과 이펙트 적용
-                ParticleSystem effect = Instantiate(buffEffect, tower.gameObject.transform);
-                Destroy(effect.gameObject, buffContents.duration);
             }
 
             // 슛 타임 초기화
