@@ -18,7 +18,6 @@ namespace Defend.UI
         public TextMeshProUGUI Attack;
         public TextMeshProUGUI AttackSpeed;
         public TextMeshProUGUI UpgradeMoney;
-        public Sprite currentsprite;
         #endregion
     }
 }

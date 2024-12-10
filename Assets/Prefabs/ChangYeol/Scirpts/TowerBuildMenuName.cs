@@ -13,9 +13,9 @@ namespace Defend.UI
         #endregion
         private void Start()
         {
-            //StartBuild();
+            StartBuild();
         }
-        /*public void StartBuild()
+        public void StartBuild()
         {
             for (int i = 0; i < towerinfo.Length; i++)
             {
@@ -27,7 +27,7 @@ namespace Defend.UI
                 towerinfo[i].Buycost.text = "Buy Money : " + build.towerinfo[i].cost1.ToString();
             }
         }
-        public void Stst(int index)
+        public void SelectTower(int index)
         {
             selectTower.SetActive(true);
             selectTowerinfo.image.sprite = build.towerSprite[index];
@@ -36,6 +36,6 @@ namespace Defend.UI
             selectTowerinfo.Mp.text = "Mp : " + build.towerinfo[index].maxMana.ToString();
             selectTowerinfo.Attack.text = "Attack : " + build.towerinfo[index].projectile.attack.ToString();
             selectTowerinfo.AttackSpeed.text = "Armor : " + build.towerinfo[index].armor.ToString();
-        }*/
+        }
     }
 }

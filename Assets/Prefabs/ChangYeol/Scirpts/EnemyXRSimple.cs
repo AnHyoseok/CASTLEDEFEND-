@@ -21,14 +21,12 @@ namespace Defend.UI
         /*protected override void OnSelectEntered(SelectEnterEventArgs args)
         {
             base.OnSelectEntered(args);
-            enemyState = buildManager.GetEnemyToBuild();
-            buildManager.SetEnemyToBuild(enemyState);
             buildManager.SelectEnemy(this);
         }
         protected override void OnSelectExited(SelectExitEventArgs args)
         {
             base.OnSelectExited(args);
-            
+
             buildManager.DeselectEnemy();
         }*/
     }

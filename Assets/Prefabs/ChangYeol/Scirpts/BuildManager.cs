@@ -62,14 +62,14 @@ namespace Defend.UI
         //선택한 타워
         private TowerXR tower;
 
-        /*//선택한 적
-        public EnemyState enemyStats;
+        //선택한 적
+        /*public Ene enemyState;
         //적 속성 UI
         public EnemyPropertiesUI EnemyproUI;
         private EnemyXRSimple xRSimple;*/
         #endregion
 
-        public TowerInfo GetTowerToBuild()
+        /*public TowerInfo GetTowerToBuild()
         {
             return towerInfo;
         }
@@ -77,9 +77,8 @@ namespace Defend.UI
         public void SetTowerToBuild(TowerInfo Tower)
         {
             towerInfo = Tower;
-            /*TowerSprite = sprite;*/
             DeselectTile();
-        }
+        }*/
         public void SelectTower(TowerXR towerXR)
         {
             //같은 타워를 선택하면 HideUI
