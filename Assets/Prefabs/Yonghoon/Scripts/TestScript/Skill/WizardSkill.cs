@@ -6,10 +6,9 @@ namespace Defend.Enemy.Skill
     public class WizardSkill : SkillBase
     {
 
+        #region Variables
         [SerializeField] private float skillCooldown = 5f; // 스킬 발동 주기
         private float lastSkillTime = -Mathf.Infinity; // 마지막 스킬 발동 시간
-
-        #region Test용 Range
         [SerializeField] private float range = 5f;
         #endregion
 

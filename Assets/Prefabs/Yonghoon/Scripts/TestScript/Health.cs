@@ -76,6 +76,9 @@ namespace Defend.TestScript
         //힐
         public void Heal(float amount)
         {
+            //죽었으면 실행하지 않음
+            if (isDeath) return;
+
             // 힐 적용 전 체력 저장
             float beforeHealth = CurrentHealth;
 
@@ -102,6 +105,9 @@ namespace Defend.TestScript
         //damageSource: 데미지를 주는 주체
         public void TakeDamage(float damage)
         {
+            //죽었으면 실행하지 않음
+            if (isDeath) return;
+
             // 방어력 적용 후 최종 데미지 계산
             float mitigatedDamage = Mathf.Max(damage - CurrentArmor, 0); // Clamp 대신 Max 사용 (더 간결)
 

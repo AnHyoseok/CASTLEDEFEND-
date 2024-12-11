@@ -59,7 +59,6 @@ namespace Defend.TestScript
         [SerializeField] private int rewardGoldCount;
         public int RewardGoldCount { get { return rewardGoldCount; } private set { rewardGoldCount = value; } } //참조가 필요시 사용할 레퍼런스
         public GameObject goldPrefab;           //코인 프리팹
-        public float scatterForce = 5f;         //흩뿌릴 힘
         public Transform offsetTransform;       //생성될 위치 (위로 조정)
 
 
@@ -154,7 +153,6 @@ namespace Defend.TestScript
 
             if (skill.CanActivateSkill(health.GetRatio()) && !channeling)
             {
-                ChangeChannelingStatus();
                 animator.SetTrigger(Constants.ENEMY_ANIM_SKILLTRIGGER);
             }
 
@@ -172,6 +170,7 @@ namespace Defend.TestScript
 
         private void ChangeChannelingStatus()
         {
+            Debug.Log("EnemyController는 문제가 없다!");
             channeling = !channeling;
             OnChanneling?.Invoke();
         }

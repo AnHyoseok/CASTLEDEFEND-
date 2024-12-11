@@ -15,7 +15,7 @@ namespace Defend.Enemy
 
         // 웨이브 간 대기 시간
         public float spawnTimer = 180f;
-        private float countdown = 0f; // 다음 웨이브 시작까지 남은 시간
+        [HideInInspector] public float countdown = 0f; // 다음 웨이브 시작까지 남은 시간
 
         // 현재 스폰 중인지 여부를 나타내는 상태 플래그
         [SerializeField] private bool isSpawn;

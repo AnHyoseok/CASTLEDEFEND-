@@ -30,11 +30,13 @@ namespace Defend.UI
 
             health.OnDamaged += SetHealthUI;
             health.OnHeal += SetHealthUI;
+            health.OnDie += DisableUI;
 
             //UI 초기화
             //healthText.text = $"{Mathf.Round(health.CurrentHealth)}/{health.MaxHealth}";
             healthText.text = $"{Mathf.Round(health.CurrentHealth)}/{health.maxHealth}";
             fillHealth.fillAmount = health.GetRatio();
+            gameObject.SetActive(false);
 
             if (target == null)
             {
@@ -43,8 +45,16 @@ namespace Defend.UI
             }
         }
 
+        //죽으면 UI 비활성화
+        private void DisableUI()
+        {
+            gameObject.SetActive(false);
+        }
+
+        //힐이나 데미지를 받으면 amount로 계수를 받아와서 text와 fillAmount값에 적용
         private void SetHealthUI(float amount)
         {
+            gameObject.SetActive(true);
             healthText.text = $"{Mathf.Round(health.CurrentHealth)}/{health.maxHealth}";
             fillHealth.fillAmount = health.GetRatio();
         }
@@ -53,7 +63,6 @@ namespace Defend.UI
         void Update()
         {
             transform.LookAt(transform.position + target.forward);
-            // TODO :: 델리게이트 사용해서 넘기자
         }
     }
 }

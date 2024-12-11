@@ -51425,8 +51425,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34e3e69428bb6e34b8257abd4398b8bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 400
-  baseArmor: 20
+  maxHealth: 100
+  baseArmor: 5
   RgAmount: 0
   Rginterval: 0
   isHpTime: 0
@@ -51462,7 +51462,6 @@ MonoBehaviour:
   scaleOffset: 0
   rewardGoldCount: 5
   goldPrefab: {fileID: 4610807197165865268, guid: 78f0efdf0964cd74896d92f9d555be50, type: 3}
-  scatterForce: 3
   offsetTransform: {fileID: 1828569783196411834}
   bodyMaterial: {fileID: 2100000, guid: 63d68c3ba5d7b90418069b96d9c35a4a, type: 2}
   hitEffectGradient:

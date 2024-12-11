@@ -13,9 +13,6 @@ namespace Defend.Enemy.Skill
         [SerializeField] private float increaseAttackPowerAmount = 5f;
         [SerializeField] private float skillDuration = 5f;  // 공격력 증가 지속 시간
         [SerializeField] private bool hasSkill = false;
-        #endregion
-
-        #region Test용 Range
         [SerializeField] private float range = 5f;
         #endregion
 
