@@ -5,11 +5,8 @@ namespace Defend.Enemy.Skill
 {
     public class WizardSkill : SkillBase
     {
-
         #region Variables
-        [SerializeField] private float skillCooldown = 5f; // 스킬 발동 주기
         private float lastSkillTime = -Mathf.Infinity; // 마지막 스킬 발동 시간
-        [SerializeField] private float range = 5f;
         #endregion
 
         public override void ActivateSkill()
@@ -31,7 +28,7 @@ namespace Defend.Enemy.Skill
                 if (enemyStats != null)
                 {
 
-                    enemyStats.Heal(healAmount); // 방어력 증가
+                    enemyStats.Heal(healAmount); // 힐
                     //Debug.Log($"{enemyStats.gameObject.name}의 체력이 {healAmount}만큼 증가했습니다!");
                 }
             }

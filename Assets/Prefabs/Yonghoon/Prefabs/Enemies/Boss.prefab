@@ -59666,6 +59666,7 @@ GameObject:
   - component: {fileID: 6327035239446093555}
   - component: {fileID: 4346929657253167004}
   - component: {fileID: 7931451948758061361}
+  - component: {fileID: 9186387081766517172}
   m_Layer: 7
   m_Name: Boss
   m_TagString: Untagged
@@ -59742,8 +59743,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34e3e69428bb6e34b8257abd4398b8bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1
-  baseArmor: 1
+  maxHealth: 200
+  baseArmor: 14
   RgAmount: 0
   Rginterval: 0
   isHpTime: 0
@@ -59759,7 +59760,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fb520b37536e55438a98a8d0930e347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSpeed: 10
+  baseSpeed: 3
 --- !u!114 &4346929657253167004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59779,7 +59780,6 @@ MonoBehaviour:
   scaleOffset: 0
   rewardGoldCount: 5
   goldPrefab: {fileID: 4610807197165865268, guid: 78f0efdf0964cd74896d92f9d555be50, type: 3}
-  scatterForce: 3
   offsetTransform: {fileID: 2703997755778126627}
   bodyMaterial: {fileID: 2100000, guid: 1131ac1e42ee4884ab91bd69310a2715, type: 2}
   hitEffectGradient:
@@ -59862,6 +59862,22 @@ MonoBehaviour:
   enemyHealth: 0
   enemyArmor: 0
   type: 0
+--- !u!114 &9186387081766517172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9083013574223758421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1079be118675284a9ec7042c9343af1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amount: 30
+  skillDuration: 5
+  skillCooldown: 5
+  range: 40
 --- !u!1 &9099716801781066013
 GameObject:
   m_ObjectHideFlags: 0

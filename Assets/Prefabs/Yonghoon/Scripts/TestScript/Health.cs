@@ -15,7 +15,7 @@ namespace Defend.TestScript
         public float CurrentHealth { get; set; }    //현재 Hp
 
         //아머 관련
-        [SerializeField] private float baseArmor = 5f;
+        public float baseArmor = 5f;
         public float CurrentArmor { get; set; }
 
         private bool isDeath = false;                       //죽음 체크

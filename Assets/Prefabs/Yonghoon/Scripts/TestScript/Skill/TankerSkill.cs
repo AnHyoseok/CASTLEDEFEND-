@@ -6,13 +6,6 @@ namespace Defend.Enemy.Skill
 {
     public class TankerSkill : SkillBase
     {
-        #region Variables
-        [SerializeField] private float increaseArmorAmount = 5f;
-        [SerializeField] private float skillDuration = 5f;  // 방어력 증가 지속 시간
-        [SerializeField] private bool hasSkill = false;
-        [SerializeField] private float range = 5f;
-        #endregion
-
         public override void ActivateSkill()
         {
             hasSkill = true;
@@ -30,8 +23,8 @@ namespace Defend.Enemy.Skill
                 var healthComponent = collider.GetComponentInParent<Health>();
                 if (healthComponent != null)
                 {
-                    healthComponent.ChangedArmor(increaseArmorAmount); // 방어력 증가
-                    //Debug.Log($"{healthComponent.gameObject.name}의 방어력이 {increaseArmorAmount}만큼 증가했습니다!");
+                    healthComponent.ChangedArmor(amount); // 방어력 증가
+                    //Debug.Log($"{healthComponent.gameObject.name}의 방어력이 {amount}만큼 증가했습니다!");
 
                     // 지속 시간 동안 방어력 증가 후 원래 값으로 복귀
                     healthComponent.StartCoroutine(RestoreArmorAfterDuration(healthComponent, skillDuration));
@@ -45,8 +38,8 @@ namespace Defend.Enemy.Skill
             yield return new WaitForSeconds(duration);
 
             // 방어력을 원래 값으로 복구
-            healthComponent.ChangedArmor(-increaseArmorAmount);
-            //Debug.Log($"{healthComponent.gameObject.name}의 방어력이 {increaseArmorAmount}만큼 다시 감소했습니다!");
+            healthComponent.ChangedArmor(-amount);
+            //Debug.Log($"{healthComponent.gameObject.name}의 방어력이 {amount}만큼 다시 감소했습니다!");
         }
 
         public override bool CanActivateSkill(float healthRatio)

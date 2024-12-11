@@ -5,6 +5,7 @@ using Defend.item;
 using Defend.Utillity;
 using Defend.Enemy.Skill;
 using UnityEngine.Events;
+using System;
 
 namespace Defend.TestScript
 {
@@ -50,13 +51,15 @@ namespace Defend.TestScript
 
         private Health health;//체력담당 컴포넌트
         private EnemyMoveController moveController;//이동담당 컴포넌트
+
         private EnemyAttackController attackController;//공격담당 컴포넌트
+        private bool isAttacking = false;
 
         public Vector3 positionOffset;//미사일이 날아와서 부딪힐 곳을 offset으로 할당
         public float scaleOffset;//몬스터마다 타워쪽 이펙트에 스케일을 조절하기위한 scaleOffset
 
         //떨어뜨릴 골드 개수
-        [SerializeField] private int rewardGoldCount;
+        public int rewardGoldCount;
         public int RewardGoldCount { get { return rewardGoldCount; } private set { rewardGoldCount = value; } } //참조가 필요시 사용할 레퍼런스
         public GameObject goldPrefab;           //코인 프리팹
         public Transform offsetTransform;       //생성될 위치 (위로 조정)
@@ -94,7 +97,7 @@ namespace Defend.TestScript
             health.Armorchange += UpdateArmor;
             moveController.MoveSpeedChanged += UpdateSpeed;
             attackController.AttackDamageChanged += UpdateAttactDamage;
-            attackController.AttackDamageChanged += UpdateAttactDamage;
+            attackController.OnAttacking += OnAttacking;
 
             // 반짝임 효과 초기화
             bodyFlashMaterialPropertyBlock = new MaterialPropertyBlock();
@@ -129,13 +132,15 @@ namespace Defend.TestScript
                     skill = gameObject.GetComponent<WizardSkill>();
                     break;
                 case EnemyType.Boss:
-                    //skill = gameObject.GetComponent<BossSkill>();
+                    skill = gameObject.GetComponent<BossSkill>();
                     break;
                 default:
                     Debug.LogWarning("Unknown EnemyType. No skill assigned.");
                     break;
             }
         }
+
+
 
         void Update()
         {
@@ -145,30 +150,13 @@ namespace Defend.TestScript
                 UpdateEffect();
             }
 
-            if (!skill)
-            {
-                Debug.Log("스킬이 설정되지 않았습니다");
-                return;
-            }
-
-            if (skill.CanActivateSkill(health.GetRatio()) && !channeling)
+            if (skill.CanActivateSkill(health.GetRatio()) && !channeling && !isAttacking)
             {
                 animator.SetTrigger(Constants.ENEMY_ANIM_SKILLTRIGGER);
             }
-
-
-
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                OnHeal(1);
-            }
-            if (Input.GetKeyDown(KeyCode.T))
-            {
-                PlayEffect(0.1f);
-            }
         }
 
-        private void ChangeChannelingStatus()
+        public void ChangeChannelingStatus()
         {
             Debug.Log("EnemyController는 문제가 없다!");
             channeling = !channeling;
@@ -288,6 +276,12 @@ namespace Defend.TestScript
             {
                 debuffParticleSystem.Play();
             }
+        }
+
+        //공격중인지 확인하는 UnityAction
+        private void OnAttacking()
+        {
+            isAttacking = !isAttacking;
         }
     }
 }

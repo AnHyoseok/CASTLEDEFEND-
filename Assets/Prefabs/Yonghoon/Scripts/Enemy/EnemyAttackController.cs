@@ -1,5 +1,6 @@
 using Defend.TestScript;
 using Defend.Utillity;
+using UnityEditor.MPE;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -21,9 +22,6 @@ namespace Defend.Enemy
         public float baseAttackDamage = 10f;
         public float baseAttackDelay = 2f;
 
-        //마법사는 공격데미지만 필요함
-        private EnemyType enemyType;
-
         public float CurrentAttackDamage { get; private set; }
         public float CurrentAttackDelay { get; private set; }
 
@@ -34,8 +32,7 @@ namespace Defend.Enemy
         private bool isChanneling = false;
 
         public UnityAction<float> AttackDamageChanged;
-
-
+        public UnityAction OnAttacking;
         #endregion
 
         private void Awake()
@@ -57,14 +54,13 @@ namespace Defend.Enemy
         {
             moveController.EnemyArrive += OnEnemyArrive;
             enemyController.OnChanneling += OnChanneling;
-            enemyType = enemyController.type;
         }
 
 
         private void Update()
         {
             //버프몬스터는 공격기능 제외
-            if (enemyType == EnemyType.Buffer) return;
+            if (enemyController.type == EnemyType.Buffer) return;
 
             //Enemy가 마지막 WayPoint에 도착하지 않았거나, 공격중이거나, 공격 타겟이 없거나, 스킬을 사용중이라면 공격 딜레이 시간이 감소하지 않고 공격도 하지 않음
             if (!hasArrived || isAttacking || !attackTarget || isChanneling) return;
@@ -77,14 +73,18 @@ namespace Defend.Enemy
             {
                 TriggerAttackAnimation();
             }
-
         }
 
         private void TriggerAttackAnimation()
         {
             // 공격 애니메이션 실행
             animator.SetTrigger(Constants.ENEMY_ANIM_ATTACKTRIGGER);
-            isAttacking = true;
+        }
+
+        public void ChangeAttackingStatus()
+        {
+            isAttacking = !isAttacking;
+            OnAttacking?.Invoke();
         }
 
         // 애니메이션 이벤트에서 호출할 메서드
@@ -100,7 +100,6 @@ namespace Defend.Enemy
 
         public void StartAttackCooldown()
         {
-            isAttacking = false;
             CurrentAttackDelay = baseAttackDelay; // 공격 대기시간 초기화
         }
 

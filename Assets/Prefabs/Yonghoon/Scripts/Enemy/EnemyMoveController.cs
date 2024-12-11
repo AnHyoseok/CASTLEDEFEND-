@@ -14,7 +14,7 @@ namespace Defend.Enemy
     {
         //필드
         #region Variable
-        [SerializeField] private float baseSpeed = 5f;
+        public float baseSpeed = 5f;
         [SerializeField] public float CurrentSpeed { get; private set; }   //이동 속도
 
         private float originSpeed;
@@ -141,7 +141,18 @@ namespace Defend.Enemy
             // 모든 슬로우 비율을 합산
             foreach (var rate in moveSources.Values)
             {
-                totalRate += rate;
+                if (enemyController.type == EnemyType.Boss)
+                {
+                    if (rate > 0)
+                    {
+                        totalRate += rate;
+                    }
+                    Debug.Log($"{enemyController.type}");
+                }
+                else
+                {
+                    totalRate += rate;
+                }
             }
 
             //증감효과는 슬로우 = 66%, 증가 = 50%로 제한

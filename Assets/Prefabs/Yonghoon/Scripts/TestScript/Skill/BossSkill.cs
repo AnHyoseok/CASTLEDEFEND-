@@ -7,22 +7,18 @@ namespace Defend.Enemy.Skill
     public class BossSkill : SkillBase
     {
         #region Variables
-
-        private List<float> thresholds = new List<float> { 0.75f, 0.5f, 0.25f }; // 체력 비율 기준
+        private float speedAmount = 1f;
+        private float healthRatio;
+        private List<float> thresholds = new List<float> { 1f, 0.75f, 0.50f }; // 체력 비율 기준
         private HashSet<float> usedThresholds = new HashSet<float>(); // 이미 사용된 체력 구간 추적
         private Dictionary<float, SkillType> skillMapping; // 체력 구간과 스킬 타입 매핑
-
-        [SerializeField] private float range = 20f; // 범위
-        [SerializeField] private float damageIncrease = 50f; // 공격력 증가량
-        [SerializeField] private float buffPowerIncrease = 30f; // 버프 파워 증가량
-        [SerializeField] private float aoeDamage = 100f; // 범위 데미지
         #endregion
 
         private enum SkillType
         {
-            BuffAllies,
-            IncreaseDamage,
-            AreaOfEffect
+            IncreaseSpeed,
+            IncreaseArmor,
+            IncreaseDamage
         }
 
         private void Start()
@@ -30,9 +26,9 @@ namespace Defend.Enemy.Skill
             // 체력 구간에 따른 스킬 매핑
             skillMapping = new Dictionary<float, SkillType>
             {
-                { 0.75f, SkillType.BuffAllies },
-                { 0.5f, SkillType.IncreaseDamage },
-                { 0.25f, SkillType.AreaOfEffect }
+                { 1f, SkillType.IncreaseSpeed },
+                { 0.75f, SkillType.IncreaseArmor },
+                { 0.5f, SkillType.IncreaseDamage }
             };
         }
 
@@ -40,12 +36,11 @@ namespace Defend.Enemy.Skill
         {
             Debug.Log("Boss uses a skill!");
 
-            float currentHealthRatio = GetCurrentHealthRatio();
-
             foreach (var threshold in thresholds)
             {
-                if (currentHealthRatio <= threshold && !usedThresholds.Contains(threshold))
+                if (healthRatio <= threshold && !usedThresholds.Contains(threshold))
                 {
+                    Debug.Log("currentHealthRatio");
                     usedThresholds.Add(threshold); // 사용된 구간 추가
                     ExecuteSkill(skillMapping[threshold]); // 해당 스킬 실행
                     break;
@@ -55,33 +50,35 @@ namespace Defend.Enemy.Skill
 
         private void ExecuteSkill(SkillType skillType)
         {
+            Debug.Log("ExecuteSkill");
             switch (skillType)
             {
-                case SkillType.BuffAllies:
-                    BuffAllies();
+                case SkillType.IncreaseArmor:
+                    IncreaseArmor();
                     break;
 
                 case SkillType.IncreaseDamage:
                     IncreaseDamage();
                     break;
 
-                case SkillType.AreaOfEffect:
-                    AreaOfEffect();
+                case SkillType.IncreaseSpeed:
+                    IncreaseSpeed();
                     break;
             }
         }
 
-        private void BuffAllies()
+        private void IncreaseArmor()
         {
             Debug.Log("Buffing all allies!");
 
-            Collider[] hitColliders = Physics.OverlapSphere(transform.position, range);
+            int layerMask = LayerMask.GetMask("Enemy", "Boss");
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, range, layerMask);
             foreach (var collider in hitColliders)
             {
-                var enemyController = collider.GetComponentInParent<EnemyAttackController>();
+                var enemyController = collider.GetComponentInParent<Health>();
                 if (enemyController != null)
                 {
-                    enemyController.ChangedAttackDamage(buffPowerIncrease);
+                    enemyController.ChangedArmor(amount);
                     Debug.Log($"{enemyController.gameObject.name}의 버프 파워가 증가했습니다!");
                 }
             }
@@ -91,36 +88,38 @@ namespace Defend.Enemy.Skill
         {
             Debug.Log("Increasing damage for all allies!");
 
-            Collider[] hitColliders = Physics.OverlapSphere(transform.position, range);
+            int layerMask = LayerMask.GetMask("Enemy", "Boss");
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, range, layerMask);
             foreach (var collider in hitColliders)
             {
                 var enemyController = collider.GetComponentInParent<EnemyAttackController>();
                 if (enemyController != null)
                 {
-                    enemyController.ChangedAttackDamage(damageIncrease);
+                    enemyController.ChangedAttackDamage(amount);
                     Debug.Log($"{enemyController.gameObject.name}의 공격력이 증가했습니다!");
                 }
             }
         }
 
-        private void AreaOfEffect()
+        private void IncreaseSpeed()
         {
             Debug.Log("Applying area damage!");
 
-            Collider[] hitColliders = Physics.OverlapSphere(transform.position, range);
+            int layerMask = LayerMask.GetMask("Enemy", "Boss");
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, range, layerMask);
             foreach (var collider in hitColliders)
             {
-                var health = collider.GetComponentInParent<Health>();
-                if (health != null)
+                var enemyController = collider.GetComponentInParent<EnemyMoveController>();
+                if (enemyController != null)
                 {
-                    health.TakeDamage(aoeDamage);
-                    Debug.Log($"{health.gameObject.name}에게 {aoeDamage}의 피해를 입혔습니다!");
+                    enemyController.ChangedMoveSpeed(this.gameObject, speedAmount);
                 }
             }
         }
 
         public override bool CanActivateSkill(float healthRatio)
         {
+            this.healthRatio= healthRatio;
             foreach (var threshold in thresholds)
             {
                 // 특정 체력 구간에 도달했으며, 아직 사용되지 않은 경우 발동 가능
@@ -133,11 +132,13 @@ namespace Defend.Enemy.Skill
             return false;
         }
 
-        private float GetCurrentHealthRatio()
+        #region Test용 GIZMO
+        private void OnDrawGizmosSelected()
         {
-            var healthComponent = GetComponent<Health>();
-            //return healthComponent != null ? healthComponent.CurrentHealth / healthComponent.MaxHealth : 1f;
-            return 1f;
+            // Gizmo로 포효 범위를 시각적으로 표시
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, range);
         }
+        #endregion
     }
 }

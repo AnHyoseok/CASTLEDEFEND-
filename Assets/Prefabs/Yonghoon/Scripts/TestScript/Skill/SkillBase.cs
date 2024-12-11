@@ -19,5 +19,15 @@ namespace Defend.Enemy.Skill
         /// <param name="elapsedTime">경과 시간 (필요한 경우)</param>
         /// <returns>스킬 활성화 가능 여부</returns>
         public abstract bool CanActivateSkill(float healthRatio);
+
+        #region Variables
+        public float amount = 5f;
+        public float skillDuration = 5f;
+        public float skillCooldown = 5f;
+        public float range = 5f;
+        
+        [HideInInspector] protected bool hasSkill = false;
+        #endregion
+
     }
 }

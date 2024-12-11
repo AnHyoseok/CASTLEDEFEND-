@@ -25707,7 +25707,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 200
-  baseArmor: 10
+  baseArmor: 14
   RgAmount: 0
   Rginterval: 0
   isHpTime: 0
@@ -25723,7 +25723,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fb520b37536e55438a98a8d0930e347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSpeed: 4
+  baseSpeed: 2
 --- !u!114 &211053470906578040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25743,7 +25743,6 @@ MonoBehaviour:
   scaleOffset: 0
   rewardGoldCount: 5
   goldPrefab: {fileID: 4610807197165865268, guid: 78f0efdf0964cd74896d92f9d555be50, type: 3}
-  scatterForce: 3
   offsetTransform: {fileID: 8381210944518672965}
   bodyMaterial: {fileID: 2100000, guid: ed14df0368fe53543907335c0e3902c6, type: 2}
   hitEffectGradient:
@@ -25838,9 +25837,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e5a440da6abfbf4b8967429481ba574, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  increaseAttackPowerAmount: 5
+  amount: 5
   skillDuration: 5
-  hasSkill: 0
+  skillCooldown: 5
   range: 5
 --- !u!1 &4257797501596484271
 GameObject:

@@ -51425,8 +51425,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34e3e69428bb6e34b8257abd4398b8bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  baseArmor: 5
+  maxHealth: 400
+  baseArmor: 14
   RgAmount: 0
   Rginterval: 0
   isHpTime: 0
@@ -51442,7 +51442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fb520b37536e55438a98a8d0930e347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSpeed: 3
+  baseSpeed: 2
 --- !u!114 &-5660023932820353151
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51556,10 +51556,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06e116e2f9af0a74aa0c45feb69d3136, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  increaseArmorAmount: 5
+  amount: 5
   skillDuration: 5
-  hasSkill: 0
-  range: 10
+  skillCooldown: 5
+  range: 5
 --- !u!1 &8361692655883624189
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,13 +9,6 @@ namespace Defend.Enemy.Skill
     /// </summary>
     public class WarriorSkill : SkillBase
     {
-        #region Variables
-        [SerializeField] private float increaseAttackPowerAmount = 5f;
-        [SerializeField] private float skillDuration = 5f;  // 공격력 증가 지속 시간
-        [SerializeField] private bool hasSkill = false;
-        [SerializeField] private float range = 5f;
-        #endregion
-
         public override void ActivateSkill()
         {
             hasSkill = true;
@@ -31,8 +24,8 @@ namespace Defend.Enemy.Skill
                 var enemyStats = enemyCollider.GetComponentInParent<EnemyAttackController>();
                 if (enemyStats != null)
                 {
-                    enemyStats.ChangedAttackDamage(increaseAttackPowerAmount); // 공격력 증가
-                    //Debug.Log($"{enemyStats.gameObject.name}의 공격력이 {increaseAttackPowerAmount}만큼 증가했습니다!");
+                    enemyStats.ChangedAttackDamage(amount); // 공격력 증가
+                    //Debug.Log($"{enemyStats.gameObject.name}의 공격력이 {amount}만큼 증가했습니다!");
 
                     // 지속 시간 동안 공격력 증가 후 원래 값으로 복귀
                     enemyStats.StartCoroutine(RestoreAttackAfterDuration(enemyStats, skillDuration));
@@ -46,8 +39,8 @@ namespace Defend.Enemy.Skill
             yield return new WaitForSeconds(duration);
 
             // 공격력을 원래 값으로 복구
-            enemyStats.ChangedAttackDamage(-increaseAttackPowerAmount);
-            //Debug.Log($"{enemyStats.gameObject.name}의 방어력이 {increaseAttackPowerAmount}만큼 다시 감소했습니다!");
+            enemyStats.ChangedAttackDamage(-amount);
+            //Debug.Log($"{enemyStats.gameObject.name}의 방어력이 {amount}만큼 다시 감소했습니다!");
         }
 
         public override bool CanActivateSkill(float healthRatio)
