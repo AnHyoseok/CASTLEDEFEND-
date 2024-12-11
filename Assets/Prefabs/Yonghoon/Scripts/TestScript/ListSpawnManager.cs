@@ -22,7 +22,7 @@ namespace Defend.Enemy
 
         // 웨이브 데이터를 배열로 관리
         public ListWaveData[] waves;
-        private int waveCount; // 현재 웨이브 번호
+        public int waveCount; // 현재 웨이브 번호
 
         // 현재 살아있는 몬스터의 총 개수 (모든 웨이브 공유)
         public static int enemyAlive;

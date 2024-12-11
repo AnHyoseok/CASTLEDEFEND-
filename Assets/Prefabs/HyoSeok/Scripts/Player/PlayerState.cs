@@ -10,10 +10,18 @@ namespace Defend.Player
         public float health = 20; //체력(성)
         public float tree; //자원(나무)
         public float rock; //자원(돌)
-   
-        #endregion
 
-    
+        #endregion
+       public string FormatMoney(float amount = 0)
+        {
+            amount = money;
+            if (amount >= 1000)
+            {
+                return (amount / 1000).ToString("F1") + "K";
+            }
+            return amount.ToString();
+        }
+
         //돈 , 나무 , 돌 개수 체크
         public void ShowStatus()
         {

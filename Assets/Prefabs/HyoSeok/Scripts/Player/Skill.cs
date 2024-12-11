@@ -9,6 +9,7 @@ using Defend.Utillity;
 using Defend.Player;
 using Unity.VisualScripting;
 using Defend.TestScript;
+using System.Net;
 
 namespace Defend.UI
 {
@@ -107,18 +108,20 @@ namespace Defend.UI
 
         public IEnumerator TimeStop()
         {
-            ////연출시작 
-          
-
-
             EnemyState[] enemys = FindObjectsByType<EnemyState>(FindObjectsSortMode.None);
 
+            
             foreach (EnemyState e in enemys)
             {
+                if (e == null)
+                {
+                    continue; 
+                }
                 e.gameObject.GetComponent<EnemyMoveController>().enabled = false;
               
                 e.gameObject.GetComponent<Animator>().speed=0.01f;
                 Debug.Log($"e={e.gameObject}");
+                ////연출시작 
                 GameObject magnetEffect = Instantiate(magnetEffectPrefab, e.transform.position + transform.forward, Quaternion.identity);
                 magnetEffect.transform.SetParent(transform);
                 //연출 종료
@@ -129,7 +132,10 @@ namespace Defend.UI
 
             foreach (EnemyState e in enemys)
             {
-
+                if (e == null)
+                {
+                    continue;
+                }
                 e.gameObject.GetComponent<EnemyMoveController>().enabled = true;
               
                 e.gameObject.GetComponent<Animator>().speed = 1f;

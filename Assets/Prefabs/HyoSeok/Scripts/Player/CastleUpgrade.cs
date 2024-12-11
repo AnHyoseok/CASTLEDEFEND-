@@ -127,7 +127,7 @@ namespace Defend.Player
             test1.text = $"curent HP = {health.CurrentHealth}";
             test2.text = $"hpmax ={health.maxHealth}";
             test3.text = $"hp rex={health.RgAmount}";
-            test4.text = $"curent money = {playerState.money}";
+            test4.text = $"curent money = {playerState.FormatMoney()}";
         }
 
         //타워 업그레이드 가격변동
