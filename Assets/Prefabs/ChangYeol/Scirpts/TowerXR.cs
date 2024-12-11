@@ -14,6 +14,7 @@ namespace Defend.UI
 
         //빌드매니저 객체
         private BuildManager buildManager;
+
         #endregion
 
         private void Start()
@@ -28,6 +29,16 @@ namespace Defend.UI
                 towerInfo[i].projectile = buildManager.buildMenu.towerinfo[i].projectile;
             }
         }
+        protected override void OnHoverEntered(HoverEnterEventArgs args)
+        {
+            base.OnHoverEntered(args);
+            buildManager.buildMenu.isReticle = false;
+        }
+        protected override void OnHoverExited(HoverExitEventArgs args)
+        {
+            base.OnHoverExited(args);
+            buildManager.buildMenu.isReticle = true;
+        }
         protected override void OnSelectEntered(SelectEnterEventArgs args)
         {
             base.OnSelectEntered(args);
@@ -35,16 +46,6 @@ namespace Defend.UI
         }
         public void SellTower()
         {
-            /*//업그레이드 터렛을 판매
-            if (turret_upgrade != null)
-            {
-                Destroy(turret_upgrade);
-                IsUpgrade = false;
-                GameObject effect = Instantiate(SellImpectPrefab, GetBuildPosition(), Quaternion.identity);
-                Destroy(effect, 2f);
-                //업그레이드터렛들의 반값으로 판매
-                PlayerStats.AddMoney(blueprint.Getupgradecost());
-            }*/
             //기본 터렛을 판매
             if (this.gameObject != null)
             {
@@ -80,7 +81,8 @@ namespace Defend.UI
                     //터렛 업그레이드 여부
                     buildManager.IsUpgrade = true;
                     //터렛 업그레이드 생성
-                    tower_upgrade = Instantiate(towerInfo[buildManager.buildMenu.indexs].upgradeTower, transform.position, Quaternion.identity);
+                    tower_upgrade = Instantiate(towerInfo[buildManager.buildMenu.indexs].upgradeTower,
+                        transform.position, Quaternion.identity);
                     tower_upgrade.AddComponent<BoxCollider>();
                     tower_upgrade.AddComponent<TowerXR>();
                     BoxCollider boxCollider = tower_upgrade.GetComponent<BoxCollider>();
@@ -89,9 +91,9 @@ namespace Defend.UI
                     Destroy(this.gameObject);
                     tower_upgrade = null;
                     buildManager.DeselectTile();
+                    buildManager.buildMenu.levelindex += 1;
+                    buildManager.buildMenu.istowerup = false;
                 }
-                buildManager.buildMenu.indexs += 1;
-                
             }
         }
     }

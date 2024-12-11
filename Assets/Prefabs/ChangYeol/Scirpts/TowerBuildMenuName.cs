@@ -27,15 +27,15 @@ namespace Defend.UI
                 towerinfo[i].Buycost.text = "Buy Money : " + build.towerinfo[i].cost1.ToString();
             }
         }
-        public void SelectTower(int index)
+        public void SelectTower()
         {
             selectTower.SetActive(true);
-            selectTowerinfo.image.sprite = build.towerSprite[index];
-            selectTowerinfo.name.text = towerinfo[index].name.text;
-            selectTowerinfo.Hp.text = "Hp : " + build.towerinfo[index].maxHealth.ToString();
-            selectTowerinfo.Mp.text = "Mp : " + build.towerinfo[index].maxMana.ToString();
-            selectTowerinfo.Attack.text = "Attack : " + build.towerinfo[index].projectile.attack.ToString();
-            selectTowerinfo.AttackSpeed.text = "Armor : " + build.towerinfo[index].armor.ToString();
+            selectTowerinfo.image.sprite = build.towerSprite[build.indexs];
+            selectTowerinfo.name.text = towerinfo[build.indexs].name.text;
+            selectTowerinfo.Hp.text = "Hp : " + build.towerinfo[build.indexs].maxHealth.ToString();
+            selectTowerinfo.Mp.text = "Mp : " + build.towerinfo[build.indexs].maxMana.ToString();
+            selectTowerinfo.Attack.text = "Attack : " + build.towerinfo[build.indexs].projectile.attack.ToString();
+            selectTowerinfo.AttackSpeed.text = "Armor : " + build.towerinfo[build.indexs].armor.ToString();
         }
     }
 }
