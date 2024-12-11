@@ -1,5 +1,6 @@
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Defend.Player
 {
@@ -19,6 +20,7 @@ namespace Defend.Player
         //플레이어 더미
         public GameObject showObject;
 
+        public InputActionProperty property;
         #endregion
         private void Start()
         {
@@ -32,7 +34,7 @@ namespace Defend.Player
         }
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.C))
+            if (property.action.WasCompletedThisFrame()|| Input.GetKeyDown(KeyCode.C))
             {
                 ViewChangeGo();
             }

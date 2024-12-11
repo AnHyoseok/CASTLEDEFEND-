@@ -26,7 +26,10 @@ namespace Defend.UI
 
         void Update()
         {
-           
+            if (Input.GetKeyUp(KeyCode.L))
+            {
+                listSpawnManager.SkipTimer();
+            }
 
             texts[0].text = health.CurrentHealth.ToString();  //Ã¼·Â
             texts[1].text = playerState.FormatMoney();  //µ·

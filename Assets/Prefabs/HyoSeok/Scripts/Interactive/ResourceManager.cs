@@ -20,8 +20,8 @@ namespace Defend.Interactive
         private float moneymultiplier = 1.0f;
 
         //dropitem수치
-        public static float distance = 3f; // 플레이어에게 가는 거리
-        public static float speed = 1.0f; // 플레이어에게 가는 속도
+       [SerializeField] public static float distance = 3f; // 플레이어에게 가는 거리
+       [SerializeField] public static float speed = 1.0f; // 플레이어에게 가는 속도
 
       
         #endregion
@@ -71,15 +71,15 @@ namespace Defend.Interactive
             {
                 case "rock":
                     rockmultiplier *= multiplier;
-                    Debug.Log($"rockamout = {moneymultiplier}");
+                    //Debug.Log($"rockamout = {moneymultiplier}");
                     break;
                 case "tree":
                     treemultiplier *= multiplier;
-                    Debug.Log($"treeAmount = {moneymultiplier}");
+                    //Debug.Log($"treeAmount = {moneymultiplier}");
                     break;
                 case "money":
                     moneymultiplier *= multiplier;
-                    Debug.Log($"moneyAmount = {moneymultiplier}");
+                    //Debug.Log($"moneyAmount = {moneymultiplier}");
                     break;
             }
         }

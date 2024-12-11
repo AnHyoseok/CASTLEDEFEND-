@@ -1,6 +1,7 @@
 
 using Defend.XR;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 namespace Defend.Player
 {
@@ -19,6 +20,7 @@ namespace Defend.Player
 
         [SerializeField] private GameObject axe;
         [SerializeField] private GameObject pickAxe;
+        public InputActionProperty property;
         #endregion
 
         private void Start()
@@ -34,7 +36,7 @@ namespace Defend.Player
             //    return;
             //}
             //   x키입력시 무기교체,
-            if (InputManager.Instance.GetLeftSecondaryButton() || Input.GetKeyDown(KeyCode.Z))
+            if (property.action.WasCompletedThisFrame() || Input.GetKeyDown(KeyCode.Z))
             {
                 
                 //Debug.Log("wepon swap");

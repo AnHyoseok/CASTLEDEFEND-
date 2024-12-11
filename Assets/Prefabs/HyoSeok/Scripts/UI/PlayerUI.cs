@@ -1,5 +1,7 @@
 using Defend.XR;
+using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Defend.UI
 {
@@ -12,14 +14,16 @@ namespace Defend.UI
         [SerializeField] private GameObject towerCanvas;
         [SerializeField] private GameObject skilCanvas;
         [SerializeField] private Animator[] animators;
+        public InputActionProperty property;
         private bool isOpen;
         #endregion
 
         private void Update()
         {
             //Y버튼 누를시 메뉴 오픈
-            if (InputManager.Instance.GetRightSecondaryButton() || Input.GetKeyDown(KeyCode.X))
+            if (property.action.WasCompletedThisFrame() || Input.GetKeyDown(KeyCode.X))
             {
+                Debug.Log("33333");
                 if (!isOpen)
                 {
                     // 메뉴가 열리지 않은 경우, gameMenuCanvas 열기

@@ -35,7 +35,7 @@ namespace Defend.XR
         // 왼쪽 손의 기본 버튼 (A 버튼)
         public bool GetLeftPrimaryButton()
         {
-            //Debug.Log("222222");
+            Debug.Log("222222");
             leftHandDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool value);
             return value;
         }

@@ -37,9 +37,9 @@ namespace Defend.Player
         //영구 구매여부
         private bool isPotalActive = false;
         private bool isMoveSpeedUp = false;
-        private bool isMoneyUp = false;
-        private bool isTreeUp = false;
-        private bool isRockUp = false;
+        //private bool isMoneyUp = false;
+        //private bool isTreeUp = false;
+        //private bool isRockUp = false;
         private bool isAutoGain = false;
         //버튼 비활성화
         public Button[] btnList;
@@ -75,9 +75,9 @@ namespace Defend.Player
         //업그레이드별 수치증가량
         private float[] IncreaseHPUpgrade = { 100f, 200f, 300f }; //hp
         private float[] IncreaseHPTimeUpgrade = { 1f, 3f, 5f }; //초당 2, 5 ,10
-        private float[] IncreaseMoneyGainUpgrade = { 1.2f, 1.5f, 2.0f };
-        private float[] IncreaseTreeGainUpgrade = { 1.2f, 1.5f, 2.0f };
-        private float[] increaseRockGainUpgrade = { 1.2f, 1.5f, 2.0f };
+        private float[] IncreaseMoneyGainUpgrade = { 1.1f, 1.2f, 1.5f };
+        private float[] IncreaseTreeGainUpgrade = { 1.1f, 1.2f, 1.5f };
+        private float[] increaseRockGainUpgrade = { 1.1f, 1.2f, 1.5f };
         private float[] increaseArmorUpgrade = { 5f, 10f, 20f };
         //private float increaseTowerATKUpgrade = 1f;
         //private float increaseTowerATKSpeedUpgrade = 1f;
@@ -106,7 +106,7 @@ namespace Defend.Player
         #endregion
         private void Start()
         {
-  
+
             //참조
             health = castle.GetComponent<Health>();
             playerState = Object.FindAnyObjectByType<PlayerState>();
@@ -149,10 +149,10 @@ namespace Defend.Player
         {
             //Debug.Log("fullonhp spend money");
             //100원 소모시 풀피 //풀피일때 구매 막기 
-            if (health != null && health.CurrentHealth != health.maxHealth && playerState.SpendMoney(CostFullHP))
+            if (health != null && health.CurrentHealth != health.maxHealth && playerState.money >= CostFullHP)
             {
                 health.CurrentHealth = health.maxHealth;
-                playerState.SpendMoney(100f);
+                playerState.SpendMoney(CostFullHP);
                 UpdateButtonStates();
             }
 
@@ -162,7 +162,7 @@ namespace Defend.Player
         public void HPUpgrade()
         {
             //Debug.Log("HPUpgrade spend money");
-            if (currentHPUpgradeLevel < CostHPUpgrade.Length && health != null && health.maxHealth < 1000f && playerState.SpendMoney(CostHPUpgrade[currentHPUpgradeLevel]))
+            if (currentHPUpgradeLevel < CostHPUpgrade.Length && health != null && health.maxHealth < 1000f && playerState.money >= CostHPUpgrade[currentHPTimeUpgradeLevel])
             {
                 // 단계별 체력 증가
                 health.IncreaseMaxHealth(IncreaseHPUpgrade[currentHPUpgradeLevel]);
@@ -176,17 +176,16 @@ namespace Defend.Player
         //체력회복량 1초에 interval 만큼 회복
         public void HPTimeUpgrade()
         {
-            if (health != null && currentHPTimeUpgradeLevel < IncreaseHPTimeUpgrade.Length && RgAmount < 5f)
+            if (health != null && currentHPTimeUpgradeLevel < IncreaseHPTimeUpgrade.Length && RgAmount < 5f && playerState.money >= CostHPTimeUpgrade[currentHPTimeUpgradeLevel])
             {
 
-                float cost = CostHPTimeUpgrade[currentHPTimeUpgradeLevel];
-                if (playerState.SpendMoney(cost))
-                {
-                    RgAmount++;
-                    health.HPTime(RgAmount, IncreaseHPTimeUpgrade[currentHPTimeUpgradeLevel]);
-                    currentHPTimeUpgradeLevel++;
-                    UpdateButtonStates();
-                }
+                playerState.SpendMoney(CostHPTimeUpgrade[currentHPTimeUpgradeLevel]);
+
+                RgAmount++;
+                health.HPTime(RgAmount, IncreaseHPTimeUpgrade[currentHPTimeUpgradeLevel]);
+                currentHPTimeUpgradeLevel++;
+                UpdateButtonStates();
+
             }
         }
 
@@ -194,33 +193,36 @@ namespace Defend.Player
         public void MoneyGain()
         {
             //Debug.Log("MoneyGain spend money");
-            if (!isMoneyUp && currentMoneyGainUpgradeLevel < CostMoneyGainUpgrade.Length && playerState.SpendMoney(CostMoneyGainUpgrade[currentMoneyGainUpgradeLevel]))
+            if (currentMoneyGainUpgradeLevel < CostMoneyGainUpgrade.Length && playerState.money >= CostMoneyGainUpgrade[currentMoneyGainUpgradeLevel])
             {
+                playerState.SpendMoney(CostMoneyGainUpgrade[currentMoneyGainUpgradeLevel]);
                 ResourceManager.Instance.UpgradeResourceGain("money", IncreaseMoneyGainUpgrade[currentMoneyGainUpgradeLevel]); // 증가량 적용
                 currentMoneyGainUpgradeLevel++;
-                isMoneyUp = true; // MoneyGain 업그레이드 활성화
+                //isMoneyUp = true; // MoneyGain 업그레이드 활성화
                 UpdateButtonStates();
             }
         }
         public void TreeGain()
         {
             //Debug.Log("TreeGain spend money");
-            if (!isTreeUp && currentTreeGainUpgradeLevel < CostTreeGainUpgrade.Length && playerState.SpendMoney(CostTreeGainUpgrade[currentTreeGainUpgradeLevel]))
+            if (currentTreeGainUpgradeLevel < CostTreeGainUpgrade.Length && playerState.money >= CostTreeGainUpgrade[currentTreeGainUpgradeLevel])
             {
+                playerState.SpendMoney(CostTreeGainUpgrade[currentTreeGainUpgradeLevel]);
                 ResourceManager.Instance.UpgradeResourceGain("tree", IncreaseTreeGainUpgrade[currentTreeGainUpgradeLevel]); // 증가량 적용
                 currentTreeGainUpgradeLevel++;
-                isTreeUp = true; // TreeGain 업그레이드 활성화
+                //isTreeUp = true; // TreeGain 업그레이드 활성화
                 UpdateButtonStates();
             }
         }
         public void RockGain()
         {
             //Debug.Log("RockGain spend money");
-            if (!isRockUp && currentRockGainUpgradeLevel < CostRockGainUpgrade.Length && playerState.SpendMoney(CostRockGainUpgrade[currentRockGainUpgradeLevel]))
+            if (currentRockGainUpgradeLevel < CostRockGainUpgrade.Length && playerState.money >= CostRockGainUpgrade[currentRockGainUpgradeLevel])
             {
+                playerState.SpendMoney(CostRockGainUpgrade[currentRockGainUpgradeLevel]);
                 ResourceManager.Instance.UpgradeResourceGain("rock", increaseRockGainUpgrade[currentRockGainUpgradeLevel]); // 증가량 적용
                 currentRockGainUpgradeLevel++;
-                isRockUp = true; // RockGain 업그레이드 활성화
+                //isRockUp = true; // RockGain 업그레이드 활성화
                 UpdateButtonStates();
             }
         }
@@ -229,10 +231,10 @@ namespace Defend.Player
         public void MoveSpeed()
         {
             //Debug.Log("MoveSpeed spend money");
-            if (isMoveSpeedUp == false && playerState.SpendMoney(CostMoveSpeedUpgrade))
+            if (isMoveSpeedUp == false && playerState.money >= CostMoveSpeedUpgrade)
             {
                 dynamicMove.moveSpeed = 10f;
-                playerState.SpendMoney(100f);
+                playerState.SpendMoney(CostMoveSpeedUpgrade);
                 isMoveSpeedUp = true;
                 UpdateButtonStates();
             }
@@ -243,7 +245,7 @@ namespace Defend.Player
         public void PotalActivate()
         {
             //Debug.Log("PotalActivate spend money");
-            if (isPotalActive == false && playerState.SpendMoney(CostPotalActivateUpgrade))
+            if (isPotalActive == false && playerState.money >= CostPotalActivateUpgrade)
             {
                 for (int i = 0; i < potalsColor.Length; i++)
                 {
@@ -252,7 +254,7 @@ namespace Defend.Player
                 }
                 XRSimpleInteractable xRSimpleInteractable = potal.GetComponent<XRSimpleInteractable>();
                 xRSimpleInteractable.enabled = true;
-                playerState.SpendMoney(100f);
+                playerState.SpendMoney(CostPotalActivateUpgrade);
                 isPotalActive = true;
                 UpdateButtonStates();
             }
@@ -262,14 +264,19 @@ namespace Defend.Player
         //아이템 흭득 범위 증가
         public void AutoGain()
         {
-            ResourceManager.speed = 20f;
-            ResourceManager.distance = 500f;
+            if (isAutoGain == false && playerState.money >= CostAutoGainUpgrade)
+            {
+                ResourceManager.speed = 10f;
+                ResourceManager.distance = 10f;
+                playerState.SpendMoney(CostAutoGainUpgrade);
+                isAutoGain = true;
+            }
         }
 
         //캐슬 방어력 업그레이드
         public void ArmorUpgrade()
         {
-            if (currenteArmorUpgradeLevel < CostArmorUpgrade.Length && health != null && playerState.SpendMoney(CostArmorUpgrade[currenteArmorUpgradeLevel]))
+            if (currenteArmorUpgradeLevel < CostArmorUpgrade.Length && health != null && playerState.money >= CostArmorUpgrade[currenteArmorUpgradeLevel])
             {
                 health.ChangedArmor(increaseArmorUpgrade[currenteArmorUpgradeLevel]);
                 playerState.SpendMoney(CostArmorUpgrade[currenteArmorUpgradeLevel]);
@@ -285,7 +292,7 @@ namespace Defend.Player
             towerbase = FindObjectsByType<TowerBase>(FindObjectsSortMode.None);
 
 
-            if (currentTowerATKUpgradeLevel < CostTowerATKUpgrade.Length && playerState.SpendMoney(CostTowerATKUpgrade[currentTowerATKUpgradeLevel]))
+            if (currentTowerATKUpgradeLevel < CostTowerATKUpgrade.Length && playerState.money >= (CostTowerATKUpgrade[currentTowerATKUpgradeLevel]))
             {
                 playerState.SpendMoney(CostTowerATKUpgrade[currentTowerATKUpgradeLevel]);
                 currentTowerATKUpgradeLevel++;
@@ -310,7 +317,7 @@ namespace Defend.Player
         public void TowerATKSpeedUpgrade()
         {
             towerbase = FindObjectsByType<TowerBase>(FindObjectsSortMode.None);
-            if (currentTowerATKSpeedUpgradeLevel < CostTowerATKSpeed.Length && playerState.SpendMoney(CostTowerATKSpeed[currentTowerATKSpeedUpgradeLevel]))
+            if (currentTowerATKSpeedUpgradeLevel < CostTowerATKSpeed.Length && playerState.money >= (CostTowerATKSpeed[currentTowerATKSpeedUpgradeLevel]))
             {
                 playerState.SpendMoney(CostTowerATKSpeed[currentTowerATKSpeedUpgradeLevel]);
                 currentTowerATKSpeedUpgradeLevel++;
@@ -333,7 +340,7 @@ namespace Defend.Player
         public void TowerATKRangeUpgrade()
         {
             towerbase = FindObjectsByType<TowerBase>(FindObjectsSortMode.None);
-            if (currentTowerATKRangeUpgradeLevel < CostTowerATKRange.Length && playerState.SpendMoney(CostTowerATKRange[currentTowerATKRangeUpgradeLevel]))
+            if (currentTowerATKRangeUpgradeLevel < CostTowerATKRange.Length && playerState.money >= (CostTowerATKRange[currentTowerATKRangeUpgradeLevel]))
             {
                 playerState.SpendMoney(CostTowerATKRange[currentTowerATKRangeUpgradeLevel]);
                 currentTowerATKRangeUpgradeLevel++;
@@ -365,9 +372,9 @@ namespace Defend.Player
             btnList[4].interactable = currentTowerATKUpgradeLevel < CostTowerATKUpgrade.Length && playerState.money >= CostTowerATKUpgrade[currentTowerATKUpgradeLevel]; // 타워 ATK 업그레이드
             btnList[5].interactable = currentTowerATKSpeedUpgradeLevel < CostTowerATKSpeed.Length && playerState.money >= CostTowerATKSpeed[currentTowerATKSpeedUpgradeLevel]; // 타워 공격 속도 업그레이드
             btnList[6].interactable = currentTowerATKRangeUpgradeLevel < CostTowerATKRange.Length && playerState.money >= CostTowerATKRange[currentTowerATKRangeUpgradeLevel]; // 타워 범위 업그레이드
-            btnList[7].interactable = currentMoneyGainUpgradeLevel < CostMoneyGainUpgrade.Length && !isMoneyUp && playerState.money >= CostMoneyGainUpgrade[currentMoneyGainUpgradeLevel]; // MoneyGain 버튼
-            btnList[8].interactable = currentTreeGainUpgradeLevel < CostTreeGainUpgrade.Length && !isTreeUp && playerState.money >= CostTreeGainUpgrade[currentTreeGainUpgradeLevel]; // TreeGain 버튼
-            btnList[9].interactable = currentRockGainUpgradeLevel < CostRockGainUpgrade.Length && !isRockUp && playerState.money >= CostRockGainUpgrade[currentRockGainUpgradeLevel]; // RockGain 버튼
+            btnList[7].interactable = currentMoneyGainUpgradeLevel < CostMoneyGainUpgrade.Length && playerState.money >= CostMoneyGainUpgrade[currentMoneyGainUpgradeLevel]; // MoneyGain 버튼
+            btnList[8].interactable = currentTreeGainUpgradeLevel < CostTreeGainUpgrade.Length && playerState.money >= CostTreeGainUpgrade[currentTreeGainUpgradeLevel]; // TreeGain 버튼
+            btnList[9].interactable = currentRockGainUpgradeLevel < CostRockGainUpgrade.Length && playerState.money >= CostRockGainUpgrade[currentRockGainUpgradeLevel]; // RockGain 버튼
             btnList[10].interactable = playerState.money >= CostMoveSpeedUpgrade && !isMoveSpeedUp; // MoveSpeed 버튼
             btnList[11].interactable = playerState.money >= CostPotalActivateUpgrade && !isPotalActive; // PotalActivate 버튼
             btnList[12].interactable = playerState.money >= CostAutoGainUpgrade && !isAutoGain; //AutoGain 버튼
