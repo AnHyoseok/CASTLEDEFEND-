@@ -41,11 +41,11 @@ namespace Defend.UI
         public void CloseAllCanvases()
         {
             isOpen = false;
-            foreach (var animator in animators)
-            { // 애니메이션 초기화
-                animator.Rebind();
-                animator.Update(0); 
-            }
+            //foreach (var animator in animators)
+            //{ // 애니메이션 초기화
+            //    animator.Rebind();
+            //    animator.Update(0); 
+            //}
 
             gameMenuCanvas.SetActive(false);
             buildCanvas.SetActive(false);
