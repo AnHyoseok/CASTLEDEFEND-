@@ -147,7 +147,6 @@ namespace Defend.Enemy
                     {
                         totalRate += rate;
                     }
-                    Debug.Log($"{enemyController.type}");
                 }
                 else
                 {
@@ -218,7 +217,6 @@ namespace Defend.Enemy
 
         private void OnChanneling()
         {
-            Debug.Log("»£√‚µ∆¥Ÿ! = " + isChanneling);
             isChanneling = !isChanneling;
         }
     }

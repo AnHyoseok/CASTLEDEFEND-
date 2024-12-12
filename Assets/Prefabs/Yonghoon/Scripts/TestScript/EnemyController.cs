@@ -64,7 +64,6 @@ namespace Defend.TestScript
         public GameObject goldPrefab;           //코인 프리팹
         public Transform offsetTransform;       //생성될 위치 (위로 조정)
 
-
         // VFX 관련 변수
         public Material bodyMaterial; // 데미지를 줄 머티리얼
         [GradientUsage(true)] public Gradient hitEffectGradient; // 데미지 컬러 그라디언트 효과
@@ -78,6 +77,8 @@ namespace Defend.TestScript
         private Gradient currentEffectGradient; // 현재 적용 중인 그라디언트
 
         public EnemyType type;
+
+
         #endregion
         void Start()
         {
@@ -158,7 +159,6 @@ namespace Defend.TestScript
 
         public void ChangeChannelingStatus()
         {
-            Debug.Log("EnemyController는 문제가 없다!");
             channeling = !channeling;
             OnChanneling?.Invoke();
         }
@@ -171,7 +171,6 @@ namespace Defend.TestScript
 
         private void OnHeal(float amount)
         {
-            //TriggerEffect(healEffectGradient); // 힐 효과 적용
             //Debug.Log("힐 받음");
             healParticleSystem.Play();
         }
@@ -249,9 +248,7 @@ namespace Defend.TestScript
             // rate에 따라 버프 또는 디버프 효과 실행
             PlayEffect(rate);
 
-            //Debug.Log($"before anim speed = {animator.speed}, rate = {rate}");
             animator.speed = animatorSpeed * (1.0f + rate);
-            //Debug.Log($"after anim speed = {animator.speed}");
         }
 
         private void UpdateArmor(float amount)

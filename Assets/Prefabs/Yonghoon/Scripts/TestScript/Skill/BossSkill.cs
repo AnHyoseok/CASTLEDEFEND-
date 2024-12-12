@@ -40,7 +40,6 @@ namespace Defend.Enemy.Skill
             {
                 if (healthRatio <= threshold && !usedThresholds.Contains(threshold))
                 {
-                    Debug.Log("currentHealthRatio");
                     usedThresholds.Add(threshold); // 사용된 구간 추가
                     ExecuteSkill(skillMapping[threshold]); // 해당 스킬 실행
                     break;
@@ -50,7 +49,7 @@ namespace Defend.Enemy.Skill
 
         private void ExecuteSkill(SkillType skillType)
         {
-            Debug.Log("ExecuteSkill");
+            Debug.Log("스킬의 분기점");
             switch (skillType)
             {
                 case SkillType.IncreaseArmor:
@@ -69,7 +68,7 @@ namespace Defend.Enemy.Skill
 
         private void IncreaseArmor()
         {
-            Debug.Log("Buffing all allies!");
+            Debug.Log("보스 체력 75%스킬 아머 증가!");
 
             int layerMask = LayerMask.GetMask("Enemy", "Boss");
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, range, layerMask);
@@ -79,14 +78,13 @@ namespace Defend.Enemy.Skill
                 if (enemyController != null)
                 {
                     enemyController.ChangedArmor(amount);
-                    Debug.Log($"{enemyController.gameObject.name}의 버프 파워가 증가했습니다!");
                 }
             }
         }
 
         private void IncreaseDamage()
         {
-            Debug.Log("Increasing damage for all allies!");
+            Debug.Log("보스 체력 50%스킬 공격력 증가!");
 
             int layerMask = LayerMask.GetMask("Enemy", "Boss");
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, range, layerMask);
@@ -96,14 +94,13 @@ namespace Defend.Enemy.Skill
                 if (enemyController != null)
                 {
                     enemyController.ChangedAttackDamage(amount);
-                    Debug.Log($"{enemyController.gameObject.name}의 공격력이 증가했습니다!");
                 }
             }
         }
 
         private void IncreaseSpeed()
         {
-            Debug.Log("Applying area damage!");
+            Debug.Log("보스 등장 스킬 이동속도 증가!");
 
             int layerMask = LayerMask.GetMask("Enemy", "Boss");
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, range, layerMask);
@@ -135,7 +132,6 @@ namespace Defend.Enemy.Skill
         #region Test용 GIZMO
         private void OnDrawGizmosSelected()
         {
-            // Gizmo로 포효 범위를 시각적으로 표시
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, range);
         }
