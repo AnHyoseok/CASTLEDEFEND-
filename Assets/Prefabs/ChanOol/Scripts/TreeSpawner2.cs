@@ -1,26 +1,43 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class TreeSpawner2 : MonoBehaviour
-
 {
-    // 랜덤좌표 스폰포인트 5군데 저장할 변수
-    // 스폰포인트 다섯군데중 1번 위치
-    // 스폰포인트 다섯군데중 2번 위치
-    // 스폰포인트 다섯군데중 3번 위치
-    // 스폰포인트 다섯군데중 4번 위치
-    // 스폰포인트 다섯군데중 5번 위치
+    // 생성시킬 프리팹
+    public GameObject treePrefab;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    // 생성시킬 위치 다섯 군데
+    public Transform[] spawnPosition = new Transform[5];
+
+    List<int> numberList = new List<int> { 0, 1, 2, 3, 4 };
+    List<int> randomNumberList = new List<int>();
+
     void Start()
     {
-        // 랜덤좌표 스폰포인트 5군데 지정
-        // 스폰포인트가 지정되면 그곳에 box 콜라이더 추가
+        Debug.Log($"Initial numberList Count: {numberList.Count}");
 
+        // 랜덤 순서로 재배열
+        while (numberList.Count > 0)
+        {
+            int randomIndex = Random.Range(0, numberList.Count);
+            randomNumberList.Add(numberList[randomIndex]);
+            numberList.RemoveAt(randomIndex);
+
+            Debug.Log($"Added {randomNumberList[randomNumberList.Count - 1]} to randomNumberList.");
+            Debug.Log($"numberList Count after removal: {numberList.Count}");
+        }
+
+        Debug.Log($"Random Number List Count: {randomNumberList.Count}");
+
+        // 인덱스와 값을 출력
+        for (int i = 0; i < randomNumberList.Count; i++)
+        {
+            Debug.Log($"Random Number at index {i}: {randomNumberList[i]}");
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
