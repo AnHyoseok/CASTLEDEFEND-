@@ -45,7 +45,7 @@ namespace Defend.TestScript
         public void IncreaseMaxHealth(float amount)
         {
             maxHealth += amount;
-            Debug.Log("Max Health up " + maxHealth);
+            //Debug.Log("Max Health up " + maxHealth);
         }
 
         //Ã¼·Â ¸®Á¨

@@ -1,0 +1,34 @@
+{
+    "isClear": [
+        false,
+        false,
+        false,
+        false,
+        false
+    ],
+    "isTowerUnlock": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+    ],
+    "isHPUpgradelevel": 0,
+    "isHPTimeUpgradelevel": 0,
+    "isArmorUpgradelevel": 0,
+    "isATKUpgradelevel": 0,
+    "isATKSpeedUpgradelevel": 0,
+    "isATKRangeUpgradelevel": 0,
+    "isMoneyGainlevel": 0,
+    "isTreeGainlevel": 0,
+    "isRockGainlevel": 0,
+    "isPotalActive": false,
+    "isMoveSpeedUp": false,
+    "isAutoGain": false,
+    "money": 0.0,
+    "health": 0.0,
+    "tree": 0.0,
+    "rock": 0.0
+}

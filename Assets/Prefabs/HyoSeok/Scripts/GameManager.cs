@@ -1,4 +1,5 @@
 using Defend.Enemy;
+using Defend.Manager;
 using Defend.Player;
 using Defend.TestScript;
 using MyVrSample;
@@ -6,6 +7,7 @@ using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.UI;
 namespace Defend.Manager
 {
@@ -32,9 +34,9 @@ namespace Defend.Manager
         float time;
 
         //public Button saveButton; // 세이브 버튼
-        public Data data; // 게임 데이터
+        public Data data = new Data(); // 게임 데이터
 
-        
+
         #endregion
 
         private void Start()
@@ -43,8 +45,8 @@ namespace Defend.Manager
             health = castle.GetComponent<Health>();
             playerState = Object.FindAnyObjectByType<PlayerState>();
             //시작하자마자 불러오기
-            DataManager.Instance.LoadGameData();
 
+            //playerState.money = data.money;
             //세이브 버튼 
             //saveButton.onClick.AddListener(OnSaveButtonClicked);
 
@@ -52,7 +54,7 @@ namespace Defend.Manager
                 return;
             audioSource = player.AddComponent<AudioSource>();
             audioSource.playOnAwake = false; // 자동 재생 방지
-       
+
         }
 
         private void Update()
@@ -74,10 +76,10 @@ namespace Defend.Manager
 
         private void OnApplicationQuit()
         {
-            DataManager.Instance.SaveGameData();
+            DataManager.Instance.SaveGameData(data);
         }
 
-        public  void OnSaveButtonClicked()
+        public void OnSaveButtonClicked()
         {
             SaveGameData();
         }
@@ -86,33 +88,48 @@ namespace Defend.Manager
         //세이브 버튼용
         public void SaveGameData()
         {
-            Debug.Log("Data: " + data);
-            Debug.Log("DataManager Instance: " + DataManager.Instance);
-            Debug.Log(data.health);
-            Debug.Log(data.money);
-            Debug.Log(data.tree);
-            Debug.Log(data.rock);
+            //Debug.Log("Data: " + data);
+            //Debug.Log("DataManager Instance: " + DataManager.Instance);
+            //Debug.Log(data.health);
+
+            //Debug.Log(data.tree);
+            //Debug.Log(data.rock);
             Debug.Log(playerState.money);
             //data.health = health.maxHealth;
-            data.money = 30f;
+            data.money = playerState.money;
+            Debug.Log($"data.money={data.money}");
             //data.tree = playerState.tree; 
             //data.rock = playerState.rock;
 
 
             // 데이터 저장
-            DataManager.Instance.SaveGameData();
-            Debug.Log("Game data saved.");
+            DataManager.Instance.SaveGameData(data);
+            //Debug.Log("Game data saved.");
         }
+
+        //로드 버튼
+        public void LoadGameData()
+        {
+            // 데이터 로드
+            DataManager.Instance.LoadGameData();
+
+
+         
+            playerState.money = data.money;
+            Debug.Log($"Loaded Money: {data.money}");
+
+        }
+
 
         //게임클리어
         IEnumerator GameClear()
         {
 
-            if (ListSpawnManager.enemyAlive <= 0 &&ListSpawnManager.waveCount >=5)
+            if (ListSpawnManager.enemyAlive <= 0 && ListSpawnManager.waveCount >= 5)
             {
                 //게임클리어 창 뜨기
                 clearUI.SetActive(true);
-            
+
                 //클리어 사운드
                 audioSource.clip = clearSound;
                 audioSource.Play();
@@ -121,7 +138,7 @@ namespace Defend.Manager
                 yield return new WaitForSeconds(3f);
 
                 audioSource.Stop();
-            
+
             }
 
         }
@@ -143,6 +160,8 @@ namespace Defend.Manager
 
         }
 
-     
+
     }
 }
+
+

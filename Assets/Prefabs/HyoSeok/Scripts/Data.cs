@@ -13,15 +13,18 @@ namespace Defend.Manager
         //타워 해금 여부
         public bool[] isTowerUnlock = new bool[7];
         //업그레이드 여부
-        public bool[] isHPUpgrade = new bool[3];
-        public bool[] isHPTimeUpgrade = new bool[3];
-        public bool[] isArmorUpgrade = new bool[3];
-        public bool[] isATKUpgrade = new bool[50];
-        public bool[] isATKSpeedUpgrade = new bool[50];
-        public bool[] isATKRangeUpgrade = new bool[50];
-        public bool[] isMoneyGain = new bool[3];
-        public bool[] isTreeGain = new bool[3];
-        public bool[] isRockGain = new bool[3];
+        public int isHPUpgradelevel;
+        public int isHPTimeUpgradelevel;
+        public int isArmorUpgradelevel;
+        public int isATKUpgradelevel;
+        public int isATKSpeedUpgradelevel;
+        public int isATKRangeUpgradelevel;
+        public int isMoneyGainlevel;
+        public int isTreeGainlevel;
+        public int isRockGainlevel;
+        public bool isPotalActive ;
+        public bool isMoveSpeedUp;
+        public bool isAutoGain;
         //플레이어 자원 여부
         public float money;
         public float health;
