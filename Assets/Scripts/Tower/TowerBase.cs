@@ -264,6 +264,12 @@ namespace Defend.Tower
             status.ManaRegenRatio /= buffContents.manaRegen;
         }
 
+        // 해당 타워의 정보를 반환하는 함수
+        public TowerInfo GetTowerInfo()
+        {
+            return towerInfo;
+        }
+
         // 공격방향 라인 랜더러
         private void DrawLine()
         {

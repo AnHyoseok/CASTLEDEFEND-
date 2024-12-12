@@ -24,6 +24,7 @@ namespace Defend.Tower
         public float cost4 = 4f;            // 건설비용 4
         public GameObject upgradeTower;     // 업그레이드 타워 프리팹
         public ProjectileInfo projectile;   // 발사체 정보
+        public bool isLock = false;         // 해금 여부
 
         //판매 가격
         public float GetSellCost()
