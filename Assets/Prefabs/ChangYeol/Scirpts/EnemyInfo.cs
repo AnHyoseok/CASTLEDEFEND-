@@ -7,6 +7,7 @@ namespace Defend.UI
     [System.Serializable]
     public class EnemyInfo
     {
+        #region Variables
         public string Enemyname;
         public Sprite enemySprite;
         //체력,방어력
@@ -17,5 +18,6 @@ namespace Defend.UI
         public EnemyMoveController Move;
         //얻는 돈
         public EnemyController Money;
+        #endregion
     }
 }
