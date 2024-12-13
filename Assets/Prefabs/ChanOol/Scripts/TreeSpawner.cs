@@ -16,7 +16,7 @@ public class TreeSpawner : MonoBehaviour
     private int[] randomIndex = new int[5];
 
     // 생성포인트 하나하나마다 판정시작
-    private bool detectionCheckStart = false;
+    //public bool detectionCheckActive = false;
 
 
     // private GameObject[] aaa;
@@ -63,17 +63,12 @@ public class TreeSpawner : MonoBehaviour
         }
 
         StartCoroutine(SpawnTrees());
-
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        if (detectionCheckStart)
-        { 
-            
-        }
 
     }
 
@@ -84,9 +79,7 @@ public class TreeSpawner : MonoBehaviour
             yield return new WaitForSeconds(5f);
 
             Instantiate(treePrefab, spawnPosition[randomIndex[i]].position, Quaternion.identity);
-            
         }
-
-
+        //detectionCheckActive = true;
     }
 }
