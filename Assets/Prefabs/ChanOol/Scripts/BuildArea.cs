@@ -5,13 +5,13 @@ public class BuildArea : MonoBehaviour
 {
     public Material AreaBlack;
     public Material AreaRed;
-    private Renderer renderer;
+    //private Renderer renderer;
     private BoxCollider boxCollider;
     
 
     void Start()
     {
-        renderer = GetComponent<Renderer>();
+        //renderer = GetComponent<Renderer>();
         boxCollider = GetComponent<BoxCollider>();
     }
 
@@ -27,12 +27,12 @@ public class BuildArea : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        renderer.material = AreaRed;
+        //renderer.material = AreaRed;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        renderer.material = AreaBlack;
+        //renderer.material = AreaBlack;
     }
 
 

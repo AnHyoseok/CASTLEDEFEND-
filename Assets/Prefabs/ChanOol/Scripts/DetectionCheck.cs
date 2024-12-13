@@ -5,9 +5,9 @@ public class DetectionCheck : MonoBehaviour
 {
     private BoxCollider boxCollider;
 
-    private bool treeFound = false;
+    //private bool treeFound = false;
 
-    private bool canBuild = false;
+    //private bool canBuild = false;
 
     private bool treeSpawned = false; // 나무가 생성되었는지 여부를 추적
 
