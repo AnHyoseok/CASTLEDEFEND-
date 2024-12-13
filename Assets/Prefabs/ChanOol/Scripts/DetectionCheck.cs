@@ -59,6 +59,10 @@ public class DetectionCheck : MonoBehaviour
     {
         yield return new WaitForSeconds(5f); // 5초 후에 나무 생성
 
+        if (treePrefab == null)
+        {
+            Debug.Log("treePrefab == null");
+        }
         Instantiate(treePrefab, transform.position, Quaternion.identity);
     }
 }
