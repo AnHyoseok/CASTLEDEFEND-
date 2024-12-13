@@ -3,47 +3,59 @@ using UnityEngine.Audio;
 
 namespace Defend.Utillity
 {
+    /// <summary>
+    /// 이 클래스는 오디오 관련 유틸리티 기능을 제공
+    /// AudioManager와 AudioMixer를 통해 오디오 그룹을 관리하고, 볼륨을 조절하거나,
+    /// 특정 위치에서 사운드 효과를 재생하는 기능을 포함.
+    /// </summary>
     public class AudioUtility
     {
+        // AudioManager의 인스턴스를 저장하는 정적 변수.
+        // AudioManager는 모든 오디오 믹싱 및 그룹 관리 기능을 담당합니다.
         static AudioManager s_AudioManager;
 
+        // 게임 내에서 사용할 오디오 그룹을 정의합니다.
         public enum AudioGroups
         {
-            DamageTick,
-            Impact,
-            EnemyDetection,
-            Pickup,
-            WeaponShoot,
-            WeaponOverheat,
-            WeaponChargeBuildup,
-            WeaponChargeLoop,
-            HUDVictory,
-            HUDObjective,
-            EnemyAttack
+            BGM,
+            EFFECT
         }
 
-        public static void CreateSFX(AudioClip clip, Vector3 position, AudioGroups audioGroup, float spatialBlend,
-            float rolloffDistanceMin = 1f)
+        // 특정 위치에서 사운드 효과(AudioClip)를 생성하고 재생합니다.
+        public static void CreateSFX(AudioClip clip, Vector3 position, AudioGroups audioGroup, float spatialBlend, float rolloffDistanceMin = 1f)
         {
+            // 새 오브젝트 생성: 사운드 효과를 재생할 임시 오브젝트를 만듭니다.
             GameObject impactSfxInstance = new GameObject();
+            // 오브젝트 위치 설정 : 효과음이 발생한 곳에 생성
             impactSfxInstance.transform.position = position;
+
+            // AudioSource 컴포넌트를 추가하여 사운드를 재생합니다.
             AudioSource source = impactSfxInstance.AddComponent<AudioSource>();
+            // 재생할 클립 설정
             source.clip = clip;
+            // 3D 공간 사운드 블렌딩 설정 (0 이면 2D, 1 이면 3D)
             source.spatialBlend = spatialBlend;
+            // 소리 감쇠가 시작되는 최소 거리
             source.minDistance = rolloffDistanceMin;
+            // 사운드 재생 시작
             source.Play();
 
+            // 출력 오디오 믹서 그룹 설정
             source.outputAudioMixerGroup = GetAudioGroup(audioGroup);
 
+            // 일정 시간이 지나면 오브젝트를 자동으로 제거하는 컴포넌트 추가
             TimedSelfDestruct timedSelfDestruct = impactSfxInstance.AddComponent<TimedSelfDestruct>();
+            // 클립 길이만큼 유지 후 제거
             timedSelfDestruct.LifeTime = clip.length;
         }
 
+        // 오디오 그룹(AudioMixerGroup)을 반환합니다.
         public static AudioMixerGroup GetAudioGroup(AudioGroups group)
         {
             if (s_AudioManager == null)
                 s_AudioManager = GameObject.FindAnyObjectByType<AudioManager>();
 
+            // AudioManager를 통해 지정된 그룹 이름의 믹서 그룹을 찾습니다.
             var groups = s_AudioManager.FindMatchingGroups(group.ToString());
 
             if (groups.Length > 0)
@@ -53,6 +65,10 @@ namespace Defend.Utillity
             return null;
         }
 
+        /*
+            Mathf.Log10을 사용하는 이유는 슬라이더의 선형 값을 로그 스케일로 변환하여 데시벨 단위의 볼륨 설정에 맞추고, 사용자에게 더 자연스러운 볼륨 변화를 제공
+            Mathf.Log10(flaot value)함수는 value가 0일때 -Infinity를 반환하므로 슬라이더 값에서 Min Value를 0.001로 설정후 사용 또는 코드에 처리해줘야함
+        */
         public static void SetMasterVolume(float value)
         {
             if (s_AudioManager == null)
@@ -62,7 +78,7 @@ namespace Defend.Utillity
                 value = 0.001f;
             float valueInDb = Mathf.Log10(value) * 20;
 
-            s_AudioManager.SetFloat("MasterVolume", valueInDb);
+            s_AudioManager.SetFloat("MASTER", valueInDb);
         }
 
         public static float GetMasterVolume()
@@ -70,7 +86,49 @@ namespace Defend.Utillity
             if (s_AudioManager == null)
                 s_AudioManager = GameObject.FindAnyObjectByType<AudioManager>();
 
-            s_AudioManager.GetFloat("MasterVolume", out var valueInDb);
+            s_AudioManager.GetFloat("MASTER", out var valueInDb);
+            return Mathf.Pow(10f, valueInDb / 20.0f);
+        }
+
+        public static void SetBGMVolume(float value)
+        {
+            if (s_AudioManager == null)
+                s_AudioManager = GameObject.FindAnyObjectByType<AudioManager>();
+
+            if (value <= 0)
+                value = 0.001f;
+            float valueInDb = Mathf.Log10(value) * 20;
+
+            s_AudioManager.SetFloat("BGM", valueInDb);
+        }
+
+        public static float GetBGMVolume()
+        {
+            if (s_AudioManager == null)
+                s_AudioManager = GameObject.FindAnyObjectByType<AudioManager>();
+
+            s_AudioManager.GetFloat("BGM", out var valueInDb);
+            return Mathf.Pow(10f, valueInDb / 20.0f);
+        }
+
+        public static void SetSFXVolume(float value)
+        {
+            if (s_AudioManager == null)
+                s_AudioManager = GameObject.FindAnyObjectByType<AudioManager>();
+
+            if (value <= 0)
+                value = 0.001f;
+            float valueInDb = Mathf.Log10(value) * 20;
+
+            s_AudioManager.SetFloat("EFFECT", valueInDb);
+        }
+
+        public static float GetSFXVolume()
+        {
+            if (s_AudioManager == null)
+                s_AudioManager = GameObject.FindAnyObjectByType<AudioManager>();
+
+            s_AudioManager.GetFloat("EFFECT", out var valueInDb);
             return Mathf.Pow(10f, valueInDb / 20.0f);
         }
     }
