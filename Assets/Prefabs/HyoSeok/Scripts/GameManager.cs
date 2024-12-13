@@ -17,6 +17,7 @@ namespace Defend.Manager
         //참조
         PlayerState playerState;
         ListSpawnManager ListSpawnManager;
+        CastleUpgrade castleUpgrade;
         Health health;
         public GameObject player;
         public GameObject castle;
@@ -44,11 +45,15 @@ namespace Defend.Manager
             //참조
             health = castle.GetComponent<Health>();
             playerState = Object.FindAnyObjectByType<PlayerState>();
+            castleUpgrade = Object.FindAnyObjectByType<CastleUpgrade>();
             //시작하자마자 불러오기
-
+            //LoadGameData();
             //playerState.money = data.money;
-            //세이브 버튼 
-            //saveButton.onClick.AddListener(OnSaveButtonClicked);
+
+            //....
+            //...
+
+
 
             if (!audioSource)
                 return;
@@ -73,7 +78,6 @@ namespace Defend.Manager
         }
 
         //게임 종료시 자동저장
-
         private void OnApplicationQuit()
         {
             DataManager.Instance.SaveGameData(data);
@@ -88,23 +92,28 @@ namespace Defend.Manager
         //세이브 버튼용
         public void SaveGameData()
         {
-            //Debug.Log("Data: " + data);
-            //Debug.Log("DataManager Instance: " + DataManager.Instance);
-            //Debug.Log(data.health);
-
-            //Debug.Log(data.tree);
-            //Debug.Log(data.rock);
-            Debug.Log(playerState.money);
-            //data.health = health.maxHealth;
+            //플레이어 자원 여부
+            data.health = health.maxHealth;
             data.money = playerState.money;
-            Debug.Log($"data.money={data.money}");
-            //data.tree = playerState.tree; 
-            //data.rock = playerState.rock;
+            data.tree = playerState.tree;
+            data.rock = playerState.rock;
+            //업그레이드 단계
+            data.isHPUpgradelevel = castleUpgrade.currentHPUpgradeLevel;
+            data.isHPTimeUpgradelevel = castleUpgrade.currentHPTimeUpgradeLevel;
+            data.isArmorUpgradelevel = castleUpgrade.currenteArmorUpgradeLevel;
+            data.isATKUpgradelevel = castleUpgrade.currentTowerATKUpgradeLevel;
+            data.isATKSpeedUpgradelevel = castleUpgrade.currentTowerATKSpeedUpgradeLevel;
+            data.isATKRangeUpgradelevel = castleUpgrade.currentTowerATKRangeUpgradeLevel;
+            data.isMoneyGainlevel = castleUpgrade.currentMoneyGainUpgradeLevel;
+            data.isTreeGainlevel = castleUpgrade.currentTreeGainUpgradeLevel;
+            data.isRockGainlevel = castleUpgrade.currentRockGainUpgradeLevel;
+            //업그레이드 해금여부
+            data.isPotalActive = castleUpgrade.isPotalActive;
+            data.isMoveSpeedUp = castleUpgrade.isMoveSpeedUp;
+            data.isAutoGain = castleUpgrade.isAutoGain;
 
-
-            // 데이터 저장
+            // 데이터 저장=
             DataManager.Instance.SaveGameData(data);
-            //Debug.Log("Game data saved.");
         }
 
         //로드 버튼
@@ -113,13 +122,34 @@ namespace Defend.Manager
             // 데이터 로드
             DataManager.Instance.LoadGameData();
 
-
-         
+            //플레이어 자원 여부
+            health.maxHealth = data.health;
             playerState.money = data.money;
-            Debug.Log($"Loaded Money: {data.money}");
-
+            playerState.tree = data.tree;
+            playerState.rock = data.rock;
+            //업그레이드 단계
+            castleUpgrade.currentHPUpgradeLevel = data.isHPUpgradelevel;
+            castleUpgrade.currentHPTimeUpgradeLevel = data.isHPTimeUpgradelevel;
+            castleUpgrade.currenteArmorUpgradeLevel = data.isArmorUpgradelevel;
+            castleUpgrade.currentTowerATKUpgradeLevel = data.isATKUpgradelevel;
+            castleUpgrade.currentTowerATKSpeedUpgradeLevel = data.isATKSpeedUpgradelevel;
+            castleUpgrade.currentTowerATKRangeUpgradeLevel = data.isATKRangeUpgradelevel;
+            castleUpgrade.currentMoneyGainUpgradeLevel = data.isMoneyGainlevel;
+            castleUpgrade.currentTreeGainUpgradeLevel = data.isTreeGainlevel;
+            castleUpgrade.currentRockGainUpgradeLevel = data.isRockGainlevel;
+            //업그레이드 해금여부
+            castleUpgrade.isPotalActive = data.isPotalActive;
+            castleUpgrade.isMoveSpeedUp = data.isMoveSpeedUp;
+            castleUpgrade.isAutoGain = data.isAutoGain;
         }
 
+        //데이터초기화
+        public void DeleteGameData()
+        {
+            data = null;
+            //데이터삭제
+            DataManager.Instance.DeleteGameData(data);
+        }
 
         //게임클리어
         IEnumerator GameClear()
@@ -138,11 +168,8 @@ namespace Defend.Manager
                 yield return new WaitForSeconds(3f);
 
                 audioSource.Stop();
-
             }
-
         }
-
         //게임오버
         IEnumerator GameOver()
         {
@@ -157,10 +184,7 @@ namespace Defend.Manager
                 yield return new WaitForSeconds(3f);
                 audioSource?.Stop();
             }
-
         }
-
-
     }
 }
 

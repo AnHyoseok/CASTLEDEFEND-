@@ -63,8 +63,8 @@ namespace Defend.Interactive
             string currentName = gameObject.name;
 
             if (!isDamaged &&
-                ((otherName == "Axe" && currentName == "Tree") ||
-                 (otherName == "PickAxe" && currentName == "Rock")))
+                ((otherName == "Axe" && currentName == "Tree(Clone)") ||
+                 (otherName == "PickAxe" && currentName == "Rock(Clone)")))
             {
                 SetCurrentResourceType(currentName);
                 StartCoroutine(Shake());
@@ -77,7 +77,7 @@ namespace Defend.Interactive
         {
             isDamaged = true;
             currentResourceType.health -= damage;
-            Debug.Log($"{currentResourceType.name} health = {currentResourceType.health}");
+            //Debug.Log($"{currentResourceType.name} health = {currentResourceType.health}");
 
             // 자원 생성 (미니사이즈)
             if (currentResourceType.resourceItem != null)

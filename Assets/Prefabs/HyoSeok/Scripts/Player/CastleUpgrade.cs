@@ -118,16 +118,17 @@ namespace Defend.Player
             RgAmount = health.RgAmount;
 
 
-
+       
             initializeUpgradeCosts();
-            UpdateButtonStates();
+    
 
         }
 
         private void Update()
         {
-
+            UpdateButtonStates();
             PriceUpdate();
+            //UpdateButtonStates();
             test1.text = $"curent HP = {health.CurrentHealth}";
             test2.text = $"hpmax ={health.maxHealth}";
             test3.text = $"hp rex={health.RgAmount}";
@@ -166,7 +167,7 @@ namespace Defend.Player
         public void HPUpgrade()
         {
             //Debug.Log("HPUpgrade spend money");
-            if (currentHPUpgradeLevel < CostHPUpgrade.Length && health != null && health.maxHealth < 1000f && playerState.money >= CostHPUpgrade[currentHPTimeUpgradeLevel])
+            if (currentHPUpgradeLevel < CostHPUpgrade.Length && health != null && health.maxHealth < 1000f && playerState.money >= CostHPUpgrade[currentHPUpgradeLevel])
             {
                 // 단계별 체력 증가
                 health.IncreaseMaxHealth(IncreaseHPUpgrade[currentHPUpgradeLevel]);
