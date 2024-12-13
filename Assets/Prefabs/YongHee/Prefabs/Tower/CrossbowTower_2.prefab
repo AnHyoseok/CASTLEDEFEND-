@@ -129,7 +129,7 @@ MonoBehaviour:
     cost2: 2
     cost3: 3
     cost4: 4
-    upgradeTower: {fileID: 0}
+    upgradeTower: {fileID: 4489671909052542958, guid: 609b3b214e404964891e36eb9f967fb2, type: 3}
     projectile:
       tower: {fileID: 2389672122861382254}
       prefab: {fileID: 5907859992763664060, guid: 42271961b32f44445a1fb97db7c37fad, type: 3}

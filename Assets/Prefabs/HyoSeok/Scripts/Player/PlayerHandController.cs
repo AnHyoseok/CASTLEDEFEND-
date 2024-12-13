@@ -44,7 +44,7 @@ namespace Defend.UI
             texts[1].text = playerState.FormatMoney();  //돈
             texts[2].text = playerState.tree.ToString();  //나무
             texts[3].text = playerState.rock.ToString();  //돌
-            texts[4].text = listSpawnManager.waveCount.ToString();  //현재라운드
+            //texts[4].text = listSpawnManager.waveCount.ToString();  //현재라운드
             texts[5].text = ListSpawnManager.enemyAlive.ToString();  //현재남아있는적의수
 
         }

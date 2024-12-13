@@ -37,25 +37,15 @@ namespace Defend.UI
         public Button Sellbutton;
         //업그레이드 버튼
         public Button UpgradeButton;
-        //타워 업그레이드 유무
-        public bool IsUpgrade;
         //타일 UI
         public UpgradeAndSell menu;
         public BuildMenu buildMenu;
         //선택한 타워
         private TowerXR tower;
+        //타워 안에 있는 속성값
+        public TowerBase[] towerBases;
+        public EnemyInfo[] enemyInfo;
         #endregion
-
-        public TowerInfo GetTowerToBuild()
-        {
-            return towerInfo;
-        }
-        //매개변수로 받은 타워 프리팹을 설치할 타워에 저장
-        public void SetTowerToBuild(TowerInfo Tower)
-        {
-            towerInfo = Tower;
-            DeselectTile();
-        }
         public void SelectTower(TowerXR towerXR)
         {
             //같은 타워를 선택하면 HideUI

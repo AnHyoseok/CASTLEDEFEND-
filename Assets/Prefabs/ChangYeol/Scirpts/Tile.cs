@@ -16,7 +16,7 @@ namespace Defend.UI
         //타일에 설치된 타워 게임오브젝트 객체
         [HideInInspector] public GameObject tower;
         //현재 선택된 타워 TowerInfo(prefab, cost, ....)
-        public TowerInfo towerInfo;
+        [HideInInspector] public TowerInfo towerInfo;
         //빌드매니저 객체
         private BuildManager buildManager;
         //설치하면 생성되는 이펙트
@@ -80,8 +80,6 @@ namespace Defend.UI
         // ReticlePrefab을 설정하는 함수
         private void SetReticlePrefab(GameObject prefab)
         {
-            Destroy(prefab);
-            prefab = null;
             prefab = buildMenu.falsetowers[buildMenu.indexs];
             reticleVisual.reticlePrefab = prefab;
             prefab.GetComponent<BoxCollider>().enabled = false;
@@ -128,6 +126,7 @@ namespace Defend.UI
         void UIEnterReticle(UIHoverEventArgs args)
         {
             buildMenu.isReticle = false;
+            buildMenu.istowerup = false;
         }
         void UIExitReticle(UIHoverEventArgs uIHover)
         {
@@ -142,11 +141,9 @@ namespace Defend.UI
                 buildManager.warningWindow.ShowWarning("Not Enough Money");
                 return;
             }
-            if (buildManager.playerState.SpendMoney(buildMenu.towerinfo[buildMenu.indexs].cost1) && buildMenu.isReticle)
+            if (buildManager.playerState.SpendMoney(buildMenu.towerinfo[buildMenu.indexs].cost1) && buildMenu.isReticle && buildMenu.towerinfo[buildMenu.indexs].isLock)
             {
-                buildMenu.towerinfo[buildMenu.indexs].projectile.attack += CastleUpgrade.buffContents.atk;
-
-                tower = Instantiate(buildMenu.towerinfo[buildMenu.indexs].projectile.tower,
+                tower = Instantiate(buildManager.towerBases[buildMenu.indexs].GetTowerInfo().projectile.tower,
                     GetBuildPosition(), Quaternion.identity);
 
                 GameObject effgo = Instantiate(TowerImpectPrefab, tower.transform.position, Quaternion.identity);
@@ -158,7 +155,7 @@ namespace Defend.UI
                 TowerXR towerXR = tower.GetComponent<TowerXR>();
                 towerXR.interactionLayers = layerMask;
                 box.isTrigger = false;
-                box.size = buildMenu.boxes[buildMenu.indexs].size + new Vector3(-0.5f,0,-0.5f);
+                box.size = buildMenu.boxes[buildMenu.indexs].size;
                 box.center = buildMenu.boxes[(buildMenu.indexs)].center;
                 buildMenu.buildpro.SetActive(false);
             }

@@ -1,3 +1,4 @@
+using Defend.Player;
 using Defend.Tower;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,8 +14,6 @@ namespace Defend.UI
         public Sprite[] towerSprite;
         //타워들의 박스콜라이더
         public BoxCollider[] boxes;
-        //빌드 메뉴의 타워 버튼
-        public Button[] buttons;
         //설치 위치를 보여주는 가짜 타워
         public GameObject[] falsetowers;
         public Tile tile;
@@ -24,7 +23,7 @@ namespace Defend.UI
         public GameObject buildpro;
         //index번째 타워를 선택하면 저장하는 값 
         public int indexs;
-        public int levelindex;
+        public int levelindex = Mathf.Clamp(1,1,3);
         //reticle이 활성화 비활성화 유무
         public bool isReticle = false;
         public bool istowerup = false;
@@ -35,15 +34,16 @@ namespace Defend.UI
             //초기화
             buildManager = BuildManager.Instance;
         }
-
-
+        
         //타워 버튼을 클릭시 호출
         public void SelectTower(int index)
         {
+            if (!towerinfo[index].isLock) return;
             indexs = index;
             isReticle = true;
             istowerup = true;
             BuildUI.SetActive(false);
+            //buildpro.SetActive(true);
         }
         public void SetLevel(int level)
         {
