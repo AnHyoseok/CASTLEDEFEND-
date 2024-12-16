@@ -125,11 +125,11 @@ namespace Defend.TestScript
 
             // 디버깅 또는 로그 출력
             //Debug.Log($"Healed: {realHeal}, Current Health: {CurrentHealth}");
-            //if (realHeal > 0f)
-            //{
+            if (realHeal > 0f)
+            {
                 //힐이펙트 구현
                 OnHeal?.Invoke(realHeal);
-            //}
+            }
         }
 
         //damageSource: 데미지를 주는 주체
@@ -175,7 +175,6 @@ namespace Defend.TestScript
             if (CurrentHealth <= 0f)
             {
                 isDeath = true;
-
                 //죽음 구현
                 OnDie?.Invoke();
             }

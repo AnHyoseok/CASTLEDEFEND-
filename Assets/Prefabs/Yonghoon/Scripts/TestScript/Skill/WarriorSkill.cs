@@ -12,7 +12,6 @@ namespace Defend.Enemy.Skill
         public override void ActivateSkill()
         {
             hasSkill = true;
-
             //Debug.Log("전사가 공격력 증가 버프 사용!");
 
             // 범위 내 특정 레이어의 Collider 검색

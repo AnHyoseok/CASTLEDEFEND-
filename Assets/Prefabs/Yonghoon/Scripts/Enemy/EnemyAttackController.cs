@@ -15,8 +15,10 @@ namespace Defend.Enemy
         // 공격 대상
         [SerializeField] private Transform attackTarget;
 
-        private EnemyMoveController moveController; // 적의 기본 속성
+        private EnemyMoveController moveController; // 적의 이동 속성
         private Animator animator; // 애니메이터 컴포넌트
+        private Health damageableTarget;
+
 
         //공격 관련
         public float baseAttackDamage = 10f;
@@ -33,12 +35,15 @@ namespace Defend.Enemy
 
         public UnityAction<float> AttackDamageChanged;
         public UnityAction OnAttacking;
+
+        //공격시 SFX
+        [SerializeField] private AudioClip attackClip;
         #endregion
 
         private void Awake()
         {
             attackTarget = FindAnyObjectByType<HealthBasedCastle>().transform;
-
+            damageableTarget = attackTarget.GetComponent<Health>();
             // 참조
             moveController = GetComponent<EnemyMoveController>();
             enemyController = GetComponent<EnemyController>();
@@ -63,7 +68,7 @@ namespace Defend.Enemy
             if (enemyController.type == EnemyType.Buffer) return;
 
             //Enemy가 마지막 WayPoint에 도착하지 않았거나, 공격중이거나, 공격 타겟이 없거나, 스킬을 사용중이라면 공격 딜레이 시간이 감소하지 않고 공격도 하지 않음
-            if (!hasArrived || isAttacking || !attackTarget || isChanneling) return;
+            if (!hasArrived || isAttacking || !damageableTarget || isChanneling) return;
             // 공격 쿨타임마다 공격
             if (CurrentAttackDelay > 0f)
             {
@@ -77,8 +82,15 @@ namespace Defend.Enemy
 
         private void TriggerAttackAnimation()
         {
-            // 공격 애니메이션 실행
-            animator.SetTrigger(Constants.ENEMY_ANIM_ATTACKTRIGGER);
+            if (damageableTarget.CurrentHealth > 0f)
+            {
+                // 공격 애니메이션 실행
+                animator.SetTrigger(Constants.ENEMY_ANIM_ATTACKTRIGGER);
+            }
+            else
+            {
+                animator.ResetTrigger(Constants.ENEMY_ANIM_ATTACKTRIGGER);
+            }
         }
 
         public void ChangeAttackingStatus()
@@ -90,12 +102,8 @@ namespace Defend.Enemy
         // 애니메이션 이벤트에서 호출할 메서드
         public void PerformAttack()
         {
-            // 데미지 계산 및 적용
-            Health damageableTarget = attackTarget.GetComponent<Health>();
-            if (damageableTarget != null)
-            {
-                damageableTarget.TakeDamage(CurrentAttackDamage);
-            }
+            AudioUtility.CreateSFX(attackClip, transform.position, AudioUtility.AudioGroups.EFFECT, 1);
+            damageableTarget.TakeDamage(CurrentAttackDamage);
         }
 
         public void StartAttackCooldown()

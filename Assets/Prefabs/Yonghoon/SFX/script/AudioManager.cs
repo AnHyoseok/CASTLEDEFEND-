@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
+using Defend.Utillity;
 
-namespace Defend.Utillity
+namespace Defend.Audio
 {
     // AudioManager 클래스는 Unity의 오디오 믹서를 제어하는 기능을 제공
     public class AudioManager : MonoBehaviour

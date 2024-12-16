@@ -37515,6 +37515,7 @@ MonoBehaviour:
   attackTarget: {fileID: 0}
   baseAttackDamage: 50
   baseAttackDelay: 2
+  attackClip: {fileID: 8300000, guid: 18c4766819c35a14b878eddbafd72ab2, type: 3}
 --- !u!114 &8203510802694303396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37560,8 +37561,8 @@ MonoBehaviour:
   buffParticleSystem: {fileID: 7036160444818451619}
   debuffParticleSystem: {fileID: 4255017052588634064}
   healParticleSystem: {fileID: 1578967352239689753}
-  buffAudioClip: {fileID: 0}
-  debuffAudioClip: {fileID: 0}
+  buffAudioClip: {fileID: 8300000, guid: 8b55bc7ca4535884093e830bc4b658c1, type: 3}
+  debuffAudioClip: {fileID: 8300000, guid: 2c3bd6e7999a03745907599c091e2db6, type: 3}
   healAudioClip: {fileID: 8300000, guid: 6ae07461192af8e418f4100c8b08a517, type: 3}
   positionOffset: {x: 0, y: 0, z: 0}
   scaleOffset: 0
@@ -37665,7 +37666,7 @@ MonoBehaviour:
   skillDuration: 5
   skillCooldown: 5
   range: 5
-  skillAudioClip: {fileID: 0}
+  skillAudioClip: {fileID: 8300000, guid: eb8824434ec7db34693a29b7cc81e19b, type: 3}
 --- !u!82 &6853720136289799836
 AudioSource:
   m_ObjectHideFlags: 0

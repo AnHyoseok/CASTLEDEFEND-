@@ -35,7 +35,7 @@ namespace Defend.Enemy.Skill
         public override void ActivateSkill()
         {
             Debug.Log("Boss uses a skill!");
-
+            
             foreach (var threshold in thresholds)
             {
                 if (healthRatio <= threshold && !usedThresholds.Contains(threshold))

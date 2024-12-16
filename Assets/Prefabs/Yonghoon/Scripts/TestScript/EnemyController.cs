@@ -158,6 +158,14 @@ namespace Defend.TestScript
 
             if (skill.CanActivateSkill(health.GetRatio()) && !channeling && !isAttacking)
             {
+                if(type == EnemyType.Boss)
+                {
+                    skill.SoundPlay(2,30);
+                }
+                else
+                {
+                    skill.SoundPlay();
+                }
                 animator.SetTrigger(Constants.ENEMY_ANIM_SKILLTRIGGER);
             }
         }
@@ -276,10 +284,12 @@ namespace Defend.TestScript
         {
             if (amount > 0)
             {
+                AudioUtility.CreateSFX(buffAudioClip, transform.position, AudioUtility.AudioGroups.EFFECT, 1);
                 buffParticleSystem.Play();
             }
             else if (amount < 0)
             {
+                AudioUtility.CreateSFX(debuffAudioClip, transform.position, AudioUtility.AudioGroups.EFFECT, 1);
                 debuffParticleSystem.Play();
             }
         }

@@ -16,7 +16,6 @@ namespace Defend.Enemy.Skill
             int layerMask = LayerMask.GetMask("Enemy", "Boss");
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, range, layerMask);
 
-
             foreach (var collider in hitColliders)
             {
                 // GetComponentInParent로 EnemyStats 가져오기

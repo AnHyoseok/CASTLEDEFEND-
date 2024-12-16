@@ -1,3 +1,4 @@
+using Defend.Utillity;
 using UnityEngine;
 
 namespace Defend.Enemy.Skill
@@ -29,6 +30,9 @@ namespace Defend.Enemy.Skill
         [HideInInspector] protected bool hasSkill = false;
         [SerializeField] protected AudioClip skillAudioClip;
         #endregion
-
+        public void SoundPlay(float rolloffDistanceMin = 1, float maxDistance = 15)
+        {
+            AudioUtility.CreateSFX(skillAudioClip, transform.position, AudioUtility.AudioGroups.EFFECT, 1, rolloffDistanceMin, maxDistance);
+        }
     }
 }
