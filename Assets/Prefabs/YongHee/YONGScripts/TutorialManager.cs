@@ -1,7 +1,10 @@
+using Defend.Enemy;
 using Defend.TestScript;
 using Defend.Tower;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 /// <summary>
 /// Tutorial Scene을 관리하는 Manager
@@ -18,159 +21,183 @@ namespace Defend.Tutorial
         public TextMeshProUGUI guideText;
         public Button hideButton;
         public Button showButton;
+        public GameObject endTutorialUI;
+        public Button nextButton;
+        public Button retryButton;
         public TMP_SpriteAsset axeSpriteAsset;
         public TMP_SpriteAsset pickaxSpriteAsset;
         public TMP_SpriteAsset handSpriteAsset;
         #endregion
 
-        public GameObject player;
+        public GameObject player;               // Player
+        public GameObject playerDummy;          // PlayerDummy TopView 인식용 Obj
         public GameObject rock;                 // 튜토리얼용 rock
         public GameObject tree;                 // 튜토리얼용 tree
         public GameObject castle;               // 튜토리얼용 castle
-        public GameObject enemy;                // 튜토리얼용 enemy
+        public GameObject axe;                  // 플레이어 Axe
+        public GameObject PickAxe;              // 플레이어 PickAxe
+        public ListSpawnManager lsm;            // ListSpawnManager
+        public float fontSize;                  // guideText font size
         private string guideString;             // UI에 나타나는 문구
         private Health health;                  // castle의 health 참조
-        public float fontSize;                  // guideText font size
+        [SerializeField] private string loadToScene; // 종료 후 로드 할 Scene
 
         #region Step 진행 Bool Variables
-        // 곡괭이로 바꾸기
+        // TopVIew 확인하기
         private bool isA = true;
-        // 채광하기
+        // 곡괭이로 바꾸기
         private bool isB = false;
-        // 벌목하기
+        // 채광하기
         private bool isC = false;
-        // User UI 띄우기
+        // 벌목하기
         private bool isD = false;
-        // 라운드 시작하기
+        // User UI 띄우기
         private bool isE = false;
+        // 라운드 시작하기
+        private bool isF = false;
+
+        UnityAction endTutorial;
         #endregion
 
         #endregion
         void Start()
         {
             health = castle.GetComponent<Health>();
+            endTutorial += EndUI;
+            guideText.fontSize = fontSize;
         }
 
         // TODO :: SHOW 버튼 반짝거리기, 위치 잡기
-        // TODO :: 탑뷰 해보기
         void Update()
         {
-            guideText.fontSize = fontSize;
-            // TODO :: UI 상호작용 하는법
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                HideUI();
+            }
 
-            // Step.A 곡괭이로 무기 바꾸기
+            // Step.A TopView 확인하기
             if (isA == true)
             {
-                AChangeToPickax();
-                // TODO :: Player 손에 곡괭이가 생긴 경우
-                if (Input.GetKeyDown(KeyCode.A))
+                AChangeTopView();
+                if (playerDummy.activeSelf == true)
                 {
                     isA = false;
                     isB = true;
                 }
             }
 
-            // Step.B 곡괭이로 채광하기
+            // Step.B 곡괭이로 무기 바꾸기
             if (isB == true)
             {
-                BMiningRock();
-                // 튜토리얼 Rock이 사라진 경우
-                if (Input.GetKeyDown(KeyCode.B))
-                //if (rock == null)
+                BChangeToPickax();
+                if (PickAxe.activeSelf == true)
                 {
                     isB = false;
                     isC = true;
                 }
             }
 
-            // Step.C 도끼로 벌목하기
+            // Step.C 곡괭이로 채광하기
             if (isC == true)
             {
-                CLoggingTree();
-                if (Input.GetKeyDown(KeyCode.C))
-                // 튜토리얼 Tree가 사라진 경우
-                //if (tree == null)
+                CMiningRock();
+                // 튜토리얼 Rock이 사라진 경우
+                if (rock == null)
                 {
                     isC = false;
                     isD = true;
                 }
             }
 
-            // Step.D User UI 띄우고 Build 선택하고 타워 건설하기
+            // Step.D 도끼로 벌목하기
             if (isD == true)
             {
-                DShowUserUI();
-                TowerBase go = FindFirstObjectByType<TowerBase>();
-                if (Input.GetKeyDown(KeyCode.D))
-                // 타워가 있는 경우
-                //if(go !=null)
+                DLoggingTree();
+                // 튜토리얼 Tree가 사라진 경우
+                if (tree == null)
                 {
                     isD = false;
                     isE = true;
                 }
             }
 
-            // Step.E 왼손 UI show 버튼 클릭 후 skip
+            // Step.E User UI 띄우고 Build 선택하고 타워 건설하기
             if (isE == true)
             {
-                ESkipRoundTimer();
-                if (Input.GetKeyDown(KeyCode.F))
-                // 왼손에 SHOW 버튼으로 UI 켜고 SKIP 버튼으로 라운드 시작
-                // TODO :: Waypoint 만들기
-                //if (enemy.activeSelf == true)
+                EShowUserUI();
+                TowerBase go = FindFirstObjectByType<TowerBase>();
+                // 타워가 있는 경우
+                if (go != null)
                 {
                     isE = false;
+                    isF = true;
                 }
             }
 
-            // 성이 부숴졌거나 enemy가 파괴된 경우 튜토리얼 종료
-            if (health.CurrentHealth <= 0 || enemy == null)
+            // Step.F 왼손 UI show 버튼 클릭 후 skip
+            if (isF == true)
             {
-                // TODO :: 종료 Scene 이동
+                FSkipRoundTimer();
+                // 왼손에 SHOW 버튼으로 UI 켜고 SKIP 버튼으로 라운드 시작
+                if (lsm.waveCount > 0)
+                {
+                    isF = false;
+                    guideString = $"Protect the castle from the enemy";
+                    guideText.text = guideString;
+                }
+            }
+
+            // 성이 부숴졌거나 enemy가 죽은 경우 튜토리얼 종료
+            if (health.CurrentHealth <= 0 || (lsm.waveCount > 0 && ListSpawnManager.enemyAlive == 0))
+            {
+                endTutorial.Invoke();
             }
         }
-
-        // Step.A 곡괭이로 무기 바꾸기
-        void AChangeToPickax()
+        // Step.A TopView 확인하기
+        void AChangeTopView()
         {
-            // TODO :: 장비 바뀌는 거 확인, 무슨 키 쓰는지 
+            // TODO :: 무슨 키 쓰는지 
+            guideString = $"Press the <color=#FF0000>Y</color>-Action button to see the entire map";
+            guideText.text = guideString;
+        }
+
+        // Step.B 곡괭이로 무기 바꾸기
+        void BChangeToPickax()
+        {
+            // TODO :: 무슨 키 쓰는지 
             guideText.spriteAsset = pickaxSpriteAsset;
             guideString = $"Press the <color=#FF0000>Y</color>-Action button to change the   <size=12><sprite=0>";
             guideText.text = guideString;
         }
 
-        // Step.B 곡괭이로 채광하기
-        void BMiningRock()
+        // Step.C 곡괭이로 채광하기
+        void CMiningRock()
         {
-            // TODO :: 채광되는지 확인 
             guideString = $"Use    <size=12><sprite=0><size={fontSize}>to mine the rock";
             guideText.text = guideString;
         }
 
-        // Step.C 도끼로 벌목하기
-        void CLoggingTree()
+        // Step.D 도끼로 벌목하기
+        void DLoggingTree()
         {
-            // TODO :: 벌목되는지 확인 
             guideText.spriteAsset = axeSpriteAsset;
             guideString = $"Change equipment into  <size=12><sprite=0><size={fontSize}> and logging";
             guideText.text = guideString;
         }
 
-        // Step.D User UI 띄우고 Build 선택하고 타워 건설하기
-        void DShowUserUI()
+        // Step.E User UI 띄우고 Build 선택하고 타워 건설하기
+        void EShowUserUI()
         {
-            // TODO :: 타워 건설하는법 이식하기, 무슨 키 쓰는지
-            guideText.spriteAsset = axeSpriteAsset;
-            //guideText.spriteAsset = handSpriteAsset;
-            guideString = $"Change to <size=12><sprite=0><size={fontSize}>\nPress the <color=#FF0000>Y</color>-Action button to show the UI\nSelect Build , and build a tower";
+            // TODO :: 무슨 키 쓰는지
+            guideText.spriteAsset = handSpriteAsset;
+            guideString = $"Change to    <size=12><sprite=0><size={fontSize}>\nPress the <color=#FF0000>Y</color>-Action button to show the UI\nSelect Build , and build a tower";
             guideText.text = guideString;
         }
 
-        // Step.E 왼손 UI show 버튼 클릭 후 skip
-        void ESkipRoundTimer()
+        // Step.F 왼손 UI show 버튼 클릭 후 skip
+        void FSkipRoundTimer()
         {
-            // TODO :: 왼손 UI 작동확인, TIMER 추가하기, SKIP 작동 확인하기, Enemy 활성화
-            // SKIP은 단순 Enemy 활성화만 해도 가능
+            // TODO :: 왼손 UI 작동확인, SKIP 작동 확인하기
             guideString = "Turn on UI through <color=#FF0000>Show</color> button attached to left hand\n Start the round through the <color=#FF0000>Skip</color> button";
             guideText.text = guideString;
         }
@@ -186,6 +213,29 @@ namespace Defend.Tutorial
         {
             backgroundUI.SetActive(false);
             showButton.gameObject.SetActive(true);
+        }
+
+        // End UI
+        public void EndUI()
+        {
+            backgroundUI.SetActive(false);
+            showButton.gameObject.SetActive(false);
+            endTutorialUI.SetActive(true);
+        }
+
+        // Next
+        public void OnClickNext()
+        {
+            // TODO :: Fader 있는지 ?
+            SceneManager.LoadScene(loadToScene);
+        }
+        // Retry 
+        public void OnClickRetry()
+        {
+            // 현재 활성화된 씬의 이름 가져오기
+            string currentSceneName = SceneManager.GetActiveScene().name;
+            // 씬 다시 로드
+            SceneManager.LoadScene(currentSceneName);
         }
     }
 }

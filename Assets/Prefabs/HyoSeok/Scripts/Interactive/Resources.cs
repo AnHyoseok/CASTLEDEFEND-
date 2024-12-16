@@ -61,7 +61,6 @@ namespace Defend.Interactive
             // 충돌한 오브젝트의 이름과 현재 오브젝트의 이름을 기반으로 자원 타입 설정
             string otherName = other.gameObject.name;
             string currentName = gameObject.name;
-
             if (!isDamaged &&
                 ((otherName == "Axe" && currentName == "Tree(Clone)") ||
                  (otherName == "PickAxe" && currentName == "Rock(Clone)")))

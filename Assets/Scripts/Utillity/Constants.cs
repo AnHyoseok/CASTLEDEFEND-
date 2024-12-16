@@ -11,7 +11,7 @@ namespace Defend.Utillity
         #endregion
 
         #region Animation 
-        public static string ANIM_SHOOTTRIGGER = "ShootTrigger";         //Anim - ShootTrigger
+        public static string TOWER_ANIM_SHOOTTRIGGER = "ShootTrigger";   //TOWERAnim - ShootTrigger
         #endregion
 
         #region EnemyAnimation
