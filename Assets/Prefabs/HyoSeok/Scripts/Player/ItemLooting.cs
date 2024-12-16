@@ -1,6 +1,6 @@
 using Mono.Cecil;
 using UnityEngine;
-using static Defend.Interactive.Resources;
+
 
 
 namespace Defend.item

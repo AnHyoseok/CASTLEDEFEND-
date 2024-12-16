@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Defend.Interactive
 {
 
-    public class Resources : MonoBehaviour
+    public class GameResources : MonoBehaviour
     {
         public enum ResourceTypeEnum
         {

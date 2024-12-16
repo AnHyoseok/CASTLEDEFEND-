@@ -31,5 +31,16 @@ namespace Defend.Tower
         {
             return cost1 / 2;
         }
+
+        //나무 가격
+        public float GetSellTreeCost()
+        {
+            return cost3 / 2;
+        }
+        //돌 가격
+        public float GetSellRockCost()
+        {
+            return cost4 / 2;
+        }
     }
 }

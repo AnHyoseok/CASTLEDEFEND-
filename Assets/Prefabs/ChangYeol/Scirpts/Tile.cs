@@ -135,12 +135,12 @@ namespace Defend.UI
         private void SetBuildTower()
         {
             if (!buildMenu.istowerup) return;
-            if (!buildManager.playerState.SpendMoney(buildMenu.towerinfo[buildMenu.indexs].cost1))
+            if (!buildManager.playerState.SpendMoney(buildManager.towerBases[buildMenu.indexs].GetTowerInfo().cost1))
             {
                 buildManager.warningWindow.ShowWarning("Not Enough Money");
                 return;
             }
-            if (buildManager.playerState.SpendMoney(buildMenu.towerinfo[buildMenu.indexs].cost1) && buildMenu.isReticle && buildMenu.towerinfo[buildMenu.indexs].isLock)
+            if (buildManager.playerState.SpendMoney(buildManager.towerBases[buildMenu.indexs].GetTowerInfo().cost1) && buildMenu.isReticle && buildMenu.towerinfo[buildMenu.indexs].isLock)
             {
                 tower = Instantiate(buildManager.towerBases[buildMenu.indexs].GetTowerInfo().projectile.tower,
                     GetBuildPosition(), Quaternion.identity);

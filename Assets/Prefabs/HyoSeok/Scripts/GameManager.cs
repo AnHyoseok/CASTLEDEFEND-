@@ -7,6 +7,8 @@ using System;
 using System.Collections;
 using TMPro;
 using Defend.Tower;
+using Defend.Interactive;
+using Defend.item;
 
 
 namespace Defend.Manager
@@ -22,6 +24,7 @@ namespace Defend.Manager
         BuildMenu build;
         Health health;
         TowerBuildMenuName towerBuildMenuName;
+        GameResources resources;
         private GameObject[] enemies;
         EnemyState[] enemyState;
         private BuildManager buildManager;
@@ -55,6 +58,7 @@ namespace Defend.Manager
             listSpawnManager = FindAnyObjectByType<ListSpawnManager>();
             build = FindAnyObjectByType<BuildMenu>();
             towerBuildMenuName = FindAnyObjectByType<TowerBuildMenuName>();
+           
             buildManager = BuildManager.instance;
 
             //LoadGameData();
@@ -181,14 +185,12 @@ namespace Defend.Manager
             }
             ListSpawnManager.enemyAlive = 0;
 
-            //타워들
-            towerbase = FindObjectsByType<TowerBase>(FindObjectsSortMode.None);
-            foreach (var tower in towerbase)
-            {
-               Destroy(tower.gameObject);
-                
+            //필드에 있는 자원들
+            DropItem[] item = FindObjectsByType<DropItem>(FindObjectsSortMode.None);
+            foreach (DropItem e in item)
+            { 
+                Destroy(e.gameObject);
             }
-
             //진행 라운드 수
             listSpawnManager.waveCount = data.Round;
             listSpawnManager.countdown = data.countdown;
@@ -239,7 +241,15 @@ namespace Defend.Manager
             towerBuildMenuName.unlockTowerButton[9].interactable = data.isTowerUnlocked10;
             towerBuildMenuName.unlockTowerButton[10].interactable = data.isTowerUnlocked11;
             //towerBuildMenuName.unlockTowerButton[12].interactable = data.isTowerUnlocked12;
+            
+            //타워들
+            towerbase = FindObjectsByType<TowerBase>(FindObjectsSortMode.None);
+            foreach (var tower in towerbase)
+            {
+                Destroy(tower.gameObject);
+                buildManager.playerState.AddMoney(tower.GetTowerInfo().GetSellCost());
 
+            }
         }
 
 
