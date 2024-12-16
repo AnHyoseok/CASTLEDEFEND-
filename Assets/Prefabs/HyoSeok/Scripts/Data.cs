@@ -10,7 +10,8 @@ namespace Defend.Manager
     {
      
         //스테이지 카운트
-        public int isClear ;
+        public int Round ;
+        public float countdown;
         //타워 해금 여부 0일때 잠금 1일때 해금
         public bool isTowerUnlock1;
         public bool isTowerUnlock2;

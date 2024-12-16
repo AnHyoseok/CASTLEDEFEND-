@@ -109,7 +109,7 @@ namespace Defend.UI
         public IEnumerator TimeStop()
         {
             EnemyState[] enemys = FindObjectsByType<EnemyState>(FindObjectsSortMode.None);
-
+            
             
             foreach (EnemyState e in enemys)
             {

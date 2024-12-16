@@ -6,6 +6,7 @@ using Defend.UI;
 using System;
 using System.Collections;
 using TMPro;
+using Defend.Tower;
 
 
 namespace Defend.Manager
@@ -15,12 +16,14 @@ namespace Defend.Manager
         #region Variables
         //참조
         PlayerState playerState;
-
+        TowerBase[] towerbase;
         ListSpawnManager listSpawnManager;
         CastleUpgrade castleUpgrade;
         BuildMenu build;
         Health health;
         TowerBuildMenuName towerBuildMenuName;
+        private GameObject[] enemies;
+        EnemyState[] enemyState;
         private BuildManager buildManager;
         public GameObject player;
         public GameObject castle;
@@ -95,10 +98,13 @@ namespace Defend.Manager
         //세이브 버튼용
         public void SaveGameData()
         {
-             
+           
+
+
 
             //스테이지 카운트
-            //data.isClear = listSpawnManager.waveCount;
+            data.Round = listSpawnManager.waveCount-1;
+            data.countdown = listSpawnManager.countdown;
 
             //플레이어 자원 여부
             data.health = health.maxHealth;
@@ -160,9 +166,32 @@ namespace Defend.Manager
             // 데이터 로드
             data = DataManager.Instance.LoadGameData();
 
+            //enemys
+            EnemyState[] enemys = FindObjectsByType<EnemyState>(FindObjectsSortMode.None);
+            foreach (EnemyState e in enemys)
+            {
+                if (e == null)
+                {
+                    continue;
+                }
+                //e.gameObject.transform
+                //e.gameObject.GetComponent<EnemyMoveController>().enabled = false;
+
+                Destroy(e.gameObject);
+            }
+            ListSpawnManager.enemyAlive = 0;
+
+            //타워들
+            towerbase = FindObjectsByType<TowerBase>(FindObjectsSortMode.None);
+            foreach (var tower in towerbase)
+            {
+               Destroy(tower.gameObject);
+                
+            }
 
             //진행 라운드 수
-            //listSpawnManager.waveCount = data.isClear;
+            listSpawnManager.waveCount = data.Round;
+            listSpawnManager.countdown = data.countdown;
             //플레이어 자원 여부
             health.maxHealth = data.health;
             playerState.money = data.money;
