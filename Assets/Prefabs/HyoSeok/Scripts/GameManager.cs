@@ -9,6 +9,7 @@ using TMPro;
 using Defend.Tower;
 using Defend.Interactive;
 using Defend.item;
+using UnityEngine.SceneManagement;
 
 
 namespace Defend.Manager
@@ -252,6 +253,21 @@ namespace Defend.Manager
             }
         }
 
+        //다시하기 
+        public void RestartGame()
+        {
+            // 데이터 초기화
+            DataManager.Instance.SaveGameData(new Data());
+            //씬다시시작
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+
+        // 게임 종료
+        public void QuitGame()
+        {
+
+            Application.Quit();
+        }
 
         //게임클리어
         IEnumerator GameClear()
