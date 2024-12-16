@@ -1,14 +1,13 @@
 using Defend.Enemy;
-using Defend.Manager;
+using UnityEngine;
 using Defend.Player;
 using Defend.TestScript;
-using MyVrSample;
+using Defend.UI;
+using System;
 using System.Collections;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEngine;
-using UnityEngine.Playables;
-using UnityEngine.UI;
+
+
 namespace Defend.Manager
 {
     public class GameManager : MonoBehaviour
@@ -16,9 +15,13 @@ namespace Defend.Manager
         #region Variables
         //참조
         PlayerState playerState;
-        ListSpawnManager ListSpawnManager;
+
+        ListSpawnManager listSpawnManager;
         CastleUpgrade castleUpgrade;
+        BuildMenu build;
         Health health;
+        TowerBuildMenuName towerBuildMenuName;
+        private BuildManager buildManager;
         public GameObject player;
         public GameObject castle;
         //ui
@@ -44,15 +47,14 @@ namespace Defend.Manager
         {
             //참조
             health = castle.GetComponent<Health>();
-            playerState = Object.FindAnyObjectByType<PlayerState>();
-            castleUpgrade = Object.FindAnyObjectByType<CastleUpgrade>();
-            //시작하자마자 불러오기
-            //LoadGameData();
-            //playerState.money = data.money;
+            playerState = FindAnyObjectByType<PlayerState>();
+            castleUpgrade = FindAnyObjectByType<CastleUpgrade>();
+            listSpawnManager = FindAnyObjectByType<ListSpawnManager>();
+            build = FindAnyObjectByType<BuildMenu>();
+            towerBuildMenuName = FindAnyObjectByType<TowerBuildMenuName>();
+            buildManager = BuildManager.instance;
 
-            //....
-            //...
-
+            LoadGameData();
 
 
             if (!audioSource)
@@ -78,6 +80,7 @@ namespace Defend.Manager
         }
 
         //게임 종료시 자동저장
+        // 초기화임
         private void OnApplicationQuit()
         {
             DataManager.Instance.SaveGameData(data);
@@ -92,6 +95,11 @@ namespace Defend.Manager
         //세이브 버튼용
         public void SaveGameData()
         {
+            //data = null;    
+
+            //스테이지 카운트
+            //data.isClear = listSpawnManager.waveCount;
+
             //플레이어 자원 여부
             data.health = health.maxHealth;
             data.money = playerState.money;
@@ -111,6 +119,36 @@ namespace Defend.Manager
             data.isPotalActive = castleUpgrade.isPotalActive;
             data.isMoveSpeedUp = castleUpgrade.isMoveSpeedUp;
             data.isAutoGain = castleUpgrade.isAutoGain;
+            //타워 해금여부
+
+            data.isTowerUnlock2 = build.towerinfo[1].isLock;
+            data.isTowerUnlock3 = build.towerinfo[2].isLock;
+            data.isTowerUnlock4 = build.towerinfo[3].isLock;
+            data.isTowerUnlock5 = build.towerinfo[4].isLock;
+            data.isTowerUnlock6 = build.towerinfo[5].isLock;
+            data.isTowerUnlock7 = build.towerinfo[6].isLock;
+            data.isTowerUnlock8 = build.towerinfo[7].isLock;
+            data.isTowerUnlock1 = build.towerinfo[8].isLock;
+            data.isTowerUnlock9 = build.towerinfo[9].isLock;
+            data.isTowerUnlock10 = build.towerinfo[10].isLock;
+            data.isTowerUnlock11 = build.towerinfo[11].isLock;
+            data.isTowerUnlock12 = build.towerinfo[12].isLock;
+
+            //타워UI해금
+            data.isTowerUnlocked1 = towerBuildMenuName.unlockTowerButton[1];
+            data.isTowerUnlocked2 = towerBuildMenuName.unlockTowerButton[2];
+            data.isTowerUnlocked3 = towerBuildMenuName.unlockTowerButton[3];
+            data.isTowerUnlocked4 = towerBuildMenuName.unlockTowerButton[4];
+            data.isTowerUnlocked5 = towerBuildMenuName.unlockTowerButton[5];
+            data.isTowerUnlocked6 = towerBuildMenuName.unlockTowerButton[6];
+            data.isTowerUnlocked7 = towerBuildMenuName.unlockTowerButton[7];
+            data.isTowerUnlocked8 = towerBuildMenuName.unlockTowerButton[8];
+            data.isTowerUnlocked9 = towerBuildMenuName.unlockTowerButton[9];
+            data.isTowerUnlocked10 = towerBuildMenuName.unlockTowerButton[10];
+            data.isTowerUnlocked11 = towerBuildMenuName.unlockTowerButton[11];
+            data.isTowerUnlocked12 = towerBuildMenuName.unlockTowerButton[12];
+
+
 
             // 데이터 저장=
             DataManager.Instance.SaveGameData(data);
@@ -120,8 +158,11 @@ namespace Defend.Manager
         public void LoadGameData()
         {
             // 데이터 로드
-            DataManager.Instance.LoadGameData();
+            data = DataManager.Instance.LoadGameData();
 
+
+            //진행 라운드 수
+            //listSpawnManager.waveCount = data.isClear;
             //플레이어 자원 여부
             health.maxHealth = data.health;
             playerState.money = data.money;
@@ -141,21 +182,43 @@ namespace Defend.Manager
             castleUpgrade.isPotalActive = data.isPotalActive;
             castleUpgrade.isMoveSpeedUp = data.isMoveSpeedUp;
             castleUpgrade.isAutoGain = data.isAutoGain;
+            //타워 해금여부
+
+            build.towerinfo[1].isLock = data.isTowerUnlock2;
+            build.towerinfo[2].isLock = data.isTowerUnlock3;
+            build.towerinfo[3].isLock = data.isTowerUnlock4;
+            build.towerinfo[4].isLock = data.isTowerUnlock5;
+            build.towerinfo[5].isLock = data.isTowerUnlock6;
+            build.towerinfo[6].isLock = data.isTowerUnlock7;
+            build.towerinfo[7].isLock = data.isTowerUnlock8;
+            build.towerinfo[8].isLock = data.isTowerUnlock1;
+            build.towerinfo[9].isLock = data.isTowerUnlock9;
+            build.towerinfo[10].isLock = data.isTowerUnlock10;
+            build.towerinfo[11].isLock = data.isTowerUnlock11;
+            //build.towerinfo[12].isLock = data.isTowerUnlock12;
+
+            //타워 버튼 해금
+            towerBuildMenuName.unlockTowerButton[1].interactable = data.isTowerUnlocked1;
+            towerBuildMenuName.unlockTowerButton[2].interactable = data.isTowerUnlocked2;
+            towerBuildMenuName.unlockTowerButton[3].interactable = data.isTowerUnlocked3;
+            towerBuildMenuName.unlockTowerButton[4].interactable = data.isTowerUnlocked4;
+            towerBuildMenuName.unlockTowerButton[5].interactable = data.isTowerUnlocked5;
+            towerBuildMenuName.unlockTowerButton[6].interactable = data.isTowerUnlocked6;
+            towerBuildMenuName.unlockTowerButton[7].interactable = data.isTowerUnlocked7;
+            towerBuildMenuName.unlockTowerButton[8].interactable = data.isTowerUnlocked8;
+            //towerBuildMenuName.unlockTowerButton[9].interactable = data.isTowerUnlocked9;
+            //towerBuildMenuName.unlockTowerButton[10].interactable= data.isTowerUnlocked10;
+            //towerBuildMenuName.unlockTowerButton[11].interactable = data.isTowerUnlocked11;
+            //towerBuildMenuName.unlockTowerButton[12].interactable = data.isTowerUnlocked12;
+
         }
 
-        //데이터초기화
-        public void DeleteGameData()
-        {
-            data = null;
-            //데이터삭제
-            DataManager.Instance.DeleteGameData(data);
-        }
 
         //게임클리어
         IEnumerator GameClear()
         {
 
-            if (ListSpawnManager.enemyAlive <= 0 && ListSpawnManager.waveCount >= 5)
+            if (ListSpawnManager.enemyAlive <= 0 && listSpawnManager.waveCount >= 5)
             {
                 //게임클리어 창 뜨기
                 clearUI.SetActive(true);

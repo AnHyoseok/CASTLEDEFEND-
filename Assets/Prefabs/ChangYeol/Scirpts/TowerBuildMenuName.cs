@@ -66,6 +66,8 @@ namespace Defend.UI
             Debug.Log(index);
             if (BuildManager.instance.playerState.SpendMoney(100) && BuildManager.instance.playerState.SpendResources())
             {
+                towerBuildButtons[index].interactable = false;
+
                 build.towerinfo[index].isLock = true;
                 towerBuildButtons[index].interactable = build.towerinfo[index].isLock;
                 unlockTowerButton[index-1].interactable = !build.towerinfo[index].isLock;
