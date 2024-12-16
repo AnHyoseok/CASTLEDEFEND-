@@ -51458,6 +51458,9 @@ MonoBehaviour:
   buffParticleSystem: {fileID: 265557943813956872}
   debuffParticleSystem: {fileID: 8614722980305677832}
   healParticleSystem: {fileID: 2099963106396781099}
+  buffAudioClip: {fileID: 0}
+  debuffAudioClip: {fileID: 0}
+  healAudioClip: {fileID: 8300000, guid: 6ae07461192af8e418f4100c8b08a517, type: 3}
   positionOffset: {x: 0, y: 0, z: 0}
   scaleOffset: 0
   rewardGoldCount: 5
@@ -51560,6 +51563,7 @@ MonoBehaviour:
   skillDuration: 5
   skillCooldown: 5
   range: 5
+  skillAudioClip: {fileID: 0}
 --- !u!1 &8361692655883624189
 GameObject:
   m_ObjectHideFlags: 0

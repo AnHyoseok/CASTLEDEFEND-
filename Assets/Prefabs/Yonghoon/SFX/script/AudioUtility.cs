@@ -22,12 +22,15 @@ namespace Defend.Utillity
         }
 
         // 특정 위치에서 사운드 효과(AudioClip)를 생성하고 재생합니다.
-        public static void CreateSFX(AudioClip clip, Vector3 position, AudioGroups audioGroup, float spatialBlend, float rolloffDistanceMin = 1f)
+        public static void CreateSFX(AudioClip clip, Vector3 position, AudioGroups audioGroup, float spatialBlend, float rolloffDistanceMin = 1f, float maxDistance = 15)
         {
             // 새 오브젝트 생성: 사운드 효과를 재생할 임시 오브젝트를 만듭니다.
-            GameObject impactSfxInstance = new GameObject();
+            GameObject impactSfxInstance = new GameObject("SFX_" + clip.name);
             // 오브젝트 위치 설정 : 효과음이 발생한 곳에 생성
             impactSfxInstance.transform.position = position;
+
+            //Hierarchy / SFXContainer 안으로 오브젝트를 생성
+            impactSfxInstance.transform.SetParent(GameObject.Find("SFXContainer").transform);
 
             // AudioSource 컴포넌트를 추가하여 사운드를 재생합니다.
             AudioSource source = impactSfxInstance.AddComponent<AudioSource>();
@@ -37,12 +40,24 @@ namespace Defend.Utillity
             source.spatialBlend = spatialBlend;
             // 소리 감쇠가 시작되는 최소 거리
             source.minDistance = rolloffDistanceMin;
-            // 사운드 재생 시작
-            source.Play();
+            source.maxDistance = maxDistance;
+
+            // Custom Rolloff Curve 설정 
+            // └ 이번 프로젝트에서는 플레이어 위치가 maxDistance 이상 멀어지게 되면
+            // 소리가 아예 들리지 않도록 설정
+            AnimationCurve customRolloff = new AnimationCurve();
+            customRolloff.AddKey(0, 1f);              // 0 거리에서 볼륨 100%
+            customRolloff.AddKey(rolloffDistanceMin, 1f);  // MinDistance까지는 유지
+            customRolloff.AddKey(maxDistance, 0f);    // MaxDistance에서 볼륨 0%
+
+            source.rolloffMode = AudioRolloffMode.Custom;
+            source.SetCustomCurve(AudioSourceCurveType.CustomRolloff, customRolloff);
 
             // 출력 오디오 믹서 그룹 설정
             source.outputAudioMixerGroup = GetAudioGroup(audioGroup);
 
+            // 사운드 재생 시작
+            source.Play();
             // 일정 시간이 지나면 오브젝트를 자동으로 제거하는 컴포넌트 추가
             TimedSelfDestruct timedSelfDestruct = impactSfxInstance.AddComponent<TimedSelfDestruct>();
             // 클립 길이만큼 유지 후 제거

@@ -44,10 +44,15 @@ namespace Defend.TestScript
         public UnityAction OnChanneling;
 
 
-        //버프와 디버프
+        //버프와 디버프 VFX
         public ParticleSystem buffParticleSystem;
         public ParticleSystem debuffParticleSystem;
         public ParticleSystem healParticleSystem;
+
+        //버프와 디버프 SFX
+        public AudioClip buffAudioClip;
+        public AudioClip debuffAudioClip;
+        public AudioClip healAudioClip;
 
         private Health health;//체력담당 컴포넌트
         private EnemyMoveController moveController;//이동담당 컴포넌트
@@ -173,6 +178,10 @@ namespace Defend.TestScript
         {
             //Debug.Log("힐 받음");
             healParticleSystem.Play();
+            if(healAudioClip != null)
+            {
+                AudioUtility.CreateSFX(healAudioClip, transform.position, AudioUtility.AudioGroups.EFFECT, 1);
+            }
         }
 
         private void OnDie()

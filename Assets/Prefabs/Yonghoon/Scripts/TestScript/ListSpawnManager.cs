@@ -94,7 +94,7 @@ namespace Defend.Enemy
         IEnumerator SpawnWave()
         {
             isSpawn = true; // 스폰 시작 상태로 전환
-
+            onPressSkipBtn = false; // 스킵 버튼을 false로 항상 초기화
             // 현재 웨이브 데이터를 가져옴
             ListWaveData wave = waves[waveCount];
             //Debug.Log(wave);

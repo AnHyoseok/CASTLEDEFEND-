@@ -27,6 +27,7 @@ namespace Defend.Enemy.Skill
         public float range = 5f;
         
         [HideInInspector] protected bool hasSkill = false;
+        [SerializeField] protected AudioClip skillAudioClip;
         #endregion
 
     }
