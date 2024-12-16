@@ -126,7 +126,6 @@ namespace Defend.UI
         void UIEnterReticle(UIHoverEventArgs args)
         {
             buildMenu.isReticle = false;
-            buildMenu.istowerup = false;
         }
         void UIExitReticle(UIHoverEventArgs uIHover)
         {
@@ -160,5 +159,6 @@ namespace Defend.UI
                 buildMenu.buildpro.SetActive(false);
             }
         }
+        
     }
 }

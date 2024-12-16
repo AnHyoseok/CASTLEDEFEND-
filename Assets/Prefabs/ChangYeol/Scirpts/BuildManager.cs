@@ -28,7 +28,7 @@ namespace Defend.UI
 
         #region Variables
         //타일에 설치할 타일의 정보(프리팹, 가격정보)
-        private TowerInfo towerInfo;
+        [HideInInspector]public TowerInfo towerInfo;
         //플레이어
         public PlayerState playerState;
         //경고창

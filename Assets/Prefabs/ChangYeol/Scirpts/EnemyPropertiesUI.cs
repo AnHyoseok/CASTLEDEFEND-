@@ -15,23 +15,28 @@ namespace Defend.UI
 
         public GameObject[] targetObject; // 크기에 따라 조절할 오브젝트
         public RectTransform canvasRect;
-        RectTransform[] targetRect;
+        public RectTransform[] targetRect;
+
+        [HideInInspector]public bool iswarrior = false;
+        [HideInInspector]public bool iswizard = false;
+        [HideInInspector]public bool isBoss = false;
+        private Vector2 previousSize; // 이전 프레임의 캔버스 크기
         #endregion
         private void Start()
         {
             buildManager = BuildManager.Instance;
             ShowProUI();
+            previousSize = canvasRect.sizeDelta;
+            iswarrior = targetObject[0].activeSelf;
+            iswizard = targetObject[1].activeSelf;
+            isBoss = targetObject[2].activeSelf;
         }
         private void Update()
         {
-            /*for (int i = 0; i < targetObject.Length; i++)
+            if (iswarrior || iswizard || isBoss)
             {
-                if (targetObject != null && targetObject[i].activeSelf)
-                {
-                    targetRect = targetObject[i].GetComponents<RectTransform>();
-                    canvasRect.sizeDelta = new Vector2(canvasRect.sizeDelta.x, canvasRect.sizeDelta.y + targetRect[0].sizeDelta.y);
-                }
-            }*/
+                CalculateCanvasSize();
+            }
         }
         public void ShowProUI()
         {
@@ -50,6 +55,23 @@ namespace Defend.UI
         public void HideProUI()
         {
             EnemyProUI.SetActive(false);
+        }
+        void CalculateCanvasSize()
+        {
+            for ( int i = 0;i < targetObject.Length;i++ )
+            {
+                switch (targetObject[i].activeSelf)
+                {
+                    case true:
+                        canvasRect.sizeDelta = new Vector2(canvasRect.sizeDelta.x, previousSize.y + canvasRect.sizeDelta.y);
+                        previousSize = canvasRect.sizeDelta;
+                        break;
+                    case false:
+                        canvasRect.sizeDelta = new Vector2(canvasRect.sizeDelta.x, previousSize.y - canvasRect.sizeDelta.y);
+                        previousSize = canvasRect.sizeDelta;
+                        break;
+                }
+            }
         }
     }
 }

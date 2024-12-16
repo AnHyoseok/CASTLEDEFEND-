@@ -26,6 +26,10 @@ namespace Defend.UI
             buildManager = BuildManager.Instance;
             StartBuild();
         }
+        private void Update()
+        {
+            UnLockUpdate();
+        }
         void StartBuild()
         {
             for (int i = 0; i < towerinfo.Length; i++)
@@ -64,13 +68,21 @@ namespace Defend.UI
             if (build.towerinfo[index].isLock) return;
             build.indexs = index;
             Debug.Log(index);
-            if (BuildManager.instance.playerState.SpendMoney(100) && BuildManager.instance.playerState.SpendResources())
+            if (BuildManager.instance.playerState.SpendMoney(0) && BuildManager.instance.playerState.SpendResources())
             {
                 towerBuildButtons[index].interactable = false;
 
                 build.towerinfo[index].isLock = true;
                 towerBuildButtons[index].interactable = build.towerinfo[index].isLock;
                 unlockTowerButton[index-1].interactable = !build.towerinfo[index].isLock;
+            }
+        }
+        void UnLockUpdate()
+        {
+            for (int i = 1; i < unlockTowerButton.Length; i++)
+            {
+                towerBuildButtons[i - 1].interactable = build.towerinfo[i - 1].isLock;
+                unlockTowerButton[i - 1].interactable = !build.towerinfo[i].isLock;
             }
         }
     }
