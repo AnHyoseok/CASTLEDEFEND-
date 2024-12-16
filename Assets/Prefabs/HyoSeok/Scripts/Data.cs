@@ -23,7 +23,7 @@ namespace Defend.Manager
         public bool isTowerUnlock9;
         public bool isTowerUnlock10;
         public bool isTowerUnlock11;
-        //public bool isTowerUnlock12;
+        public bool isTowerUnlock12;
 
         //
         //타워 해금 여부 0일때 잠금 1일때 해금
@@ -37,7 +37,7 @@ namespace Defend.Manager
         public bool isTowerUnlocked8;
         public bool isTowerUnlocked9;
         public bool isTowerUnlocked10;
-        //public bool isTowerUnlocked11;
+        public bool isTowerUnlocked11;
         //public bool isTowerUnlocked12;
 
         //업그레이드 여부

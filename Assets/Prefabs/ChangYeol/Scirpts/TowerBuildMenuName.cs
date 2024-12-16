@@ -79,9 +79,9 @@ namespace Defend.UI
         }
         void UnLockUpdate()
         {
-            for (int i = 1; i < unlockTowerButton.Length; i++)
+            for (int i = 1; i < towerBuildButtons.Length; i++)
             {
-                towerBuildButtons[i - 1].interactable = build.towerinfo[i - 1].isLock;
+                towerBuildButtons[i].interactable = build.towerinfo[i].isLock;
                 unlockTowerButton[i - 1].interactable = !build.towerinfo[i].isLock;
             }
         }

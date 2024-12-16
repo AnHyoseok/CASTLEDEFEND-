@@ -135,17 +135,17 @@ namespace Defend.Manager
             //data.isTowerUnlock12 = build.towerinfo[12].isLock;
 
             //타워UI해금
-            data.isTowerUnlocked1 = towerBuildMenuName.unlockTowerButton[1];
-            data.isTowerUnlocked2 = towerBuildMenuName.unlockTowerButton[2];
-            data.isTowerUnlocked3 = towerBuildMenuName.unlockTowerButton[3];
-            data.isTowerUnlocked4 = towerBuildMenuName.unlockTowerButton[4];
-            data.isTowerUnlocked5 = towerBuildMenuName.unlockTowerButton[5];
-            data.isTowerUnlocked6 = towerBuildMenuName.unlockTowerButton[6];
-            data.isTowerUnlocked7 = towerBuildMenuName.unlockTowerButton[7];
-            data.isTowerUnlocked8 = towerBuildMenuName.unlockTowerButton[8];
-            data.isTowerUnlocked9 = towerBuildMenuName.unlockTowerButton[9];
-            data.isTowerUnlocked10 = towerBuildMenuName.unlockTowerButton[10];
-            //data.isTowerUnlocked11 = towerBuildMenuName.unlockTowerButton[11];
+            data.isTowerUnlocked1 = towerBuildMenuName.unlockTowerButton[0];
+            data.isTowerUnlocked2 = towerBuildMenuName.unlockTowerButton[1];
+            data.isTowerUnlocked3 = towerBuildMenuName.unlockTowerButton[2];
+            data.isTowerUnlocked4 = towerBuildMenuName.unlockTowerButton[3];
+            data.isTowerUnlocked5 = towerBuildMenuName.unlockTowerButton[4];
+            data.isTowerUnlocked6 = towerBuildMenuName.unlockTowerButton[5];
+            data.isTowerUnlocked7 = towerBuildMenuName.unlockTowerButton[6];
+            data.isTowerUnlocked8 = towerBuildMenuName.unlockTowerButton[7];
+            data.isTowerUnlocked9 = towerBuildMenuName.unlockTowerButton[8];
+            data.isTowerUnlocked10 = towerBuildMenuName.unlockTowerButton[9];
+            data.isTowerUnlocked11 = towerBuildMenuName.unlockTowerButton[10];
             //data.isTowerUnlocked12 = towerBuildMenuName.unlockTowerButton[12];
 
 
@@ -198,17 +198,17 @@ namespace Defend.Manager
             //build.towerinfo[12].isLock = data.isTowerUnlock12;
 
             //타워 버튼 해금
-            towerBuildMenuName.unlockTowerButton[1].interactable = data.isTowerUnlocked1;
-            towerBuildMenuName.unlockTowerButton[2].interactable = data.isTowerUnlocked2;
-            towerBuildMenuName.unlockTowerButton[3].interactable = data.isTowerUnlocked3;
-            towerBuildMenuName.unlockTowerButton[4].interactable = data.isTowerUnlocked4;
-            towerBuildMenuName.unlockTowerButton[5].interactable = data.isTowerUnlocked5;
-            towerBuildMenuName.unlockTowerButton[6].interactable = data.isTowerUnlocked6;
-            towerBuildMenuName.unlockTowerButton[7].interactable = data.isTowerUnlocked7;
-            towerBuildMenuName.unlockTowerButton[8].interactable = data.isTowerUnlocked8;
-            towerBuildMenuName.unlockTowerButton[9].interactable = data.isTowerUnlocked9;
-            towerBuildMenuName.unlockTowerButton[10].interactable = data.isTowerUnlocked10;
-            //towerBuildMenuName.unlockTowerButton[11].interactable = data.isTowerUnlocked11;
+            towerBuildMenuName.unlockTowerButton[0].interactable = data.isTowerUnlocked1;
+            towerBuildMenuName.unlockTowerButton[1].interactable = data.isTowerUnlocked2;
+            towerBuildMenuName.unlockTowerButton[2].interactable = data.isTowerUnlocked3;
+            towerBuildMenuName.unlockTowerButton[3].interactable = data.isTowerUnlocked4;
+            towerBuildMenuName.unlockTowerButton[4].interactable = data.isTowerUnlocked5;
+            towerBuildMenuName.unlockTowerButton[5].interactable = data.isTowerUnlocked6;
+            towerBuildMenuName.unlockTowerButton[6].interactable = data.isTowerUnlocked7;
+            towerBuildMenuName.unlockTowerButton[7].interactable = data.isTowerUnlocked8;
+            towerBuildMenuName.unlockTowerButton[8].interactable = data.isTowerUnlocked9;
+            towerBuildMenuName.unlockTowerButton[9].interactable = data.isTowerUnlocked10;
+            towerBuildMenuName.unlockTowerButton[10].interactable = data.isTowerUnlocked11;
             //towerBuildMenuName.unlockTowerButton[12].interactable = data.isTowerUnlocked12;
 
         }
