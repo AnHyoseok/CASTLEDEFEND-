@@ -62,7 +62,7 @@ namespace Defend.Tower
 
                 // 애니메이션 재생
                 if (animator != null)
-                    animator.SetTrigger(Constants.ANIM_SHOOTTRIGGER);
+                    animator.SetTrigger(Constants.TOWER_ANIM_SHOOTTRIGGER);
             }
 
             // 슛 타임 초기화

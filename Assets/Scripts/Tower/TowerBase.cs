@@ -220,7 +220,7 @@ namespace Defend.Tower
                 GameObject projectilePrefab = Instantiate(towerInfo.projectile.prefab, firePoint.transform.position, Quaternion.identity);
                 // Shoot Animation 재생
                 if (animator != null)
-                    animator.SetTrigger(Constants.ANIM_SHOOTTRIGGER);
+                    animator.SetTrigger(Constants.TOWER_ANIM_SHOOTTRIGGER);
 
                 // 발사체 정보 초기화, 발사체의 가장 가까운 타겟설정, 공격 범위 내 타겟들 설정
                 projectilePrefab.GetComponent<ProjectileBase>().Init(towerInfo.projectile, currentTarget);
