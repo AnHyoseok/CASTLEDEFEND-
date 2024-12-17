@@ -34,6 +34,9 @@ namespace Defend.TestScript
     public class EnemyController : MonoBehaviour
     {
         #region Variables
+        //Enemy IMG Sprite
+        public Sprite sprite;
+
         //애니메이터
         private Animator animator;
         private float animatorSpeed;
