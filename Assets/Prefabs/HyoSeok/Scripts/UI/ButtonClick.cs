@@ -17,7 +17,7 @@ namespace Defend.UI
 
         void Start()
         {
-            audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource = GetComponent<AudioSource>();
             audioSource.clip = clickSound; 
             audioSource.playOnAwake = false; // 자동 재생 방지
 
@@ -30,6 +30,7 @@ namespace Defend.UI
 
         public void OnButtonClick()
         {
+            audioSource.clip = clickSound;
             audioSource.Play();
         }
     }

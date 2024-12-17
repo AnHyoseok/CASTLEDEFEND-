@@ -32,7 +32,8 @@ namespace MyVrSample
         private void Start()
         {
         
-            audioSource = player.AddComponent<AudioSource>();
+            //audioSource = player.AddComponent<AudioSource>();
+            audioSource = GetComponent<AudioSource>();
         }
         //Æ÷Å» UI ¶ç¿ì±â
         public void OnPotalUI()
