@@ -4,8 +4,10 @@ using Defend.Tower;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.XR;
 /// <summary>
 /// Tutorial Scene을 관리하는 Manager
 /// </summary>
@@ -24,6 +26,7 @@ namespace Defend.Tutorial
         public GameObject endTutorialUI;
         public Button nextButton;
         public Button retryButton;
+        public GameObject buildUI;
         public TMP_SpriteAsset axeSpriteAsset;
         public TMP_SpriteAsset pickaxSpriteAsset;
         public TMP_SpriteAsset handSpriteAsset;
@@ -38,8 +41,9 @@ namespace Defend.Tutorial
         public GameObject PickAxe;              // 플레이어 PickAxe
         public ListSpawnManager lsm;            // ListSpawnManager
         public float fontSize;                  // guideText font size
+        public InputActionProperty leftXButton; // LeftHandController 'X'
         private string guideString;             // UI에 나타나는 문구
-        private Health health;                  // castle의 health 참조
+        [SerializeField] private string isNewGuide = "IsNewGuide"; // Animation bool 변수
         [SerializeField] private string loadToScene; // 종료 후 로드 할 Scene
 
         #region Step 진행 Bool Variables
@@ -57,20 +61,23 @@ namespace Defend.Tutorial
         private bool isF = false;
 
         UnityAction endTutorial;
+        Animator animator;
+        Health health;                           // castle의 health 참조
         #endregion
 
         #endregion
         void Start()
         {
             health = castle.GetComponent<Health>();
+            animator = showButton.GetComponent<Animator>();
             endTutorial += EndUI;
             guideText.fontSize = fontSize;
         }
-
-        // TODO :: SHOW 버튼 반짝거리기, 위치 잡기
+        // TODO :: 사운드 테스트
+        // TODO :: 씬 변경하면 안되는거
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.X))
+            if (Input.GetKeyDown(KeyCode.X) || leftXButton.action.WasPerformedThisFrame())
             {
                 HideUI();
             }
@@ -83,6 +90,7 @@ namespace Defend.Tutorial
                 {
                     isA = false;
                     isB = true;
+                    playShowButtonAnim();
                 }
             }
 
@@ -94,6 +102,7 @@ namespace Defend.Tutorial
                 {
                     isB = false;
                     isC = true;
+                    playShowButtonAnim();
                 }
             }
 
@@ -106,6 +115,7 @@ namespace Defend.Tutorial
                 {
                     isC = false;
                     isD = true;
+                    playShowButtonAnim();
                 }
             }
 
@@ -118,6 +128,7 @@ namespace Defend.Tutorial
                 {
                     isD = false;
                     isE = true;
+                    playShowButtonAnim();
                 }
             }
 
@@ -131,6 +142,7 @@ namespace Defend.Tutorial
                 {
                     isE = false;
                     isF = true;
+                    playShowButtonAnim();
                 }
             }
 
@@ -156,7 +168,6 @@ namespace Defend.Tutorial
         // Step.A TopView 확인하기
         void AChangeTopView()
         {
-            // TODO :: 무슨 키 쓰는지 
             guideString = $"Press the <color=#FF0000>Y</color>-Action button to see the entire map";
             guideText.text = guideString;
         }
@@ -164,9 +175,8 @@ namespace Defend.Tutorial
         // Step.B 곡괭이로 무기 바꾸기
         void BChangeToPickax()
         {
-            // TODO :: 무슨 키 쓰는지 
             guideText.spriteAsset = pickaxSpriteAsset;
-            guideString = $"Press the <color=#FF0000>Y</color>-Action button to change the   <size=12><sprite=0>";
+            guideString = $"Press the <color=#FF0000>A</color>-Action button to change the   <size=12><sprite=0>";
             guideText.text = guideString;
         }
 
@@ -188,16 +198,14 @@ namespace Defend.Tutorial
         // Step.E User UI 띄우고 Build 선택하고 타워 건설하기
         void EShowUserUI()
         {
-            // TODO :: 무슨 키 쓰는지
             guideText.spriteAsset = handSpriteAsset;
-            guideString = $"Change to    <size=12><sprite=0><size={fontSize}>\nPress the <color=#FF0000>Y</color>-Action button to show the UI\nSelect Build , and build a tower";
+            guideString = $"Change to    <size=12><sprite=0><size={fontSize}>\nPress the <color=#FF0000>X</color>-Action button to show the UI\nSelect Build, and use the Grab button to build a tower";
             guideText.text = guideString;
         }
 
         // Step.F 왼손 UI show 버튼 클릭 후 skip
         void FSkipRoundTimer()
         {
-            // TODO :: 왼손 UI 작동확인, SKIP 작동 확인하기
             guideString = "Turn on UI through <color=#FF0000>Show</color> button attached to left hand\n Start the round through the <color=#FF0000>Skip</color> button";
             guideText.text = guideString;
         }
@@ -208,11 +216,16 @@ namespace Defend.Tutorial
             backgroundUI.SetActive(true);
             showButton.gameObject.SetActive(false);
         }
+
         // Hide UI
         public void HideUI()
         {
             backgroundUI.SetActive(false);
             showButton.gameObject.SetActive(true);
+            if (backgroundUI.activeSelf == true)
+            {
+                animator.SetBool(isNewGuide, false);
+            }
         }
 
         // End UI
@@ -226,9 +239,9 @@ namespace Defend.Tutorial
         // Next
         public void OnClickNext()
         {
-            // TODO :: Fader 있는지 ?
             SceneManager.LoadScene(loadToScene);
         }
+
         // Retry 
         public void OnClickRetry()
         {
@@ -237,5 +250,15 @@ namespace Defend.Tutorial
             // 씬 다시 로드
             SceneManager.LoadScene(currentSceneName);
         }
+
+        // ShowButtonAnim 재생
+        public void playShowButtonAnim()
+        {
+            if (backgroundUI.activeSelf == false && showButton.gameObject.activeSelf == true)
+            {
+                animator.SetBool(isNewGuide, true);
+            }
+        }
     }
 }
+

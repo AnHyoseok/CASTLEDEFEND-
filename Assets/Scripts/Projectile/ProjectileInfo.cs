@@ -15,5 +15,6 @@ namespace Defend.Projectile
         public float moveSpeed;         // 이동속도
         public float attackRange;       // 타격 범위
         public float debuffRatio;       // 디버프 비율
+        public AudioClip sfxClip;       // 효과음
     }
 }

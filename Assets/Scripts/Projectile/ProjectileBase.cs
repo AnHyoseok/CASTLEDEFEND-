@@ -1,6 +1,6 @@
 using Defend.TestScript;
-using System.Collections.Generic;
 using UnityEngine;
+using static Defend.Utillity.AudioUtility;
 /// <summary>
 /// 발사체의 기능을 정의한 상위 클래스
 /// </summary>
@@ -13,6 +13,7 @@ namespace Defend.Projectile
         [SerializeField] protected ProjectileInfo projectileInfo;       // 발사체 정보
         [SerializeField] protected Vector3 offset;
 
+        // TODO :: Bat, Rocket sfx clip 찾아서 추가하기
         protected virtual void Start()
         {
             
@@ -32,13 +33,21 @@ namespace Defend.Projectile
             projectileInfo = _projectileInfo;
         }
 
-        // 타겟에 Projectile Effect 생성
+        // 타겟에 Projectile Effect & Sound 생성
         protected virtual void Hit()
         {
             // Projectile Effect 생성
-            GameObject effect = Instantiate(projectileInfo.effectPrefab, transform.position, Quaternion.identity);
-            // Projectile Effect 삭제 예약
-            Destroy(effect, projectileInfo.effectTime);
+            if (projectileInfo.effectPrefab != null)
+            {
+                GameObject effect = Instantiate(projectileInfo.effectPrefab, transform.position, Quaternion.identity);
+                // Projectile Effect 삭제 예약
+                Destroy(effect, projectileInfo.effectTime);
+            }
+            // Projectile Sound 생성
+            if(projectileInfo.sfxClip != null)
+            {
+                CreateSFX(projectileInfo.sfxClip, transform.position, AudioGroups.EFFECT);
+            }
             // Projectile 삭제 
             Destroy(this.gameObject);
         }

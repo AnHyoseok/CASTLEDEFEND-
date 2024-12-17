@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using static Defend.Utillity.AudioUtility;
 /// <summary>
 /// Debuff를 거는 발사체 기능 구현
 /// </summary>
@@ -41,6 +42,12 @@ namespace Defend.Projectile
         {
             applyAction(targetComponent); // 디버프 동작 수행
             isDebuff = true;
+
+            // Projectile Sound 생성
+            if (projectileInfo.sfxClip != null)
+            {
+                CreateSFX(projectileInfo.sfxClip, transform.position, AudioGroups.EFFECT);
+            }
         }
 
         // 디버프 제거
