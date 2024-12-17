@@ -9717,7 +9717,7 @@ Transform:
   m_GameObject: {fileID: 1804497351227217583}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 0.5, z: -14.41}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9770,6 +9770,7 @@ MonoBehaviour:
   buffEffect: {fileID: 1362654769694918472, guid: 485d1a74ddf5544469139c460fbe22ec, type: 3}
   debuffEffect: {fileID: 2639560195941380255, guid: 9fb0195321ad90d48be4c27218022c91, type: 3}
   destroyEffect: {fileID: 1842692474500718, guid: cfd68de6510901147ad542cfdfa2e148, type: 3}
+  buffSfxClip: {fileID: 8300000, guid: b0e62ed71b1538648b719821f4f63b4c, type: 3}
   gizmo:
     gizmoColor: {r: 0, g: 1, b: 0, a: 1}
     sphereRadius: 20
@@ -19695,7 +19696,7 @@ PrefabInstance:
     - target: {fileID: 2715368477043167026, guid: 40ce92f049b3c0b4caabdb9342af370b, type: 3}
       propertyPath: target
       value: 
-      objectReference: {fileID: 480672432906672122}
+      objectReference: {fileID: 0}
     - target: {fileID: 5403166087981713806, guid: 40ce92f049b3c0b4caabdb9342af370b, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

@@ -6,6 +6,7 @@ using UnityEngine;
 using Defend.TestScript;
 using System.Linq;
 using System.Collections;
+using static Defend.Utillity.AudioUtility;
 /*
 기본타워 => 타겟공격
 스플래시타워 => 지점공격
@@ -43,6 +44,10 @@ namespace Defend.Tower
         [SerializeField] protected ParticleSystem buffEffect;
         [SerializeField] protected ParticleSystem debuffEffect;
         [SerializeField] protected GameObject destroyEffect;
+
+        // Sfx
+        public AudioClip buffSfxClip;                       // 버프 효과음
+
         #endregion
 
         #region Variables For Test
@@ -247,8 +252,17 @@ namespace Defend.Tower
             {
                 StartCoroutine(ResetTower(buffContents));
                 // 효과 이펙트 적용
-                ParticleSystem effect = Instantiate(buffEffect, gameObject.transform);
-                Destroy(effect.gameObject, buffContents.duration);
+                if (buffEffect != null)
+                {
+                    ParticleSystem effect = Instantiate(buffEffect, gameObject.transform);
+                    effect.Play();
+                    Destroy(effect.gameObject, buffContents.duration);
+                }
+                // Sfx 생성
+                if (buffSfxClip!= null)
+                {
+                    CreateSFX(buffSfxClip, transform.position, AudioGroups.EFFECT);
+                }
             }
         }
 

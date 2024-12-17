@@ -73,7 +73,7 @@ namespace Defend.Tutorial
             endTutorial += EndUI;
             guideText.fontSize = fontSize;
         }
-        // TODO :: 사운드 테스트
+
         // TODO :: 씬 변경하면 안되는거
         void Update()
         {

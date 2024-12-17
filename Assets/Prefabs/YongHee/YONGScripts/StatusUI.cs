@@ -1,6 +1,7 @@
 using Defend.Tower;
 using Defend.Utillity;
 using TMPro;
+using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,27 +23,27 @@ namespace Defend.UI
         public GameObject buffsFisrt;           // 버프창1
         public GameObject buffsSecond;          // 버프창2
         [SerializeField] private Status status; // 상태를 받아올 스크립트
+        TowerBase tb;
         #endregion
 
         void Start()
         {
+            status.OnDamaged += SetFillHealth;
+            status.OnDamaged += SetHealthText;
+            status.OnUseMana += SetFillMana;
+            status.OnUseMana += SetManaText;
+            status.OnDamaged.Invoke();
+            status.OnUseMana.Invoke();
             if (target == null)
             {
-                // TODO :: Player를 바라봐야함
-                target = Camera.main.transform;
+                target = FindFirstObjectByType<XROrigin>().gameObject.transform;
             }
         }
 
         // Update is called once per frame
         void Update()
         {
-            transform.LookAt(transform.position + target.forward);
-            // TODO :: 델리게이트 사용해서 넘기자
-            if (status == null) return;
-            SetFillHealth();
-            SetHealthText();
-            SetFillMana();
-            SetManaText();
+            transform.LookAt(target);
         }
 
         void SetFillHealth()

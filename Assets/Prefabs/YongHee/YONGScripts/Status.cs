@@ -1,5 +1,7 @@
 using Defend.Tower;
 using UnityEngine;
+using UnityEngine.Events;
+
 namespace Defend.Utillity
 {
     public class Status : MonoBehaviour
@@ -94,6 +96,10 @@ namespace Defend.Utillity
                 healthRegenRatio = value;
             }
         }
+
+        // Action
+        public UnityAction OnDamaged;           // 데미지를 받을 때 호출하는 이벤트
+        public UnityAction OnUseMana;             // 마나를 소모할 때 호출하는 이벤트
         #endregion
 
         private void Start()
@@ -157,6 +163,7 @@ namespace Defend.Utillity
                 CurrentHealth = 0;
                 //Die();
             }
+            OnDamaged.Invoke();
         }
 
         // 체력 회복
@@ -188,6 +195,7 @@ namespace Defend.Utillity
             {
                 CurrentMana = 0;
             }
+            OnUseMana.Invoke();
         }
 
         // 마나 재생
