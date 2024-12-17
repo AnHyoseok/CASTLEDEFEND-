@@ -1,4 +1,3 @@
-using Defend.Player;
 using Defend.Tower;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -126,6 +125,7 @@ namespace Defend.UI
         void UIEnterReticle(UIHoverEventArgs args)
         {
             buildMenu.isReticle = false;
+            buildMenu.istowerup = false;
         }
         void UIExitReticle(UIHoverEventArgs uIHover)
         {
@@ -135,11 +135,6 @@ namespace Defend.UI
         private void SetBuildTower()
         {
             if (!buildMenu.istowerup) return;
-            if (!buildManager.playerState.SpendMoney(buildManager.towerBases[buildMenu.indexs].GetTowerInfo().cost1))
-            {
-                buildManager.warningWindow.ShowWarning("Not Enough Money");
-                return;
-            }
             if (buildManager.playerState.SpendMoney(buildManager.towerBases[buildMenu.indexs].GetTowerInfo().cost1) && buildMenu.isReticle && buildMenu.towerinfo[buildMenu.indexs].isLock)
             {
                 tower = Instantiate(buildManager.towerBases[buildMenu.indexs].GetTowerInfo().projectile.tower,

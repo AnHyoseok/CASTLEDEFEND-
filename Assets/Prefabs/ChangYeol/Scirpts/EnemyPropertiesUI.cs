@@ -1,7 +1,7 @@
 using Defend.Enemy;
-using Unity.VisualScripting;
+using Defend.TestScript;
+using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Defend.UI
 {
@@ -9,32 +9,40 @@ namespace Defend.UI
     {
         #region Variables
         public GameObject EnemyProUI;
-        public GameObject[] enemylist;
         //Enemy ¼Ó¼º°ª
-        public Upgrade[] EnemyText;
+        public GameObject Enemyinfo;
+
+        public float waitSecond = 5;
         private BuildManager buildManager;
         #endregion
         private void Start()
         {
             buildManager = BuildManager.Instance;
-            //ShowProUI();
+            ShowProUI();
         }
         public void ShowProUI()
         {
-            EnemyProUI.SetActive(true);
-            for ( int i = 0; i < EnemyText.Length; i++ )
+            StartCoroutine(HideProUI());
+            ListWaveData waveData = buildManager.spawnManager.waves[buildManager.spawnManager.waveCount];
+
+            foreach (var enemy in waveData.enemies)
             {
-                EnemyText[i].name.text = buildManager.enemyInfo[i].Enemyname;
-                EnemyText[i].image.sprite = buildManager.enemyInfo[i].enemySprite;
-                EnemyText[i].Hp.text = "HP : " + buildManager.enemyInfo[i].Health.maxHealth.ToString();
-                EnemyText[i].Mp.text = "Armor : " + buildManager.enemyInfo[i].Health.baseArmor.ToString();
-                EnemyText[i].Attack.text = "Attack : " + buildManager.enemyInfo[i].Attack.baseAttackDamage.ToString();
-                EnemyText[i].AttackSpeed.text = "AttackSpeed : " + buildManager.enemyInfo[i].Attack.baseAttackDelay.ToString();
-                EnemyText[i].Buycost.text = " : " + buildManager.enemyInfo[i].Money.rewardGoldCount.ToString();
+                GameObject info = Instantiate(Enemyinfo,EnemyProUI.transform);
+                Upgrade enemyinfo = Enemyinfo.GetComponent<EnemyInfo>().EnemyText;
+                enemyinfo.name.text = enemy.enemyPrefab.name;
+                enemyinfo.image.sprite = enemy.enemyPrefab.GetComponent<EnemyController>().sprite;
+                enemyinfo.Hp.text = "HP : " + enemy.enemyPrefab.GetComponent<Health>().maxHealth.ToString();
+                enemyinfo.Mp.text = "Armor : " + enemy.enemyPrefab.GetComponent<Health>().baseArmor.ToString();
+                enemyinfo.Attack.text = "Attack : " + enemy.enemyPrefab.GetComponent<EnemyAttackController>().baseAttackDamage.ToString();
+                enemyinfo.AttackSpeed.text = "AttackSpeed : " + enemy.enemyPrefab.GetComponent<EnemyAttackController>().baseAttackDelay.ToString();
+                enemyinfo.Buycost.text = " : " + enemy.enemyPrefab.GetComponent<EnemyController>().rewardGoldCount.ToString();
+                enemyinfo.UpgradeMoney.text = "X" + enemy.count.ToString();
             }
         }
-        public void HideProUI()
+        IEnumerator HideProUI()
         {
+            EnemyProUI.SetActive(true);
+            yield return new WaitForSeconds(waitSecond);
             EnemyProUI.SetActive(false);
         }
     }

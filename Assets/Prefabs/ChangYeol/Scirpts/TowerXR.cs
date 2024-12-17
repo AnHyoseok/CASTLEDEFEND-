@@ -49,6 +49,7 @@ namespace Defend.UI
         {
             base.OnHoverEntered(args);
             buildManager.buildMenu.isReticle = false;
+            buildManager.buildMenu.istowerup = false;
         }
         protected override void OnHoverExited(HoverExitEventArgs args)
         {

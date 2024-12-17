@@ -51457,6 +51457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 511c8228ce2acd340a44481bdb938a52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: 22bc2f95294f4bf479dfda7bb86b5114, type: 3}
   buffParticleSystem: {fileID: 265557943813956872}
   debuffParticleSystem: {fileID: 8614722980305677832}
   healParticleSystem: {fileID: 2099963106396781099}

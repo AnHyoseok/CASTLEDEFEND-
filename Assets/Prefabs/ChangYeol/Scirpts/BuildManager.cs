@@ -1,3 +1,4 @@
+using Defend.Enemy;
 using Defend.Player;
 using Defend.Tower;
 using UnityEngine;
@@ -44,7 +45,7 @@ namespace Defend.UI
         private TowerXR tower;
         //타워 안에 있는 속성값
         public TowerBase[] towerBases;
-        public EnemyInfo[] enemyInfo;
+        public ListSpawnManager spawnManager;
         [HideInInspector] public EnemyPropertiesUI enemy;
         #endregion
         private void Start()
