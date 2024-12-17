@@ -9778,24 +9778,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e3c2fb115b97ec43a5e33f115fb539a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeText: {fileID: 2665033108058948944}
-  viewButton: {fileID: 8534235803960660976}
+  texts: []
   uiOnButton: {fileID: 24702030}
   viewCanvas: {fileID: 1847400415565623835}
-  rockheld: {fileID: 181896947}
-  treeheld: {fileID: 1646914889}
-  moneyheld: {fileID: 1762983991}
-  menuCanvas: {fileID: 1310999530}
-  statusButton: {fileID: 0}
-  potalButton: {fileID: 0}
-  potalCanvas: {fileID: 755130200}
-  buttons:
-  - {fileID: 5183158174422109543}
-  - {fileID: 1474386947}
-  - {fileID: 24702032}
-  - {fileID: 1093830482}
-  - {fileID: 14920704}
-  clickSound: {fileID: 8300000, guid: 311ec0e3ddc71474eb5f91f03161f401, type: 3}
 --- !u!1 &986402000
 GameObject:
   m_ObjectHideFlags: 0
@@ -10612,10 +10597,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 370b053a86a5f3c48b63d86f1cfd8972, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  castle: {fileID: 0}
   clearUI: {fileID: 631738275}
   gameoverUI: {fileID: 663870316}
   clearSound: {fileID: 0}
   gameoverSound: {fileID: 0}
+  testtext: {fileID: 0}
 --- !u!4 &1066712269
 Transform:
   m_ObjectHideFlags: 0
@@ -47485,6 +47473,7 @@ MonoBehaviour:
   - {fileID: 663870316}
   player: {fileID: 4872608693177072846}
   distance: 1.5
+  yPos: 0
 --- !u!114 &7123259279144707543
 MonoBehaviour:
   m_ObjectHideFlags: 0

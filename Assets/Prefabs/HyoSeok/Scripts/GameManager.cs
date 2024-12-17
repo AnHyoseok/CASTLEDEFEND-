@@ -40,10 +40,7 @@ namespace Defend.Manager
         public AudioClip clearSound;
         public AudioClip gameoverSound;
 
-        //테스트용 시간초
-        public TextMeshProUGUI testtext;
-        float time;
-
+        
         //public Button saveButton; // 세이브 버튼
         public Data data = new Data(); // 게임 데이터
 
@@ -83,8 +80,6 @@ namespace Defend.Manager
                 Time.timeScale = 1f;
             }
 
-            time += Time.deltaTime;
-            testtext.text = time.ToString("F1");
         }
 
         //게임 종료시 자동저장
@@ -292,7 +287,7 @@ namespace Defend.Manager
         IEnumerator GameOver()
         {
 
-            if (playerState.health <= 0)
+            if (health.CurrentHealth <= 0)
             {
                 //게임오버 창 띄우기
                 gameoverUI.SetActive(true);

@@ -1464,10 +1464,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd49f9d10c121fd42b118c8d8f2949bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  towerInfo:
+    rotationSpeed: 5
+    attackRange: 5
+    detectDelay: 0.5
+    shootDelay: 1
+    maxHealth: 200
+    maxMana: 50
+    armor: 5
+    healthRegen: 1
+    manaRegen: 1
+    cost1: 1
+    cost2: 2
+    cost3: 3
+    cost4: 4
+    upgradeTower: {fileID: 0}
+    projectile:
+      tower: {fileID: 0}
+      prefab: {fileID: 0}
+      effectPrefab: {fileID: 0}
+      effectTime: 0
+      attack: 0
+      moveSpeed: 0
+      attackRange: 0
+      debuffRatio: 0
+    isLock: 0
   playerState: {fileID: 0}
   warningWindow: {fileID: 0}
+  Sellbutton: {fileID: 0}
+  UpgradeButton: {fileID: 0}
   menu: {fileID: 0}
   buildMenu: {fileID: 0}
+  towerBases: []
+  enemyInfo: []
 --- !u!4 &1534121171
 Transform:
   m_ObjectHideFlags: 0
@@ -1665,21 +1694,20 @@ MonoBehaviour:
   m_StartingSelectFilters: []
   m_StartingInteractionStrengthFilters: []
   tower: {fileID: 0}
-  tower_upgrade: {fileID: 0}
   towerInfo:
-  - rotationSpeed: 0
-    attackRange: 0
-    detectDelay: 0
-    shootDelay: 0
-    maxHealth: 0
-    maxMana: 0
-    armor: 0
-    healthRegen: 0
-    manaRegen: 0
-    cost1: 0
-    cost2: 0
-    cost3: 0
-    cost4: 0
+    rotationSpeed: 5
+    attackRange: 5
+    detectDelay: 0.5
+    shootDelay: 1
+    maxHealth: 200
+    maxMana: 50
+    armor: 5
+    healthRegen: 1
+    manaRegen: 1
+    cost1: 1
+    cost2: 2
+    cost3: 3
+    cost4: 4
     upgradeTower: {fileID: 0}
     projectile:
       tower: {fileID: 0}
@@ -1690,32 +1718,10 @@ MonoBehaviour:
       moveSpeed: 0
       attackRange: 0
       debuffRatio: 0
-  - rotationSpeed: 0
-    attackRange: 0
-    detectDelay: 0
-    shootDelay: 0
-    maxHealth: 0
-    maxMana: 0
-    armor: 0
-    healthRegen: 0
-    manaRegen: 0
-    cost1: 0
-    cost2: 0
-    cost3: 0
-    cost4: 0
-    upgradeTower: {fileID: 0}
-    projectile:
-      tower: {fileID: 0}
-      prefab: {fileID: 0}
-      effectPrefab: {fileID: 0}
-      effectTime: 0
-      attack: 0
-      moveSpeed: 0
-      attackRange: 0
-      debuffRatio: 0
+    isLock: 0
   TowerImpectPrefab: {fileID: 0}
   buildMenu: {fileID: 0}
-  lineVisual: {fileID: 8868687749213888214}
+  rayInteractor: {fileID: 0}
   property:
     m_UseReference: 0
     m_Action:
@@ -1728,6 +1734,8 @@ MonoBehaviour:
       m_SingletonActionBindings: []
       m_Flags: 0
     m_Reference: {fileID: 0}
+  layerMask:
+    m_Bits: 0
 --- !u!1 &1778144475
 GameObject:
   m_ObjectHideFlags: 0
