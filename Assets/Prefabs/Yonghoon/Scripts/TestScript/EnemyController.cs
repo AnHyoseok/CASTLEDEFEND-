@@ -158,9 +158,9 @@ namespace Defend.TestScript
 
             if (skill.CanActivateSkill(health.GetRatio()) && !channeling && !isAttacking)
             {
-                if(type == EnemyType.Boss)
+                if (type == EnemyType.Boss)
                 {
-                    skill.SoundPlay(2,30);
+                    skill.SoundPlay(2, 30);
                 }
                 else
                 {
@@ -186,7 +186,7 @@ namespace Defend.TestScript
         {
             //Debug.Log("힐 받음");
             healParticleSystem.Play();
-            if(healAudioClip != null)
+            if (healAudioClip != null)
             {
                 AudioUtility.CreateSFX(healAudioClip, transform.position, AudioUtility.AudioGroups.EFFECT, 1);
             }
@@ -202,8 +202,7 @@ namespace Defend.TestScript
             //죽으면 코인 흩뿌리기
             ScatterCoins();
 
-            //Enemy 킬
-            Destroy(gameObject, 2f);
+            // 애니메이션 종료 후 제거되는 로직은 StateMachineBehaviour에서 처리
         }
 
         private void TriggerEffect(Gradient effectGradient)

@@ -37567,7 +37567,7 @@ MonoBehaviour:
   positionOffset: {x: 0, y: 0, z: 0}
   scaleOffset: 0
   rewardGoldCount: 5
-  goldPrefab: {fileID: 4610807197165865268, guid: 78f0efdf0964cd74896d92f9d555be50, type: 3}
+  goldPrefab: {fileID: 3387045420084571198, guid: 209a641942809fc4cad0b9a8d4ba8a9b, type: 3}
   offsetTransform: {fileID: 335957619251406168}
   bodyMaterial: {fileID: 2100000, guid: b7ce918c50194e646a4579e55b19af86, type: 2}
   hitEffectGradient:

@@ -1,7 +1,6 @@
-using Defend.TestScript;
 using UnityEngine;
 
-namespace Defend.Enemy.Skill
+namespace Defend.Enemy
 {
     public class AttackControlStateMachine : StateMachineBehaviour
     {
