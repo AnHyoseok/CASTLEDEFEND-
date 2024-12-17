@@ -71,6 +71,8 @@ namespace Defend.UI
                 //Destroy(effect, 2f);
                 //기본터렛들의 반값으로 판매
                 buildManager.playerState.AddMoney(towerInfo.GetSellCost());
+                buildManager.playerState.AddRock(towerInfo.GetSellRockCost());
+                buildManager.playerState.AddTree(towerInfo.GetSellTreeCost());
                 buildManager.DeselectTile();
             }
             else if (!this.gameObject)

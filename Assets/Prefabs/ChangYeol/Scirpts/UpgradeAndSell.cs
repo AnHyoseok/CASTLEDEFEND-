@@ -36,6 +36,7 @@ namespace Defend.UI
             //선택받은 타워 저장
             tower = towerXR;
             TowerInfo info = tower.GetComponent<TowerBase>().GetTowerInfo();
+            TowerInfo upinfo = tower.upgradetowerInfo;
 
             //업그레이드 가격 표시
             if ((tower.Isupgradeone && tower.Isupgradetwo && tower.currentlevel == 3)|| 
@@ -70,12 +71,12 @@ namespace Defend.UI
                 //업그레이드 판매 가격 표시
                 upGradeText.image.sprite = tower.currentTower[tower.currentindex + 1];
                 upGradeText.name.text = buildManager.buildMenu.boxes[tower.currentindex + 1].name;
-                upGradeText.Buycost.text = "Buy : " + tower.upgradetowerInfo.cost2.ToString() + " G";
-                upGradeText.Sellcost.text = "Sell : " + tower.upgradetowerInfo.GetSellCost().ToString() + " G";
-                upGradeText.Hp.text = "Hp : " + tower.upgradetowerInfo.maxHealth.ToString();
-                upGradeText.Mp.text = "Mp : " + tower.upgradetowerInfo.maxMana.ToString();
-                upGradeText.Attack.text = "Attack : " + tower.upgradetowerInfo.projectile.attack.ToString();
-                upGradeText.AttackSpeed.text = "AttackSpeed : " + tower.upgradetowerInfo.projectile.moveSpeed.ToString();
+                upGradeText.Buycost.text = "Buy : " + upinfo.cost2.ToString() + " G";
+                upGradeText.Sellcost.text = "Sell : " + upinfo.GetSellCost().ToString() + " G";
+                upGradeText.Hp.text = "Hp : " + upinfo.maxHealth.ToString();
+                upGradeText.Mp.text = "Mp : " + upinfo.maxMana.ToString();
+                upGradeText.Attack.text = "Attack : " + upinfo.projectile.attack.ToString();
+                upGradeText.AttackSpeed.text = "AttackSpeed : " + upinfo.projectile.moveSpeed.ToString();
                 PropertiesUI.SetActive(true);
                 DescriptionUI.SetActive(true);
             }
@@ -94,12 +95,12 @@ namespace Defend.UI
                 //업그레이드 판매 가격 표시
                 upGradeText.image.sprite = tower.currentTower[tower.currentindex + 1];
                 upGradeText.name.text = buildManager.buildMenu.boxes[tower.currentindex + 1].name;
-                upGradeText.Buycost.text = "Buy : " + tower.upgradetowerInfo.cost2.ToString() + " G";
-                upGradeText.Sellcost.text = "Sell : " + tower.upgradetowerInfo.GetSellCost().ToString() + " G";
-                upGradeText.Hp.text = "Hp : " + tower.upgradetowerInfo.maxHealth.ToString();
-                upGradeText.Mp.text = "Mp : " + tower.upgradetowerInfo.maxMana.ToString();
-                upGradeText.Attack.text = "Attack : " + tower.upgradetowerInfo.projectile.attack.ToString();
-                upGradeText.AttackSpeed.text = "AttackSpeed : " + tower.upgradetowerInfo.projectile.moveSpeed.ToString();
+                upGradeText.Buycost.text = "Buy : " + upinfo.cost2.ToString() + " G";
+                upGradeText.Sellcost.text = "Sell : " + upinfo.GetSellCost().ToString() + " G";
+                upGradeText.Hp.text = "Hp : " + upinfo.maxHealth.ToString();
+                upGradeText.Mp.text = "Mp : " + upinfo.maxMana.ToString();
+                upGradeText.Attack.text = "Attack : " + upinfo.projectile.attack.ToString();
+                upGradeText.AttackSpeed.text = "AttackSpeed : " + upinfo.projectile.moveSpeed.ToString();
                 PropertiesUI.SetActive(true);
                 DescriptionUI.SetActive(true);
             }

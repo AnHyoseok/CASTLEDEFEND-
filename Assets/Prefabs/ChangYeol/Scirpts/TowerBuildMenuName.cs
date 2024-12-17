@@ -41,7 +41,7 @@ namespace Defend.UI
                 towerinfo[i].Mp.text = "Mp : " + buildManager.towerBases[i].GetTowerInfo().maxMana.ToString();
                 towerinfo[i].Attack.text = "Attack : " + buildManager.towerBases[i].GetTowerInfo().projectile.attack.ToString();
                 towerinfo[i].AttackSpeed.text = "Armor : " + buildManager.towerBases[i].GetTowerInfo().armor.ToString();
-                towerinfo[i].Buycost.text = "Buy Money : " + buildManager.towerBases[i].GetTowerInfo().cost1.ToString();
+                towerinfo[i].Buycost.text = " : " + buildManager.towerBases[i].GetTowerInfo().cost1.ToString();
             }
             for (int i = 1; i < buildManager.towerBases.Length; i++)
             {
@@ -50,7 +50,7 @@ namespace Defend.UI
                 buyTower[i - 1].Mp.text = "Mp : " + buildManager.towerBases[i].GetTowerInfo().maxMana.ToString();
                 buyTower[i - 1].Attack.text = "Attack : " + buildManager.towerBases[i].GetTowerInfo().projectile.attack.ToString();
                 buyTower[i - 1].AttackSpeed.text = "Armor : " + buildManager.towerBases[i].GetTowerInfo().armor.ToString();
-                buyTower[i - 1].Buycost.text = "Buy Money : " + buildManager.towerBases[i].GetTowerInfo().cost1.ToString();
+                buyTower[i - 1].Buycost.text = " : " + buildManager.towerBases[i].GetTowerInfo().cost1.ToString();
             }
         }
         public void SelectTower()

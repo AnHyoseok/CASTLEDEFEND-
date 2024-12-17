@@ -45,7 +45,12 @@ namespace Defend.UI
         //타워 안에 있는 속성값
         public TowerBase[] towerBases;
         public EnemyInfo[] enemyInfo;
+        [HideInInspector] public EnemyPropertiesUI enemy;
         #endregion
+        private void Start()
+        {
+            enemy = menu.GetComponent<EnemyPropertiesUI>();
+        }
         public void SelectTower(TowerXR towerXR)
         {
             //같은 타워를 선택하면 HideUI
