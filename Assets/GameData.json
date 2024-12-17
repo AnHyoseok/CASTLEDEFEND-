@@ -1,8 +1,8 @@
 {
-    "Round": 0,
+    "Round": -1,
     "countdown": 1.0,
-    "isTowerUnlock1": true,
-    "isTowerUnlock2": true,
+    "isTowerUnlock1": false,
+    "isTowerUnlock2": false,
     "isTowerUnlock3": false,
     "isTowerUnlock4": false,
     "isTowerUnlock5": false,
@@ -24,8 +24,8 @@
     "isTowerUnlocked9": true,
     "isTowerUnlocked10": true,
     "isTowerUnlocked11": true,
-    "isHPUpgradelevel": 1,
-    "isHPTimeUpgradelevel": 0,
+    "isHPUpgradelevel": 0,
+    "isHPTimeUpgradelevel": 3,
     "isArmorUpgradelevel": 0,
     "isATKUpgradelevel": 0,
     "isATKSpeedUpgradelevel": 0,
@@ -36,8 +36,8 @@
     "isPotalActive": false,
     "isMoveSpeedUp": false,
     "isAutoGain": false,
-    "money": 89775.0,
-    "health": 200.0,
+    "money": 88250.0,
+    "health": 100.0,
     "tree": 0.0,
     "rock": 0.0
 }
