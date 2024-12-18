@@ -12,8 +12,7 @@ namespace Defend.Enemy.Skill
         public override void ActivateSkill()
         {
             //Debug.Log("Wizard uses Heal skill!");
-            //float healAmount = gameObject.GetComponent<EnemyAttackController>().CurrentAttackDamage;
-            float healAmount = gameObject.GetComponent<EnemyAttackController>().baseAttackDamage;
+            float healAmount = gameObject.GetComponent<EnemyAttackController>().CurrentAttackDamage;
 
             //Debug.Log(healAmount);
 

@@ -70,8 +70,6 @@ namespace Defend.UI
             {
                 if (button.name.Contains("Teleport"))
                 {
-                    Debug.Log(button.name);
-
                     button.onClick.AddListener(() => PlayClickSound(potalSound));  // 클릭 이벤트에 사운드 재생 추가
                 }
                 else
