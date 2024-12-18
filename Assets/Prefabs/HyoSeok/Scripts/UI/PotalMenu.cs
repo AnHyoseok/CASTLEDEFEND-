@@ -64,8 +64,6 @@ namespace MyVrSample
         {
             audioSource.clip = potalSound;
             audioSource.Play();
-
-     
         }
     }
 }
