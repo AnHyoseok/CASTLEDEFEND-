@@ -12,10 +12,10 @@ namespace Defend.Enemy.Skill
             {
                 enemyController = animator.GetComponentInParent<EnemyController>();
             }
-            if (enemyController != null)
-            {
-                enemyController.ChangeChannelingStatus();
-            }
+            //if (enemyController != null)
+            //{
+            //    enemyController.ChangeChannelingStatus();
+            //}
         }
 
         override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

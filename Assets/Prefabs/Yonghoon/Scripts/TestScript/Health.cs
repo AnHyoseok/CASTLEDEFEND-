@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
+using Defend.Enemy;
 namespace Defend.TestScript
 {
     /// <summary>
@@ -31,10 +32,14 @@ namespace Defend.TestScript
 
         public float GetRatio() => CurrentHealth / maxHealth;
 
+        private ListSpawnManager listSpawnManager;
+
         #endregion
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Awake()
         {
+            listSpawnManager = FindAnyObjectByType<ListSpawnManager>();
+            maxHealth *= (listSpawnManager.waveCount + 1);
             CurrentHealth = maxHealth;
             CurrentArmor = baseArmor;
             HPTime(RgAmount, Rginterval);//1초마다 1의 체력을 회복
@@ -113,7 +118,8 @@ namespace Defend.TestScript
             float beforeHealth = CurrentHealth;
 
             // 힐 적용
-            CurrentHealth = Mathf.Clamp(CurrentHealth + amount, CurrentHealth, maxHealth);
+            amount = amount / 100;
+            CurrentHealth = Mathf.Clamp(CurrentHealth + (maxHealth * amount), CurrentHealth, maxHealth); 
 
             // 실제 힐량 계산
             float realHeal = CurrentHealth - beforeHealth;

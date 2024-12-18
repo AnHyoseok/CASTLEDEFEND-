@@ -170,6 +170,7 @@ namespace Defend.TestScript
                     skill.SoundPlay();
                 }
                 animator.SetTrigger(Constants.ENEMY_ANIM_SKILLTRIGGER);
+                ChangeChannelingStatus();
             }
         }
 
