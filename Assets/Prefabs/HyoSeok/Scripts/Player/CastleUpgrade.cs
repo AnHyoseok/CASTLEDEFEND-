@@ -50,9 +50,9 @@ namespace Defend.Player
         //비용
         //private float upgradeCost1 = 100f;  //임시용
         private float CostFullHP = 100f;    //hp회복
-        private float[] CostHPUpgrade = { 100f, 250f, 500f };
-        private float[] CostHPTimeUpgrade = { 250f, 500f, 1000f };
-        private float[] CostArmorUpgrade = { 250f, 500f, 1000f }; //방어력
+        private float[] CostHPUpgrade = { 100f, 100f, 100f };
+        private float[] CostHPTimeUpgrade = { 100f, 150f, 200f };
+        private float[] CostArmorUpgrade = { 200f, 200f, 200f }; //방어력
 
         // 타워 업그레이드
         private float[] CostTowerATKUpgrade = new float[50];
@@ -66,9 +66,9 @@ namespace Defend.Player
         private float[] CostRockGainUpgrade = { 100f, 250f, 500f };
 
         //영구업그레이드
-        private float CostMoveSpeedUpgrade = 200f;
-        private float CostPotalActivateUpgrade = 300f;
-        private float CostAutoGainUpgrade = 400f;
+        private float CostMoveSpeedUpgrade = 100f;
+        private float CostPotalActivateUpgrade = 100f;
+        private float CostAutoGainUpgrade = 100f;
 
 
 
@@ -271,7 +271,7 @@ namespace Defend.Player
         {
             if (isAutoGain == false && playerState.money >= CostAutoGainUpgrade)
             {
-                ResourceManager.speed = 10f;
+                ResourceManager.speed = 5f;
                 ResourceManager.distance = 10f;
                 playerState.SpendMoney(CostAutoGainUpgrade);
                 isAutoGain = true;

@@ -20,8 +20,8 @@ namespace Defend.Interactive
         private float moneymultiplier = 1.0f;
 
         //dropitem수치
-       [SerializeField] public static float distance = 3f; // 플레이어에게 가는 거리
-       [SerializeField] public static float speed = 1.0f; // 플레이어에게 가는 속도
+       [SerializeField] public static float distance = 5f; // 플레이어에게 가는 거리
+       [SerializeField] public static float speed = 2.0f; // 플레이어에게 가는 속도
 
       
         #endregion

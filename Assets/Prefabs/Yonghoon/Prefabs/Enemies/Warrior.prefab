@@ -25708,8 +25708,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34e3e69428bb6e34b8257abd4398b8bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  baseArmor: 5
+  maxHealth: 85
+  baseArmor: 1
   RgAmount: 0
   Rginterval: 0
   isHpTime: 0
@@ -25725,7 +25725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fb520b37536e55438a98a8d0930e347, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSpeed: 2
+  baseSpeed: 5
 --- !u!114 &211053470906578040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25747,7 +25747,7 @@ MonoBehaviour:
   healAudioClip: {fileID: 8300000, guid: 6ae07461192af8e418f4100c8b08a517, type: 3}
   positionOffset: {x: 0, y: 0, z: 0}
   scaleOffset: 0
-  rewardGoldCount: 5
+  rewardGoldCount: 10
   goldPrefab: {fileID: 3387045420084571198, guid: 209a641942809fc4cad0b9a8d4ba8a9b, type: 3}
   offsetTransform: {fileID: 8381210944518672965}
   bodyMaterial: {fileID: 2100000, guid: ed14df0368fe53543907335c0e3902c6, type: 2}

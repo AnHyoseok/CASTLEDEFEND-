@@ -37567,7 +37567,7 @@ MonoBehaviour:
   healAudioClip: {fileID: 8300000, guid: 6ae07461192af8e418f4100c8b08a517, type: 3}
   positionOffset: {x: 0, y: 0, z: 0}
   scaleOffset: 0
-  rewardGoldCount: 5
+  rewardGoldCount: 25
   goldPrefab: {fileID: 3387045420084571198, guid: 209a641942809fc4cad0b9a8d4ba8a9b, type: 3}
   offsetTransform: {fileID: 335957619251406168}
   bodyMaterial: {fileID: 2100000, guid: b7ce918c50194e646a4579e55b19af86, type: 2}
@@ -37663,9 +37663,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 645075da7f794114783c47684969cb21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amount: 5
+  amount: 2
   skillDuration: 5
-  skillCooldown: 5
+  skillCooldown: 10
   range: 5
   skillAudioClip: {fileID: 8300000, guid: eb8824434ec7db34693a29b7cc81e19b, type: 3}
 --- !u!82 &6853720136289799836

@@ -59745,8 +59745,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34e3e69428bb6e34b8257abd4398b8bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
-  baseArmor: 5
+  maxHealth: 10000
+  baseArmor: 10
   RgAmount: 0
   Rginterval: 0
   isHpTime: 0

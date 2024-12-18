@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resourceName: Money
-  amount: 1
+  amount: 10
   GetItemSound: {fileID: 8300000, guid: 0b089b225b9095444afd110f536faa69, type: 3}
 --- !u!95 &7767192355702798200
 Animator:

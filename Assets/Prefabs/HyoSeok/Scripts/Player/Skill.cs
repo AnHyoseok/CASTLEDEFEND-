@@ -29,9 +29,9 @@ namespace Defend.UI
         //쿨타임
         public GameObject[] coolTimeUI;        //쿨타임이미지
         public TextMeshProUGUI[] coolTimeText; //쿨타임 시간
-        [SerializeField] float magnetCoolTime = 60f;
+        [SerializeField] float magnetCoolTime = 30f;
         [SerializeField] float timeStopCoolTime = 120f;
-        [SerializeField] float atkSpeedUpCoolTime = 180f;
+        [SerializeField] float atkSpeedUpCoolTime = 120f;
 
         private bool[] isCooldown;
         public Button[] skillButtons;
