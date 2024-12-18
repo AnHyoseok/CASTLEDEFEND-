@@ -95,11 +95,11 @@ namespace Defend.UI
 
             if (rayInteractor.TryGetCurrent3DRaycastHit(out RaycastHit hit))
             {
-                // 충돌한 오브젝트의 정보 가져오기
-                GameObject hitObject = hit.collider.gameObject;
                 // 현재 레이캐스트 히트 지점 가져오기
                 hitPoint = hit.point;
-                if (hitObject == terrain)
+
+                // Terrain인지 확인
+                if (hit.collider.gameObject == terrain)
                 {
                     reticleVisual.enabled = true;
                 }

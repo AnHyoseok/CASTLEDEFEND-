@@ -38,6 +38,9 @@ namespace Defend.UI
         {
             if (!towerinfo[index].isLock) return;
             indexs = index;
+            // 해당 프리팹의 위치를 플레이어가 볼 수 없도록 조정
+            falsetowers[indexs].transform.position = new Vector3(0, -1000, 0);
+            // recticlePrefab에 선택한 타워 할당
             tile.reticleVisual.reticlePrefab = falsetowers[indexs];
             //isReticle = true;
             //istrigger = true;
