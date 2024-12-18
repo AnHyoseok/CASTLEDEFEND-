@@ -1,7 +1,5 @@
-using Defend.Player;
 using Defend.Tower;
 using UnityEngine;
-using UnityEngine.UI;
 namespace Defend.UI
 {
     public class BuildMenu : MonoBehaviour
@@ -26,7 +24,7 @@ namespace Defend.UI
         public int levelindex = Mathf.Clamp(1,1,3);
         //reticle이 활성화 비활성화 유무
         public bool isReticle = false;
-        public bool istowerup = false;
+        public bool istrigger = false;
         #endregion
 
         private void Start()
@@ -41,7 +39,7 @@ namespace Defend.UI
             if (!towerinfo[index].isLock) return;
             indexs = index;
             isReticle = true;
-            istowerup = true;
+            istrigger = true;
             BuildUI.SetActive(false);
             //buildpro.SetActive(true);
         }
