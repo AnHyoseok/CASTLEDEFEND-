@@ -45,16 +45,33 @@ namespace Defend.UI
                 upgradetowerInfo.projectile.attack += castle.atkRangeLevel;
             }
         }
-        protected override void OnHoverEntered(HoverEnterEventArgs args)
+        protected override void OnHoverEntering(HoverEnterEventArgs args)
         {
-            base.OnHoverEntered(args);
+            base.OnHoverEntering(args);
             buildManager.buildMenu.isReticle = false;
-            buildManager.buildMenu.istowerup = false;
+            buildManager.buildMenu.tile.reticleVisual.enabled = false;
         }
-        protected override void OnHoverExited(HoverExitEventArgs args)
+        protected override void OnHoverExiting(HoverExitEventArgs args)
         {
-            base.OnHoverExited(args);
+            base.OnHoverExiting(args);
+            if (!buildManager.buildMenu.istrigger) return;
             buildManager.buildMenu.isReticle = true;
+            buildManager.buildMenu.tile.reticleVisual.enabled = true;
+        }
+        protected override void OnRegistered(InteractableRegisteredEventArgs args)
+        {
+            base.OnRegistered(args);
+            Debug.Log("OnRegistered");
+        }
+        protected override void OnFocusEntering(FocusEnterEventArgs args)
+        {
+            base.OnFocusEntering(args);
+            Debug.Log("OnFocusEntering");
+        }
+        protected override void OnFocusExiting(FocusExitEventArgs args)
+        {
+            base.OnFocusExiting(args);
+            Debug.Log("OnFocusExiting");
         }
         protected override void OnSelectEntered(SelectEnterEventArgs args)
         {
@@ -81,7 +98,6 @@ namespace Defend.UI
                 Debug.Log("판매하지 못했습니다");
             }
         }
-
         public void UpgradeTower()
         {
             if (towerInfo == null)
@@ -109,11 +125,12 @@ namespace Defend.UI
                         tower.Isupgradeone = true;
                         BoxCollider boxCollider = tower_upgrade.GetComponent<BoxCollider>();
                         boxCollider.size = buildManager.buildMenu.boxes[currentindex].size;
+                        boxCollider.size = boxCollider.size + new Vector3(0.5f, 0, 0.5f);
                         boxCollider.center = buildManager.buildMenu.boxes[currentindex].center;
                         Destroy(this.gameObject);
                         tower_upgrade = null;
                         buildManager.DeselectTile();
-                        buildManager.buildMenu.istowerup = false;
+                        buildManager.buildMenu.istrigger = false;
                     }
                     else if (currentlevel == 2 && Isupgradeone)
                     {
@@ -128,11 +145,12 @@ namespace Defend.UI
                         tower.Isupgradetwo = true;
                         BoxCollider boxCollider = tower_upgrade.GetComponent<BoxCollider>();
                         boxCollider.size = buildManager.buildMenu.boxes[currentindex].size;
+                        boxCollider.size = boxCollider.size + new Vector3(0.5f, 0, 0.5f);
                         boxCollider.center = buildManager.buildMenu.boxes[currentindex].center;
                         Destroy(this.gameObject);
                         tower_upgrade = null;
                         buildManager.DeselectTile();
-                        buildManager.buildMenu.istowerup = false;
+                        buildManager.buildMenu.istrigger = false;
                     }
                 }
             }

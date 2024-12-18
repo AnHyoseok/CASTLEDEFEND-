@@ -25,7 +25,7 @@ namespace Defend.UI
         //플레이어 손 라인
         public XRRayInteractor rayInteractor;
         //플레이어 왼손 레티클 비주얼
-        private XRInteractorReticleVisual reticleVisual;
+        [HideInInspector]public XRInteractorReticleVisual reticleVisual;
         //설치할 타워를 보여주는 게임 오브젝트
         private GameObject reticlePrefabs;
         //트리거 키 입력
@@ -47,7 +47,8 @@ namespace Defend.UI
             //Trigger 버튼 누르면 reticle = null
             if (property.action.WasPressedThisFrame())
             {
-                buildMenu.isReticle = false;
+                buildMenu.istrigger = false;
+                return;
             }
 
             if (rayInteractor == null) return;
@@ -96,14 +97,14 @@ namespace Defend.UI
             // 라인이 유효한지 확인
             if (IsLineVisualValid())
             {
-                if ((!buildMenu.isReticle && !buildMenu.istowerup) || !buildMenu.istowerup || !buildMenu.isReticle)
+                if (!buildMenu.istrigger || !buildMenu.isReticle)
                 {
                     reticleVisual.reticlePrefab = null;
                     reticlePrefabs = null;
                     return;
                 }
                 // 허용된 경우 ReticlePrefab 활성화가 되야지 설치
-                else if (reticleVisual.reticlePrefab == null && buildMenu.isReticle)
+                if (reticleVisual.reticlePrefab == null && buildMenu.isReticle )
                 {
                     SetReticlePrefab(reticlePrefabs);
                     if(reticleVisual.reticlePrefab != null)
@@ -124,17 +125,19 @@ namespace Defend.UI
         }
         void UIEnterReticle(UIHoverEventArgs args)
         {
-            buildMenu.isReticle = false;
-            buildMenu.istowerup = false;
+            Debug.Log("dddd");
+            reticleVisual.enabled = false;
         }
         void UIExitReticle(UIHoverEventArgs uIHover)
         {
-            buildMenu.isReticle = true;
+            Debug.Log("ccc");
+            if (!buildMenu.istrigger) return;
+            reticleVisual.enabled = true;
         }
         //타워 설치
         private void SetBuildTower()
         {
-            if (!buildMenu.istowerup) return;
+            if (!buildMenu.istrigger) return;
             if (buildManager.playerState.SpendMoney(buildManager.towerBases[buildMenu.indexs].GetTowerInfo().cost1) && buildMenu.isReticle && buildMenu.towerinfo[buildMenu.indexs].isLock)
             {
                 tower = Instantiate(buildManager.towerBases[buildMenu.indexs].GetTowerInfo().projectile.tower,
@@ -150,6 +153,7 @@ namespace Defend.UI
                 towerXR.interactionLayers = layerMask;
                 box.isTrigger = false;
                 box.size = buildMenu.boxes[buildMenu.indexs].size;
+                box.size = box.size + new Vector3(0.5f, 0, 0.5f);
                 box.center = buildMenu.boxes[(buildMenu.indexs)].center;
                 buildMenu.buildpro.SetActive(false);
             }
