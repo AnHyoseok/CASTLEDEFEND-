@@ -60,6 +60,7 @@ namespace Defend.UI
                 DeselectTile();
                 return;
             }
+            DeselectTile();
             //선택한 타워에 저장하기
             tower = towerXR;
             //저장한 타워 속성을 초기화

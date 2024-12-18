@@ -1,6 +1,7 @@
 using Defend.Tower;
 using Defend.Utillity;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
@@ -59,7 +60,15 @@ namespace Defend.UI
 
             if (rayInteractor == null) return;
 
-            IsBuildTower();
+            // Ray가 UI를 향하고 있는 경우
+            if (rayInteractor.TryGetCurrentUIRaycastResult(out RaycastResult result))
+            {
+                reticleVisual.enabled = false;
+            }
+            else
+            {
+                IsBuildTower();
+            }
         }
         protected override void OnSelectEntered(SelectEnterEventArgs args)
         {
@@ -140,28 +149,16 @@ namespace Defend.UI
             //    }
             //}
         }
-        void UIEnterReticle(UIHoverEventArgs args)
-        {
-            Debug.Log("ENTER UI");
-            reticleVisual.enabled = false;
-        }
-        void UIExitReticle(UIHoverEventArgs uIHover)
-        {
-            Debug.Log("EXIT UI");
-            //if (!buildMenu.istrigger) return;
-            reticleVisual.enabled = true;
-        }
         //타워 설치
         private void SetBuildTower()
         {
-            //if (!buildMenu.istrigger) return;
+            if (reticleVisual.reticlePrefab == null) return;
             if (buildManager.playerState.SpendMoney(buildManager.towerBases[buildMenu.indexs].GetTowerInfo().cost1) 
                 //&& buildMenu.isReticle 
                 && buildMenu.towerinfo[buildMenu.indexs].isLock)
             {
                 tower = Instantiate(buildManager.towerBases[buildMenu.indexs].GetTowerInfo().projectile.tower,
                     GetBuildPosition(), Quaternion.identity);
-                Debug.Log(tower.gameObject.transform.position);
                 GameObject effgo = Instantiate(TowerImpectPrefab, tower.transform.position, Quaternion.identity);
                 Destroy(effgo, 2f);
 
