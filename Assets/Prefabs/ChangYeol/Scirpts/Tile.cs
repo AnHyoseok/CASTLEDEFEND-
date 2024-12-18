@@ -1,4 +1,5 @@
 using Defend.Tower;
+using Defend.Utillity;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -36,6 +37,8 @@ namespace Defend.UI
         private Vector3 hitPoint;
         // 터레인
         public GameObject terrain;
+
+        public AudioClip towerBuildSound;
         #endregion
 
         private void Start()
@@ -158,9 +161,12 @@ namespace Defend.UI
             {
                 tower = Instantiate(buildManager.towerBases[buildMenu.indexs].GetTowerInfo().projectile.tower,
                     GetBuildPosition(), Quaternion.identity);
-
+                Debug.Log(tower.gameObject.transform.position);
                 GameObject effgo = Instantiate(TowerImpectPrefab, tower.transform.position, Quaternion.identity);
                 Destroy(effgo, 2f);
+
+                //효과음 재생
+                AudioUtility.CreateSFX(towerBuildSound, tower.transform.position, AudioUtility.AudioGroups.EFFECT, 1);
 
                 tower.AddComponent<BoxCollider>();
                 tower.AddComponent<TowerXR>();
