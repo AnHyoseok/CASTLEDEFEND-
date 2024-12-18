@@ -205,6 +205,7 @@ namespace Defend.Utillity
             if(CurrentMana < maxMana)
             {
                 CurrentMana = Mathf.Min(CurrentMana + Time.deltaTime * ratio, maxMana);
+                OnUseMana.Invoke();
             }
         }
 
