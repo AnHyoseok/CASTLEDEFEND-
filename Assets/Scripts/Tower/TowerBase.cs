@@ -77,25 +77,25 @@ namespace Defend.Tower
 
             #region Test를 위한 시각화 => LineRenderer 초기화, Gizmo
             {
-                // 기즈모 색상 초기화
-                gizmo.gizmoColor = Color.green;
-                // 기즈모 범위 초기화
-                gizmo.sphereRadius = towerInfo.attackRange;
-                // 라인랜더러 길이 초기화
-                gizmo.lineLength = towerInfo.attackRange;
+                //// 기즈모 색상 초기화
+                //gizmo.gizmoColor = Color.green;
+                //// 기즈모 범위 초기화
+                //gizmo.sphereRadius = towerInfo.attackRange;
+                //// 라인랜더러 길이 초기화
+                //gizmo.lineLength = towerInfo.attackRange;
 
-                // LineRenderer 컴포넌트를 가져오거나 추가
-                lineRenderer = GetComponent<LineRenderer>();
-                if (lineRenderer == null)
-                    lineRenderer = gameObject.AddComponent<LineRenderer>();
+                //// LineRenderer 컴포넌트를 가져오거나 추가
+                //lineRenderer = GetComponent<LineRenderer>();
+                //if (lineRenderer == null)
+                //    lineRenderer = gameObject.AddComponent<LineRenderer>();
 
-                // LineRenderer 초기 설정
-                lineRenderer.startWidth = 0.1f;
-                lineRenderer.endWidth = 0.1f;
-                lineRenderer.positionCount = 2; // 시작점과 끝점
-                lineRenderer.material = new Material(Shader.Find("Sprites/Default")); // 기본 셰이더
-                lineRenderer.startColor = Color.red;
-                lineRenderer.endColor = Color.red;
+                //// LineRenderer 초기 설정
+                //lineRenderer.startWidth = 0.1f;
+                //lineRenderer.endWidth = 0.1f;
+                //lineRenderer.positionCount = 2; // 시작점과 끝점
+                //lineRenderer.material = new Material(Shader.Find("Sprites/Default")); // 기본 셰이더
+                //lineRenderer.startColor = Color.red;
+                //lineRenderer.endColor = Color.red;
             }
             #endregion
         }

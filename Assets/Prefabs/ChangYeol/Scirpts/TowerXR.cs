@@ -48,14 +48,14 @@ namespace Defend.UI
         protected override void OnHoverEntering(HoverEnterEventArgs args)
         {
             base.OnHoverEntering(args);
-            buildManager.buildMenu.isReticle = false;
+            //buildManager.buildMenu.isReticle = false;
             buildManager.buildMenu.tile.reticleVisual.enabled = false;
         }
         protected override void OnHoverExiting(HoverExitEventArgs args)
         {
             base.OnHoverExiting(args);
-            if (!buildManager.buildMenu.istrigger) return;
-            buildManager.buildMenu.isReticle = true;
+            //if (!buildManager.buildMenu.istrigger) return;
+            //buildManager.buildMenu.isReticle = true;
             buildManager.buildMenu.tile.reticleVisual.enabled = true;
         }
         protected override void OnRegistered(InteractableRegisteredEventArgs args)
@@ -130,7 +130,7 @@ namespace Defend.UI
                         Destroy(this.gameObject);
                         tower_upgrade = null;
                         buildManager.DeselectTile();
-                        buildManager.buildMenu.istrigger = false;
+                        //buildManager.buildMenu.istrigger = false;
                     }
                     else if (currentlevel == 2 && Isupgradeone)
                     {
@@ -150,7 +150,7 @@ namespace Defend.UI
                         Destroy(this.gameObject);
                         tower_upgrade = null;
                         buildManager.DeselectTile();
-                        buildManager.buildMenu.istrigger = false;
+                        //buildManager.buildMenu.istrigger = false;
                     }
                 }
             }

@@ -23,8 +23,8 @@ namespace Defend.UI
         public int indexs;
         public int levelindex = Mathf.Clamp(1,1,3);
         //reticle이 활성화 비활성화 유무
-        public bool isReticle = false;
-        public bool istrigger = false;
+        //public bool isReticle = false;
+        //public bool istrigger = false;
         #endregion
 
         private void Start()
@@ -38,8 +38,9 @@ namespace Defend.UI
         {
             if (!towerinfo[index].isLock) return;
             indexs = index;
-            isReticle = true;
-            istrigger = true;
+            tile.reticleVisual.reticlePrefab = falsetowers[indexs];
+            //isReticle = true;
+            //istrigger = true;
             BuildUI.SetActive(false);
             //buildpro.SetActive(true);
         }
@@ -50,7 +51,7 @@ namespace Defend.UI
         public void BuildMenuUI()
         {
             BuildUI.SetActive(!BuildUI.activeSelf);
-            isReticle=false;
+            //isReticle=false;
         }
     }
 }

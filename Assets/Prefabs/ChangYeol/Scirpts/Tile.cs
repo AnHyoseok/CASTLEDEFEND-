@@ -27,13 +27,15 @@ namespace Defend.UI
         //플레이어 왼손 레티클 비주얼
         [HideInInspector]public XRInteractorReticleVisual reticleVisual;
         //설치할 타워를 보여주는 게임 오브젝트
-        private GameObject reticlePrefabs;
+        [SerializeField] public GameObject reticlePrefabs;
         //트리거 키 입력
         public InputActionProperty property;
         //타워 선택이 가능한 레이어 설정
         public InteractionLayerMask layerMask;
         //타워 설치 위치
         private Vector3 hitPoint;
+        // 터레인
+        public GameObject terrain;
         #endregion
 
         private void Start()
@@ -47,17 +49,13 @@ namespace Defend.UI
             //Trigger 버튼 누르면 reticle = null
             if (property.action.WasPressedThisFrame())
             {
-                buildMenu.istrigger = false;
+                reticleVisual.reticlePrefab = null;
+                //buildMenu.istrigger = false;
                 return;
             }
 
             if (rayInteractor == null) return;
 
-            // 현재 레이캐스트 히트 지점 가져오기
-            if (rayInteractor.TryGetCurrent3DRaycastHit(out RaycastHit hit))
-            {
-                hitPoint = hit.point; // Reticle이 표시하는 위치
-            }
             IsBuildTower();
         }
         protected override void OnSelectEntered(SelectEnterEventArgs args)
@@ -78,12 +76,12 @@ namespace Defend.UI
             return false;
         }
         // ReticlePrefab을 설정하는 함수
-        private void SetReticlePrefab(GameObject prefab)
-        {
-            prefab = buildMenu.falsetowers[buildMenu.indexs];
-            reticleVisual.reticlePrefab = prefab;
-            prefab.GetComponent<BoxCollider>().enabled = false;
-        }
+        //private void SetReticlePrefab()
+        //{
+        //    reticlePrefabs = buildMenu.falsetowers[buildMenu.indexs];
+        //    reticlePrefabs.GetComponent<BoxCollider>().enabled = false;
+        //    reticleVisual.reticlePrefab = reticlePrefabs;
+        //}
         //타워 설치 위치
         private Vector3 GetBuildPosition()
         {
@@ -94,51 +92,69 @@ namespace Defend.UI
         {
             if (rayInteractor == null || reticleVisual == null)
                 return;
+
+            if (rayInteractor.TryGetCurrent3DRaycastHit(out RaycastHit hit))
+            {
+                // 충돌한 오브젝트의 정보 가져오기
+                GameObject hitObject = hit.collider.gameObject;
+                // 현재 레이캐스트 히트 지점 가져오기
+                hitPoint = hit.point;
+                if (hitObject == terrain)
+                {
+                    reticleVisual.enabled = true;
+                }
+                else
+                {
+                    reticleVisual.enabled = false;
+                }
+            }
             // 라인이 유효한지 확인
-            if (IsLineVisualValid())
-            {
-                if (!buildMenu.istrigger || !buildMenu.isReticle)
-                {
-                    reticleVisual.reticlePrefab = null;
-                    reticlePrefabs = null;
-                    return;
-                }
-                // 허용된 경우 ReticlePrefab 활성화가 되야지 설치
-                if (reticleVisual.reticlePrefab == null && buildMenu.isReticle )
-                {
-                    SetReticlePrefab(reticlePrefabs);
-                    if(reticleVisual.reticlePrefab != null)
-                    {
-                        rayInteractor.uiHoverEntered.AddListener(UIEnterReticle);
-                        rayInteractor.uiHoverExited.AddListener(UIExitReticle);
-                    }
-                }
-            }
-            else
-            {
-                // 허용되지 않은 경우 ReticlePrefab 비활성화
-                if (reticleVisual.reticlePrefab != null && buildMenu.isReticle)
-                {
-                    reticleVisual.reticlePrefab = null;
-                }
-            }
+            //if (IsLineVisualValid())
+            //{
+            //    if (!buildMenu.istrigger || !buildMenu.isReticle)
+            //    {
+            //        reticleVisual.reticlePrefab = null;
+            //        reticlePrefabs = null;
+            //        return;
+            //    }
+            //    // 허용된 경우 ReticlePrefab 활성화가 되야지 설치
+            //    if (reticleVisual.reticlePrefab == null && buildMenu.isReticle )
+            //    {
+            //        SetReticlePrefab();
+            //        if(reticleVisual.reticlePrefab != null)
+            //        {
+            //            rayInteractor.uiHoverEntered.AddListener(UIEnterReticle);
+            //            rayInteractor.uiHoverExited.AddListener(UIExitReticle);
+            //        }
+            //    }
+            //}
+            //else
+            //{
+            //    // 허용되지 않은 경우 ReticlePrefab 비활성화
+            //    if (reticleVisual.reticlePrefab != null && buildMenu.isReticle)
+            //    {
+            //        reticleVisual.reticlePrefab = null;
+            //    }
+            //}
         }
         void UIEnterReticle(UIHoverEventArgs args)
         {
-            Debug.Log("dddd");
+            Debug.Log("ENTER UI");
             reticleVisual.enabled = false;
         }
         void UIExitReticle(UIHoverEventArgs uIHover)
         {
-            Debug.Log("ccc");
-            if (!buildMenu.istrigger) return;
+            Debug.Log("EXIT UI");
+            //if (!buildMenu.istrigger) return;
             reticleVisual.enabled = true;
         }
         //타워 설치
         private void SetBuildTower()
         {
-            if (!buildMenu.istrigger) return;
-            if (buildManager.playerState.SpendMoney(buildManager.towerBases[buildMenu.indexs].GetTowerInfo().cost1) && buildMenu.isReticle && buildMenu.towerinfo[buildMenu.indexs].isLock)
+            //if (!buildMenu.istrigger) return;
+            if (buildManager.playerState.SpendMoney(buildManager.towerBases[buildMenu.indexs].GetTowerInfo().cost1) 
+                //&& buildMenu.isReticle 
+                && buildMenu.towerinfo[buildMenu.indexs].isLock)
             {
                 tower = Instantiate(buildManager.towerBases[buildMenu.indexs].GetTowerInfo().projectile.tower,
                     GetBuildPosition(), Quaternion.identity);
