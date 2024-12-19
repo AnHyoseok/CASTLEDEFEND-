@@ -17,6 +17,7 @@ public class SkyboxTest : MonoBehaviour
     private ListSpawnManager listSpawnManager; // ListSpawnManager 스크립트의 waveCount 참조용
     private bool hasTransitioned = false; // 스카이박스 전환이 일어났는지 확인
 
+    
     void Start()
     {
         
