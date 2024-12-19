@@ -35,8 +35,8 @@ namespace Defend.UI
             for (int i = 0; i < towerinfo.Length; i++)
             {
                 towerBuildButtons[i].interactable = build.towerinfo[i * 3].isLock;
-                //buildManager.towerBases[i].GetTowerInfo().projectile.attack += castleUpgrade.atkLevel;
                 //타워 빌드창
+                towerinfo[i].image.sprite = build.towerSprite[i * 3];
                 towerinfo[i].Hp.text = "Hp : " + buildManager.towerBases[i * 3].GetTowerInfo().maxHealth.ToString();
                 towerinfo[i].Mp.text = "Mp : " + buildManager.towerBases[i * 3].GetTowerInfo().maxMana.ToString();
                 towerinfo[i].Attack.text = "Attack : " + buildManager.towerBases[i * 3].GetTowerInfo().projectile.attack.ToString();
@@ -46,6 +46,7 @@ namespace Defend.UI
             for (int i = 1; i < towerinfo.Length; i++)
             {
                 //타워 구매창
+                buyTower[i - 1].image.sprite = build.towerSprite[i * 3];
                 buyTower[i - 1].Hp.text = "Hp : " + buildManager.towerBases[i * 3].GetTowerInfo().maxHealth.ToString();
                 buyTower[i - 1].Mp.text = "Mp : " + buildManager.towerBases[i * 3].GetTowerInfo().maxMana.ToString();
                 buyTower[i - 1].Attack.text = "Attack : " + buildManager.towerBases[i * 3].GetTowerInfo().projectile.attack.ToString();
