@@ -69,9 +69,8 @@ namespace Defend.UI
             if (this.gameObject != null)
             {
                 Destroy(this.gameObject);
-                //IsUpgrade = false;
-                //GameObject effect = Instantiate(SellImpectPrefab, GetBuildPosition(), Quaternion.identity);
-                //Destroy(effect, 2f);
+                GameObject effect = Instantiate(buildManager.buildMenu.tile.TowerImpectPrefab[3], transform.position, Quaternion.identity);
+                Destroy(effect, 2f);
                 //기본터렛들의 반값으로 판매
                 buildManager.playerState.AddMoney(towerInfo.GetSellCost());
                 buildManager.playerState.AddRock(towerInfo.GetSellRockCost());

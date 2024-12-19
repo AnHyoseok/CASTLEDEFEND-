@@ -83,12 +83,8 @@ namespace Defend.UI
         }
         IEnumerator ButtonIsAction()
         {
-            if (!UpgradeButton.IsActive() || !Sellbutton.IsActive())
-            {
-                yield return new WaitForSeconds(4);
-                Debug.Log("");
-                DeselectTile();
-            }
+            yield return new WaitForSeconds(4);
+            DeselectTile();
         }
     }
 }
