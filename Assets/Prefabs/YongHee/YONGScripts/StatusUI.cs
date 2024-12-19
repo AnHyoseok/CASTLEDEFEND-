@@ -43,7 +43,12 @@ namespace Defend.UI
         // Update is called once per frame
         void Update()
         {
-            transform.LookAt(target);
+            // target 위치에서 현재 오브젝트의 위치를 뺀 방향 벡터를 계산
+            Vector3 direction = target.position - transform.position;
+
+            // UI가 Z축이 아니라 다른 축(예: Y축)으로 바라보게 설정
+            Quaternion rotation = Quaternion.LookRotation(-direction); // Z축 반전을 위해 음수 사용
+            transform.rotation = rotation;
         }
 
         void SetFillHealth()
