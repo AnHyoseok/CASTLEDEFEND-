@@ -9751,10 +9751,10 @@ MonoBehaviour:
     armor: 5
     healthRegen: 1
     manaRegen: 1
-    cost1: 1
-    cost2: 2
-    cost3: 3
-    cost4: 4
+    cost1: 250
+    cost2: 100
+    cost3: 50
+    cost4: 50
     upgradeTower: {fileID: 4736779892808516748, guid: 7877d0f193b10a8449b3037a3b28fd36, type: 3}
     projectile:
       tower: {fileID: 1804497351227217583}

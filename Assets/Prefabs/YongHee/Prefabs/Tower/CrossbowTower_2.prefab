@@ -125,17 +125,17 @@ MonoBehaviour:
     armor: 2
     healthRegen: 1
     manaRegen: 1
-    cost1: 1
-    cost2: 2
-    cost3: 3
-    cost4: 4
+    cost1: 600
+    cost2: 300
+    cost3: 50
+    cost4: 50
     upgradeTower: {fileID: 4489671909052542958, guid: 609b3b214e404964891e36eb9f967fb2, type: 3}
     projectile:
       tower: {fileID: 2389672122861382254}
       prefab: {fileID: 5907859992763664060, guid: 42271961b32f44445a1fb97db7c37fad, type: 3}
       effectPrefab: {fileID: 704625340843485128, guid: b0e4dfc222bb5744d9854453d5799f78, type: 3}
       effectTime: 3
-      attack: 20
+      attack: 65
       moveSpeed: 50
       attackRange: 0
       debuffRatio: 0

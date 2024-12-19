@@ -61,10 +61,10 @@ MonoBehaviour:
     armor: 4
     healthRegen: 1
     manaRegen: 1
-    cost1: 1
-    cost2: 2
-    cost3: 3
-    cost4: 4
+    cost1: 240
+    cost2: 80
+    cost3: 50
+    cost4: 50
     upgradeTower: {fileID: 0}
     projectile:
       tower: {fileID: 652007546766904640}

@@ -10034,7 +10034,7 @@ MonoBehaviour:
   shootTime: 0
   towerInfo:
     rotationSpeed: 1
-    attackRange: 4
+    attackRange: 25
     detectDelay: 0.5
     shootDelay: 5
     maxHealth: 200
@@ -10042,10 +10042,10 @@ MonoBehaviour:
     armor: 5
     healthRegen: 1
     manaRegen: 1
-    cost1: 1
-    cost2: 2
-    cost3: 3
-    cost4: 4
+    cost1: 500
+    cost2: 250
+    cost3: 50
+    cost4: 50
     upgradeTower: {fileID: 6938008428153396831, guid: 9df58c378a91516448e2bfc70b5ec2d8, type: 3}
     projectile:
       tower: {fileID: 8591448804290326268}

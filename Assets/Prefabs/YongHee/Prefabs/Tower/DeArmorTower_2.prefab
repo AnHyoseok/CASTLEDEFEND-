@@ -5089,10 +5089,10 @@ MonoBehaviour:
     armor: 5
     healthRegen: 1
     manaRegen: 1
-    cost1: 1
-    cost2: 2
-    cost3: 3
-    cost4: 4
+    cost1: 400
+    cost2: 200
+    cost3: 50
+    cost4: 50
     upgradeTower: {fileID: 2604370016932081696, guid: 36d3640aa7caa10418c32bcc41227ffd, type: 3}
     projectile:
       tower: {fileID: 9131892694948468726}

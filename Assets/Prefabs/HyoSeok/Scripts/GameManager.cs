@@ -283,6 +283,11 @@ namespace Defend.Manager
                 audioSource.Stop();
             }
         }
+        void GameOverGo()
+        {
+            StartCoroutine(GameOver());
+        }
+        
         //게임오버
         IEnumerator GameOver()
         {
@@ -297,6 +302,13 @@ namespace Defend.Manager
                 yield return new WaitForSeconds(3f);
                 audioSource?.Stop();
             }
+        }
+
+
+        //치트용 버튼
+        public void GiveMoney()
+        {
+            playerState.money = 99999f;
         }
     }
 }
