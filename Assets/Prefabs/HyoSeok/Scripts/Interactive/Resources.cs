@@ -81,8 +81,8 @@ namespace Defend.Interactive
             // 자원 생성 (미니사이즈)
             if (currentResourceType.resourceItem != null)
             {
-                //위치 다시잡아야됌 ======================================================================================================
-                GameObject dropitem = Instantiate(currentResourceType.resourceItem, transform.position, Quaternion.identity);
+                Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z); 
+                GameObject dropitem = Instantiate(currentResourceType.resourceItem, spawnPosition, Quaternion.identity);
                 DropItem item = dropitem.GetComponent<DropItem>();
                 item.amount = currentResourceType.amount;
                 item.resourceName = currentResourceType.name.ToString();
@@ -92,7 +92,7 @@ namespace Defend.Interactive
             PlayHitSound();
             if (currentResourceType.health <= 0)
             {
-
+                
                 // 흔들림 효과와 사운드가 재생될 시간을 주기 위해 대기
                 yield return new WaitForSeconds(0.5f);
                 Destroy(gameObject);

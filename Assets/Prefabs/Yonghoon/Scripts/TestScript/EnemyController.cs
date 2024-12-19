@@ -255,7 +255,8 @@ namespace Defend.TestScript
             for (int i = 0; i < rewardGoldCount; i++)
             {
                 // 코인 생성
-                GameObject coin = Instantiate(goldPrefab, transform.position, Quaternion.identity);
+                Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
+                GameObject coin = Instantiate(goldPrefab, spawnPosition, Quaternion.identity);
                 DropItem item = coin.GetComponent<DropItem>();
                 item.amount = 1f;
                 item.resourceName = "Money";
