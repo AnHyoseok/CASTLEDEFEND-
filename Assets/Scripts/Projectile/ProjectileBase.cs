@@ -32,7 +32,7 @@ namespace Defend.Projectile
             offsetPosition = target.gameObject.GetComponent<EnemyController>().positionOffset;
             offsetScale = target.gameObject.GetComponent<EnemyController>().scaleOffset;
             targetPosition = target.position + offsetPosition;
-            //transform.GetChild(0).
+            transform.GetChild(0).localScale *= offsetScale;
             projectileInfo = _projectileInfo;
         }
 
@@ -43,6 +43,7 @@ namespace Defend.Projectile
             if (projectileInfo.effectPrefab != null)
             {
                 GameObject effect = Instantiate(projectileInfo.effectPrefab, transform.position, Quaternion.identity);
+                effect.transform.localScale *= offsetScale;
                 // Projectile Effect 삭제 예약
                 Destroy(effect, projectileInfo.effectTime);
             }

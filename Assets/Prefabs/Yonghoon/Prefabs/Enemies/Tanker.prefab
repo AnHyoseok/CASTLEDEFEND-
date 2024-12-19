@@ -51464,8 +51464,8 @@ MonoBehaviour:
   buffAudioClip: {fileID: 8300000, guid: 8b55bc7ca4535884093e830bc4b658c1, type: 3}
   debuffAudioClip: {fileID: 8300000, guid: 2c3bd6e7999a03745907599c091e2db6, type: 3}
   healAudioClip: {fileID: 8300000, guid: 6ae07461192af8e418f4100c8b08a517, type: 3}
-  positionOffset: {x: 0, y: 0, z: 0}
-  scaleOffset: 0
+  positionOffset: {x: 0, y: 1.5, z: 0}
+  scaleOffset: 1.5
   rewardGoldCount: 5
   goldPrefab: {fileID: 3387045420084571198, guid: 209a641942809fc4cad0b9a8d4ba8a9b, type: 3}
   offsetTransform: {fileID: 1828569783196411834}
