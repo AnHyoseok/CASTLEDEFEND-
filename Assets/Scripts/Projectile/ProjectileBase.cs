@@ -8,10 +8,11 @@ namespace Defend.Projectile
 {
     public abstract class ProjectileBase : MonoBehaviour
     {
-        [SerializeField] protected Transform target;                    // 목표물
-        [SerializeField] protected Vector3 targetPosition;              // 목표물
-        [SerializeField] protected ProjectileInfo projectileInfo;       // 발사체 정보
-        [SerializeField] protected Vector3 offset;
+        [SerializeField] protected Transform target;                // 목표물
+        [SerializeField] protected Vector3 targetPosition;          // 목표물
+        [SerializeField] protected ProjectileInfo projectileInfo;   // 발사체 정보
+        [SerializeField] protected Vector3 offsetPosition;          // Position 보정
+        [SerializeField] protected float offsetScale;               // Scale 보정
 
         // TODO :: Bat, Rocket sfx clip 찾아서 추가하기
         protected virtual void Start()
@@ -28,8 +29,10 @@ namespace Defend.Projectile
         public virtual void Init(ProjectileInfo _projectileInfo, Transform closestTarget)
         {
             target = closestTarget;
-            offset = target.gameObject.GetComponent<EnemyController>().positionOffset;
-            targetPosition = target.position + offset;
+            offsetPosition = target.gameObject.GetComponent<EnemyController>().positionOffset;
+            offsetScale = target.gameObject.GetComponent<EnemyController>().scaleOffset;
+            targetPosition = target.position + offsetPosition;
+            //transform.GetChild(0).
             projectileInfo = _projectileInfo;
         }
 
