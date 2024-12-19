@@ -5,31 +5,38 @@ namespace Defend.Interactive
     public class ResorceSpawn : MonoBehaviour
     {
         #region Variables
-        public bool treeSpawned = true;
+        [SerializeField] int spawntime = 5;
         public GameObject treePrefab;
+        private GameObject currentObject;
+        private bool isRespawning = false; 
         #endregion
 
-        private void Update()
+        void Start()
         {
-
-              StartCoroutine(SpawnTree());
+            SpawnObject();
         }
 
-        public IEnumerator SpawnTree()
+        void SpawnObject()
         {
-            if (treeSpawned == true)
-            {
-                yield return new WaitForSeconds(5f); // 5초 후에 나무 생성
+            currentObject = Instantiate(treePrefab, transform.position, Quaternion.identity);
+            isRespawning = false; 
+        }
 
-                if (treePrefab == null)
-                {
-                    Debug.Log("treePrefab == null");
-                }
-                GameObject tree = Instantiate(treePrefab, transform.position, Quaternion.identity);
-               
+        void Update()
+        {
+        
+            if (currentObject == null && !isRespawning)
+            {
+                isRespawning = true; 
+                Invoke("RespawnObject", spawntime);
             }
         }
 
-     
+        void RespawnObject()
+        {
+            SpawnObject();
+        }
+
+
     }
 }

@@ -99,7 +99,7 @@ namespace Defend.Interactive
                 //¡¶∞≈ ¿Ã∆Â∆Æ
                 GameObject detheffect = Instantiate(destroyEffect, transform.position, Quaternion.identity);
                 Destroy(detheffect, 1f);
-                resorceSpawn.treeSpawned = true;
+                //resorceSpawn.treeSpawned = true;
             }
 
             yield return new WaitForSeconds(1f);
