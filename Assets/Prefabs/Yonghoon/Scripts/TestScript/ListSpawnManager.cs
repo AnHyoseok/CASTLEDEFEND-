@@ -1,3 +1,4 @@
+using Defend.UI;
 using System.Collections;
 using UnityEngine;
 
@@ -52,6 +53,7 @@ namespace Defend.Enemy
             // 카운트다운이 0 이하가 되면 새로운 웨이브 시작
             if (countdown <= 0f)
             {
+                BuildManager.instance.enemy.ShowProUI();
                 StartCoroutine(SpawnWave()); // 웨이브 스폰 코루틴 호출
                 countdown = spawnTimer;     // 다음 웨이브를 위한 타이머 리셋
             }
