@@ -35,7 +35,7 @@ public class DetectionCheck : MonoBehaviour
             bool treeDetected = false;
             foreach (var collider in colliders)
             {
-                if (collider.gameObject.name.Contains("Tree"))
+                if (collider.gameObject.name=="Tree(Clone)")
                 {
                     treeDetected = true;
                     break;
@@ -48,7 +48,7 @@ public class DetectionCheck : MonoBehaviour
                 treeSpawned = true; // 나무 생성 상태 설정
                 StartCoroutine(SpawnTree());
             }
-            else if (treeDetected)
+            else if(treeDetected) 
             {
                 treeSpawned = false; // 나무가 발견되면 생성 상태 초기화
             }
@@ -64,6 +64,7 @@ public class DetectionCheck : MonoBehaviour
             Debug.Log("treePrefab == null");
         }
         Instantiate(treePrefab, transform.position, Quaternion.identity);
+        yield return new WaitForSeconds(5f);
     }
 }
 
