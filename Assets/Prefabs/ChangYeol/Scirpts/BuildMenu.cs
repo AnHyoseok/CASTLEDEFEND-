@@ -58,17 +58,3 @@ namespace Defend.UI
         }
     }
 }
-/*
-0 - BallistaTower_1
-1 - BallistaTower_2
-2 - BallistaTower_3
-3 - BatTower_1
-4 - BatTower_2
-5 - BatTower_3
-6 - CannonTower_1
-7 - CannonTower_2
-8 - CannonTower_3
-9 - CrossbowTower_1
-10 - CrossbowTower_2
-11 - CrossbowTower_3
-*/

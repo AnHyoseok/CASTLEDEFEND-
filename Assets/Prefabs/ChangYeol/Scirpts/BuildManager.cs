@@ -1,6 +1,7 @@
 using Defend.Enemy;
 using Defend.Player;
 using Defend.Tower;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -60,7 +61,6 @@ namespace Defend.UI
                 DeselectTile();
                 return;
             }
-            DeselectTile();
             //선택한 타워에 저장하기
             tower = towerXR;
             //저장한 타워 속성을 초기화
@@ -69,6 +69,7 @@ namespace Defend.UI
             menu.ShowTileUI(towerXR);
             UpgradeButton.onClick.AddListener(towerXR.UpgradeTower);
             Sellbutton.onClick.AddListener(towerXR.SellTower);
+            StartCoroutine(ButtonIsAction());
         }
         //선택 해제
         public void DeselectTile()
@@ -79,6 +80,15 @@ namespace Defend.UI
             Sellbutton.onClick.RemoveAllListeners();
             //선택한 타일 초기화하기
             tower = null;
+        }
+        IEnumerator ButtonIsAction()
+        {
+            if (!UpgradeButton.IsActive() || !Sellbutton.IsActive())
+            {
+                yield return new WaitForSeconds(4);
+                Debug.Log("");
+                DeselectTile();
+            }
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Defend.UI
         private void Start()
         {
             buildManager = BuildManager.Instance;
-            ShowProUI();
+            //ShowProUI();
         }
         public void ShowProUI()
         {

@@ -12,7 +12,7 @@ namespace Defend.UI
         [SerializeField]private TowerInfo towerInfo;
         public TowerInfo upgradetowerInfo;
         public int currentindex = BuildManager.instance.buildMenu.indexs;
-        public Sprite[] currentTower = new Sprite[12];
+        public Sprite[] currentTower = new Sprite[24];
         private GameObject tower_upgrade;
         private TowerBase towerBase;
         public int currentlevel = BuildManager.instance.buildMenu.levelindex;
@@ -58,21 +58,6 @@ namespace Defend.UI
             //buildManager.buildMenu.isReticle = true;
             buildManager.buildMenu.tile.reticleVisual.enabled = true;
         }
-        protected override void OnRegistered(InteractableRegisteredEventArgs args)
-        {
-            base.OnRegistered(args);
-            Debug.Log("OnRegistered");
-        }
-        protected override void OnFocusEntering(FocusEnterEventArgs args)
-        {
-            base.OnFocusEntering(args);
-            Debug.Log("OnFocusEntering");
-        }
-        protected override void OnFocusExiting(FocusExitEventArgs args)
-        {
-            base.OnFocusExiting(args);
-            Debug.Log("OnFocusExiting");
-        }
         protected override void OnSelectEntered(SelectEnterEventArgs args)
         {
             base.OnSelectEntered(args);
@@ -107,25 +92,24 @@ namespace Defend.UI
             }
             if (towerInfo != null)
             {
-                //Effect
-                //GameObject effectGo = Instantiate(TowerImpectPrefab, GetBuildPosition(), Quaternion.identity);
-                //Destroy(effectGo, 2f);
                 if (towerInfo.upgradeTower &&
                     buildManager.playerState.SpendMoney(towerInfo.cost2) && buildManager.playerState.SpendResources())
                 {
-                    if ((currentlevel == 1 && !Isupgradeone) || (currentlevel == 2 && !Isupgradeone))
+                    if (currentlevel == 1 && !Isupgradeone)
                     {
+                        //Effect
+                        GameObject effectGo = Instantiate(buildManager.buildMenu.tile.TowerImpectPrefab[1], transform.position, Quaternion.identity);
+                        Destroy(effectGo, 2f);
                         //터렛 업그레이드 생성
                         tower_upgrade = Instantiate(towerInfo.upgradeTower, transform.position, Quaternion.identity);
                         tower_upgrade.AddComponent<BoxCollider>();
                         tower_upgrade.AddComponent<TowerXR>();
                         TowerXR tower = tower_upgrade.GetComponent<TowerXR>();
-                        tower.currentindex += 1;
-                        tower.currentlevel += 1;
+                        tower.currentindex = currentindex + 1;
+                        tower.currentlevel = currentlevel + 1;
                         tower.Isupgradeone = true;
                         BoxCollider boxCollider = tower_upgrade.GetComponent<BoxCollider>();
-                        boxCollider.size = buildManager.buildMenu.boxes[currentindex].size;
-                        boxCollider.size = boxCollider.size + new Vector3(0.5f, 0, 0.5f);
+                        boxCollider.size = buildManager.buildMenu.boxes[currentindex].size + new Vector3(0.5f, 0, 0.5f);
                         boxCollider.center = buildManager.buildMenu.boxes[currentindex].center;
                         Destroy(this.gameObject);
                         tower_upgrade = null;
@@ -134,18 +118,20 @@ namespace Defend.UI
                     }
                     else if (currentlevel == 2 && Isupgradeone)
                     {
+                        //Effect
+                        GameObject effectGo = Instantiate(buildManager.buildMenu.tile.TowerImpectPrefab[2], transform.position, Quaternion.identity);
+                        Destroy(effectGo, 2f);
                         //터렛 업그레이드 생성
                         tower_upgrade = Instantiate(towerInfo.upgradeTower, transform.position, Quaternion.identity);
                         tower_upgrade.AddComponent<BoxCollider>();
                         tower_upgrade.AddComponent<TowerXR>();
                         TowerXR tower = tower_upgrade.GetComponent<TowerXR>();
-                        tower.currentindex += 2;
-                        tower.currentlevel += 2;
+                        tower.currentindex = currentindex + 1;
+                        tower.currentlevel = currentlevel + 1;
                         tower.Isupgradeone = true;
                         tower.Isupgradetwo = true;
                         BoxCollider boxCollider = tower_upgrade.GetComponent<BoxCollider>();
-                        boxCollider.size = buildManager.buildMenu.boxes[currentindex].size;
-                        boxCollider.size = boxCollider.size + new Vector3(0.5f, 0, 0.5f);
+                        boxCollider.size = buildManager.buildMenu.boxes[currentindex].size + new Vector3(0.5f, 0, 0.5f);
                         boxCollider.center = buildManager.buildMenu.boxes[currentindex].center;
                         Destroy(this.gameObject);
                         tower_upgrade = null;

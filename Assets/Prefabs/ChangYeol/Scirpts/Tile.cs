@@ -7,7 +7,6 @@ using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
 using UnityEngine.XR.Interaction.Toolkit.Interactors.Visuals;
-using UnityEngine.XR.Interaction.Toolkit.UI;
 
 namespace Defend.UI
 {
@@ -21,7 +20,7 @@ namespace Defend.UI
         //빌드매니저 객체
         private BuildManager buildManager;
         //설치하면 생성되는 이펙트
-        public GameObject TowerImpectPrefab;
+        public GameObject[] TowerImpectPrefab;
         //플레이어 위치
         public BuildMenu buildMenu;
         //플레이어 손 라인
@@ -159,11 +158,11 @@ namespace Defend.UI
             {
                 tower = Instantiate(buildManager.towerBases[buildMenu.indexs].GetTowerInfo().projectile.tower,
                     GetBuildPosition(), Quaternion.identity);
-                GameObject effgo = Instantiate(TowerImpectPrefab, tower.transform.position, Quaternion.identity);
+                GameObject effgo = Instantiate(TowerImpectPrefab[0], tower.transform.position, Quaternion.identity);
                 Destroy(effgo, 2f);
-
+                tower.transform.parent = buildManager.transform;
                 //효과음 재생
-                AudioUtility.CreateSFX(towerBuildSound, tower.transform.position, AudioUtility.AudioGroups.EFFECT, 1);
+                //AudioUtility.CreateSFX(towerBuildSound, tower.transform.position, AudioUtility.AudioGroups.EFFECT, 1);
 
                 tower.AddComponent<BoxCollider>();
                 tower.AddComponent<TowerXR>();
