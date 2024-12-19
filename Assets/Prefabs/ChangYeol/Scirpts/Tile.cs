@@ -173,7 +173,7 @@ namespace Defend.UI
                 box.size = buildMenu.boxes[buildMenu.indexs].size;
                 box.size = box.size + new Vector3(0.5f, 0, 0.5f);
                 box.center = buildMenu.boxes[(buildMenu.indexs)].center;
-                buildMenu.buildpro.SetActive(false);
+
             }
         }
         
