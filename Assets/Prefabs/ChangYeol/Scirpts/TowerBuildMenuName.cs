@@ -51,7 +51,7 @@ namespace Defend.UI
                 buyTower[i - 1].Mp.text = "Mp : " + buildManager.towerBases[i * 3].GetTowerInfo().maxMana.ToString();
                 buyTower[i - 1].Attack.text = "Attack : " + buildManager.towerBases[i * 3].GetTowerInfo().projectile.attack.ToString();
                 buyTower[i - 1].AttackSpeed.text = "Armor : " + buildManager.towerBases[i * 3].GetTowerInfo().armor.ToString();
-                buyTower[i - 1].Buycost.text = " : " + buildManager.towerBases[i * 3].GetTowerInfo().cost1.ToString();
+                buyTower[i - 1].Buycost.text = "100";
             }
         }
         /*public void SelectTower()
