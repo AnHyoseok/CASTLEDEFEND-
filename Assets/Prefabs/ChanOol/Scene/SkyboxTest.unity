@@ -119,6 +119,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &1907842959
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1907842960}
+  m_Layer: 0
+  m_Name: TimeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1907842960
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1907842959}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.6892088, y: 23.45156, z: 49.913574}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1941803188
 GameObject:
   m_ObjectHideFlags: 0
@@ -1237,6 +1268,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blendedSkybox: {fileID: 2100000, guid: 8bf3475b9214d5b4a864d8026edc00bd, type: 2}
   transitionSpeed: 0.5
+  directionalLight: {fileID: 0}
+  lightTransitionSpeed: 1
   listSpawnManagerObject: {fileID: 0}
 --- !u!1 &8088734829366846650
 GameObject:
@@ -1347,3 +1380,4 @@ SceneRoots:
   - {fileID: 1961146159}
   - {fileID: 1253115583757226385}
   - {fileID: 5028169858028328250}
+  - {fileID: 1907842960}
