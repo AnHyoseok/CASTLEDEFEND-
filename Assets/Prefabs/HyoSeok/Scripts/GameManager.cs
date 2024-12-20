@@ -324,7 +324,9 @@ namespace Defend.Manager
         //치트용 버튼
         public void Cheating()
         {
-            playerState.money = 99999f;
+            playerState.money = 999999f;
+            playerState.tree = 999999f;
+            playerState.rock = 999999f;
             towerBuildMenuName.unlockTowerButton[0].interactable = true;
             towerBuildMenuName.unlockTowerButton[1].interactable = true;
             towerBuildMenuName.unlockTowerButton[2].interactable = true;
