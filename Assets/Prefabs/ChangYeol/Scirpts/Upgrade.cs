@@ -17,6 +17,7 @@ namespace Defend.UI
         public TextMeshProUGUI Mp;
         public TextMeshProUGUI Attack;
         public TextMeshProUGUI AttackSpeed;
+        public TextMeshProUGUI AttackRange;
         public TextMeshProUGUI UpgradeMoney;
         #endregion
     }

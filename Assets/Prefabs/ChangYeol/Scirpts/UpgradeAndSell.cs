@@ -45,12 +45,13 @@ namespace Defend.UI
             {
                 basicText.image.sprite = tower.currentTower[tower.currentindex];
                 basicText.name.text = buildManager.buildMenu.boxes[tower.currentindex].name;
-                basicText.Buycost.text = "Sell : " + info.cost2.ToString() + " G";
+                basicText.Buycost.text = "Sell : " + info.GetSellCost().ToString() + " G, tree : " + info.GetSellTreeCost().ToString() + " rock : " + info.GetSellRockCost().ToString();
                 basicText.Sellcost.text = "";
                 basicText.Hp.text = "Hp : " + info.maxHealth.ToString();
                 basicText.Mp.text = "Mp : " + info.maxMana.ToString();
                 basicText.Attack.text = "Attack : " + info.projectile.attack.ToString();
                 basicText.AttackSpeed.text = "AttackSpeed : " + info.projectile.moveSpeed.ToString();
+                basicText.AttackRange.text = "AttackRang : " + info.projectile.attackRange.ToString();
                 basicText.UpgradeMoney.text = "";
                 PropertiesUI.SetActive(true);
                 DescriptionUI.SetActive(false);
@@ -61,22 +62,24 @@ namespace Defend.UI
                 //기본 터렛 판매 가격 표시
                 basicText.image.sprite = tower.currentTower[tower.currentindex];
                 basicText.name.text = buildManager.buildMenu.boxes[tower.currentindex].name;
-                basicText.Buycost.text = "Buy : " + info.cost1 + " G";
-                basicText.Sellcost.text = "Sell : " + info.GetSellCost().ToString() + " G";
+                basicText.Buycost.text = "Buy : " + info.cost1 + "G, tree : " + info.cost3.ToString() + " rock : " + info.cost4.ToString();
+                basicText.Sellcost.text = "Sell : " + info.GetSellCost().ToString() + " G, tree : " + info.GetSellTreeCost().ToString() + " rock : " + info.GetSellRockCost().ToString();
                 basicText.Hp.text = "Hp : " + info.maxHealth.ToString();
                 basicText.Mp.text = "Mp : " + info.maxMana.ToString();
                 basicText.Attack.text = "Attack : " + info.projectile.attack.ToString();
                 basicText.AttackSpeed.text = "AttackSpeed : " + info.projectile.moveSpeed.ToString();
-                basicText.UpgradeMoney.text = "Upgrade : " + info.cost2;
+                basicText.AttackRange.text = "AttackRang : " + info.projectile.attackRange.ToString();
+                basicText.UpgradeMoney.text = "Upgrade : " + info.cost2 + "G, tree : " + info.cost3.ToString() + " rock : " + info.cost4.ToString();
                 //업그레이드 판매 가격 표시
                 upGradeText.image.sprite = tower.currentTower[tower.currentindex + 1];
                 upGradeText.name.text = buildManager.buildMenu.boxes[tower.currentindex + 1].name;
-                upGradeText.Buycost.text = "Buy : " + upinfo.cost2.ToString() + " G";
-                upGradeText.Sellcost.text = "Sell : " + upinfo.GetSellCost().ToString() + " G";
+                upGradeText.Buycost.text = "Upgrade : " + upinfo.cost2.ToString() + " G\n                  tree : " + upinfo.cost3.ToString() + " rock : " + upinfo.cost4.ToString(); ;
+                upGradeText.Sellcost.text = "Sell : " + upinfo.GetSellCost().ToString() + " G, tree : " + upinfo.GetSellTreeCost().ToString() + " rock : " + upinfo.GetSellRockCost().ToString();
                 upGradeText.Hp.text = "Hp : " + upinfo.maxHealth.ToString();
                 upGradeText.Mp.text = "Mp : " + upinfo.maxMana.ToString();
                 upGradeText.Attack.text = "Attack : " + upinfo.projectile.attack.ToString();
                 upGradeText.AttackSpeed.text = "AttackSpeed : " + upinfo.projectile.moveSpeed.ToString();
+                upGradeText.AttackRange.text = "AttackRange : " + upinfo.projectile.attackRange.ToString();
                 PropertiesUI.SetActive(true);
                 DescriptionUI.SetActive(true);
             }
@@ -91,16 +94,18 @@ namespace Defend.UI
                 basicText.Mp.text = "Mp : " + info.maxMana.ToString();
                 basicText.Attack.text = "Attack : " + info.projectile.attack.ToString();
                 basicText.AttackSpeed.text = "AttackSpeed : " + info.projectile.moveSpeed.ToString();
-                basicText.UpgradeMoney.text = "Upgrade : " + info.cost2;
+                basicText.AttackRange.text = "AttackRang : " + info.projectile.attackRange.ToString();
+                basicText.UpgradeMoney.text = "Upgrade : " + info.cost2 + "G, tree : " + info.cost3.ToString() + " rock : " + info.cost4.ToString();
                 //업그레이드 판매 가격 표시
                 upGradeText.image.sprite = tower.currentTower[tower.currentindex + 1];
                 upGradeText.name.text = buildManager.buildMenu.boxes[tower.currentindex + 1].name;
-                upGradeText.Buycost.text = "Buy : " + upinfo.cost2.ToString() + " G";
-                upGradeText.Sellcost.text = "Sell : " + upinfo.GetSellCost().ToString() + " G";
+                upGradeText.Buycost.text = "Upgrade : " + upinfo.cost2.ToString() + " G\n                  tree : " + upinfo.cost3.ToString() + ", rock : " + upinfo.cost4.ToString();
+                upGradeText.Sellcost.text = "Sell : " + upinfo.GetSellCost().ToString() + " G, tree : " + upinfo.GetSellTreeCost().ToString() + ", rock : " + upinfo.GetSellRockCost().ToString();
                 upGradeText.Hp.text = "Hp : " + upinfo.maxHealth.ToString();
                 upGradeText.Mp.text = "Mp : " + upinfo.maxMana.ToString();
                 upGradeText.Attack.text = "Attack : " + upinfo.projectile.attack.ToString();
                 upGradeText.AttackSpeed.text = "AttackSpeed : " + upinfo.projectile.moveSpeed.ToString();
+                upGradeText.AttackRange.text = "AttackRange : " + upinfo.projectile.attackRange.ToString();
                 PropertiesUI.SetActive(true);
                 DescriptionUI.SetActive(true);
             }

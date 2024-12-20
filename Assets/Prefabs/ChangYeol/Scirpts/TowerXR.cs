@@ -113,7 +113,6 @@ namespace Defend.UI
                         Destroy(this.gameObject);
                         tower_upgrade = null;
                         buildManager.DeselectTile();
-                        //buildManager.buildMenu.istrigger = false;
                     }
                     else if (currentlevel == 2 && Isupgradeone)
                     {
@@ -135,7 +134,6 @@ namespace Defend.UI
                         Destroy(this.gameObject);
                         tower_upgrade = null;
                         buildManager.DeselectTile();
-                        //buildManager.buildMenu.istrigger = false;
                     }
                 }
             }

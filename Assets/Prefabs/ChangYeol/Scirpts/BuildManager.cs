@@ -46,7 +46,6 @@ namespace Defend.UI
         private TowerXR tower;
         //타워 안에 있는 속성값
         public TowerBase[] towerBases;
-        public ListSpawnManager spawnManager;
         [HideInInspector] public EnemyPropertiesUI enemy;
         #endregion
         private void Start()
@@ -83,7 +82,7 @@ namespace Defend.UI
         }
         IEnumerator ButtonIsAction()
         {
-            yield return new WaitForSeconds(4);
+            yield return new WaitForSeconds(10);
             DeselectTile();
         }
     }

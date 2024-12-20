@@ -13,22 +13,24 @@ namespace Defend.UI
         public GameObject Enemyinfo;
 
         public float waitSecond = 5;
-        private BuildManager buildManager;
+        public ListSpawnManager spawnManager;
+
+        Upgrade enemyinfo;
+
+        ListWaveData ListWaveData;
         #endregion
         private void Start()
         {
-            buildManager = BuildManager.Instance;
             //ShowProUI();
+            enemyinfo = Enemyinfo.GetComponent<EnemyInfo>().EnemyText;
         }
         public void ShowProUI()
         {
             StartCoroutine(HideProUI());
-            ListWaveData waveData = buildManager.spawnManager.waves[buildManager.spawnManager.waveCount];
-
-            foreach (var enemy in waveData.enemies)
+            ListWaveData = spawnManager.waves[spawnManager.waveCount];
+            foreach (var enemy in ListWaveData.enemies)
             {
                 GameObject info = Instantiate(Enemyinfo,EnemyProUI.transform);
-                Upgrade enemyinfo = Enemyinfo.GetComponent<EnemyInfo>().EnemyText;
                 enemyinfo.name.text = enemy.enemyPrefab.name;
                 enemyinfo.image.sprite = enemy.enemyPrefab.GetComponent<EnemyController>().sprite;
                 enemyinfo.Hp.text = "HP : " + enemy.enemyPrefab.GetComponent<Health>().maxHealth.ToString();
@@ -37,6 +39,7 @@ namespace Defend.UI
                 enemyinfo.AttackSpeed.text = "AttackSpeed : " + enemy.enemyPrefab.GetComponent<EnemyAttackController>().baseAttackDelay.ToString();
                 enemyinfo.Buycost.text = " : " + enemy.enemyPrefab.GetComponent<EnemyController>().rewardGoldCount.ToString();
                 enemyinfo.UpgradeMoney.text = "X" + enemy.count.ToString();
+                Destroy(info,waitSecond);
             }
         }
         IEnumerator HideProUI()
