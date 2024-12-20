@@ -36,17 +36,18 @@ Shader "Skybox/Blended"
                 v2f o;
                 o.pos = UnityObjectToClipPos(v.vertex);
 
-                // VR에서 각 눈의 뷰 디렉션을 계산
+                // 월드 공간 방향 계산
                 float3 worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;
-                o.texcoord = mul(UNITY_MATRIX_V, float4(worldPos, 1.0)).xyz;
+                o.texcoord = worldPos;
 
                 return o;
             }
 
             half4 frag(v2f i) : SV_Target
             {
-                half4 col1 = texCUBE(_Sky1, i.texcoord);
-                half4 col2 = texCUBE(_Sky2, i.texcoord);
+                // 월드 공간 좌표로 텍스처 샘플링
+                half4 col1 = texCUBE(_Sky1, normalize(i.texcoord));
+                half4 col2 = texCUBE(_Sky2, normalize(i.texcoord));
                 return lerp(col1, col2, _Blend);
             }
             ENDCG
