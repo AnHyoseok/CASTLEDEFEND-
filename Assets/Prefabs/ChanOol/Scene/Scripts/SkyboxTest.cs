@@ -54,21 +54,17 @@ public class SkyboxTest : MonoBehaviour
         stageWave = listSpawnManager.waveCount;
 
         // 만약 현재 wave가 2와 같거나 높으면, 스카이박스 전환이 아직 일어나지 않았다면
-        //if (stageWave >= 2 && hasTransitioned == false)
-        if (Input.GetKeyDown(KeyCode.U) && hasTransitioned == false)
+        if (stageWave >= 2 && hasTransitioned == false)
+        //if (Input.GetKeyDown(KeyCode.U) && hasTransitioned == false)
         {
-            Debug.Log("test U");
             StartCoroutine(TransitionToNight());
             hasTransitioned = true; // 스카이박스 전환 완료 체크
         }
         //RenderSettings.skybox.SetFloat("_Blend", blendValue);
 
+        // 셰이더 코드에서 _Blend 값을 포함한 모든 전역 프로퍼티를 동기화
         MaterialPropertyBlock propertyBlock = new MaterialPropertyBlock();
         propertyBlock.SetFloat("_Blend", blendValue);
-
-        //// 각 카메라에 대해 머티리얼 프로퍼티 동기화
-        //Graphics.SetRenderTarget(null);
-        //Graphics.DrawProceduralNow(MeshTopology.Triangles, 3, 1);
     }
 
     IEnumerator TransitionToNight()
