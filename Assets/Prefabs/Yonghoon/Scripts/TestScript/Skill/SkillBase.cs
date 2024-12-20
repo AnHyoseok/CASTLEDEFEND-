@@ -32,7 +32,7 @@ namespace Defend.Enemy.Skill
         #endregion
         public void SoundPlay(float rolloffDistanceMin = 1, float maxDistance = 15)
         {
-            AudioUtility.CreateSFX(skillAudioClip, transform.position, AudioUtility.AudioGroups.EFFECT, 1, rolloffDistanceMin, maxDistance);
+            AudioUtility.CreateSFX(skillAudioClip, transform.position, AudioUtility.AudioGroups.SKill, 1, rolloffDistanceMin, maxDistance);
         }
     }
 }

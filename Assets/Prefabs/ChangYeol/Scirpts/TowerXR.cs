@@ -1,5 +1,6 @@
 using Defend.Player;
 using Defend.Tower;
+using Defend.Utillity;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
@@ -92,8 +93,9 @@ namespace Defend.UI
             if (towerInfo != null)
             {
                 if (towerInfo.upgradeTower &&
-                    buildManager.playerState.SpendMoney(towerInfo.cost2) && buildManager.playerState.SpendResources())
+                    buildManager.playerState.SpendMoney(towerInfo.cost2) && buildManager.playerState.SpendResources(towerInfo.cost3,towerInfo.cost4))
                 {
+                    AudioUtility.CreateSFX(buildManager.towerBuildSound, transform.position, AudioUtility.AudioGroups.EFFECT);
                     if (currentlevel == 1 && !Isupgradeone)
                     {
                         //Effect

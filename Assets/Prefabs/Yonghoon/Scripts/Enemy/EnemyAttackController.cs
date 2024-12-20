@@ -84,6 +84,7 @@ namespace Defend.Enemy
         {
             if (damageableTarget.CurrentHealth > 0f)
             {
+                transform.LookAt(attackTarget);
                 // 공격 애니메이션 실행
                 animator.SetTrigger(Constants.ENEMY_ANIM_ATTACKTRIGGER);
             }

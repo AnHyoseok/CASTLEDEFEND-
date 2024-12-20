@@ -37,8 +37,6 @@ namespace Defend.UI
         private Vector3 hitPoint;
         // 터레인
         public GameObject terrain;
-
-        public AudioClip towerBuildSound;
         #endregion
 
         private void Start()
@@ -162,7 +160,7 @@ namespace Defend.UI
                 Destroy(effgo, 2f);
                 tower.transform.parent = buildManager.transform;
                 //효과음 재생
-                //AudioUtility.CreateSFX(towerBuildSound, tower.transform.position, AudioUtility.AudioGroups.EFFECT, 1);
+                AudioUtility.CreateSFX(buildManager.towerBuildSound, tower.transform.position, AudioUtility.AudioGroups.EFFECT, 1);
 
                 tower.AddComponent<BoxCollider>();
                 tower.AddComponent<TowerXR>();

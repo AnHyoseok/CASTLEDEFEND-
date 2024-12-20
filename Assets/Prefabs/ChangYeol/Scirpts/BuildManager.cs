@@ -47,6 +47,8 @@ namespace Defend.UI
         //타워 안에 있는 속성값
         public TowerBase[] towerBases;
         [HideInInspector] public EnemyPropertiesUI enemy;
+
+        public AudioClip towerBuildSound;
         #endregion
         private void Start()
         {

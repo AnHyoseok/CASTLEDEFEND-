@@ -52,10 +52,11 @@ namespace Defend.TestScript
         public ParticleSystem debuffParticleSystem;
         public ParticleSystem healParticleSystem;
 
-        //버프와 디버프 SFX
+        //SFX
         public AudioClip buffAudioClip;
         public AudioClip debuffAudioClip;
         public AudioClip healAudioClip;
+        public AudioClip dieAudioClip;
 
         private Health health;//체력담당 컴포넌트
         private EnemyMoveController moveController;//이동담당 컴포넌트
@@ -192,12 +193,14 @@ namespace Defend.TestScript
             healParticleSystem.Play();
             if (healAudioClip != null)
             {
-                AudioUtility.CreateSFX(healAudioClip, transform.position, AudioUtility.AudioGroups.EFFECT, 1);
+                AudioUtility.CreateSFX(healAudioClip, transform.position, AudioUtility.AudioGroups.BuffAndDebuff, 1);
             }
         }
 
         private void OnDie()
         {
+            AudioUtility.CreateSFX(dieAudioClip, transform.position, AudioUtility.AudioGroups.EFFECT);
+
             //살아있는 에너미 수 감소
             ListSpawnManager.enemyAlive--;
 
@@ -288,12 +291,12 @@ namespace Defend.TestScript
         {
             if (amount > 0)
             {
-                AudioUtility.CreateSFX(buffAudioClip, transform.position, AudioUtility.AudioGroups.EFFECT, 1);
+                AudioUtility.CreateSFX(buffAudioClip, transform.position, AudioUtility.AudioGroups.BuffAndDebuff, 1);
                 buffParticleSystem.Play();
             }
             else if (amount < 0)
             {
-                AudioUtility.CreateSFX(debuffAudioClip, transform.position, AudioUtility.AudioGroups.EFFECT, 1);
+                AudioUtility.CreateSFX(debuffAudioClip, transform.position, AudioUtility.AudioGroups.BuffAndDebuff, 1);
                 debuffParticleSystem.Play();
             }
         }

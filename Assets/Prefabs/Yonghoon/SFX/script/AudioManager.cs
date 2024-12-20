@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
 using Defend.Utillity;
+using Defend.Enemy;
 
 namespace Defend.Audio
 {
@@ -15,12 +16,43 @@ namespace Defend.Audio
         [SerializeField] private Slider m_AudioBGMSlider;
         [SerializeField] private Slider m_AudioSFXSlider;
 
+        public AudioClip peacefulBGM;
+        public AudioClip direBGM;
+        private AudioClip currentBGM; // 현재 재생 중인 BGM
+
+        private AudioSource audioSource;
+
         private void Awake()
         {
-            m_AudioMasterSlider.onValueChanged.AddListener(AudioUtility.SetMasterVolume);
-            m_AudioBGMSlider.onValueChanged.AddListener(AudioUtility.SetBGMVolume);
-            m_AudioSFXSlider.onValueChanged.AddListener(AudioUtility.SetSFXVolume);
+            m_AudioMasterSlider.onValueChanged.AddListener(value => AudioUtility.SetVolume(value, "MASTER"));
+            m_AudioBGMSlider.onValueChanged.AddListener(value => AudioUtility.SetVolume(value, "BGM"));
+            m_AudioSFXSlider.onValueChanged.AddListener(value => AudioUtility.SetVolume(value, "EFFECT"));
+
+            audioSource = GetComponent<AudioSource>();
+            currentBGM = audioSource.clip;
         }
+
+        private void Update()
+        {
+            // 현재 BGM 상태를 결정
+            AudioClip targetBGM = ListSpawnManager.enemyAlive > 0 ? direBGM : peacefulBGM;
+
+            // BGM이 변경되었을 때만 교체
+            if (currentBGM != targetBGM)
+            {
+                ChangeBGM(targetBGM);
+            }
+        }
+
+        private void ChangeBGM(AudioClip clip)
+        {
+            currentBGM = clip; // 현재 BGM 업데이트
+            audioSource.clip = clip;
+            audioSource.playOnAwake = true;
+            audioSource.loop = true;
+            audioSource.Play();
+        }
+
 
         /// <summary>
         /// 지정된 경로(subPath)에 해당하는 AudioMixerGroup들을 찾습니다.

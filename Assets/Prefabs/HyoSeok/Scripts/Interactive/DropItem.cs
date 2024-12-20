@@ -15,7 +15,6 @@ namespace Defend.item
         public float amount; // 자원 양
 
         //아이템 흭득 사운드
-        public AudioClip GetItemSound;
         private AudioSource audioSource;
 
         //자원 중복흭득방지
@@ -26,11 +25,11 @@ namespace Defend.item
         {
             Collider collider = GetComponent<Collider>();
             playerState = Object.FindAnyObjectByType<PlayerState>(); // PlayerState를 찾기
-            audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource = GetComponent<AudioSource>();
             targetObject = GameObject.Find("PlayerBody");
 
         }
-       
+
 
         private void Update()
         {
@@ -47,15 +46,12 @@ namespace Defend.item
                 if (distanceToPlayer < ResourceManager.distance)
                 {
                     Vector3 direction = (targetObject.transform.position - transform.position).normalized;
-            
+
                     transform.position += direction * ResourceManager.speed * Time.deltaTime;
 
-                    if (distanceToPlayer < 0.5f && !isCollected) 
+                    if (distanceToPlayer < 0.5f && !isCollected)
                     {
                         GetResource();
-                        audioSource.clip = GetItemSound;
-                        audioSource.Play();
-                        Destroy(gameObject, 0.1f);
                     }
                 }
             }
@@ -65,6 +61,10 @@ namespace Defend.item
         {
             // 플레이어에게 전달
             ResourceManager.Instance.AddResources(amount, resourceName);
+
+            audioSource.Play();
+            Destroy(gameObject, 0.1f);
+
             isCollected = true;
         }
 
@@ -76,15 +76,7 @@ namespace Defend.item
             if (other.CompareTag("Player") && !isCollected)
             {
                 GetResource();
-                audioSource.clip = GetItemSound;
-                audioSource.Play();
-                Destroy(gameObject, 0.1f);
-
             }
-
         }
-
     }
-
-
 }
