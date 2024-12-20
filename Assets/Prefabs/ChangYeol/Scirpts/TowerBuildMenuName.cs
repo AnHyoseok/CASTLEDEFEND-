@@ -26,6 +26,7 @@ namespace Defend.UI
         }
         private void Update()
         {
+            StartBuild();
             UnLockUpdate();
         }
         void StartBuild()
@@ -33,23 +34,33 @@ namespace Defend.UI
             for (int i = 0; i < towerinfo.Length; i++)
             {
                 towerBuildButtons[i].interactable = build.towerinfo[i * 3].isLock;
+
+                float Attack = buildManager.towerBases[i * 3].GetTowerInfo().projectile.attack;
+                Attack += castleUpgrade.atkLevel;
+                float Range = buildManager.towerBases[i * 3].GetTowerInfo().attackRange;
+                Range += castleUpgrade.atkRangeLevel;
+
                 //타워 빌드창
                 towerinfo[i].image.sprite = build.towerSprite[i * 3];
                 towerinfo[i].Hp.text = "Hp : " + buildManager.towerBases[i * 3].GetTowerInfo().maxHealth.ToString();
                 towerinfo[i].Mp.text = "Mp : " + buildManager.towerBases[i * 3].GetTowerInfo().maxMana.ToString();
-                towerinfo[i].Attack.text = "Attack : " + buildManager.towerBases[i * 3].GetTowerInfo().projectile.attack.ToString();
-                towerinfo[i].AttackSpeed.text = "Armor : " + buildManager.towerBases[i * 3].GetTowerInfo().armor.ToString();
+                towerinfo[i].Attack.text = "Attack : " + Attack.ToString();
+                towerinfo[i].AttackSpeed.text = "Range : " + Range.ToString();
                 towerinfo[i].Buycost.text = " : " + buildManager.towerBases[i * 3].GetTowerInfo().cost1.ToString();
             }
             for (int i = 1; i < towerinfo.Length; i++)
             {
+                float Attack = buildManager.towerBases[i * 3].GetTowerInfo().projectile.attack;
+                Attack += castleUpgrade.atkLevel;
+                float Range = buildManager.towerBases[i * 3].GetTowerInfo().attackRange;
+                Range += castleUpgrade.atkRangeLevel;
                 //타워 구매창
                 buyTower[i - 1].image.sprite = build.towerSprite[i * 3];
                 buyTower[i - 1].Hp.text = "Hp : " + buildManager.towerBases[i * 3].GetTowerInfo().maxHealth.ToString();
                 buyTower[i - 1].Mp.text = "Mp : " + buildManager.towerBases[i * 3].GetTowerInfo().maxMana.ToString();
-                buyTower[i - 1].Attack.text = "Attack : " + buildManager.towerBases[i * 3].GetTowerInfo().projectile.attack.ToString();
-                buyTower[i - 1].AttackSpeed.text = "Armor : " + buildManager.towerBases[i * 3].GetTowerInfo().armor.ToString();
-                buyTower[i - 1].Buycost.text = "100";
+                buyTower[i - 1].Attack.text = "Attack : " + Attack.ToString();
+                buyTower[i - 1].AttackSpeed.text = "Range : " + Range.ToString();
+                buyTower[i - 1].Buycost.text = " : 100";
             }
         }
         /*public void SelectTower()

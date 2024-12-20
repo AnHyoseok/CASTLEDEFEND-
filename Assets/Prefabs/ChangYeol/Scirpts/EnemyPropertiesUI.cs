@@ -23,12 +23,13 @@ namespace Defend.UI
             ListWaveData = spawnManager.waves[spawnManager.waveCount];
             foreach (var enemy in ListWaveData.enemies)
             {
-                enemy.enemyPrefab.GetComponent<Health>().maxHealth *= (spawnManager.waveCount + 1);
+                float maxhealth = enemy.enemyPrefab.GetComponent<Health>().maxHealth;
+                maxhealth *= (spawnManager.waveCount + 1);
                 GameObject info = Instantiate(Enemyinfo,EnemyProUI.transform);
                 Upgrade enemyinfo = info.GetComponent<EnemyInfo>().EnemyText;
                 enemyinfo.name.text = enemy.enemyPrefab.name;
                 enemyinfo.image.sprite = enemy.enemyPrefab.GetComponent<EnemyController>().sprite;
-                enemyinfo.Hp.text = "HP : " + enemy.enemyPrefab.GetComponent<Health>().maxHealth.ToString();
+                enemyinfo.Hp.text = "HP : " + maxhealth.ToString();
                 enemyinfo.Mp.text = "Armor : " + enemy.enemyPrefab.GetComponent<Health>().baseArmor.ToString();
                 enemyinfo.Attack.text = "Attack : " + enemy.enemyPrefab.GetComponent<EnemyAttackController>().baseAttackDamage.ToString();
                 enemyinfo.AttackSpeed.text = "AttackSpeed : " + enemy.enemyPrefab.GetComponent<EnemyAttackController>().baseAttackDelay.ToString();

@@ -43,7 +43,7 @@ namespace Defend.UI
                 upgradetowerInfo = towerBase.GetTowerInfo().upgradeTower.GetComponent<TowerBase>().GetTowerInfo();
                 upgradetowerInfo.projectile.attack += castle.atkLevel;
                 upgradetowerInfo.projectile.moveSpeed += castle.atkSpeedLevel;
-                upgradetowerInfo.projectile.attack += castle.atkRangeLevel;
+                upgradetowerInfo.projectile.attackRange += castle.atkRangeLevel;
             }
         }
         protected override void OnHoverEntering(HoverEnterEventArgs args)
