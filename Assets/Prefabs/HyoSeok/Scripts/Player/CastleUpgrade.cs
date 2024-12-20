@@ -78,7 +78,7 @@ namespace Defend.Player
         private float[] IncreaseMoneyGainUpgrade = { 1.1f, 1.2f, 1.5f };
         private float[] IncreaseTreeGainUpgrade = { 1.1f, 1.2f, 1.5f };
         private float[] increaseRockGainUpgrade = { 1.1f, 1.2f, 1.5f };
-        private float[] increaseArmorUpgrade = { 5f, 10f, 20f };
+        private float[] increaseArmorUpgrade = { 1f, 2f, 3f };
         //private float increaseTowerATKUpgrade = 1f;
         //private float increaseTowerATKSpeedUpgrade = 1f;
         //private float increaseTowerATKRangeUpgrade = 1f;
