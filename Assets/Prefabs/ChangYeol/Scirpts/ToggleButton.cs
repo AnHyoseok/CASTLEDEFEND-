@@ -26,6 +26,8 @@ namespace Defend.UI
                     Preferences.SetActive(!Preferences.activeSelf);
                 }
             }
+            isOnto = !isOnto;
+            isOnPlay = !isOnPlay;
         }
         public void OnOffToggle()
         {

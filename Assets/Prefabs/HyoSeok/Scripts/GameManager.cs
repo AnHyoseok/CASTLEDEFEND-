@@ -27,6 +27,7 @@ namespace Defend.Manager
         TowerBuildMenuName towerBuildMenuName;
         GameResources resources;
         HealthBasedCastle healthBasedCastle;
+        ToggleButton toggleButton;
         private GameObject[] enemies;
         EnemyState[] enemyState;
         private BuildManager buildManager;
@@ -60,6 +61,7 @@ namespace Defend.Manager
             build = FindAnyObjectByType<BuildMenu>();
             towerBuildMenuName = FindAnyObjectByType<TowerBuildMenuName>();
             healthBasedCastle = FindAnyObjectByType<HealthBasedCastle>();
+            toggleButton = FindAnyObjectByType<ToggleButton>();
             buildManager = BuildManager.instance;
 
             //LoadGameData();
@@ -165,9 +167,9 @@ namespace Defend.Manager
             //data.soundSettings["SFX"] = 0f;
 
             //터널링
-            //data.isTuneeling = 
+            data.isTuneeling = toggleButton.isOnto;
             //플레이어ui
-            //data.isPlayerUI=
+            data.isPlayerUI = toggleButton.isOnPlay;
 
             // 데이터 저장=
             DataManager.Instance.SaveGameData(data);
@@ -265,9 +267,9 @@ namespace Defend.Manager
             //0f = data.soundSettings["SFX"];
 
             //터널링
-            //data.isTuneeling = 
+            toggleButton.isOnto = data.isTuneeling;
             //플레이어ui
-            //data.isPlayerUI=
+            toggleButton.isOnPlay = data.isPlayerUI;
         }
 
         //다시하기 
