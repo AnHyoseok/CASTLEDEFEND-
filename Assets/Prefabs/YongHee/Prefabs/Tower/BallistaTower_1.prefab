@@ -301,8 +301,8 @@ MonoBehaviour:
     manaRegen: 1
     cost1: 100
     cost2: 100
-    cost3: 50
-    cost4: 50
+    cost3: 0
+    cost4: 0
     upgradeTower: {fileID: 5253876965354232760, guid: 543e1035fdbfcfe49a8a9c2ed957fba7, type: 3}
     projectile:
       tower: {fileID: 4360369038294738218}

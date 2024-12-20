@@ -10,6 +10,7 @@ using Defend.Tower;
 using Defend.Interactive;
 using Defend.item;
 using UnityEngine.SceneManagement;
+using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
 
 
 namespace Defend.Manager
@@ -46,13 +47,15 @@ namespace Defend.Manager
         //public Button saveButton; // 세이브 버튼
         public Data data = new Data(); // 게임 데이터
 
-
+        //이동속도 변경
+        public DynamicMoveProvider dynamicMove;
         private bool isGameOver = false;
         private bool isGameClear = false;
         #endregion
 
         private void Start()
         {
+
             //참조
             health = castle.GetComponent<Health>();
             playerState = FindAnyObjectByType<PlayerState>();
@@ -341,9 +344,8 @@ namespace Defend.Manager
             build.towerinfo[15].isLock = true;
             build.towerinfo[18].isLock = true;
             build.towerinfo[21].isLock = true;
-            castleUpgrade.isPotalActive = true;
-            castleUpgrade.isMoveSpeedUp = true;
-            castleUpgrade.isAutoGain = true;
+
+            dynamicMove.moveSpeed = 10f;
             //player.transform.position = new Vector3(0f, 4f, -6.0f);
         }
 
