@@ -85,11 +85,7 @@ namespace Defend.UI
         }
         public void UpgradeTower()
         {
-            if (towerInfo == null)
-            {
-                Debug.Log("업그레이드 실패했습니다");
-                return;
-            }
+            if (towerInfo == null) return;
             if (towerInfo != null)
             {
                 if (towerInfo.upgradeTower &&

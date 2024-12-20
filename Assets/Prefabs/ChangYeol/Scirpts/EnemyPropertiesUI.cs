@@ -23,6 +23,7 @@ namespace Defend.UI
             ListWaveData = spawnManager.waves[spawnManager.waveCount];
             foreach (var enemy in ListWaveData.enemies)
             {
+                enemy.enemyPrefab.GetComponent<Health>().maxHealth *= (spawnManager.waveCount + 1);
                 GameObject info = Instantiate(Enemyinfo,EnemyProUI.transform);
                 Upgrade enemyinfo = info.GetComponent<EnemyInfo>().EnemyText;
                 enemyinfo.name.text = enemy.enemyPrefab.name;
