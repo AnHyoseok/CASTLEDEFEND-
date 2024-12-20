@@ -35,7 +35,11 @@ Shader "Skybox/Blended"
             {
                 v2f o;
                 o.pos = UnityObjectToClipPos(v.vertex);
-                o.texcoord = v.vertex.xyz;
+
+                // VR에서 각 눈의 뷰 디렉션을 계산
+                float3 worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;
+                o.texcoord = mul(UNITY_MATRIX_V, float4(worldPos, 1.0)).xyz;
+
                 return o;
             }
 
