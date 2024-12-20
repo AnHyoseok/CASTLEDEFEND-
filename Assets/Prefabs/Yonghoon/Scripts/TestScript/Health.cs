@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Events;
 using System.Collections;
 using Defend.Enemy;
@@ -15,6 +16,7 @@ namespace Defend.TestScript
         public float maxHealth = 100f;    //최대 Hp
         public float CurrentHealth { get; set; }    //현재 Hp
 
+        public Image CastleHealthBar;
         //아머 관련
         public float baseArmor = 5f;
         public float CurrentArmor { get; set; }
@@ -45,6 +47,13 @@ namespace Defend.TestScript
             HPTime(RgAmount, Rginterval);//1초마다 1의 체력을 회복
         }
 
+        public void chakeC()
+        {
+            if(transform.name == "Castle")
+            {
+                CastleHealthBar.fillAmount = CurrentHealth/maxHealth;
+            }
+        }
 
         //맥스 체력 올리기
         public void IncreaseMaxHealth(float amount)
@@ -139,6 +148,7 @@ namespace Defend.TestScript
         }
 
         //damageSource: 데미지를 주는 주체
+       
         public void TakeDamage(float damage)
         {
             //죽었으면 실행하지 않음
@@ -163,7 +173,6 @@ namespace Defend.TestScript
                 HandleDeath();
             }
         }
-
         //아머값 변경시 호출될 메서드
         public void ChangedArmor(float amount)
         {

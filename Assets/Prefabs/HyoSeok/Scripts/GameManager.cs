@@ -26,6 +26,7 @@ namespace Defend.Manager
         Health health;
         TowerBuildMenuName towerBuildMenuName;
         GameResources resources;
+        HealthBasedCastle healthBasedCastle;
         private GameObject[] enemies;
         EnemyState[] enemyState;
         private BuildManager buildManager;
@@ -36,15 +37,17 @@ namespace Defend.Manager
         public GameObject gameoverUI;
 
         //sfs
-        private AudioSource audioSource;
-        public AudioClip clearSound;
-        public AudioClip gameoverSound;
+        //private AudioSource audioSource;
+        //public AudioClip clearSound;
+        //public AudioClip gameoverSound;
 
-        
+
         //public Button saveButton; // 세이브 버튼
         public Data data = new Data(); // 게임 데이터
 
 
+        private bool isGameOver = false;
+        private bool isGameClear = false;
         #endregion
 
         private void Start()
@@ -56,16 +59,16 @@ namespace Defend.Manager
             listSpawnManager = FindAnyObjectByType<ListSpawnManager>();
             build = FindAnyObjectByType<BuildMenu>();
             towerBuildMenuName = FindAnyObjectByType<TowerBuildMenuName>();
-           
+            healthBasedCastle = FindAnyObjectByType<HealthBasedCastle>();
             buildManager = BuildManager.instance;
 
             //LoadGameData();
 
 
-            if (!audioSource)
-                return;
-            audioSource = player.AddComponent<AudioSource>();
-            audioSource.playOnAwake = false; // 자동 재생 방지
+            //if (!audioSource)
+            //    return;
+            //audioSource = player.AddComponent<AudioSource>();
+            //audioSource.playOnAwake = false; // 자동 재생 방지
 
         }
 
@@ -80,6 +83,11 @@ namespace Defend.Manager
                 Time.timeScale = 1f;
             }
 
+            if (isGameOver)
+                return;
+
+            GameOverGo();
+            GameClear();
         }
 
         //게임 종료시 자동저장
@@ -98,12 +106,9 @@ namespace Defend.Manager
         //세이브 버튼용
         public void SaveGameData()
         {
-           
-
-
 
             //스테이지 카운트
-            data.Round = listSpawnManager.waveCount-1;
+            data.Round = listSpawnManager.waveCount - 1;
             data.countdown = listSpawnManager.countdown;
 
             //플레이어 자원 여부
@@ -154,7 +159,15 @@ namespace Defend.Manager
             //data.isTowerUnlocked11 = towerBuildMenuName.unlockTowerButton[10];
             //data.isTowerUnlocked12 = towerBuildMenuName.unlockTowerButton[12];
 
+            ////사운드
+            //data.soundSettings["Master"] = 0f;
+            //data.soundSettings["BGM"] = 0f;
+            //data.soundSettings["SFX"] = 0f;
 
+            //터널링
+            //data.isTuneeling = 
+            //플레이어ui
+            //data.isPlayerUI=
 
             // 데이터 저장=
             DataManager.Instance.SaveGameData(data);
@@ -184,7 +197,7 @@ namespace Defend.Manager
             //필드에 있는 자원들
             DropItem[] item = FindObjectsByType<DropItem>(FindObjectsSortMode.None);
             foreach (DropItem e in item)
-            { 
+            {
                 Destroy(e.gameObject);
             }
             //진행 라운드 수
@@ -237,7 +250,7 @@ namespace Defend.Manager
             //towerBuildMenuName.unlockTowerButton[9].interactable = data.isTowerUnlocked10;
             //towerBuildMenuName.unlockTowerButton[10].interactable = data.isTowerUnlocked11;
             //towerBuildMenuName.unlockTowerButton[12].interactable = data.isTowerUnlocked12;
-            
+
             //타워들
             towerbase = FindObjectsByType<TowerBase>(FindObjectsSortMode.None);
             foreach (var tower in towerbase)
@@ -246,6 +259,15 @@ namespace Defend.Manager
                 buildManager.playerState.AddMoney(tower.GetTowerInfo().GetSellCost());
 
             }
+            ////사운드
+            //0f = data.soundSettings["Master"];
+            //0f = data.soundSettings["BGM"];
+            //0f = data.soundSettings["SFX"];
+
+            //터널링
+            //data.isTuneeling = 
+            //플레이어ui
+            //data.isPlayerUI=
         }
 
         //다시하기 
@@ -265,50 +287,66 @@ namespace Defend.Manager
         }
 
         //게임클리어
-        IEnumerator GameClear()
+        void GameClear()
         {
 
-            if (ListSpawnManager.enemyAlive <= 0 && listSpawnManager.waveCount >= 5)
+            if (ListSpawnManager.enemyAlive <= 0 && listSpawnManager.waveCount >= 4 && !isGameClear)
             {
+                isGameClear = true;
+                Debug.Log("GameClaer");
                 //게임클리어 창 뜨기
                 clearUI.SetActive(true);
 
-                //클리어 사운드
-                audioSource.clip = clearSound;
-                audioSource.Play();
+                ////클리어 사운드
+                //audioSource.clip = clearSound;
+                //audioSource.Play();
 
-
-                yield return new WaitForSeconds(3f);
-
-                audioSource.Stop();
             }
         }
         void GameOverGo()
         {
-            StartCoroutine(GameOver());
-        }
-        
-        //게임오버
-        IEnumerator GameOver()
-        {
-
-            if (health.CurrentHealth <= 0)
+            if (healthBasedCastle.castleHealth <= 0 && !isGameOver)
             {
+                isGameOver = true;
+                Debug.Log("GameOver");
                 //게임오버 창 띄우기
                 gameoverUI.SetActive(true);
                 //게임오버 사운드
-                audioSource.clip = gameoverSound;
-                audioSource.Play();
-                yield return new WaitForSeconds(3f);
-                audioSource?.Stop();
+                //audioSource.clip = gameoverSound;
+                //audioSource.Play(3);
             }
         }
 
 
+
         //치트용 버튼
-        public void GiveMoney()
+        public void Cheating()
         {
             playerState.money = 99999f;
+            towerBuildMenuName.unlockTowerButton[0].interactable = true;
+            towerBuildMenuName.unlockTowerButton[1].interactable = true;
+            towerBuildMenuName.unlockTowerButton[2].interactable = true;
+            towerBuildMenuName.unlockTowerButton[3].interactable = true;
+            towerBuildMenuName.unlockTowerButton[4].interactable = true;
+            towerBuildMenuName.unlockTowerButton[5].interactable = true;
+            towerBuildMenuName.unlockTowerButton[6].interactable = true;
+            build.towerinfo[3].isLock = true;
+            build.towerinfo[6].isLock = true;
+            build.towerinfo[9].isLock = true;
+            build.towerinfo[12].isLock = true;
+            build.towerinfo[15].isLock = true;
+            build.towerinfo[18].isLock = true;
+            build.towerinfo[21].isLock = true;
+            castleUpgrade.isPotalActive = true;
+            castleUpgrade.isMoveSpeedUp = true;
+            castleUpgrade.isAutoGain = true;
+            //player.transform.position = new Vector3(0f, 4f, -6.0f);
+        }
+
+        //플레이어 위치 셋 
+        public void PlayerTransformSenter()
+        {
+            player.transform.position = new Vector3(0f, 4f, -6.0f);
         }
     }
 }

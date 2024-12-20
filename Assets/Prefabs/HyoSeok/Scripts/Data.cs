@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 namespace Defend.Manager
 {
     /// <summary>
@@ -60,5 +61,17 @@ namespace Defend.Manager
         public float tree;
         public float rock;
         //타워설치 - 못하면 저장하는시점에 다 팔아버리고(설치가격으로) 자원 추가
+
+        // 사운드
+        public Dictionary<string, float> soundSettings = new Dictionary<string, float>
+        {
+            { "Master", 1.0f },
+            { "BGM", 1.0f },
+            { "SFX", 1.0f }
+        };
+        //터널링여부
+        public bool isTuneeling;
+        //플레이어 ui여부
+        public bool isPlayerUI;
     }
 }

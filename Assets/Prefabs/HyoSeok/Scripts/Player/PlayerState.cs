@@ -106,7 +106,7 @@ namespace Defend.Player
             else
             {
                 //구매 불가 ui띄우기
-                Debug.Log("Not Enough Money");
+                buildManager.warningWindow.ShowWarning("Not Enough Money");
                 return false;
             }
         }

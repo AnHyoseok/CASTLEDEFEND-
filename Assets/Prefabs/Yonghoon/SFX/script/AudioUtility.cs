@@ -147,5 +147,6 @@ namespace Defend.Utillity
             s_AudioManager.GetFloat("EFFECT", out var valueInDb);
             return Mathf.Pow(10f, valueInDb / 20.0f);
         }
+
     }
 }

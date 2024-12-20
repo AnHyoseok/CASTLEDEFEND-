@@ -28,6 +28,7 @@ namespace Defend.UI
 
         void Update()
         {
+           
             SetFillHealth();
             SetHealthText();
            
