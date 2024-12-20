@@ -19,9 +19,6 @@ namespace Defend.UI
         public Upgrade basicText;
         //업그레이드 타워 가격 텍스트, 버튼, 판매가격 텍스트
         public Upgrade upGradeText;
-
-        //업그레이드 버튼
-        public Button upgradebutton;
         #endregion
 
         void Start()

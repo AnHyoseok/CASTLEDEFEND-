@@ -15,15 +15,8 @@ namespace Defend.UI
         public float waitSecond = 5;
         public ListSpawnManager spawnManager;
 
-        Upgrade enemyinfo;
-
         ListWaveData ListWaveData;
         #endregion
-        private void Start()
-        {
-            //ShowProUI();
-            enemyinfo = Enemyinfo.GetComponent<EnemyInfo>().EnemyText;
-        }
         public void ShowProUI()
         {
             StartCoroutine(HideProUI());
@@ -31,6 +24,7 @@ namespace Defend.UI
             foreach (var enemy in ListWaveData.enemies)
             {
                 GameObject info = Instantiate(Enemyinfo,EnemyProUI.transform);
+                Upgrade enemyinfo = info.GetComponent<EnemyInfo>().EnemyText;
                 enemyinfo.name.text = enemy.enemyPrefab.name;
                 enemyinfo.image.sprite = enemy.enemyPrefab.GetComponent<EnemyController>().sprite;
                 enemyinfo.Hp.text = "HP : " + enemy.enemyPrefab.GetComponent<Health>().maxHealth.ToString();

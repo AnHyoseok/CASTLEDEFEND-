@@ -9,11 +9,9 @@ namespace Defend.UI
         #region Variables
         [SerializeField]private Upgrade[] towerinfo;
         [SerializeField]private Upgrade[] buyTower;
-        [SerializeField]private Upgrade selectTowerinfo;
 
         public BuildMenu build;
         private BuildManager buildManager;
-        public GameObject selectTower;
         public Button[] towerBuildButtons;
         public Button[] unlockTowerButton;
         private CastleUpgrade castleUpgrade;

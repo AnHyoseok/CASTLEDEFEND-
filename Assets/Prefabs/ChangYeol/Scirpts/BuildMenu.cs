@@ -17,8 +17,6 @@ namespace Defend.UI
         public Tile tile;
         //빌드 메뉴 UI
         public GameObject BuildUI;
-        //빌드 메뉴에 타워 선택시 선택한 타워의 정보를 보여주는 UI
-        public GameObject buildpro;
         //index번째 타워를 선택하면 저장하는 값 
         public int indexs;
         public int levelindex = Mathf.Clamp(1,1,3);

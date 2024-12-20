@@ -6,9 +6,13 @@ namespace Defend.UI
     public class ToggleButton : MonoBehaviour
     {
         #region Variables
-        public bool isOn = false;
-
-        public GameObject toggleGameobject;
+        [HideInInspector] public bool isOnto = false;
+        [HideInInspector] public bool isOnPlay = false;
+        //Tunneling
+        public GameObject TunnelingGameobject;
+        
+        public GameObject PlayerMain;
+        //환경설정 창
         public GameObject Preferences;
 
         public InputActionProperty property;
@@ -25,8 +29,8 @@ namespace Defend.UI
         }
         public void OnOffToggle()
         {
-            isOn = !isOn;
-            if (!isOn)
+            isOnto = !isOnto;
+            if (!isOnto)
             {
                 Ontoggle();
             }
@@ -35,29 +39,49 @@ namespace Defend.UI
                 Offtoggle();
             }
         }
+        public void OnOffPlayer()
+        {
+            isOnPlay = !isOnPlay;
+            if (!isOnPlay)
+            {
+                OnPlayerMine();
+            }
+            else
+            {
+                OffPlayerMine();
+            }
+        }
         void Ontoggle()
         {
-            toggleGameobject.SetActive(true);
+            TunnelingGameobject.SetActive(true);
         }
         void Offtoggle()
         {
-            toggleGameobject.SetActive(false);
+            TunnelingGameobject.SetActive(false);
         }
         public void OnPreferences()
         {
-            if(toggleGameobject && Preferences)
+            if(TunnelingGameobject && Preferences)
             {
-                toggleGameobject.SetActive(true);
+                TunnelingGameobject.SetActive(true);
                 Preferences.SetActive(false);
             }
         }
         public void OffPreferences()
         {
-            if (toggleGameobject && Preferences)
+            if (TunnelingGameobject && Preferences)
             {
-                toggleGameobject.SetActive(false);
+                TunnelingGameobject.SetActive(false);
                 Preferences.SetActive(true);
             }
+        }
+        void OnPlayerMine()
+        {
+            PlayerMain.SetActive(true);
+        }
+        void OffPlayerMine()
+        {
+            PlayerMain.SetActive(false);
         }
     }
 }
