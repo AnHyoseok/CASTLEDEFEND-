@@ -12,9 +12,9 @@ namespace Defend.Audio
         // AudioMixer 배열은 프로젝트에서 사용할 오디오 믹서들을 참조
         // AudioMixer는 Unity의 오디오 시스템에서 여러 오디오 트랙을 믹싱하고 처리하는 데 사
         public AudioMixer[] AudioMixers;
-        [SerializeField] private Slider m_AudioMasterSlider;
-        [SerializeField] private Slider m_AudioBGMSlider;
-        [SerializeField] private Slider m_AudioSFXSlider;
+        [SerializeField] public Slider m_AudioMasterSlider;
+        [SerializeField] public Slider m_AudioBGMSlider;
+        [SerializeField] public Slider m_AudioSFXSlider;
 
         public AudioClip peacefulBGM;
         public AudioClip direBGM;
@@ -24,12 +24,17 @@ namespace Defend.Audio
 
         private void Awake()
         {
-            m_AudioMasterSlider.onValueChanged.AddListener(value => AudioUtility.SetVolume(value, "MASTER"));
-            m_AudioBGMSlider.onValueChanged.AddListener(value => AudioUtility.SetVolume(value, "BGM"));
-            m_AudioSFXSlider.onValueChanged.AddListener(value => AudioUtility.SetVolume(value, "EFFECT"));
+            m_AudioMasterSlider.onValueChanged.AddListener(value => AudioUtility.SetVolume(value, Constants.AUDIO_UTIL_MASTER));
+            m_AudioBGMSlider.onValueChanged.AddListener(value => AudioUtility.SetVolume(value, Constants.AUDIO_UTIL_BGM));
+            m_AudioSFXSlider.onValueChanged.AddListener(value => AudioUtility.SetVolume(value, Constants.AUDIO_UTIL_EFFECT));
 
             audioSource = GetComponent<AudioSource>();
             currentBGM = audioSource.clip;
+        }
+
+        private void Start()
+        {
+            //InitializeSliders();
         }
 
         private void Update()
@@ -85,8 +90,10 @@ namespace Defend.Audio
                 if (AudioMixers[i] != null)
                 {
                     AudioMixers[i].SetFloat(name, value);
+                    InitializeSliders();
                 }
             }
+            
         }
 
         /// <summary>
@@ -106,6 +113,12 @@ namespace Defend.Audio
                 }
             }
         }
-
+        private void InitializeSliders()
+        {
+            // AudioManager에서 현재 값을 가져와 슬라이더에 반영
+            m_AudioMasterSlider.value = AudioUtility.GetVolume(Constants.AUDIO_UTIL_MASTER);
+            m_AudioBGMSlider.value = AudioUtility.GetVolume(Constants.AUDIO_UTIL_BGM);
+            m_AudioSFXSlider.value = AudioUtility.GetVolume(Constants.AUDIO_UTIL_EFFECT);
+        }
     }
 }

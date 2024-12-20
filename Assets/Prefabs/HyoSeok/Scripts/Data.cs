@@ -63,15 +63,36 @@ namespace Defend.Manager
         //타워설치 - 못하면 저장하는시점에 다 팔아버리고(설치가격으로) 자원 추가
 
         // 사운드
-        public Dictionary<string, float> soundSettings = new Dictionary<string, float>
-        {
-            { "Master", 1.0f },
-            { "BGM", 1.0f },
-            { "SFX", 1.0f }
-        };
+        public SoundData soundData;
+
+        //public Dictionary<string, float> soundSettings = new Dictionary<string, float>
+        //{
+        //    { "Master", 1.0f },
+        //    { "BGM", 1.0f },
+        //    { "SFX", 1.0f }
+        //};
         //터널링여부
         public bool isTuneeling;
         //플레이어 ui여부
         public bool isPlayerUI;
+        public void initialSound(float master, float bgm, float sfx)
+        {
+            soundData = new SoundData(master, bgm, sfx);
+        }
+    }
+}
+
+[System.Serializable]
+public class SoundData
+{
+    public float masterVolumn;
+    public float bgmVolumn;
+    public float sfxVolumn;
+
+    public SoundData(float master, float bgm, float sfx)
+    {
+        this.masterVolumn = master;
+        this.bgmVolumn = bgm;
+        this.sfxVolumn = sfx;
     }
 }

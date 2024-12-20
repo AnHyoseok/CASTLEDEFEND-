@@ -47,10 +47,6 @@ namespace Defend.UI
         //타워공속업 변수
         //private float originalshootDelay;
 
-        //사운드
-        public AudioClip magnetSound;
-        private AudioSource audioSource;
-
         //이펙트
         public GameObject magnetEffectPrefab;   //자석연출
         #endregion
@@ -59,11 +55,8 @@ namespace Defend.UI
         {
 
             moveController = FindFirstObjectByType<EnemyMoveController>();
-            audioSource = player.AddComponent<AudioSource>();
 
             isCooldown = new bool[coolTimeUI.Length];
-            audioSource.clip = magnetSound;
-            audioSource.playOnAwake = false; // 자동 재생 방지
 
         }
         //필드위 자원 모두 흡수하는 스킬
@@ -82,8 +75,6 @@ namespace Defend.UI
             //연출시작 
             GameObject magnetEffect = Instantiate(magnetEffectPrefab, player.transform.position + transform.forward, Quaternion.identity);
             magnetEffect.transform.SetParent(transform);
-            //사운드 시작
-            audioSource.Play();
             //yield return new WaitForSeconds(1f);    //연출할 시간
 
 
@@ -94,8 +85,6 @@ namespace Defend.UI
             yield return new WaitForSeconds(3f);
             //연출 종료
             Destroy(magnetEffect);
-            //사운드 종료
-            audioSource.Stop();
             ResourceManager.speed = originalMagnetSpeed;
             ResourceManager.distance = originalMagnetDistance;
         }
@@ -142,8 +131,6 @@ namespace Defend.UI
 
             }
      
-            //사운드 종료
-            audioSource.Stop();
         }
         //타워 공속 업
         public void TowerAtkSpeedPlay()
@@ -158,8 +145,6 @@ namespace Defend.UI
             //연출시작 
             GameObject magnetEffect = Instantiate(magnetEffectPrefab, player.transform.position + transform.forward, Quaternion.identity);
             magnetEffect.transform.SetParent(transform);
-            //사운드 시작
-            audioSource.Play();
             if (CastleUpgrade.buffContents != null)
             {
                 CastleUpgrade.buffContents.duration = 5f;
@@ -180,8 +165,6 @@ namespace Defend.UI
 
             //연출 종료
             Destroy(magnetEffect);
-            //사운드 종료
-            audioSource.Stop();
         }
 
         //쿨시작

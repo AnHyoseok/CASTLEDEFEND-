@@ -25,5 +25,11 @@ namespace Defend.Utillity
         public static string ENEMY_ANIM_STATE_ATTACK = "Attack";        //EnemyAnimState - Attack
         public static string ENEMY_ANIM_STATE_SKILL = "Skill";          //EnemyAnimState - Skill
         #endregion
+
+        #region SoundParameter
+        public static string AUDIO_UTIL_MASTER = "MASTER";
+        public static string AUDIO_UTIL_BGM = "BGM";
+        public static string AUDIO_UTIL_EFFECT = "EFFECT";
+        #endregion
     }
 }

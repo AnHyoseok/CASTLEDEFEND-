@@ -151,6 +151,17 @@ namespace Defend.Utillity
             return Mathf.Pow(10f, valueInDb / 20.0f);
         }
 
+        public static float GetVolume(string parameterName)
+        {
+            if (s_AudioManager == null)
+                s_AudioManager = GameObject.FindAnyObjectByType<AudioManager>();
+
+            s_AudioManager.GetFloat(parameterName, out var valueInDb);
+            //Debug.Log($"{valueInDb} 1");
+            //Debug.Log($"{Mathf.Pow(10f, valueInDb / 20.0f)} 2");
+            return Mathf.Pow(10f, valueInDb / 20.0f);
+        }
+
 
         public static void SetVolume(float value, string parameterName)
         {

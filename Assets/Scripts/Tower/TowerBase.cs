@@ -261,7 +261,7 @@ namespace Defend.Tower
                 // Sfx »ý¼º
                 if (buffSfxClip!= null)
                 {
-                    CreateSFX(buffSfxClip, transform.position, AudioGroups.EFFECT);
+                    CreateSFX(buffSfxClip, transform.position, AudioGroups.BuffAndDebuff);
                 }
             }
         }

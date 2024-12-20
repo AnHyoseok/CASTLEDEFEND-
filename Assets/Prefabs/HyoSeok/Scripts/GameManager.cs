@@ -11,6 +11,7 @@ using Defend.Interactive;
 using Defend.item;
 using UnityEngine.SceneManagement;
 using UnityEngine.XR.Interaction.Toolkit.Samples.StarterAssets;
+using Defend.Utillity;
 
 
 namespace Defend.Manager
@@ -165,9 +166,15 @@ namespace Defend.Manager
             //data.isTowerUnlocked12 = towerBuildMenuName.unlockTowerButton[12];
 
             ////사운드
-            //data.soundSettings["Master"] = 0f;
-            //data.soundSettings["BGM"] = 0f;
-            //data.soundSettings["SFX"] = 0f;
+            //Debug.Log(AudioUtility.GetVolume(Constants.AUDIO_UTIL_MASTER) + "savedata");
+            //data.soundSettings[Constants.AUDIO_UTIL_MASTER] = AudioUtility.GetVolume(Constants.AUDIO_UTIL_MASTER);
+            //data.soundSettings[Constants.AUDIO_UTIL_BGM] = AudioUtility.GetVolume(Constants.AUDIO_UTIL_BGM);
+            //data.soundSettings[Constants.AUDIO_UTIL_EFFECT] = AudioUtility.GetVolume(Constants.AUDIO_UTIL_EFFECT);
+            data.initialSound(
+                AudioUtility.GetVolume(Constants.AUDIO_UTIL_MASTER),
+                AudioUtility.GetVolume(Constants.AUDIO_UTIL_BGM),
+                AudioUtility.GetVolume(Constants.AUDIO_UTIL_EFFECT)
+                    );
 
             //터널링
             data.isTuneeling = toggleButton.isOnto;
@@ -264,10 +271,22 @@ namespace Defend.Manager
                 buildManager.playerState.AddMoney(tower.GetTowerInfo().GetSellCost());
 
             }
-            ////사운드
-            //0f = data.soundSettings["Master"];
-            //0f = data.soundSettings["BGM"];
-            //0f = data.soundSettings["SFX"];
+            //사운드
+            //float masterSound = data.soundSettings[Constants.AUDIO_UTIL_MASTER];
+            //Debug.Log(masterSound+"loaddata");
+            //AudioUtility.SetVolume(masterSound, Constants.AUDIO_UTIL_MASTER);
+            //audioManager.m_AudioMasterSlider.value = masterSound;
+
+            //float bgmSound = data.soundSettings[Constants.AUDIO_UTIL_BGM];
+            //AudioUtility.SetVolume(bgmSound, Constants.AUDIO_UTIL_BGM);
+            //audioManager.m_AudioBGMSlider.value = bgmSound;
+
+            //float effectSound = data.soundSettings[Constants.AUDIO_UTIL_EFFECT];
+            //AudioUtility.SetVolume(effectSound, Constants.AUDIO_UTIL_EFFECT);
+            //audioManager.m_AudioSFXSlider.value = effectSound;
+            AudioUtility.SetVolume(data.soundData.masterVolumn, Constants.AUDIO_UTIL_MASTER);
+            AudioUtility.SetVolume(data.soundData.bgmVolumn, Constants.AUDIO_UTIL_BGM);
+            AudioUtility.SetVolume(data.soundData.sfxVolumn, Constants.AUDIO_UTIL_EFFECT);
 
             //터널링
             toggleButton.isOnto = data.isTuneeling;
