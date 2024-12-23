@@ -331,10 +331,11 @@ namespace Defend.Manager
         {
             if (health.CurrentHealth <= 0 && !isGameOver)
             {
-                Debug.Log($"healthBasedCastle.castleHealth {healthBasedCastle.castleHealth}");
-                Debug.Log($"health.CurrentHealth {health.CurrentHealth}");
+                //Debug.Log($"healthBasedCastle.castleHealth {healthBasedCastle.castleHealth}");
+                //Debug.Log($"health.CurrentHealth {health.CurrentHealth}");
+                health.RgAmount = 0;
                 isGameOver = true;
-                Debug.Log("GameOver");
+                //Debug.Log("GameOver");
                 //게임오버 창 띄우기
                 gameoverUI.SetActive(true);
                 //게임오버 사운드
