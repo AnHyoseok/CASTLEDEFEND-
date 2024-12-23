@@ -99,11 +99,11 @@ namespace Defend.Player
         public int atkSpeedLevel = 0;
         public int atkRangeLevel = 0;
 
-        //테스트용 텍스트
-        public TextMeshProUGUI test1;
-        public TextMeshProUGUI test2;
-        public TextMeshProUGUI test3;
-        public TextMeshProUGUI test4;
+        ////테스트용 텍스트
+        //public TextMeshProUGUI test1;
+        //public TextMeshProUGUI test2;
+        //public TextMeshProUGUI test3;
+        //public TextMeshProUGUI test4;
 
         //각 비용 텍스트
         public TextMeshProUGUI[] PriceTexts;
@@ -128,11 +128,11 @@ namespace Defend.Player
         {
             UpdateButtonStates();
             PriceUpdate();
-            //UpdateButtonStates();
-            test1.text = $"curent HP = {health.CurrentHealth}";
-            test2.text = $"hpmax ={health.maxHealth}";
-            test3.text = $"hp rex={health.RgAmount}";
-            test4.text = $"curent money = {playerState.FormatMoney()}";
+            ////UpdateButtonStates();
+            //test1.text = $"curent HP = {health.CurrentHealth}";
+            //test2.text = $"hpmax ={health.maxHealth}";
+            //test3.text = $"hp rex={health.RgAmount}";
+            //test4.text = $"curent money = {playerState.FormatMoney()}";
         }
 
         //타워 업그레이드 가격변동
