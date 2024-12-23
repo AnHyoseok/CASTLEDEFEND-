@@ -329,8 +329,10 @@ namespace Defend.Manager
         }
         void GameOverGo()
         {
-            if (healthBasedCastle.castleHealth <= 0 && !isGameOver)
+            if (health.CurrentHealth <= 0 && !isGameOver)
             {
+                Debug.Log($"healthBasedCastle.castleHealth {healthBasedCastle.castleHealth}");
+                Debug.Log($"health.CurrentHealth {health.CurrentHealth}");
                 isGameOver = true;
                 Debug.Log("GameOver");
                 //게임오버 창 띄우기
