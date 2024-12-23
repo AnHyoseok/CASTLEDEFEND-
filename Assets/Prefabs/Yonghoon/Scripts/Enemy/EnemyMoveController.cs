@@ -136,7 +136,7 @@ namespace Defend.Enemy
 
         private void UpdateCurrentSpeed()
         {
-            Debug.Log("속도변경 호출!");
+            //Debug.Log("속도변경 호출!");
             float totalRate = 0;
 
             // 모든 슬로우 비율을 합산
