@@ -73,10 +73,6 @@ namespace Defend.UI
             menu.ShowTileUI(towerXR);
             UpgradeButton.onClick.AddListener(towerXR.UpgradeTower);
             Sellbutton.onClick.AddListener(towerXR.SellTower);
-            if (!isCoroutine && coroutine == null)
-            {
-                coroutine = StartCoroutine(ButtonIsAction());
-            }
         }
         //선택 해제
         public void DeselectTile()
@@ -87,15 +83,6 @@ namespace Defend.UI
             Sellbutton.onClick.RemoveAllListeners();
             //선택한 타일 초기화하기
             tower = null;
-            StopCoroutine(ButtonIsAction());
-            coroutine = null;
-            isCoroutine = false;
-        }
-        IEnumerator ButtonIsAction()
-        {
-            isCoroutine = true;
-            yield return new WaitForSeconds(6);
-            DeselectTile();
         }
     }
 }
