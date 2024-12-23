@@ -1,3 +1,4 @@
+using Defend.TestScript;
 using System;
 using UnityEngine;
 using static Defend.Utillity.AudioUtility;
@@ -30,11 +31,17 @@ namespace Defend.Projectile
         {
             base.Update();
             CheckDistanceFromTower();
+            CheckHealth();
         }
 
         protected override void Hit()
         {
 
+        }
+        private void CheckHealth()
+        {
+            if (target.GetComponent<Health>().CurrentHealth <= 0)
+                Destroy(this.gameObject);
         }
 
         // 디버프 적용

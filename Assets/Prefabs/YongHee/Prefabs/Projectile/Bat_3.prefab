@@ -4874,7 +4874,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.90000093, y: 0.9, z: 0.90000093}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7319321566716212252}
@@ -4924,7 +4924,9 @@ MonoBehaviour:
     moveSpeed: 0
     attackRange: 0
     debuffRatio: 0
-  offset: {x: 0, y: 0, z: 0}
+    sfxClip: {fileID: 0}
+  offsetPosition: {x: 0, y: 0, z: 0}
+  offsetScale: 0
 --- !u!1 &926895700093980481
 GameObject:
   m_ObjectHideFlags: 0

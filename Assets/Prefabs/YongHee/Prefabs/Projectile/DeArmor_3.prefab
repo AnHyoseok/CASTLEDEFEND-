@@ -57,7 +57,8 @@ MonoBehaviour:
     attackRange: 0
     debuffRatio: 0
     sfxClip: {fileID: 0}
-  offset: {x: 0, y: 0, z: 0}
+  offsetPosition: {x: 0, y: 0, z: 0}
+  offsetScale: 0
   targetComponent: {fileID: 0}
   isDebuff: 0
 --- !u!1 &1295961563625803369
@@ -14759,7 +14760,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.8, y: 1.8, z: 1.8}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8357120302662630142}

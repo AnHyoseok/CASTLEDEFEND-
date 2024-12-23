@@ -5013,7 +5013,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1111127, y: 1.1111112, z: 1.1111127}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 907741538542417496}
@@ -5055,13 +5055,17 @@ MonoBehaviour:
   target: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
   projectileInfo:
+    tower: {fileID: 0}
     prefab: {fileID: 0}
     effectPrefab: {fileID: 0}
     effectTime: 0
     attack: 0
     moveSpeed: 0
     attackRange: 0
-  offset: {x: 0, y: 0, z: 0}
+    debuffRatio: 0
+    sfxClip: {fileID: 0}
+  offsetPosition: {x: 0, y: 0, z: 0}
+  offsetScale: 0
 --- !u!1 &3172747779683171775
 GameObject:
   m_ObjectHideFlags: 0
