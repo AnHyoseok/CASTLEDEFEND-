@@ -75,9 +75,9 @@ namespace Defend.Player
         //업그레이드별 수치증가량
         private float[] IncreaseHPUpgrade = { 100f, 200f, 300f }; //hp
         private float[] IncreaseHPTimeUpgrade = { 1f, 3f, 5f }; //초당 2, 5 ,10
-        private float[] IncreaseMoneyGainUpgrade = { 1.1f, 1.2f, 1.5f };
-        private float[] IncreaseTreeGainUpgrade = { 1.1f, 1.2f, 1.5f };
-        private float[] increaseRockGainUpgrade = { 1.1f, 1.2f, 1.5f };
+        private float[] IncreaseMoneyGainUpgrade = { 2f, 2f, 2f };
+        private float[] IncreaseTreeGainUpgrade = { 2f, 2f, 2f };
+        private float[] increaseRockGainUpgrade = { 2f, 2f, 2f };
         private float[] increaseArmorUpgrade = { 1f, 2f, 3f };
         //private float increaseTowerATKUpgrade = 1f;
         //private float increaseTowerATKSpeedUpgrade = 1f;
