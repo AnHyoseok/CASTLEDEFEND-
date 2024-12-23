@@ -30,7 +30,7 @@ namespace Defend.UI
 
         #region Variables
         //타일에 설치할 타일의 정보(프리팹, 가격정보)
-        [HideInInspector]public TowerInfo towerInfo;
+        [HideInInspector] public TowerInfo towerInfo;
         //플레이어
         public PlayerState playerState;
         //경고창
@@ -43,12 +43,15 @@ namespace Defend.UI
         public UpgradeAndSell menu;
         public BuildMenu buildMenu;
         //선택한 타워
-        [HideInInspector]public TowerXR tower;
+        [HideInInspector] public TowerXR tower;
         //타워 안에 있는 속성값
         public TowerBase[] towerBases;
         [HideInInspector] public EnemyPropertiesUI enemy;
 
         public AudioClip towerBuildSound;
+
+        private bool isCoroutine = false;
+        public Coroutine coroutine = null;
         #endregion
         private void Start()
         {
@@ -70,7 +73,10 @@ namespace Defend.UI
             menu.ShowTileUI(towerXR);
             UpgradeButton.onClick.AddListener(towerXR.UpgradeTower);
             Sellbutton.onClick.AddListener(towerXR.SellTower);
-            StartCoroutine(ButtonIsAction());
+            if (!isCoroutine && coroutine == null)
+            {
+                coroutine = StartCoroutine(ButtonIsAction());
+            }
         }
         //선택 해제
         public void DeselectTile()
@@ -81,9 +87,13 @@ namespace Defend.UI
             Sellbutton.onClick.RemoveAllListeners();
             //선택한 타일 초기화하기
             tower = null;
+            StopCoroutine(ButtonIsAction());
+            coroutine = null;
+            isCoroutine = false;
         }
         IEnumerator ButtonIsAction()
         {
+            isCoroutine = true;
             yield return new WaitForSeconds(6);
             DeselectTile();
         }

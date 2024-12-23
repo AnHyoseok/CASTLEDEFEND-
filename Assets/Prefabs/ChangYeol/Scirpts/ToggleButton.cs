@@ -6,15 +6,15 @@ namespace Defend.UI
     public class ToggleButton : MonoBehaviour
     {
         #region Variables
-        [HideInInspector] public bool isOnto = false;
-        [HideInInspector] public bool isOnPlay = false;
+        public bool isOnPlay = false;
+        public bool isOnto = false;
         //Tunneling
         public GameObject TunnelingGameobject;
         
         public GameObject PlayerMain;
         //환경설정 창
         public GameObject Preferences;
-
+        public GameObject OperationManual;
         public InputActionProperty property;
         #endregion
         private void Update()
@@ -26,13 +26,18 @@ namespace Defend.UI
                     Preferences.SetActive(!Preferences.activeSelf);
                 }
             }
-            OnOffToggle();
-
         }
         public void OnOffToggle()
         {
-            isOnto = !TunnelingGameobject.activeSelf;
-            TunnelingGameobject.SetActive(isOnto);
+            isOnto = !isOnto;
+            if (!isOnto)
+            {
+                Ontoggle();
+            }
+            else
+            {
+                Offtoggle();
+            }
         }
         public void OnOffPlayer()
         {
@@ -56,17 +61,17 @@ namespace Defend.UI
         }
         public void OnPreferences()
         {
-            if(TunnelingGameobject && Preferences)
+            if(OperationManual && Preferences)
             {
-                TunnelingGameobject.SetActive(true);
+                OperationManual.SetActive(true);
                 Preferences.SetActive(false);
             }
         }
         public void OffPreferences()
         {
-            if (TunnelingGameobject && Preferences)
+            if (OperationManual && Preferences)
             {
-                TunnelingGameobject.SetActive(false);
+                OperationManual.SetActive(false);
                 Preferences.SetActive(true);
             }
         }
