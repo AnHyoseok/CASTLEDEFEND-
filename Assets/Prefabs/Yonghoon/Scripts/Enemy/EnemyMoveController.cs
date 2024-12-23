@@ -35,6 +35,8 @@ namespace Defend.Enemy
         //이동속도 변화를 감지할 UnityAction
         public UnityAction<float, float> MoveSpeedChanged;
         public UnityAction EnemyArrive;
+
+        float adjustedArrivalDistance = 0.2f;
         #endregion
 
         // Start is called before the first frame update
@@ -86,10 +88,17 @@ namespace Defend.Enemy
 
             //도착판정
             float distance = Vector3.Distance(transform.position, target.position);
-            if (distance < 0.2f)
+            if (enemyController.type == EnemyType.Boss)
+            {
+                // 크기에 따라 판정 거리 조정
+                adjustedArrivalDistance = 3f * transform.lossyScale.magnitude;
+            }
+
+            if (distance < adjustedArrivalDistance)
             {
                 SetNextTarget();
             }
+
         }
 
         //다음 목표 지점 셋팅

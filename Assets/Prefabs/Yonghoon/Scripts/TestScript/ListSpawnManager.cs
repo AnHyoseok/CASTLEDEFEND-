@@ -118,6 +118,7 @@ namespace Defend.Enemy
 
         public void SkipTimer()
         {
+            if (enemyAlive > 0) return;
             onPressSkipBtn = true;
             countdown = 5f;
         }
