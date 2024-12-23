@@ -50,14 +50,14 @@ namespace Defend.UI
         {
             base.OnHoverEntering(args);
             //buildManager.buildMenu.isReticle = false;
-            buildManager.buildMenu.tile.reticleVisual.enabled = false;
+            buildManager.buildMenu.tile.leftReticleVisual.enabled = false;
         }
         protected override void OnHoverExiting(HoverExitEventArgs args)
         {
             base.OnHoverExiting(args);
             //if (!buildManager.buildMenu.istrigger) return;
             //buildManager.buildMenu.isReticle = true;
-            buildManager.buildMenu.tile.reticleVisual.enabled = true;
+            buildManager.buildMenu.tile.leftReticleVisual.enabled = true;
         }
         protected override void OnSelectEntered(SelectEnterEventArgs args)
         {
@@ -66,8 +66,9 @@ namespace Defend.UI
         }
         public void SellTower()
         {
+            if (this.gameObject != gameObject) return;
             //기본 터렛을 판매
-            if (this.gameObject != null)
+            if (this.gameObject != null && this.gameObject == buildManager.tower.gameObject)
             {
                 Destroy(this.gameObject);
                 GameObject effect = Instantiate(buildManager.buildMenu.tile.TowerImpectPrefab[3], transform.position, Quaternion.identity);
@@ -85,7 +86,7 @@ namespace Defend.UI
         }
         public void UpgradeTower()
         {
-            if (towerInfo == null) return;
+            if (towerInfo == null || this.gameObject != buildManager.tower.gameObject) return;
             if (towerInfo != null)
             {
                 if (towerInfo.upgradeTower &&

@@ -16,8 +16,12 @@ namespace Defend.UI
         [SerializeField] private Animator[] animators;
         public InputActionProperty property;
         private bool isOpen;
+        private UITransformSet transformSet;
         #endregion
-
+        private void Start()
+        {
+            transformSet = GetComponent<UITransformSet>();
+        }
         private void Update()
         {
             //Y버튼 누를시 메뉴 오픈
@@ -47,6 +51,10 @@ namespace Defend.UI
             upgradeCanvas.SetActive(false);
             towerCanvas.SetActive(false);
             skilCanvas.SetActive(false);
+            foreach (var canvas in transformSet.Canvases)
+            {
+                canvas.gameObject.SetActive(false);
+            }
         }
 
         public void Build()

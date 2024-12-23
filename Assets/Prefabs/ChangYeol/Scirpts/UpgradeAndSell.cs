@@ -48,7 +48,7 @@ namespace Defend.UI
                 basicText.Mp.text = "Mp : " + info.maxMana.ToString();
                 basicText.Attack.text = "Attack : " + info.projectile.attack.ToString();
                 basicText.AttackSpeed.text = "AttackSpeed : " + info.projectile.moveSpeed.ToString();
-                basicText.AttackRange.text = "AttackRang : " + info.projectile.attackRange.ToString();
+                basicText.AttackRange.text = "AttackRang : " + info.attackRange.ToString();
                 basicText.UpgradeMoney.text = "";
                 PropertiesUI.SetActive(true);
                 DescriptionUI.SetActive(false);
@@ -65,7 +65,7 @@ namespace Defend.UI
                 basicText.Mp.text = "Mp : " + info.maxMana.ToString();
                 basicText.Attack.text = "Attack : " + info.projectile.attack.ToString();
                 basicText.AttackSpeed.text = "AttackSpeed : " + info.projectile.moveSpeed.ToString();
-                basicText.AttackRange.text = "AttackRang : " + info.projectile.attackRange.ToString();
+                basicText.AttackRange.text = "AttackRang : " + info.attackRange.ToString();
                 basicText.UpgradeMoney.text = "Upgrade : " + info.cost2 + "G, tree : " + info.cost3.ToString() + " rock : " + info.cost4.ToString();
                 //업그레이드 판매 가격 표시
                 upGradeText.image.sprite = tower.currentTower[tower.currentindex + 1];
@@ -76,7 +76,7 @@ namespace Defend.UI
                 upGradeText.Mp.text = "Mp : " + upinfo.maxMana.ToString();
                 upGradeText.Attack.text = "Attack : " + upinfo.projectile.attack.ToString();
                 upGradeText.AttackSpeed.text = "AttackSpeed : " + upinfo.projectile.moveSpeed.ToString();
-                upGradeText.AttackRange.text = "AttackRange : " + upinfo.projectile.attackRange.ToString();
+                upGradeText.AttackRange.text = "AttackRange : " + upinfo.attackRange.ToString();
                 PropertiesUI.SetActive(true);
                 DescriptionUI.SetActive(true);
             }
@@ -91,7 +91,7 @@ namespace Defend.UI
                 basicText.Mp.text = "Mp : " + info.maxMana.ToString();
                 basicText.Attack.text = "Attack : " + info.projectile.attack.ToString();
                 basicText.AttackSpeed.text = "AttackSpeed : " + info.projectile.moveSpeed.ToString();
-                basicText.AttackRange.text = "AttackRang : " + info.projectile.attackRange.ToString();
+                basicText.AttackRange.text = "AttackRang : " + info.attackRange.ToString();
                 basicText.UpgradeMoney.text = "Upgrade : " + info.cost2 + "G, tree : " + info.cost3.ToString() + " rock : " + info.cost4.ToString();
                 //업그레이드 판매 가격 표시
                 upGradeText.image.sprite = tower.currentTower[tower.currentindex + 1];
@@ -102,7 +102,7 @@ namespace Defend.UI
                 upGradeText.Mp.text = "Mp : " + upinfo.maxMana.ToString();
                 upGradeText.Attack.text = "Attack : " + upinfo.projectile.attack.ToString();
                 upGradeText.AttackSpeed.text = "AttackSpeed : " + upinfo.projectile.moveSpeed.ToString();
-                upGradeText.AttackRange.text = "AttackRange : " + upinfo.projectile.attackRange.ToString();
+                upGradeText.AttackRange.text = "AttackRange : " + upinfo.attackRange.ToString();
                 PropertiesUI.SetActive(true);
                 DescriptionUI.SetActive(true);
             }

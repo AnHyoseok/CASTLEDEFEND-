@@ -26,20 +26,13 @@ namespace Defend.UI
                     Preferences.SetActive(!Preferences.activeSelf);
                 }
             }
-            isOnto = !isOnto;
-            isOnPlay = !isOnPlay;
+            OnOffToggle();
+
         }
         public void OnOffToggle()
         {
-            isOnto = !isOnto;
-            if (!isOnto)
-            {
-                Ontoggle();
-            }
-            else
-            {
-                Offtoggle();
-            }
+            isOnto = !TunnelingGameobject.activeSelf;
+            TunnelingGameobject.SetActive(isOnto);
         }
         public void OnOffPlayer()
         {

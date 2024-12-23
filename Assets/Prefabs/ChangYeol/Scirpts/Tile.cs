@@ -23,10 +23,13 @@ namespace Defend.UI
         public GameObject[] TowerImpectPrefab;
         //플레이어 위치
         public BuildMenu buildMenu;
-        //플레이어 손 라인
-        public XRRayInteractor rayInteractor;
+        //플레이어 왼손 라인
+        public XRRayInteractor leftRayInteractor;
+        //플레이어 오른손 라인
+        public XRRayInteractor rightRayInteractor;
         //플레이어 왼손 레티클 비주얼
-        [HideInInspector]public XRInteractorReticleVisual reticleVisual;
+        [HideInInspector]public XRInteractorReticleVisual leftReticleVisual;
+        [HideInInspector]public XRInteractorReticleVisual rightReticleVisual;
         //설치할 타워를 보여주는 게임 오브젝트
         [SerializeField] public GameObject reticlePrefabs;
         //트리거 키 입력
@@ -34,7 +37,8 @@ namespace Defend.UI
         //타워 선택이 가능한 레이어 설정
         public InteractionLayerMask layerMask;
         //타워 설치 위치
-        private Vector3 hitPoint;
+        private Vector3 leftHitPoint;
+        private Vector3 rightHitPoint;
         // 터레인
         public GameObject terrain;
         #endregion
@@ -43,29 +47,38 @@ namespace Defend.UI
         {
             //초기화
             buildManager = BuildManager.Instance;
-            reticleVisual = rayInteractor.GetComponent<XRInteractorReticleVisual>();
+            leftReticleVisual = leftRayInteractor.GetComponent<XRInteractorReticleVisual>();
+            rightReticleVisual = rightRayInteractor.GetComponent<XRInteractorReticleVisual>();
         }
         private void Update()
         {
             //Trigger 버튼 누르면 reticle = null
             if (property.action.WasPressedThisFrame())
             {
-                reticleVisual.reticlePrefab = null;
+                leftReticleVisual.reticlePrefab = null;
                 //buildMenu.istrigger = false;
                 return;
             }
 
-            if (rayInteractor == null) return;
+            if (leftReticleVisual == null/* || rightReticleVisual == null*/) return;
 
             // Ray가 UI를 향하고 있는 경우
-            if (rayInteractor.TryGetCurrentUIRaycastResult(out RaycastResult result))
+            if (leftRayInteractor.TryGetCurrentUIRaycastResult(out RaycastResult result))
             {
-                reticleVisual.enabled = false;
+                leftReticleVisual.enabled = false;
             }
             else
             {
                 IsBuildTower();
             }
+            /*if (rightRayInteractor.TryGetCurrentUIRaycastResult(out RaycastResult raycastResult))
+            {
+                leftReticleVisual.enabled = false;
+            }
+            else
+            {
+                IsBuildTower();
+            }*/
         }
         protected override void OnSelectEntered(SelectEnterEventArgs args)
         {
@@ -77,7 +90,7 @@ namespace Defend.UI
         private bool IsLineVisualValid()
         {
             // XRRayInteractor의 히트 정보를 가져옴
-            if (rayInteractor.TryGetHitInfo(out Vector3 hitPosition, out Vector3 hitNormal,
+            if (leftRayInteractor.TryGetHitInfo(out Vector3 hitPosition, out Vector3 hitNormal,
                 out int hitIndex, out bool isValidTarget))
             {
                 return isValidTarget; // 타겟이 유효한지 반환
@@ -94,29 +107,44 @@ namespace Defend.UI
         //타워 설치 위치
         private Vector3 GetBuildPosition()
         {
-            return hitPoint;
+            return leftHitPoint;
         }
         //타워 설치 위치를 보여준다
         private void IsBuildTower()
         {
-            if (rayInteractor == null || reticleVisual == null)
+            if ((leftRayInteractor == null || leftReticleVisual == null) /*|| (rightRayInteractor == null || leftReticleVisual == null)*/)
                 return;
 
-            if (rayInteractor.TryGetCurrent3DRaycastHit(out RaycastHit hit))
+            if (leftRayInteractor.TryGetCurrent3DRaycastHit(out RaycastHit lefthit))
             {
                 // 현재 레이캐스트 히트 지점 가져오기
-                hitPoint = hit.point;
+                leftHitPoint = lefthit.point;
 
                 // Terrain인지 확인
-                if (hit.collider.gameObject == terrain)
+                if (lefthit.collider.gameObject == terrain)
                 {
-                    reticleVisual.enabled = true;
+                    leftReticleVisual.enabled = true;
                 }
                 else
                 {
-                    reticleVisual.enabled = false;
+                    leftReticleVisual.enabled = false;
                 }
             }
+            /*if (rightRayInteractor.TryGetCurrent3DRaycastHit(out RaycastHit righthit))
+            {
+                // 현재 레이캐스트 히트 지점 가져오기
+                leftHitPoint = righthit.point;
+
+                // Terrain인지 확인
+                if (righthit.collider.gameObject == terrain)
+                {
+                    leftReticleVisual.enabled = true;
+                }
+                else
+                {
+                    leftReticleVisual.enabled = false;
+                }
+            }*/
             // 라인이 유효한지 확인
             //if (IsLineVisualValid())
             //{
@@ -149,7 +177,16 @@ namespace Defend.UI
         //타워 설치
         private void SetBuildTower()
         {
-            if (reticleVisual.reticlePrefab == null) return;
+            if (leftReticleVisual.reticlePrefab == null) return;
+            if(leftRayInteractor.TryGetCurrent3DRaycastHit(out RaycastHit lefthit))
+            {
+                leftHitPoint = lefthit.point;
+                TowerXR tower = lefthit.collider.gameObject.GetComponent<TowerXR>();
+                if (tower != null)
+                {
+                    return;
+                }
+            }
             if (buildManager.playerState.SpendMoney(buildManager.towerBases[buildMenu.indexs].GetTowerInfo().cost1) 
                 //&& buildMenu.isReticle 
                 && buildMenu.towerinfo[buildMenu.indexs].isLock)

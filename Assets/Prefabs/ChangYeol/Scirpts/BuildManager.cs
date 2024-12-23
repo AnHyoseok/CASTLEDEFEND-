@@ -43,7 +43,7 @@ namespace Defend.UI
         public UpgradeAndSell menu;
         public BuildMenu buildMenu;
         //선택한 타워
-        private TowerXR tower;
+        [HideInInspector]public TowerXR tower;
         //타워 안에 있는 속성값
         public TowerBase[] towerBases;
         [HideInInspector] public EnemyPropertiesUI enemy;
@@ -84,7 +84,7 @@ namespace Defend.UI
         }
         IEnumerator ButtonIsAction()
         {
-            yield return new WaitForSeconds(10);
+            yield return new WaitForSeconds(6);
             DeselectTile();
         }
     }
