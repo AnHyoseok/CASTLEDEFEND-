@@ -159,7 +159,7 @@ MonoBehaviour:
   shootTime: 0
   towerInfo:
     rotationSpeed: 1
-    attackRange: 6
+    attackRange: 30
     detectDelay: 0.5
     shootDelay: 5
     maxHealth: 400
@@ -177,9 +177,9 @@ MonoBehaviour:
       prefab: {fileID: 3842759679402244547, guid: f10c401fd94d5a841b87aa3f135b4f84, type: 3}
       effectPrefab: {fileID: 2292840498582609313, guid: 1f47346b8c6ce0c4ca70f90fdda741de, type: 3}
       effectTime: 3
-      attack: 100
-      moveSpeed: 10
-      attackRange: 5
+      attack: 104
+      moveSpeed: 49
+      attackRange: 38
       debuffRatio: 0
       sfxClip: {fileID: 8300000, guid: c5385c7578de7b34c948ddc271965c95, type: 3}
     isLock: 0

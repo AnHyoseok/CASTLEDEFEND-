@@ -25,11 +25,8 @@ namespace Defend.UI
         public BuildMenu buildMenu;
         //플레이어 왼손 라인
         public XRRayInteractor leftRayInteractor;
-        //플레이어 오른손 라인
-        public XRRayInteractor rightRayInteractor;
         //플레이어 왼손 레티클 비주얼
         [HideInInspector]public XRInteractorReticleVisual leftReticleVisual;
-        [HideInInspector]public XRInteractorReticleVisual rightReticleVisual;
         //설치할 타워를 보여주는 게임 오브젝트
         [SerializeField] public GameObject reticlePrefabs;
         //트리거 키 입력
@@ -38,7 +35,6 @@ namespace Defend.UI
         public InteractionLayerMask layerMask;
         //타워 설치 위치
         private Vector3 leftHitPoint;
-        private Vector3 rightHitPoint;
         // 터레인
         public GameObject terrain;
         #endregion
@@ -71,14 +67,6 @@ namespace Defend.UI
             {
                 IsBuildTower();
             }
-            /*if (rightRayInteractor.TryGetCurrentUIRaycastResult(out RaycastResult raycastResult))
-            {
-                leftReticleVisual.enabled = false;
-            }
-            else
-            {
-                IsBuildTower();
-            }*/
         }
         protected override void OnSelectEntered(SelectEnterEventArgs args)
         {
@@ -86,7 +74,7 @@ namespace Defend.UI
             //타워 설치
             SetBuildTower();
         }
-        // 라인의 유효성을 검사하는 함수
+        /*// 라인의 유효성을 검사하는 함수
         private bool IsLineVisualValid()
         {
             // XRRayInteractor의 히트 정보를 가져옴
@@ -96,14 +84,7 @@ namespace Defend.UI
                 return isValidTarget; // 타겟이 유효한지 반환
             }
             return false;
-        }
-        // ReticlePrefab을 설정하는 함수
-        //private void SetReticlePrefab()
-        //{
-        //    reticlePrefabs = buildMenu.falsetowers[buildMenu.indexs];
-        //    reticlePrefabs.GetComponent<BoxCollider>().enabled = false;
-        //    reticleVisual.reticlePrefab = reticlePrefabs;
-        //}
+        }*/
         //타워 설치 위치
         private Vector3 GetBuildPosition()
         {
@@ -112,7 +93,7 @@ namespace Defend.UI
         //타워 설치 위치를 보여준다
         private void IsBuildTower()
         {
-            if ((leftRayInteractor == null || leftReticleVisual == null) /*|| (rightRayInteractor == null || leftReticleVisual == null)*/)
+            if (leftRayInteractor == null || leftReticleVisual == null)
                 return;
 
             if (leftRayInteractor.TryGetCurrent3DRaycastHit(out RaycastHit lefthit))
@@ -130,49 +111,6 @@ namespace Defend.UI
                     leftReticleVisual.enabled = false;
                 }
             }
-            /*if (rightRayInteractor.TryGetCurrent3DRaycastHit(out RaycastHit righthit))
-            {
-                // 현재 레이캐스트 히트 지점 가져오기
-                leftHitPoint = righthit.point;
-
-                // Terrain인지 확인
-                if (righthit.collider.gameObject == terrain)
-                {
-                    leftReticleVisual.enabled = true;
-                }
-                else
-                {
-                    leftReticleVisual.enabled = false;
-                }
-            }*/
-            // 라인이 유효한지 확인
-            //if (IsLineVisualValid())
-            //{
-            //    if (!buildMenu.istrigger || !buildMenu.isReticle)
-            //    {
-            //        reticleVisual.reticlePrefab = null;
-            //        reticlePrefabs = null;
-            //        return;
-            //    }
-            //    // 허용된 경우 ReticlePrefab 활성화가 되야지 설치
-            //    if (reticleVisual.reticlePrefab == null && buildMenu.isReticle )
-            //    {
-            //        SetReticlePrefab();
-            //        if(reticleVisual.reticlePrefab != null)
-            //        {
-            //            rayInteractor.uiHoverEntered.AddListener(UIEnterReticle);
-            //            rayInteractor.uiHoverExited.AddListener(UIExitReticle);
-            //        }
-            //    }
-            //}
-            //else
-            //{
-            //    // 허용되지 않은 경우 ReticlePrefab 비활성화
-            //    if (reticleVisual.reticlePrefab != null && buildMenu.isReticle)
-            //    {
-            //        reticleVisual.reticlePrefab = null;
-            //    }
-            //}
         }
         //타워 설치
         private void SetBuildTower()

@@ -35,9 +35,15 @@ namespace Defend.UI
             towerBase = GetComponent<TowerBase>();
             towerInfo = towerBase.GetTowerInfo();
             CastleUpgrade castle = buildManager.buildMenu.GetComponent<CastleUpgrade>();
-            towerInfo.projectile.attack += castle.atkLevel;
-            towerInfo.projectile.moveSpeed += castle.atkSpeedLevel;
-            towerInfo.projectile.attackRange += castle.atkRangeLevel;
+            towerInfo.projectile.attack += (1 * castle.atkLevel);
+            for (int i = 0;i < castle.atkSpeedLevel; i++)
+            {
+                towerInfo.shootDelay *= (0.99f);
+            }
+            for (int i = 0; i< castle.atkRangeLevel; i++)
+            {
+                towerInfo.attackRange *= (1.01f);
+            }
         }
         protected override void OnHoverEntering(HoverEnterEventArgs args)
         {
@@ -64,7 +70,8 @@ namespace Defend.UI
             if (this.gameObject != null && this.gameObject == buildManager.tower.gameObject)
             {
                 Destroy(this.gameObject);
-                GameObject effect = Instantiate(buildManager.buildMenu.tile.TowerImpectPrefab[3], transform.position, Quaternion.identity);
+                GameObject effect = Instantiate(buildManager.buildMenu.tile.TowerImpectPrefab[3],
+                    transform.position, Quaternion.identity);
                 Destroy(effect, 2f);
                 //기본터렛들의 반값으로 판매
                 buildManager.playerState.AddMoney(towerInfo.GetSellCost());
@@ -83,13 +90,15 @@ namespace Defend.UI
             if (towerInfo != null)
             {
                 if (towerInfo.upgradeTower &&
-                    buildManager.playerState.SpendMoney(towerInfo.cost2) && buildManager.playerState.SpendResources(towerInfo.cost3,towerInfo.cost4))
+                    buildManager.playerState.SpendMoney(towerInfo.cost2)
+                    && buildManager.playerState.SpendResources(towerInfo.cost3,towerInfo.cost4))
                 {
                     AudioUtility.CreateSFX(buildManager.towerBuildSound, transform.position, AudioUtility.AudioGroups.EFFECT);
                     if (currentlevel == 1 && !Isupgradeone)
                     {
                         //Effect
-                        GameObject effectGo = Instantiate(buildManager.buildMenu.tile.TowerImpectPrefab[1], transform.position, Quaternion.identity);
+                        GameObject effectGo = Instantiate(buildManager.buildMenu.tile.TowerImpectPrefab[1],
+                            transform.position, Quaternion.identity);
                         Destroy(effectGo, 2f);
                         //터렛 업그레이드 생성
                         tower_upgrade = Instantiate(towerInfo.upgradeTower, transform.position, Quaternion.identity);
@@ -109,7 +118,8 @@ namespace Defend.UI
                     else if (currentlevel == 2 && Isupgradeone)
                     {
                         //Effect
-                        GameObject effectGo = Instantiate(buildManager.buildMenu.tile.TowerImpectPrefab[2], transform.position, Quaternion.identity);
+                        GameObject effectGo = Instantiate(buildManager.buildMenu.tile.TowerImpectPrefab[2],
+                            transform.position, Quaternion.identity);
                         Destroy(effectGo, 2f);
                         //터렛 업그레이드 생성
                         tower_upgrade = Instantiate(towerInfo.upgradeTower, transform.position, Quaternion.identity);

@@ -50,8 +50,8 @@ namespace Defend.UI
                 basicText.Hp.text = "Hp : " + info.maxHealth.ToString();
                 basicText.Mp.text = "Mp : " + info.maxMana.ToString();
                 basicText.Attack.text = "Attack : " + info.projectile.attack.ToString();
-                basicText.AttackSpeed.text = "AttackSpeed : " + info.projectile.moveSpeed.ToString();
-                basicText.AttackRange.text = "AttackRang : " + info.attackRange.ToString();
+                basicText.AttackSpeed.text = "AttackSpeed : " + info.projectile.moveSpeed.ToString("F1");
+                basicText.AttackRange.text = "AttackRang : " + info.attackRange.ToString("F1");
                 basicText.UpgradeMoney.text = "";
                 PropertiesUI.SetActive(true);
                 DescriptionUI.SetActive(false);
@@ -68,19 +68,19 @@ namespace Defend.UI
                 basicText.Hp.text = "Hp : " + info.maxHealth.ToString();
                 basicText.Mp.text = "Mp : " + info.maxMana.ToString();
                 basicText.Attack.text = "Attack : " + info.projectile.attack.ToString();
-                basicText.AttackSpeed.text = "AttackSpeed : " + info.projectile.moveSpeed.ToString();
-                basicText.AttackRange.text = "AttackRang : " + info.attackRange.ToString();
+                basicText.AttackSpeed.text = "AttackSpeed : " + info.projectile.moveSpeed.ToString("F1");
+                basicText.AttackRange.text = "AttackRang : " + info.attackRange.ToString("F1");
                 basicText.UpgradeMoney.text = "Upgrade : " + info.cost2 + "G, tree : " + info.cost3.ToString() + " rock : " + info.cost4.ToString();
                 //업그레이드 판매 가격 표시
                 upGradeText.image.sprite = tower.currentTower[tower.currentindex + 1];
                 upGradeText.name.text = buildManager.buildMenu.boxes[tower.currentindex + 1].name;
                 upGradeText.Buycost.text = "Upgrade : " + upinfo.cost2.ToString() + " G\n                  tree : " + upinfo.cost3.ToString() + " rock : " + upinfo.cost4.ToString(); ;
-                upGradeText.Sellcost.text = "Sell : " + upinfo.GetSellCost().ToString() + " G, tree : " + upinfo.GetSellTreeCost().ToString() + " rock : " + upinfo.GetSellRockCost().ToString();
+                upGradeText.Sellcost.text = "Sell : " + upinfo.GetSellCost().ToString() + " G\n            tree : " + upinfo.GetSellTreeCost().ToString() + " rock : " + upinfo.GetSellRockCost().ToString();
                 upGradeText.Hp.text = "Hp : " + upinfo.maxHealth.ToString();
                 upGradeText.Mp.text = "Mp : " + upinfo.maxMana.ToString();
                 upGradeText.Attack.text = "Attack : " + (upinfo.projectile.attack + (CastleUpgrade.buffContents.atk * castleUpgrade.atkLevel)).ToString();
-                upGradeText.AttackSpeed.text = "AttackSpeed : " + (upinfo.projectile.moveSpeed + (CastleUpgrade.buffContents.shootDelay * castleUpgrade.atkSpeedLevel)).ToString();
-                upGradeText.AttackRange.text = "AttackRange : " + (upinfo.attackRange + (CastleUpgrade.buffContents.atkRange * castleUpgrade.atkRangeLevel)).ToString();
+                upGradeText.AttackSpeed.text = "AttackSpeed : " + (upinfo.shootDelay - (CastleUpgrade.buffContents.shootDelay * castleUpgrade.atkSpeedLevel)).ToString("F1");
+                upGradeText.AttackRange.text = "AttackRange : " + (upinfo.attackRange + (CastleUpgrade.buffContents.atkRange * castleUpgrade.atkRangeLevel)).ToString("F1");
                 PropertiesUI.SetActive(true);
                 DescriptionUI.SetActive(true);
             }
@@ -95,19 +95,19 @@ namespace Defend.UI
                 basicText.Hp.text = "Hp : " + info.maxHealth.ToString();
                 basicText.Mp.text = "Mp : " + info.maxMana.ToString();
                 basicText.Attack.text = "Attack : " + info.projectile.attack.ToString();
-                basicText.AttackSpeed.text = "AttackSpeed : " + info.projectile.moveSpeed.ToString();
-                basicText.AttackRange.text = "AttackRang : " + info.attackRange.ToString();
+                basicText.AttackSpeed.text = "AttackSpeed : " + info.projectile.moveSpeed.ToString("F1");
+                basicText.AttackRange.text = "AttackRang : " + info.attackRange.ToString("F1");
                 basicText.UpgradeMoney.text = "Upgrade : " + info.cost2 + "G, tree : " + info.cost3.ToString() + " rock : " + info.cost4.ToString();
                 //업그레이드 판매 가격 표시
                 upGradeText.image.sprite = tower.currentTower[tower.currentindex + 1];
                 upGradeText.name.text = buildManager.buildMenu.boxes[tower.currentindex + 1].name;
                 upGradeText.Buycost.text = "Upgrade : " + upinfo.cost2.ToString() + " G\n                  tree : " + upinfo.cost3.ToString() + ", rock : " + upinfo.cost4.ToString();
-                upGradeText.Sellcost.text = "Sell : " + upinfo.GetSellCost().ToString() + " G, tree : " + upinfo.GetSellTreeCost().ToString() + ", rock : " + upinfo.GetSellRockCost().ToString();
+                upGradeText.Sellcost.text = "Sell : " + upinfo.GetSellCost().ToString() + " G\n                  tree : " + upinfo.GetSellTreeCost().ToString() + ", rock : " + upinfo.GetSellRockCost().ToString();
                 upGradeText.Hp.text = "Hp : " + upinfo.maxHealth.ToString();
                 upGradeText.Mp.text = "Mp : " + upinfo.maxMana.ToString();
                 upGradeText.Attack.text = "Attack : " + (upinfo.projectile.attack + (CastleUpgrade.buffContents.atk * castleUpgrade.atkLevel)).ToString();
-                upGradeText.AttackSpeed.text = "AttackSpeed : " + (upinfo.projectile.moveSpeed + (CastleUpgrade.buffContents.shootDelay * castleUpgrade.atkSpeedLevel)).ToString();
-                upGradeText.AttackRange.text = "AttackRange : " + (upinfo.attackRange + (CastleUpgrade.buffContents.atkRange * castleUpgrade.atkRangeLevel)).ToString();
+                upGradeText.AttackSpeed.text = "AttackSpeed : " + (upinfo.projectile.moveSpeed + (CastleUpgrade.buffContents.shootDelay * castleUpgrade.atkSpeedLevel)).ToString("F1");
+                upGradeText.AttackRange.text = "AttackRange : " + (upinfo.attackRange + (CastleUpgrade.buffContents.atkRange * castleUpgrade.atkRangeLevel)).ToString("F1");
                 PropertiesUI.SetActive(true);
                 DescriptionUI.SetActive(true);
             }

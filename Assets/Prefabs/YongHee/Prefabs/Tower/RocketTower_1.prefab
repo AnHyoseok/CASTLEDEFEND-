@@ -10034,7 +10034,7 @@ MonoBehaviour:
   shootTime: 0
   towerInfo:
     rotationSpeed: 1
-    attackRange: 25
+    attackRange: 30
     detectDelay: 0.5
     shootDelay: 5
     maxHealth: 200
