@@ -19,7 +19,7 @@ namespace Defend.Enemy
         [HideInInspector] public float countdown = 0f; // 다음 웨이브 시작까지 남은 시간
 
         // 현재 스폰 중인지 여부를 나타내는 상태 플래그
-        [SerializeField] private bool isSpawn;
+        [SerializeField] public static bool isSpawn;
         [SerializeField] private bool onPressSkipBtn;
 
         // 웨이브 데이터를 배열로 관리

@@ -40,7 +40,7 @@ namespace Defend.Audio
         private void Update()
         {
             // 현재 BGM 상태를 결정
-            AudioClip targetBGM = ListSpawnManager.enemyAlive > 0 ? direBGM : peacefulBGM;
+            AudioClip targetBGM = ListSpawnManager.enemyAlive > 0 && !ListSpawnManager.isSpawn ? direBGM : peacefulBGM;
 
             // BGM이 변경되었을 때만 교체
             if (currentBGM != targetBGM)

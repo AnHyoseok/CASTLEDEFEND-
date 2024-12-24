@@ -56,14 +56,17 @@ public class SkyboxTest : MonoBehaviour
 
         // 만약 현재 wave가 2와 같거나 높으면, 스카이박스 전환이 아직 일어나지 않았다면
         // 만약 남아있는 몬스터가 1마리 이상이고, 스카이박스 전환이 아직 일어나지 않았다면
-        if (ListSpawnManager.enemyAlive > 0 && hasTransitioned == false)
+
+
         //if (Input.GetKeyDown(KeyCode.U) && hasTransitioned == false)
+
+        if (ListSpawnManager.enemyAlive > 0 && hasTransitioned == false && ListSpawnManager.isSpawn == true)
         {
             StartCoroutine(TransitionToNight());
             hasTransitioned = true; // 스카이박스 전환 완료 체크
         }
         //RenderSettings.skybox.SetFloat("_Blend", blendValue);
-        else if (ListSpawnManager.enemyAlive <= 0 && hasTransitioned == true)
+        else if (ListSpawnManager.enemyAlive <= 0 && hasTransitioned == true && ListSpawnManager.isSpawn == false)
         {
             StartCoroutine(TransitionToDay());
             hasTransitioned = false; // 스카이박스 전환 해제
