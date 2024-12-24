@@ -309,7 +309,6 @@ namespace Defend.Manager
 
             Application.Quit();
         }
-
         //게임클리어
         void GameClear()
         {
@@ -318,29 +317,17 @@ namespace Defend.Manager
             {
                 isGameClear = true;
                 Debug.Log("GameClaer");
-                //게임클리어 창 뜨기
                 clearUI.SetActive(true);
-
-                ////클리어 사운드
-                //audioSource.clip = clearSound;
-                //audioSource.Play();
-
             }
         }
         void GameOverGo()
         {
             if (health.CurrentHealth <= 0 && !isGameOver)
             {
-                //Debug.Log($"healthBasedCastle.castleHealth {healthBasedCastle.castleHealth}");
-                //Debug.Log($"health.CurrentHealth {health.CurrentHealth}");
                 health.RgAmount = 0;
                 isGameOver = true;
-                //Debug.Log("GameOver");
-                //게임오버 창 띄우기
                 gameoverUI.SetActive(true);
-                //게임오버 사운드
-                //audioSource.clip = gameoverSound;
-                //audioSource.Play(3);
+           
             }
         }
 

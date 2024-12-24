@@ -123,14 +123,7 @@ namespace Defend.Interactive
 
             transform.position = origin;
         }
-        // //자원흭득
-        //public void GiveResource()
-        // {
-        //     // 플레이어에게 전달
-        //     ResourceManager.Instance.AddResources(currentResourceType.amount, currentResourceType.name.ToString());
-        // }
-
-        // 자원 타입에 따른 현재 자원 설정
+    
         public void SetCurrentResourceType(string resourceName)
         {
             foreach (var resourceType in resourceTypes)
