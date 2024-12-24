@@ -306,6 +306,10 @@ namespace Defend.Player
                 if (buffContents != null)
                 {
                     buffContents.atk = 0f;
+                    buffContents.armor = 0f;
+                    buffContents.shootDelay = 1f;
+                    buffContents.atkRange = 1f;
+
                     buffContents.atk++;
                     atkLevel++;
 
@@ -331,8 +335,13 @@ namespace Defend.Player
                 //타워 공격속도 업
                 if (buffContents != null)
                 {
-                    buffContents.shootDelay = 0f;
-                    buffContents.shootDelay++;
+                    buffContents.shootDelay = 1f;
+                    buffContents.atk = 0f;
+                    buffContents.armor = 0f;
+                   
+                    buffContents.atkRange = 1;
+
+                    buffContents.shootDelay = 0.99f;
                     atkSpeedLevel++;
 
                 }
@@ -346,6 +355,7 @@ namespace Defend.Player
         //타워 공격 범위 업그레이드
         public void TowerATKRangeUpgrade()
         {
+            
             towerbase = FindObjectsByType<TowerBase>(FindObjectsSortMode.None);
             if (currentTowerATKRangeUpgradeLevel < CostTowerATKRange.Length && playerState.money >= (CostTowerATKRange[currentTowerATKRangeUpgradeLevel]))
             {
@@ -354,8 +364,13 @@ namespace Defend.Player
                 // 공격 범위 증가 로직 추가             
                 if (buffContents != null)
                 {
-                    buffContents.atkRange = 0f;
-                    buffContents.atkRange++;
+                    buffContents.atk = 0f;
+                    buffContents.armor = 0f;
+                    buffContents.shootDelay = 1f;
+                    buffContents.atkRange = 1f;
+
+                    buffContents.atkRange =1.01f;
+                    
                     atkRangeLevel++;
 
                 }
@@ -364,6 +379,7 @@ namespace Defend.Player
                     tower.BuffTower(buffContents, true);
                 }
                 UpdateButtonStates();
+                Debug.Log(buffContents.atkRange);
             }
         }
 

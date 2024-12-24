@@ -242,7 +242,7 @@ namespace Defend.Tower
             // 버프 적용
             towerInfo.projectile.attack += buffContents.atk;
             towerInfo.armor += buffContents.armor;
-            towerInfo.shootDelay /= buffContents.shootDelay;
+            towerInfo.shootDelay *= buffContents.shootDelay;
             towerInfo.attackRange *= buffContents.atkRange;
             status.HealthRegenRatio *= buffContents.healthRegen;
             status.ManaRegenRatio *= buffContents.manaRegen;
