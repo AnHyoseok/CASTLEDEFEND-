@@ -48,7 +48,7 @@ namespace Defend.UI
             //√ ±‚»≠
             buildManager = BuildManager.Instance;
             leftReticleVisual = leftRayInteractor.GetComponent<XRInteractorReticleVisual>();
-            rightReticleVisual = rightRayInteractor.GetComponent<XRInteractorReticleVisual>();
+            //rightReticleVisual = rightRayInteractor.GetComponent<XRInteractorReticleVisual>();
         }
         private void Update()
         {

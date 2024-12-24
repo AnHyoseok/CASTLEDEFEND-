@@ -37,8 +37,7 @@ namespace Defend.UI
             //선택받은 타워 저장
             tower = towerXR;
             TowerInfo info = tower.GetComponent<TowerBase>().GetTowerInfo();
-            TowerInfo upinfo = info.upgradeTower.GetComponent<TowerBase>().GetTowerInfo();
-
+            
             //업그레이드 가격 표시
             if ((tower.Isupgradeone && tower.Isupgradetwo && tower.currentlevel == 3)|| 
                 (tower.Isupgradeone && !tower.Isupgradetwo && tower.currentlevel == 3) 
@@ -60,6 +59,7 @@ namespace Defend.UI
             else if((tower.Isupgradeone && !tower.Isupgradetwo && tower.currentlevel == 2) ||
                 (!tower.Isupgradeone && !tower.Isupgradetwo && tower.currentlevel == 2))
             {
+                TowerInfo upinfo = info.upgradeTower.GetComponent<TowerBase>().GetTowerInfo();
                 //기본 터렛 판매 가격 표시
                 basicText.image.sprite = tower.currentTower[tower.currentindex];
                 basicText.name.text = buildManager.buildMenu.boxes[tower.currentindex].name;
@@ -79,13 +79,14 @@ namespace Defend.UI
                 upGradeText.Hp.text = "Hp : " + upinfo.maxHealth.ToString();
                 upGradeText.Mp.text = "Mp : " + upinfo.maxMana.ToString();
                 upGradeText.Attack.text = "Attack : " + (upinfo.projectile.attack + (CastleUpgrade.buffContents.atk * castleUpgrade.atkLevel)).ToString();
-                upGradeText.AttackSpeed.text = "AttackSpeed : " + upinfo.projectile.moveSpeed.ToString();
-                upGradeText.AttackRange.text = "AttackRange : " + upinfo.attackRange.ToString();
+                upGradeText.AttackSpeed.text = "AttackSpeed : " + (upinfo.projectile.moveSpeed + (CastleUpgrade.buffContents.shootDelay * castleUpgrade.atkSpeedLevel)).ToString();
+                upGradeText.AttackRange.text = "AttackRange : " + (upinfo.attackRange + (CastleUpgrade.buffContents.atkRange * castleUpgrade.atkRangeLevel)).ToString();
                 PropertiesUI.SetActive(true);
                 DescriptionUI.SetActive(true);
             }
             else if (!tower.Isupgradeone && !tower.Isupgradetwo && tower.currentlevel == 1)
             {
+                TowerInfo upinfo = info.upgradeTower.GetComponent<TowerBase>().GetTowerInfo();
                 //기본 터렛 판매 가격 표시
                 basicText.image.sprite = tower.currentTower[tower.currentindex];
                 basicText.name.text = buildManager.buildMenu.boxes[tower.currentindex].name;
@@ -105,8 +106,8 @@ namespace Defend.UI
                 upGradeText.Hp.text = "Hp : " + upinfo.maxHealth.ToString();
                 upGradeText.Mp.text = "Mp : " + upinfo.maxMana.ToString();
                 upGradeText.Attack.text = "Attack : " + (upinfo.projectile.attack + (CastleUpgrade.buffContents.atk * castleUpgrade.atkLevel)).ToString();
-                upGradeText.AttackSpeed.text = "AttackSpeed : " + upinfo.projectile.moveSpeed.ToString();
-                upGradeText.AttackRange.text = "AttackRange : " + upinfo.attackRange.ToString();
+                upGradeText.AttackSpeed.text = "AttackSpeed : " + (upinfo.projectile.moveSpeed + (CastleUpgrade.buffContents.shootDelay * castleUpgrade.atkSpeedLevel)).ToString();
+                upGradeText.AttackRange.text = "AttackRange : " + (upinfo.attackRange + (CastleUpgrade.buffContents.atkRange * castleUpgrade.atkRangeLevel)).ToString();
                 PropertiesUI.SetActive(true);
                 DescriptionUI.SetActive(true);
             }
