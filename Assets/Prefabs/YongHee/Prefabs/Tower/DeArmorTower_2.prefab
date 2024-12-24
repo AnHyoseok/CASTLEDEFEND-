@@ -5103,12 +5103,12 @@ MonoBehaviour:
       moveSpeed: 10
       attackRange: 20
       debuffRatio: -10
-      sfxClip: {fileID: 8300000, guid: 7a9de5c4d998126449cf964a6b27a8b0, type: 3}
+      sfxClip: {fileID: 8300000, guid: 584cfb2d0bb90d749b3a935721ba832c, type: 3}
     isLock: 0
   buffEffect: {fileID: 1362654769694918472, guid: 485d1a74ddf5544469139c460fbe22ec, type: 3}
   debuffEffect: {fileID: 2639560195941380255, guid: 9fb0195321ad90d48be4c27218022c91, type: 3}
   destroyEffect: {fileID: 1842692474500718, guid: cfd68de6510901147ad542cfdfa2e148, type: 3}
-  buffSfxClip: {fileID: 8300000, guid: b0e62ed71b1538648b719821f4f63b4c, type: 3}
+  buffSfxClip: {fileID: 8300000, guid: 59a1b779edc23c54ba5be6d7e02632d2, type: 3}
   gizmo:
     gizmoColor: {r: 0, g: 1, b: 0, a: 1}
     sphereRadius: 0
