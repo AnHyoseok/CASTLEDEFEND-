@@ -53,6 +53,7 @@ namespace Defend.UI
             skilCanvas.SetActive(false);
             foreach (var canvas in transformSet.Canvases)
             {
+                if (canvas.name == "GuideCanvas") continue;
                 canvas.gameObject.SetActive(false);
             }
         }

@@ -2,6 +2,7 @@ using Defend.Enemy;
 using Defend.TestScript;
 using Defend.Tower;
 using TMPro;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -42,7 +43,11 @@ namespace Defend.Tutorial
         public ListSpawnManager lsm;            // ListSpawnManager
         public float fontSize;                  // guideText font size
         public InputActionProperty leftXButton; // LeftHandController 'X'
+        public InputActionProperty leftYButton; // LeftHandController 'Y'
+        public InputActionProperty leftMenuButton; // LeftHandController 'Menu'
         private string guideString;             // UI에 나타나는 문구
+        private UnityAction buttonAnimAction;   // ShowButton Animation UnityAction
+        CinemachineBrain cmb;                   // Player의 CinemachineBrain
         [SerializeField] private string isNewGuide = "IsNewGuide"; // Animation bool 변수
         [SerializeField] private string loadToScene; // 종료 후 로드 할 Scene
 
@@ -72,15 +77,21 @@ namespace Defend.Tutorial
             animator = showButton.GetComponent<Animator>();
             endTutorial += EndUI;
             guideText.fontSize = fontSize;
+            buttonAnimAction += playShowButtonAnim;
+            cmb = player.GetComponent<CinemachineBrain>();
         }
 
-        // TODO :: 씬 변경하면 안되는거
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.X) || leftXButton.action.WasPerformedThisFrame())
+            if (Input.GetKeyDown(KeyCode.X) || leftXButton.action.WasCompletedThisFrame() || leftMenuButton.action.WasCompletedThisFrame())
             {
                 HideUI();
             }
+
+            //if (leftYButton.action.WasCompletedThisFrame())
+            //{
+            //    HideUIWhenViewChange();
+            //}
 
             // Step.A TopView 확인하기
             if (isA == true)
@@ -90,7 +101,7 @@ namespace Defend.Tutorial
                 {
                     isA = false;
                     isB = true;
-                    playShowButtonAnim();
+                    buttonAnimAction.Invoke();
                 }
             }
 
@@ -102,7 +113,7 @@ namespace Defend.Tutorial
                 {
                     isB = false;
                     isC = true;
-                    playShowButtonAnim();
+                    buttonAnimAction.Invoke();
                 }
             }
 
@@ -115,7 +126,7 @@ namespace Defend.Tutorial
                 {
                     isC = false;
                     isD = true;
-                    playShowButtonAnim();
+                    buttonAnimAction.Invoke();
                 }
             }
 
@@ -128,7 +139,7 @@ namespace Defend.Tutorial
                 {
                     isD = false;
                     isE = true;
-                    playShowButtonAnim();
+                    buttonAnimAction.Invoke();
                 }
             }
 
@@ -142,7 +153,7 @@ namespace Defend.Tutorial
                 {
                     isE = false;
                     isF = true;
-                    playShowButtonAnim();
+                    buttonAnimAction.Invoke();
                 }
             }
 
@@ -215,18 +226,30 @@ namespace Defend.Tutorial
         {
             backgroundUI.SetActive(true);
             showButton.gameObject.SetActive(false);
+            animator.SetBool(isNewGuide, false);
         }
 
-        // Hide UI
+        // Hide Guide UI
         public void HideUI()
         {
             backgroundUI.SetActive(false);
             showButton.gameObject.SetActive(true);
-            if (backgroundUI.activeSelf == true)
-            {
-                animator.SetBool(isNewGuide, false);
-            }
         }
+
+        // ViewChange에 따른 UI
+        //public void HideUIWhenViewChange()
+        //{
+        //    if (cmb.enabled == false)
+        //    {
+        //        backgroundUI.SetActive(false);
+        //        showButton.gameObject.SetActive(false);
+        //    }
+        //    else
+        //    {
+        //        backgroundUI.SetActive(false);
+        //        showButton.gameObject.SetActive(true);
+        //    }
+        //}
 
         // End UI
         public void EndUI()
@@ -254,10 +277,7 @@ namespace Defend.Tutorial
         // ShowButtonAnim 재생
         public void playShowButtonAnim()
         {
-            if (backgroundUI.activeSelf == false && showButton.gameObject.activeSelf == true)
-            {
-                animator.SetBool(isNewGuide, true);
-            }
+            animator.SetBool(isNewGuide, !backgroundUI.activeSelf);
         }
     }
 }
