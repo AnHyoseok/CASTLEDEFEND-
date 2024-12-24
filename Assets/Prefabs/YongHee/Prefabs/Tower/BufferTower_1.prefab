@@ -9782,7 +9782,7 @@ MonoBehaviour:
     duration: 3
     atk: 1
     armor: 1
-    shootDelay: 1.1
+    shootDelay: 0.9
     atkRange: 1.1
     healthRegen: 1.1
     manaRegen: 1.1

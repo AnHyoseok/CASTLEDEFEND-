@@ -159,7 +159,7 @@ MonoBehaviour:
     duration: 10
     atk: 3
     armor: 3
-    shootDelay: 1.2
+    shootDelay: 0.8
     atkRange: 1.2
     healthRegen: 1.2
     manaRegen: 1.2
