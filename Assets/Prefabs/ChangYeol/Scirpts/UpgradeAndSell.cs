@@ -1,3 +1,4 @@
+using Defend.Player;
 using Defend.Tower;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +16,8 @@ namespace Defend.UI
         //선택받은 타일
         private TowerXR tower;
 
+        private CastleUpgrade castleUpgrade;
+
         //기본 타워 구매가격, 판매가격, HP,MP, Attack, AttackSpeed
         public Upgrade basicText;
         //업그레이드 타워 가격 텍스트, 버튼, 판매가격 텍스트
@@ -25,6 +28,7 @@ namespace Defend.UI
         {
             //초기화
             buildManager = BuildManager.Instance;
+            castleUpgrade = FindAnyObjectByType<CastleUpgrade>();
         }
 
         //매개변수로 선택한 타일 정보를 얻어온다
@@ -33,7 +37,7 @@ namespace Defend.UI
             //선택받은 타워 저장
             tower = towerXR;
             TowerInfo info = tower.GetComponent<TowerBase>().GetTowerInfo();
-            TowerInfo upinfo = tower.upgradetowerInfo;
+            TowerInfo upinfo = info.upgradeTower.GetComponent<TowerBase>().GetTowerInfo();
 
             //업그레이드 가격 표시
             if ((tower.Isupgradeone && tower.Isupgradetwo && tower.currentlevel == 3)|| 
@@ -74,7 +78,7 @@ namespace Defend.UI
                 upGradeText.Sellcost.text = "Sell : " + upinfo.GetSellCost().ToString() + " G, tree : " + upinfo.GetSellTreeCost().ToString() + " rock : " + upinfo.GetSellRockCost().ToString();
                 upGradeText.Hp.text = "Hp : " + upinfo.maxHealth.ToString();
                 upGradeText.Mp.text = "Mp : " + upinfo.maxMana.ToString();
-                upGradeText.Attack.text = "Attack : " + upinfo.projectile.attack.ToString();
+                upGradeText.Attack.text = "Attack : " + (upinfo.projectile.attack + (CastleUpgrade.buffContents.atk * castleUpgrade.atkLevel)).ToString();
                 upGradeText.AttackSpeed.text = "AttackSpeed : " + upinfo.projectile.moveSpeed.ToString();
                 upGradeText.AttackRange.text = "AttackRange : " + upinfo.attackRange.ToString();
                 PropertiesUI.SetActive(true);
@@ -100,7 +104,7 @@ namespace Defend.UI
                 upGradeText.Sellcost.text = "Sell : " + upinfo.GetSellCost().ToString() + " G, tree : " + upinfo.GetSellTreeCost().ToString() + ", rock : " + upinfo.GetSellRockCost().ToString();
                 upGradeText.Hp.text = "Hp : " + upinfo.maxHealth.ToString();
                 upGradeText.Mp.text = "Mp : " + upinfo.maxMana.ToString();
-                upGradeText.Attack.text = "Attack : " + upinfo.projectile.attack.ToString();
+                upGradeText.Attack.text = "Attack : " + (upinfo.projectile.attack + (CastleUpgrade.buffContents.atk * castleUpgrade.atkLevel)).ToString();
                 upGradeText.AttackSpeed.text = "AttackSpeed : " + upinfo.projectile.moveSpeed.ToString();
                 upGradeText.AttackRange.text = "AttackRange : " + upinfo.attackRange.ToString();
                 PropertiesUI.SetActive(true);
