@@ -99,11 +99,9 @@ namespace Defend.Enemy
             onPressSkipBtn = false; // 스킵 버튼을 false로 항상 초기화
             // 현재 웨이브 데이터를 가져옴
             ListWaveData wave = waves[waveCount];
-            //Debug.Log(wave);
             // 웨이브 내의 모든 몬스터 데이터를 순회
             foreach (var enemyData in wave.enemies)
             {
-                //Debug.Log(enemyData);
                 // 각 몬스터의 개수만큼 스폰
                 for (int i = 0; i < enemyData.count; i++)
                 {
@@ -118,8 +116,11 @@ namespace Defend.Enemy
 
         public void SkipTimer()
         {
+            //Enemy가 맵에 살아있으면 스킵하지 못함
             if (enemyAlive > 0) return;
+            //스킵 활성화
             onPressSkipBtn = true;
+            //타이머 5초뒤에 스폰되도록 설정
             countdown = 5f;
         }
     }
