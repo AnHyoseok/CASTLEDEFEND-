@@ -49,9 +49,6 @@ namespace Defend.UI
         [HideInInspector] public EnemyPropertiesUI enemy;
 
         public AudioClip towerBuildSound;
-
-        private bool isCoroutine = false;
-        public Coroutine coroutine = null;
         #endregion
         private void Start()
         {
