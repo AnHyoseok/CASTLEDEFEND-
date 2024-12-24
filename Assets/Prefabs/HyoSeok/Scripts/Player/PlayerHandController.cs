@@ -1,10 +1,9 @@
 using Defend.Enemy;
 using Defend.Player;
 using TMPro;
-using Unity.Cinemachine;
-using UnityEditor.SceneManagement;
+
 using UnityEngine;
-using UnityEngine.UI;
+
 
 namespace Defend.UI
 {
