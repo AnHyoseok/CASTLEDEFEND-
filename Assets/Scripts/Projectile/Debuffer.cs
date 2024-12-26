@@ -29,9 +29,22 @@ namespace Defend.Projectile
 
         protected override void Update()
         {
+            // 발사한 타워가 판매 또는 업그레이드되면 발사체 파괴
+            if (projectileInfo.tower == null)
+            {
+                Destroy(this.gameObject);
+            }
+
             base.Update();
             CheckDistanceFromTower();
             CheckHealth();
+        }
+
+        // 파괴될 때 시행
+        private void OnDestroy()
+        {
+            // 디버프 해제
+            RemoveDebuff(UndoDebuffAction);
         }
 
         protected override void Hit()
@@ -68,6 +81,7 @@ namespace Defend.Projectile
         protected virtual void CheckDistanceFromTower()
         {
             if (targetComponent == null) return;
+            if (projectileInfo.tower == null) return;
 
             float distance = Vector3.Distance(transform.position, projectileInfo.tower.transform.position);
             bool inAttackRange = distance <= projectileInfo.attackRange;
