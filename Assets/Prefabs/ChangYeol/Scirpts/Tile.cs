@@ -56,10 +56,10 @@ namespace Defend.UI
                 //buildMenu.istrigger = false;
                 return;
             }
-            if (leftSelect.action.WasPressedThisFrame() && leftReticleVisual.enabled == true)
+            /*if (leftSelect.action.WasPressedThisFrame() && leftReticleVisual.enabled == true)
             {
                 SetBuildTower();
-            }
+            }*/
             if (leftReticleVisual == null/* || rightReticleVisual == null*/) return;
 
             // Ray가 UI를 향하고 있는 경우
@@ -72,12 +72,12 @@ namespace Defend.UI
                 IsBuildTower();
             }
         }
-        /*protected override void OnSelectEntered(SelectEnterEventArgs args)
+        protected override void OnSelectEntered(SelectEnterEventArgs args)
         {
             base.OnSelectEntered(args);
             //타워 설치
             SetBuildTower();
-        }*/
+        }
         /*// 라인의 유효성을 검사하는 함수
         private bool IsLineVisualValid()
         {
@@ -131,8 +131,7 @@ namespace Defend.UI
             }
             if (buildManager.playerState.SpendMoney(buildManager.towerBases[buildMenu.indexs].GetTowerInfo().cost1) 
                 //&& buildMenu.isReticle 
-                && buildMenu.towerinfo[buildMenu.indexs].isLock
-                && leftReticleVisual.enabled == true)
+                && buildMenu.towerinfo[buildMenu.indexs].isLock)
             {
                 tower = Instantiate(buildManager.towerBases[buildMenu.indexs].GetTowerInfo().projectile.tower,
                     GetBuildPosition(), Quaternion.identity);
