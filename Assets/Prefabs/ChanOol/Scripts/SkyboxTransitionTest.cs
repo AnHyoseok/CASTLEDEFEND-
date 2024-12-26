@@ -49,10 +49,10 @@ public class SkyboxTransitionTest : MonoBehaviour
 
     IEnumerator enumerator()
     {
-        Debug.Log("Enumerator started");
+        //Debug.Log("Enumerator started");
         yield return new WaitForSeconds(3f);
 
-        Debug.Log("Transition started");
+        //Debug.Log("Transition started");
         StartTransition();
     }
 }

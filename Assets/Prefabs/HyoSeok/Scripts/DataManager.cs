@@ -43,9 +43,9 @@ namespace Defend.Manager
 
             // 이미 저장된 파일이 있다면 덮어쓰고, 없다면 새로 만들어서 저장
             File.WriteAllText(dataPath, ToJsonData);
-            Debug.Log(data.money);
+            //Debug.Log(data.money);
             // 올바르게 저장됐는지 확인용
-            Debug.Log("저장 완료");
+            //Debug.Log("저장 완료");
 
         }
 

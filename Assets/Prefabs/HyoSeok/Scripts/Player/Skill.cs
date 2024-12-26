@@ -109,7 +109,7 @@ namespace Defend.UI
                 e.gameObject.GetComponent<EnemyMoveController>().enabled = false;
               
                 e.gameObject.GetComponent<Animator>().speed=0.01f;
-                Debug.Log($"e={e.gameObject}");
+                //Debug.Log($"e={e.gameObject}");
                 ////연출시작 
                 GameObject magnetEffect = Instantiate(magnetEffectPrefab, e.transform.position + transform.forward, Quaternion.identity);
                 magnetEffect.transform.SetParent(transform);

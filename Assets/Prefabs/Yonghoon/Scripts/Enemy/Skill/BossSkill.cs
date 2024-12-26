@@ -34,7 +34,7 @@ namespace Defend.Enemy.Skill
 
         public override void ActivateSkill()
         {
-            Debug.Log("Boss uses a skill!");
+            //Debug.Log("Boss uses a skill!");
             
             foreach (var threshold in thresholds)
             {
@@ -49,7 +49,7 @@ namespace Defend.Enemy.Skill
 
         private void ExecuteSkill(SkillType skillType)
         {
-            Debug.Log("스킬의 분기점");
+            //Debug.Log("스킬의 분기점");
             switch (skillType)
             {
                 case SkillType.IncreaseArmor:
@@ -68,7 +68,7 @@ namespace Defend.Enemy.Skill
 
         private void IncreaseArmor()
         {
-            Debug.Log("보스 체력 75%스킬 아머 증가!");
+            //Debug.Log("보스 체력 75%스킬 아머 증가!");
 
             int layerMask = LayerMask.GetMask("Enemy", "Boss");
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, range, layerMask);
@@ -84,7 +84,7 @@ namespace Defend.Enemy.Skill
 
         private void IncreaseDamage()
         {
-            Debug.Log("보스 체력 50%스킬 공격력 증가!");
+            //Debug.Log("보스 체력 50%스킬 공격력 증가!");
 
             int layerMask = LayerMask.GetMask("Enemy", "Boss");
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, range, layerMask);
@@ -100,7 +100,7 @@ namespace Defend.Enemy.Skill
 
         private void IncreaseSpeed()
         {
-            Debug.Log("보스 등장 스킬 이동속도 증가!");
+            //Debug.Log("보스 등장 스킬 이동속도 증가!");
 
             int layerMask = LayerMask.GetMask("Enemy", "Boss");
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, range, layerMask);
@@ -125,7 +125,6 @@ namespace Defend.Enemy.Skill
                     return true;
                 }
             }
-
             return false;
         }
 

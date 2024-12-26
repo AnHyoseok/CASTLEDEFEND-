@@ -14,7 +14,7 @@ public class TreeSpawner2 : MonoBehaviour
 
     void Start()
     {
-        Debug.Log($"Initial numberList Count: {numberList.Count}");
+        //Debug.Log($"Initial numberList Count: {numberList.Count}");
 
         // 랜덤 순서로 재배열
         while (numberList.Count > 0)
@@ -23,16 +23,16 @@ public class TreeSpawner2 : MonoBehaviour
             randomNumberList.Add(numberList[randomIndex]);
             numberList.RemoveAt(randomIndex);
 
-            Debug.Log($"Added {randomNumberList[randomNumberList.Count - 1]} to randomNumberList.");
-            Debug.Log($"numberList Count after removal: {numberList.Count}");
+            //Debug.Log($"Added {randomNumberList[randomNumberList.Count - 1]} to randomNumberList.");
+            //Debug.Log($"numberList Count after removal: {numberList.Count}");
         }
 
-        Debug.Log($"Random Number List Count: {randomNumberList.Count}");
+        //Debug.Log($"Random Number List Count: {randomNumberList.Count}");
 
         // 인덱스와 값을 출력
         for (int i = 0; i < randomNumberList.Count; i++)
         {
-            Debug.Log($"Random Number at index {i}: {randomNumberList[i]}");
+            //Debug.Log($"Random Number at index {i}: {randomNumberList[i]}");
         }
     }
 

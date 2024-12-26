@@ -316,7 +316,7 @@ namespace Defend.Manager
             if (ListSpawnManager.enemyAlive <= 0 && listSpawnManager.waveCount >= 4 && !isGameClear)
             {
                 isGameClear = true;
-                Debug.Log("GameClaer");
+                //Debug.Log("GameClaer");
                 clearUI.SetActive(true);
             }
         }

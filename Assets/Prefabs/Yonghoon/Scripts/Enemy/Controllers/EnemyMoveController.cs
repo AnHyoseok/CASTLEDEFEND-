@@ -17,6 +17,7 @@ namespace Defend.Enemy
         public float baseSpeed = 5f;
         [SerializeField] public float CurrentSpeed { get; private set; }   //이동 속도
 
+        //플레이어의 적 이동을 멈추는 스킬 사용시 CurrentSpeed의 값을 저장시킬 대체변수
         private float originSpeed;
 
         // 슬로우를 적용한 주체와 비율을 저장하는 딕셔너리

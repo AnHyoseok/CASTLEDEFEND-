@@ -379,7 +379,7 @@ namespace Defend.Player
                     tower.BuffTower(buffContents, true);
                 }
                 UpdateButtonStates();
-                Debug.Log(buffContents.atkRange);
+                //Debug.Log(buffContents.atkRange);
             }
         }
 

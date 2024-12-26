@@ -44,8 +44,8 @@ public class SkyboxTest2 : MonoBehaviour
         // directionalLight.intensity 값 원래대로 (초기화)
         // directionalLight.intensity = 2f;
 
-        Debug.Log("TEST1 = " + blendValue);
-        Debug.Log("TEST2 = " + directionalLight.intensity);
+        //Debug.Log("TEST1 = " + blendValue);
+        //Debug.Log("TEST2 = " + directionalLight.intensity);
     }
 
     void Update()
@@ -57,7 +57,7 @@ public class SkyboxTest2 : MonoBehaviour
         //if (stageWave >= 2 && hasTransitioned == false)
         if (Input.GetKeyDown(KeyCode.U) && hasTransitioned == false)
         {
-            Debug.Log("test U");
+            //Debug.Log("test U");
             StartCoroutine(TransitionToNight());
             hasTransitioned = true; // 스카이박스 전환 완료 체크
         }
