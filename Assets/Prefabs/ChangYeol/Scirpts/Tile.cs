@@ -31,6 +31,7 @@ namespace Defend.UI
         [SerializeField] public GameObject reticlePrefabs;
         //트리거 키 입력
         public InputActionProperty property;
+        public InputActionProperty leftSelect;
         //타워 선택이 가능한 레이어 설정
         public InteractionLayerMask layerMask;
         //타워 설치 위치
@@ -55,7 +56,10 @@ namespace Defend.UI
                 //buildMenu.istrigger = false;
                 return;
             }
-
+            if (leftSelect.action.WasPressedThisFrame())
+            {
+                SetBuildTower();
+            }
             if (leftReticleVisual == null/* || rightReticleVisual == null*/) return;
 
             // Ray가 UI를 향하고 있는 경우
@@ -68,12 +72,12 @@ namespace Defend.UI
                 IsBuildTower();
             }
         }
-        protected override void OnSelectEntered(SelectEnterEventArgs args)
+        /*protected override void OnSelectEntered(SelectEnterEventArgs args)
         {
             base.OnSelectEntered(args);
             //타워 설치
             SetBuildTower();
-        }
+        }*/
         /*// 라인의 유효성을 검사하는 함수
         private bool IsLineVisualValid()
         {
