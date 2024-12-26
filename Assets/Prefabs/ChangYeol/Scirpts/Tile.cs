@@ -56,7 +56,7 @@ namespace Defend.UI
                 //buildMenu.istrigger = false;
                 return;
             }
-            if (leftSelect.action.WasPressedThisFrame())
+            if (leftSelect.action.WasPressedThisFrame() && leftReticleVisual.enabled == true)
             {
                 SetBuildTower();
             }
@@ -131,7 +131,8 @@ namespace Defend.UI
             }
             if (buildManager.playerState.SpendMoney(buildManager.towerBases[buildMenu.indexs].GetTowerInfo().cost1) 
                 //&& buildMenu.isReticle 
-                && buildMenu.towerinfo[buildMenu.indexs].isLock)
+                && buildMenu.towerinfo[buildMenu.indexs].isLock
+                && leftReticleVisual.enabled == true)
             {
                 tower = Instantiate(buildManager.towerBases[buildMenu.indexs].GetTowerInfo().projectile.tower,
                     GetBuildPosition(), Quaternion.identity);
