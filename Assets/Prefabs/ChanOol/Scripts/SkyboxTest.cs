@@ -18,7 +18,10 @@ public class SkyboxTest : MonoBehaviour
     //private ListSpawnManager listSpawnManager; // ListSpawnManager 스크립트의 waveCount 참조용
     private bool hasTransitioned = false; // 스카이박스 전환이 일어났는지 확인
 
-    
+    //맵에 있는 램프를 컨틀로 하기위한 변수
+    private LightController light;
+
+
     void Start()
     {
         
@@ -41,6 +44,9 @@ public class SkyboxTest : MonoBehaviour
 
         // 스카이박스 Blend Factor 값 원래대로 (초기화)
         blendedSkybox.SetFloat("_Blend", 0.0f);
+
+        //램프 컴포넌트를 찾아서 붙여준다
+        light = FindAnyObjectByType<LightController>();
 
         // directionalLight.intensity 값 원래대로 (초기화)
         // directionalLight.intensity = 2f;
@@ -79,6 +85,7 @@ public class SkyboxTest : MonoBehaviour
 
     IEnumerator TransitionToNight()
     {
+        light.SetLampState(true);
         // 낮 -> 밤 (Blend 증가 및 빛 감소) 
         while (blendValue < 1.0f || directionalLight.intensity > 0)
         {
@@ -105,6 +112,7 @@ public class SkyboxTest : MonoBehaviour
 
     IEnumerator TransitionToDay()
     {
+        light.SetLampState(false);
         // 밤 -> 낮 (Blend 감소 및 빛 증가) 
         while (blendValue > 0.0f || directionalLight.intensity < 1.0f)
         {
